@@ -17,16 +17,16 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <style>
-#page-wrapper {
-  transform: scale(0.6);
-  transform-origin: top left;
-  width: calc(100% / 0.6); /* compensates for scale horizontally */
-}
-body {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
+      #page-wrapper {
+        transform: scale(0.6);
+        transform-origin: top left;
+        width: calc(100% / 0.6); /* compensates for scale horizontally */
+      }
+      body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+      }
 
       /* ===== Sitefully Gradient Theme Update (Indigo → Pink) ===== */
 
@@ -140,133 +140,146 @@ body {
       <!-- 💃 Animations -->
 /* Fade-in animation */
 @keyframes dance {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-5px) rotate(-3deg); }
-  50% { transform: translateY(4px) rotate(3deg); }
-  75% { transform: translateY(-3px) rotate(-2deg); }
-}
-.animate-dance {
-  animation: dance 2.5s ease-in-out infinite;
-}
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-5px) rotate(-3deg);
+        }
+        50% {
+          transform: translateY(4px) rotate(3deg);
+        }
+        75% {
+          transform: translateY(-3px) rotate(-2deg);
+        }
+      }
+      .animate-dance {
+        animation: dance 2.5s ease-in-out infinite;
+      }
 
-/* Popup "pop-in" + wiggle animation */
-@keyframes popupWiggle {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(20px);
-  }
-  10% {
-    opacity: 1;
-    transform: scale(1.05) translateY(0);
-  }
-  20% {
-    transform: scale(0.95) rotate(-2deg);
-  }
-  25% {
-    transform: scale(1.02) rotate(2deg);
-  }
-  30% {
-    transform: scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.9) translateY(15px);
-  }
-}
+      /* Popup "pop-in" + wiggle animation */
+      @keyframes popupWiggle {
+        0% {
+          opacity: 0;
+          transform: scale(0.8) translateY(20px);
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1.05) translateY(0);
+        }
+        20% {
+          transform: scale(0.95) rotate(-2deg);
+        }
+        25% {
+          transform: scale(1.02) rotate(2deg);
+        }
+        30% {
+          transform: scale(1) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.9) translateY(15px);
+        }
+      }
 
-.popup-message {
-  animation: popupWiggle 8s ease-in-out infinite;
-  animation-delay: 2s;
-}
-
+      .popup-message {
+        animation: popupWiggle 8s ease-in-out infinite;
+        animation-delay: 2s;
+      }
     </style>
   </head>
 
   <body class="bg-white text-[var(--color-text)] antialiased">
-<!-- 🔔 Notification Top Bar -->
-<div
-  id="topbar"
-  class="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-indigo-600 via-pink-500 to-indigo-700 text-white shadow-sm"
->
-  <div class="container mx-auto px-4 lg:px-8 py-2 flex items-center justify-center text-center">
-    <p class="flex flex-wrap items-center justify-center gap-2 text-sm md:text-base font-medium leading-tight">
-      <span>
-         <strong class="text-white">Limited Offer:</strong> Get 
-        <strong class="text-yellow-300">20% OFF</strong> on all web development services!
-      </span>
-    </p>
-  </div>
-</div>
-
-<!-- 🌐 Navigation Bar (Clean Modern UI) -->
-<nav
-  id="navbar"
-  class="fixed top-[40px] left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md"
->
-  <div class="container mx-auto px-4 lg:px-8">
-    <div class="flex items-center justify-between h-16 md:h-20">
-      
-      <!-- Logo -->
-      <a
-        href="#"
-        class="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-lg px-1 py-1"
+    <!-- 🔔 Notification Top Bar -->
+    <div
+      id="topbar"
+      class="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-indigo-600 via-pink-500 to-indigo-700 text-white shadow-sm"
+    >
+      <div
+        class="container mx-auto px-4 lg:px-8 py-2 flex items-center justify-center text-center"
       >
-        <div class="relative h-10 w-10">
-          <img
-            src="Assets/sitefully logo.png"
-            alt="Sitefully Logo"
-            class="w-full h-full object-contain rounded"
-          />
-        </div>
-        <span
-          class="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent tracking-tight group-hover:brightness-110 transition-all"
+        <p
+          class="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm font-medium leading-tight"
         >
-          Sitefully
-        </span>
-      </a>
-
-      <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-8 font-medium text-gray-800">
-        <a href="#" class="relative group">
-          <span class="group-hover:text-pink-500 transition">Home</span>
-          <span
-            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
-          ></span>
-        </a>
-        <a href="About.html" class="relative group">
-          <span class="group-hover:text-pink-500 transition">About</span>
-          <span
-            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
-          ></span>
-        </a>
-        <a href="Services.html" class="relative group">
-          <span class="group-hover:text-pink-500 transition">Products & Services</span>
-          <span
-            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
-          ></span>
-        </a>
-        <a href="Contact.html" class="relative group">
-          <span class="group-hover:text-pink-500 transition">Contact</span>
-          <span
-            class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
-          ></span>
-        </a>
+          <span>
+            Get <strong class="text-yellow-300">20% OFF</strong> on all web
+            development services!
+          </span>
+        </p>
       </div>
-
-      <!-- Mobile Menu Button -->
-      <button
-        id="menuBtn"
-        class="md:hidden p-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-pink-500/10 border border-indigo-100 text-gray-700 hover:from-indigo-500/20 hover:to-pink-500/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-      >
-        <i class="fa-solid fa-bars text-xl"></i>
-      </button>
     </div>
-  </div>
-</nav>
 
+    <!-- 🌐 Navigation Bar (Clean Modern UI) -->
+    <nav
+      id="navbar"
+      class="fixed top-[40px] left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-md"
+    >
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="flex items-center justify-between h-16 md:h-20">
+          <!-- Logo -->
+          <a
+            href="#"
+            class="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-lg px-1 py-1"
+          >
+            <div class="relative h-10 w-10">
+              <img
+                src="Assets/sitefully logo.png"
+                alt="Sitefully Logo"
+                class="w-full h-full object-contain rounded"
+              />
+            </div>
+            <span
+              class="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent tracking-tight group-hover:brightness-110 transition-all"
+            >
+              Sitefully
+            </span>
+          </a>
 
+          <!-- Desktop Links -->
+          <div
+            class="hidden md:flex items-center gap-8 font-medium text-gray-800"
+          >
+            <a href="#" class="relative group">
+              <span class="group-hover:text-pink-500 transition">Home</span>
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+            <a href="About.html" class="relative group">
+              <span class="group-hover:text-pink-500 transition">About</span>
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+            <a href="Services.html" class="relative group">
+              <span class="group-hover:text-pink-500 transition"
+                >Products & Services</span
+              >
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+            <a href="Contact.html" class="relative group">
+              <span class="group-hover:text-pink-500 transition">Contact</span>
+              <span
+                class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"
+              ></span>
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="menuBtn"
+            class="md:hidden p-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-pink-500/10 border border-indigo-100 text-gray-700 hover:from-indigo-500/20 hover:to-pink-500/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
 
     <!-- 📱 Mobile Menu (Sitefully Indigo→Pink Theme) -->
     <div
@@ -314,13 +327,27 @@ body {
               <i class="fa-solid fa-home w-6 text-indigo-500"></i>
               Home
             </a>
-            <a
-              href="About.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-info-circle w-6 text-indigo-500"></i>
-              About
-            </a>
+            
+ <li class="relative group">
+  <!-- Dropdown Button -->
+  <button id="dropdownButton" class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300 focus:outline-none md:cursor-pointer">
+    <i class="fa-solid fa-info-circle w-6 text-indigo-500"></i>
+    About
+    <svg class="ml-1 h-4 w-4 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div id="dropdownMenu" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 scale-95 transform origin-top transition-all duration-300 pointer-events-none md:group-hover:opacity-100 md:group-hover:scale-100 md:pointer-events-auto z-50">
+    <div class="py-1">
+      <a href="#mission" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Our Mission</a>
+      <a href="#team" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Our Team</a>
+      <a href="#history" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Our History</a>
+    </div>
+  </div>
+</li>
+
             <a
               href="Services.html"
               class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
@@ -450,7 +477,7 @@ body {
       <div
         class="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180"
       >
-       <!-- 🌊 Wave Divider (Sitefully Indigo→Pink Theme) 
+        <!-- 🌊 Wave Divider (Sitefully Indigo→Pink Theme) 
 <svg
   class="relative block w-full h-24 md:h-32"
   xmlns="http://www.w3.org/2000/svg"
@@ -468,7 +495,6 @@ body {
     d="M0,64L48,74.7C96,85,192,107,288,128C384,149,480,171,576,181.3C672,192,768,192,864,181.3C960,171,1056,149,1152,128C1248,107,1344,85,1392,74.7L1440,64V320H0Z"
   ></path>
 </svg>  -->
-
       </div>
 
       <!-- 💎 Portfolio Content -->
@@ -861,20 +887,24 @@ body {
         </div>
       </div>
     </section>
-   <!-- WhatsApp Floating Button -->
-<a 
-  href="https://wa.me/01163068633" 
-  target="_blank"
-  class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg animate-bounce hover:scale-110 transition-transform z-[9999]"
->
-  <!-- WhatsApp SVG Icon -->
-  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
-    <path d="M20.52 3.48a11.71 11.71 0 00-16.57 0 11.71 11.71 0 00-3.43 8.29c0 2.13.56 4.21 1.63 6.01l-1.72 6.29 6.47-1.7a11.69 11.69 0 005.41 1.34h.01a11.71 11.71 0 008.29-3.44 11.71 11.71 0 000-16.56zm-8.52 16.04a9.22 9.22 0 01-4.6-1.2l-.33-.19-3.85 1.01 1.01-3.75-.22-.36a9.21 9.21 0 01-1.38-4.44 9.21 9.21 0 0114.02-7.33 9.22 9.22 0 012.83 6.49 9.21 9.21 0 01-9.43 9.42zm5.1-6.77c-.28-.14-1.65-.81-1.9-.91s-.42-.14-.6.14-.69.91-.85 1.1-.31.21-.58.07a7.13 7.13 0 01-2.1-1.29 7.42 7.42 0 01-1.36-1.68c-.14-.28 0-.43.1-.57.1-.1.28-.28.42-.42.14-.14.19-.24.28-.4.1-.14.05-.28-.02-.42-.07-.14-.6-1.44-.82-1.97-.22-.52-.45-.45-.6-.46-.15 0-.33-.02-.51-.02s-.42.07-.64.28c-.22.21-.85.83-.85 2.03s.87 2.36.99 2.52c.14.14 1.72 2.63 4.16 3.68.58.25 1.03.4 1.38.51.58.18 1.11.15 1.53.09.46-.06 1.65-.67 1.88-1.31.22-.63.22-1.17.15-1.31-.07-.14-.26-.22-.54-.36z"/>
-  </svg>
-</a>
-
-
-
+    <!-- WhatsApp Floating Button -->
+    <a
+      href="https://wa.me/01163068633"
+      target="_blank"
+      class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg animate-bounce hover:scale-110 transition-transform z-[9999]"
+    >
+      <!-- WhatsApp SVG Icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        class="w-8 h-8"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M20.52 3.48a11.71 11.71 0 00-16.57 0 11.71 11.71 0 00-3.43 8.29c0 2.13.56 4.21 1.63 6.01l-1.72 6.29 6.47-1.7a11.69 11.69 0 005.41 1.34h.01a11.71 11.71 0 008.29-3.44 11.71 11.71 0 000-16.56zm-8.52 16.04a9.22 9.22 0 01-4.6-1.2l-.33-.19-3.85 1.01 1.01-3.75-.22-.36a9.21 9.21 0 01-1.38-4.44 9.21 9.21 0 0114.02-7.33 9.22 9.22 0 012.83 6.49 9.21 9.21 0 01-9.43 9.42zm5.1-6.77c-.28-.14-1.65-.81-1.9-.91s-.42-.14-.6.14-.69.91-.85 1.1-.31.21-.58.07a7.13 7.13 0 01-2.1-1.29 7.42 7.42 0 01-1.36-1.68c-.14-.28 0-.43.1-.57.1-.1.28-.28.42-.42.14-.14.19-.24.28-.4.1-.14.05-.28-.02-.42-.07-.14-.6-1.44-.82-1.97-.22-.52-.45-.45-.6-.46-.15 0-.33-.02-.51-.02s-.42.07-.64.28c-.22.21-.85.83-.85 2.03s.87 2.36.99 2.52c.14.14 1.72 2.63 4.16 3.68.58.25 1.03.4 1.38.51.58.18 1.11.15 1.53.09.46-.06 1.65-.67 1.88-1.31.22-.63.22-1.17.15-1.31-.07-.14-.26-.22-.54-.36z"
+        />
+      </svg>
+    </a>
 
     <!-- 🌙 SITEFULLY FOOTER (Indigo→Pink Theme) -->
     <footer
@@ -936,15 +966,25 @@ body {
                 </a>
               </li>
               <li>
-                <a
-                  href="About.html"
-                  class="group flex items-center gap-2 text-gray-200/90 hover:text-white transition-all duration-200"
-                >
-                  <i
-                    class="fa-solid fa-angle-right text-pink-400 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  About
-                </a>
+                <!-- About Dropdown -->
+        <li class="relative group">
+          <button id="dropdownButton" class="flex items-center gap-2 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300 focus:outline-none md:cursor-pointer">
+            <i class="fa-solid fa-info-circle w-5 text-indigo-500"></i>
+            About
+            <svg class="ml-1 h-4 w-4 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div id="dropdownMenu" class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 scale-95 transform origin-top transition-all duration-300 pointer-events-none md:group-hover:opacity-100 md:group-hover:scale-100 md:pointer-events-auto z-50">
+            <div class="py-1">
+              <a href="#mission" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Our Mission</a>
+              <a href="#team" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Our Team</a>
+              <a href="#history" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Our History</a>
+            </div>
+          </div>
+        </li>
+
               </li>
               <li>
                 <a
@@ -1008,11 +1048,41 @@ body {
         </div>
       </div>
     </footer>
-    
 
     <!-- SCRIPTS -->
-    <script>
-      
+    <script> 
+
+  // Dropdown functionality
+       const dropdownButton = document.getElementById('dropdownButton');
+  const dropdownMenu = document.getElementById('dropdownMenu');
+  const dropdownIcon = dropdownButton.querySelector('svg');
+
+  dropdownButton.addEventListener('click', (e) => {
+    // Only toggle on mobile (screen width < 768px)
+    if (window.innerWidth < 768) {
+      e.preventDefault();
+      const isOpen = !dropdownMenu.classList.contains('opacity-0');
+
+      if (isOpen) {
+        dropdownMenu.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        dropdownMenu.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+        dropdownIcon.classList.remove('rotate-180');
+      } else {
+        dropdownMenu.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+        dropdownMenu.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+        dropdownIcon.classList.add('rotate-180');
+      }
+    }
+  });
+
+  // Close dropdown if clicked outside (mobile)
+  window.addEventListener('click', (e) => {
+    if (window.innerWidth < 768 && !dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+      dropdownMenu.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+      dropdownMenu.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+      dropdownIcon.classList.remove('rotate-180');
+    }
+  });
       // Menu elements
       const menuBtn = document.getElementById("menuBtn");
       const closeMenu = document.getElementById("closeMenu");
