@@ -17,16 +17,15 @@
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <style>
-
-      html {
+#page-wrapper {
   transform: scale(0.6);
   transform-origin: top left;
-  width: 166.67%; /* compensates for the scale to prevent layout clipping */
+  width: calc(100% / 0.6); /* compensates for scale horizontally */
 }
-html, body {
-  height: 100%;
+body {
   overflow-x: hidden;
-  overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
 
       /* ===== Sitefully Gradient Theme Update (Indigo → Pink) ===== */
@@ -184,6 +183,7 @@ html, body {
   </head>
 
   <body class="bg-white text-[var(--color-text)] antialiased">
+    <div id="page-wrapper">
 <!-- 🔔 Notification Top Bar -->
 <div
   id="topbar"
@@ -1018,6 +1018,7 @@ html, body {
         </div>
       </div>
     </footer>
+    </div>
 
     <!-- SCRIPTS -->
     <script>
