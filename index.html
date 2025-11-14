@@ -13,1083 +13,741 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
+
+    <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <style>
-      /* ===== Sitefully Gradient Theme Update (Indigo → Pink) ===== */
+      /* ===== Sitefully — Custom Palette (Dark Teal / Cyan-Teal / Bronze / Soft Peach / Light Mint) ===== */
+      :root{
+        --dark-teal: #2C3531;
+        --cyan-teal: #116466;
+        --bronze: #D9B08C;
+        --soft-peach: #FFCB9A;
+        --light-mint: #D1E8E2;
 
-      /* Define new gradient and key brand colors */
-      :root {
-        --color-primary: #4f46e5; /* Indigo-600 */
-        --color-accent: #ec4899; /* Pink-500 */
-        --color-gradient: linear-gradient(90deg, #4f46e5, #ec4899);
+        /* derived */
+        --primary-gradient: linear-gradient(90deg, var(--cyan-teal), var(--soft-peach));
+        --muted-bg: rgba(209,232,226,0.06); /* subtle light mint tint for cards */
+        --glass: rgba(255,255,255,0.03);
       }
 
-      /* Gradient text utility */
+      /* Base page */
+      html,body { height:100%; }
+      body {
+        margin:0;
+        background: var(--dark-teal);
+        color: var(--light-mint);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+      }
+
+      /* gradient text helper */
       .gradient-text {
-        background: var(--color-gradient);
+        background: var(--primary-gradient);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
       }
-      /* Fade-in animation */
-      .fade-enter {
-        opacity: 0;
-        transform: translateY(10px);
+
+      /* buttons */
+      .btn-primary {
+        background: var(--primary-gradient);
+        color: var(--dark-teal);
+        font-weight:600;
+        box-shadow: 0 6px 20px rgba(17,100,102,0.14);
+        transition: transform .18s ease, box-shadow .18s ease;
       }
-      .fade-active {
-        opacity: 1;
-        transform: translateY(0);
-        transition: all 0.8s ease-in-out;
+      .btn-primary:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(17,100,102,0.18);
       }
 
-      /* Gradient buttons */
-      .btn-gradient,
-      a.bg-gradient {
-        background: var(--color-gradient);
-        color: white !important;
-        transition: all 0.3s ease;
-      }
-      .btn-gradient:hover,
-      a.bg-gradient:hover {
-        opacity: 0.9;
-        transform: translateY(-2px);
+      /* subtle glass cards */
+      .card-glass{
+        background: linear-gradient(180deg, rgba(209,232,226,0.03), rgba(255,255,255,0.01));
+        border: 1px solid rgba(209,232,226,0.06);
+        backdrop-filter: blur(6px);
       }
 
-      /* Gradient borders and accents */
-      .border-gradient {
-        border-image: var(--color-gradient) 1;
+      /* nav link underline */
+      .nav-underline::after{
+        content: "";
+        position: absolute;
+        left:0;
+        right:auto;
+        bottom:-6px;
+        height:3px;
+        width:0;
+        background: var(--primary-gradient);
+        border-radius: 999px;
+        transition: width .28s cubic-bezier(.2,.9,.3,1);
       }
+      .nav-underline:hover::after{ width:100%; }
 
-      /* Navbar underline hover update */
-      .nav-link::after {
-        background: var(--color-gradient);
-      }
-
-      /* Social icons hover with gradient */
-      .social-icon:hover {
-        background: var(--color-gradient);
-        color: white !important;
-      }
-
-      /* Call-to-action and footer highlights */
-      .bg-accent,
-      .bg-[var(--color-accent)] {
-        background: var(--color-gradient) !important;
-        color: white;
-      }
-
-      .text-accent,
-      .text-[var(--color-accent)] {
-        background: var(--color-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-      }
-
-      /* Optional: subtle gradient bar for top notification or footer divider */
-      #topbar,
-      footer {
-        background: var(--color-gradient);
-      }
-
-      /* Typing subtitle */
-      #heroTyping {
-        display: inline-block;
-        white-space: nowrap;
-        overflow: hidden;
-        vertical-align: middle;
-        min-height: 1.25rem;
-      }
+      /* hero typing */
+      #heroTyping { display:inline-block; white-space:nowrap; overflow:hidden; vertical-align:middle; min-height:1.25rem; color:var(--light-mint); }
       #heroTyping .cursor {
-        display: inline-block;
-        width: 2px;
-        height: 1.1em;
-        background: var(--color-gradient);
-        margin-left: 8px;
-        vertical-align: middle;
+        display:inline-block;
+        width:2px;
+        height:1.15em;
+        background: var(--soft-peach);
+        margin-left:8px;
         animation: blink 1s steps(2) infinite;
+        box-shadow: 0 0 8px rgba(255,203,154,0.25);
       }
-      @keyframes blink {
-        50% {
-          opacity: 0;
-        }
-      }
+      @keyframes blink { 50%{ opacity:0; } }
 
-      .social-icon-footer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.08);
-        color: white;
-        font-size: 16px;
-        transition: all 0.3s ease;
+      /* testimonials dot glow */
+      .dot-glow { box-shadow: 0 0 10px rgba(17,100,102,0.08); transition: all .25s ease; }
+      .dot-active { background: var(--soft-peach); transform: scale(1.15); box-shadow: 0 6px 18px rgba(255,203,154,0.14); }
+
+      /* small utilities */
+      .accent-bronze { color: var(--bronze); }
+      .bg-soft-mint { background: var(--light-mint); color: var(--dark-teal); }
+      .shadow-soft { box-shadow: 0 10px 30px rgba(12,14,13,0.35); }
+
+      /* responsive tweaks */
+      @media (max-width:768px){
+        .hero-title { font-size:2rem; }
       }
-      .social-icon-footer:hover {
-        background: linear-gradient(135deg, #6366f1, #ec4899);
-        transform: scale(1.1);
-        box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
-      }
-    
     </style>
   </head>
 
-  <body class="bg-white text-[var(--color-text)] antialiased">
- <!-- 🔔 Notification Top Bar + Navigation Bar (merged visually) -->
-<div class="fixed top-0 left-0 right-0 z-50">
-  <!-- Notification Top Bar -->
-  <div class="bg-gradient-to-r from-indigo-600 via-pink-500 to-indigo-700 text-white shadow-sm">
-    <div class="container mx-auto px-4 lg:px-8 py-2 flex items-center justify-center text-center">
-      <p class="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm font-medium leading-tight">
-        <span>
-          Get <strong class="text-yellow-300">20% OFF</strong> on all web development services!
-        </span>
-      </p>
-    </div>
-  </div>
-
-  <!-- Navigation Bar -->
-  <nav class="bg-white border-t border-b border-gray-100 shadow-md">
-    <div class="container mx-auto px-4 lg:px-8">
-      <div class="flex items-center justify-between h-16 md:h-20">
-        <!-- Logo -->
-        <a href="#" class="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-pink-400 rounded-lg px-1 py-1">
-          <div class="relative h-10 w-10">
-            <img src="Assets/sitefully logo.png" alt="Sitefully Logo" class="w-full h-full object-contain rounded"/>
-          </div>
-          <span class="text-xl md:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent tracking-tight group-hover:brightness-110 transition-all">
-            Sitefully
-          </span>
-        </a>
-
-        <!-- Desktop Links -->
-        <div class="hidden md:flex items-center gap-8 font-medium text-gray-800">
-          <a href="#" class="relative group">
-            <span class="group-hover:text-pink-500 transition">Home</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="About.html" class="relative group">
-            <span class="group-hover:text-pink-500 transition">About</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="Portfolio.html" class="relative group">
-            <span class="group-hover:text-pink-500 transition">Portfolio</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-         
-          <a href="Services.html" class="relative group">
-            <span class="group-hover:text-pink-500 transition">Products & Services</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="Contact.html" class="relative group">
-            <span class="group-hover:text-pink-500 transition">Contact</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="pricing.html" class="relative group">
-            <span class="group-hover:text-pink-500 transition">Pricing</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="faq.html" class="relative group">
-            <span class="group-hover:text-pink-500 transition">FAQ</span>
-            <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-indigo-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-
+  <body class="antialiased">
+    <!-- Fixed top: notification + navbar -->
+    <div class="fixed top-0 left-0 right-0 z-50">
+      <!-- Notification Top Bar -->
+      <div class="w-full" style="background: linear-gradient(90deg, rgba(17,100,102,0.95), rgba(255,203,154,0.95));">
+        <div class="container mx-auto px-4 lg:px-8 py-2 flex items-center justify-center text-center">
+          <p class="flex items-center gap-2 text-sm font-medium text-[var(--dark-teal)]">
+            Get <strong class="accent-bronze">20% OFF</strong> on all web development services!
+          </p>
         </div>
+      </div>
 
-        <!-- Mobile Menu Button -->
-        <button id="menuBtn" class="md:hidden p-2 rounded-full bg-gradient-to-r from-indigo-500/10 to-pink-500/10 border border-indigo-100 text-gray-700 hover:from-indigo-500/20 hover:to-pink-500/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-pink-400" aria-label="Toggle menu" aria-expanded="false">
-          <i class="fa-solid fa-bars text-xl"></i>
-        </button>
+      <!-- NAVBAR -->
+      <nav id="navbar" class="bg-[var(--glass)] backdrop-blur-md border-b border-white/5">
+        <div class="container mx-auto px-4 lg:px-8">
+          <div class="flex items-center justify-between h-16 md:h-20">
+            <div class="flex items-center space-x-4">
+  <!-- Logo -->
+  <img src="Assets/logo.png" alt="Sitefully" class="w-16 h-16 object-contain rounded-md"/>
+
+  <!-- Name + Motto -->
+  <div class="flex flex-col">
+    <h2 class="text-2xl font-extrabold text-gray-800">Sitefully</h2>
+    <p class="text-xs text-gray-500 ">The brain of great websites</p>
+  </div>
+</div>
+
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 font-medium text-[var(--light-mint)]">
+              <a href="#" class="relative nav-underline">Home</a>
+              <a href="About.html" class="relative nav-underline">About</a>
+              <a href="Portfolio.html" class="relative nav-underline">Portfolio</a>
+              <a href="Services.html" class="relative nav-underline">Services</a>
+              <a href="Contact.html" class="relative nav-underline">Contact</a>
+              <a href="pricing.html" class="relative nav-underline">Pricing</a>
+              <a href="faq.html" class="relative nav-underline">FAQ</a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false"
+              class="md:hidden p-2 rounded-full border border-white/6 bg-[rgba(255,255,255,0.02)] text-[var(--light-mint)] hover:bg-[rgba(255,255,255,0.04)] transition">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+   <!-- Mobile Menu Drawer -->
+<div id="mobileMenu"
+  class="fixed inset-0 z-[9999] md:hidden opacity-0 pointer-events-none
+         transition-opacity duration-300">
+
+  <!-- Overlay -->
+  <div id="overlay"
+    class="absolute inset-0 bg-[rgba(12,14,13,0.6)] backdrop-blur-sm opacity-0
+           transition-opacity duration-300"></div>
+
+  <!-- Drawer -->
+  <nav id="drawer" aria-label="Mobile Navigation"
+    class="absolute top-0 right-0 bottom-0 w-80 bg-[var(--dark-teal)]
+           border-l border-white/10 shadow-xl rounded-l-2xl
+           transform translate-x-full transition-transform duration-300">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-white/10">
+      <span class="text-lg font-semibold text-[var(--light-mint)]">Menu</span>
+      <button id="closeMenu" class="p-2 rounded-full bg-[rgba(255,255,255,0.04)] text-[var(--light-mint)]">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Links -->
+    <div class="p-6 space-y-5 text-[var(--light-mint)]">
+      <a href="#" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-home w-6 text-[var(--cyan-teal)]"></i> Home
+      </a>
+
+      <a href="About.html" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-info-circle w-6 text-[var(--cyan-teal)]"></i> About
+      </a>
+
+      <a href="Portfolio.html" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-image w-6 text-[var(--cyan-teal)]"></i> Portfolio
+      </a>
+
+      <a href="Services.html" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-briefcase w-6 text-[var(--cyan-teal)]"></i> Services
+      </a>
+
+      <a href="Contact.html" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-envelope w-6 text-[var(--cyan-teal)]"></i> Contact
+      </a>
+
+      <a href="pricing.html" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-tag w-6 text-[var(--cyan-teal)]"></i> Pricing
+      </a>
+
+      <a href="faq.html" class="flex items-center gap-3 text-lg font-medium">
+        <i class="fa-solid fa-question-circle w-6 text-[var(--cyan-teal)]"></i> FAQ
+      </a>
+
+      <!-- CTA Box -->
+      <div class="mt-6 bg-[rgba(209,232,226,0.05)] p-4 rounded-lg border border-white/5">
+        <h3 class="font-semibold text-[var(--light-mint)]">Join Our Journey</h3>
+        <p class="text-sm text-[var(--light-mint)]/70 mb-3">Have a project? Let's discuss it.</p>
+        <a href="Contact.html"
+           class="inline-block px-4 py-2 bg-[var(--cyan-teal)] text-[#D1E8E2] rounded-md text-sm">
+          Get in Touch
+        </a>
       </div>
     </div>
   </nav>
 </div>
 
-    <!-- 📱 Mobile Menu (Sitefully Indigo→Pink Theme) -->
-    <div
-      id="mobileMenu"
-      class="fixed inset-0 z-[60] md:hidden transition-all duration-500 opacity-0 pointer-events-none"
-    >
-      <!-- Backdrop -->
-      <div
-        id="overlay"
-        class="absolute inset-0 bg-gradient-to-br from-indigo-950/80 via-black/60 to-pink-900/70 backdrop-blur-md transition-opacity duration-500"
-      ></div>
 
-      <!-- Sliding Drawer -->
-      <nav
-        id="drawer"
-        class="absolute top-0 right-0 bottom-0 w-80 bg-gradient-to-b from-white/95 via-indigo-50/95 to-pink-50/95 backdrop-blur-xl border-l border-white/20 shadow-[0_0_40px_rgba(99,102,241,0.25)] rounded-l-3xl transform translate-x-full transition-transform duration-500 ease-out"
-        aria-label="Mobile Navigation"
-      >
-        <!-- Header -->
-        <div
-          class="flex items-center justify-between p-6 border-b border-white/20"
-        >
-          <span
-            class="text-lg font-semibold bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent"
-          >
-            Menu
-          </span>
-          <button
-            id="closeMenu"
-            class="p-2 rounded-full bg-white/20 hover:bg-gradient-to-r hover:from-indigo-500/20 hover:to-pink-500/20 transition-all duration-300"
-          >
-            <i
-              class="fa-solid fa-xmark text-xl text-gray-700 hover:text-pink-600"
-            ></i>
-          </button>
-        </div>
+    <!-- Spacer so content not hidden under fixed header -->
+    <div style="height:96px" aria-hidden="true"></div>
 
-        <!-- Navigation Links -->
-        <div class="p-6">
-          <div class="space-y-5">
-            <a
-              href="#"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-home w-6 text-indigo-500"></i>
-              Home
-            </a>
-            <a
-              href="About.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-info-circle w-6 text-indigo-500"></i>
-              About
-            </a>
-            <a
-              href="Portfolio.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-image w-6 text-indigo-500"></i>
-              Portfolio
-            </a>
-            <a
-              href="Services.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
+   <!-- HEADER (Former Hero) -->
+<header class="relative min-h-[720px] flex items-center justify-center overflow-hidden" aria-label="Header">
+  
+  <!-- Background -->
+  <div 
+    class="absolute inset-0 w-full h-full bg-cover bg-center opacity-20"
+    style="background-image: url('Assets/bg-masthead.jpg');"
+    aria-hidden="true"></div>
 
-              <i class="fa-solid fa-briefcase w-6 text-indigo-500"></i>
-              Products & Services
-            </a>
-           
-            <a
-              href="Contact.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-envelope w-6 text-indigo-500"></i>
-              Contact
-            </a>
-            <a
-              href="pricing.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-tag w-6 text-indigo-500"></i>
-              Pricing
-            </a>
-            <a
-              href="faq.html"
-              class="flex items-center gap-3 text-lg font-medium text-gray-800 hover:text-pink-500 transition-all duration-300"
-            >
-              <i class="fa-solid fa-question-circle w-6 text-indigo-500"></i>
-              FAQ
-            </a>
-          </div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-t from-[rgba(12,14,13,0.85)] via-[rgba(17,100,102,0.25)] to-transparent"></div>
 
-         
+  <div class="container mx-auto px-6 lg:px-10 relative z-10 text-center py-24 md:py-36">
+    <div class="max-w-4xl mx-auto space-y-6">
 
-          <!-- 🌐 Sitefully Bottom Section -->
-<div class="absolute bottom-2 left-6 right-6">
-  <div class="bg-gradient-to-r from-pink-100 to-indigo-100 p-4 rounded-lg">
-    <h3 class="font-semibold text-gray-900 mb-2">Join Our Creative Journey</h3>
-    <p class="text-sm text-gray-700 mb-3">
-      Have a design idea, project, or testimonial to share? Let’s make your brand shine with Sitefully.
-    </p>
-    <a
-      href="Contact.html"
-      class="inline-block bg-gradient-to-r from-pink-500 to-indigo-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
-    >
-      Get in Touch
-    </a>
-  </div>
-</div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-[var(--light-mint)] hero-title">
+        <span class="gradient-text">Discover Grow Transform</span>
+      </h1>
 
+      <div id="heroTyping" class="mt-2 text-lg md:text-2xl font-medium tracking-wide text-[var(--light-mint)]"></div>
 
+      <p class="text-lg md:text-xl text-[var(--light-mint)]/90 max-w-2xl mx-auto leading-relaxed">
+        From concept to code, <span class="accent-bronze font-semibold">Sitefully</span> crafts intelligent web solutions that define brands and drive measurable growth.
+      </p>
 
-        </div>
-      </nav>
+      <div class="pt-6 flex items-center justify-center gap-4">
+        <a href="Contact.html " class="btn-primary px-8 py-3 rounded-full inline-flex items-center gap-3">
+          Start Your Project
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
+  </div>
 
-    <!-- Spacer to keep content below navbar -->
-    <div id="top-spacer" aria-hidden="true" style="height: 88px"></div>
+ <!-- HEADER arrow -->
+<button id="scroll-arrow" 
+  class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--light-mint)] animate-bounce text-4xl">
+  <i class="fa-solid fa-chevron-down"></i>
+</button>
 
-    <!-- HERO SECTION (Sitefully Indigo→Pink Theme) -->
-    <section
-      class="relative min-h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-b from-indigo-600 via-pink-500/30 to-white"
-    >
-      <!-- Decorative Video Background -->
-     <video
-  id="heroVideo"
-  autoplay
-  muted
-  loop
-  playsinline
-  class="absolute inset-0 w-full h-full object-cover object-center opacity-40 md:opacity-30 z-0"
-  aria-hidden="true"
-  poster="Assets/hero-poster.jpg"
->
-  <source src="Assets/hero.mp4" type="video/mp4" />
-</video>
+ <!-- bottom fade -->
+      <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[var(--dark-teal)] to-transparent pointer-events-none"></div>
+
+</header>
 
 
-      <!-- Overlay Gradient -->
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-indigo-900/60 via-pink-700/30 to-transparent"
-      ></div>
+     
 
-      <!-- Content -->
-      <div
-        class="container mx-auto px-6 lg:px-10 relative z-10 text-center py-28 md:py-44"
-      >
-        <div class="max-w-4xl mx-auto space-y-8 animate-fade-in">
-          <!-- Headline -->
-          <h1
-            class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
-          >
-            <span
-              class="bg-gradient-to-r from-indigo-400 via-pink-400 to-indigo-300 bg-clip-text text-transparent"
-            >
-              Discover. Grow. Transform.
-            </span>
-          </h1>
+   <!-- HERO (Upgraded About → Hero) -->
+<section id="hero-section" class="relative min-h-[720px] py-24 md:py-32 overflow-hidden">
 
-          <!-- Subheading Typing Line -->
-          <div
-            id="heroTyping"
-            class="mt-3 text-lg md:text-2xl text-indigo-100 font-medium tracking-wide"
-          ></div>
+  <!-- Background Glow Effects -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.12]">
+    <div class="w-72 h-72 bg-[var(--accent-pink)] blur-[140px] absolute top-10 left-10"></div>
+    <div class="w-80 h-80 bg-[var(--accent-indigo)] blur-[160px] absolute bottom-10 right-10"></div>
+  </div>
 
-          <!-- Description -->
-          <p
-            class="text-lg md:text-xl text-indigo-50/90 max-w-2xl mx-auto leading-relaxed"
-          >
-            From concept to code,
-            <span class="text-pink-300 font-semibold">Sitefully</span>
-            delivers intelligent web solutions that define brands and drive
-            success.
-          </p>
+  <div class="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
 
-          <!-- Call to Action Button -->
-          <div class="pt-8">
-            <a
-              href="Contact.html"
-              class="inline-flex items-center justify-center gap-2 text-base md:text-lg px-8 py-4 rounded-2xl font-semibold bg-gradient-to-r from-indigo-500 to-pink-500 text-white shadow-lg shadow-pink-500/30 hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300"
-            >
-              Start Your Project
-              <i
-                class="fa-solid fa-arrow-right ml-1 group-hover:translate-x-1 transition-transform"
-              ></i>
-            </a>
-          </div>
-        </div>
-      </div>
+    <div class="grid md:grid-cols-2 gap-16 items-center">
 
-      <!-- Bottom Gradient Fade -->
-      <div
-        class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none"
-      ></div>
-    </section>
+      <!-- Text Block -->
+      <div class="space-y-8" data-aos="fade-up">
 
-   
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-[var(--light-mint)]">
+          <span class="gradient-text">Who We Are</span>
+        </h1>
 
-    <!-- ABOUT PREVIEW SECTION -->
-    <section class="py-24 bg-white relative overflow-hidden">
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-indigo-50 to-white"
-      ></div>
+        <p class="text-[var(--light-mint)]/85 text-lg md:text-xl leading-relaxed max-w-xl">
+          At <span class="accent-bronze font-semibold">Sitefully</span>, we architect 
+          cutting-edge digital experiences where 
+          <span class="text-[var(--accent-indigo)] font-medium">creativity</span> meets 
+          <span class="text-[var(--accent-pink)] font-medium">innovation</span>.  
+          We design and build immersive, future-ready solutions engineered for 
+          clarity, performance, and measurable impact.
+        </p>
 
-      <div class="container relative mx-auto px-6 md:px-12 lg:px-20">
-        <div class="grid md:grid-cols-2 items-center gap-12">
-          <!-- Left: Text Content -->
-          <div class="space-y-6" data-aos="fade-up">
-            <h2 class="text-3xl md:text-5xl font-bold">
-              <span
-                class="bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent"
-              >
-                Who We Are
-              </span>
-            </h2>
-            <p class="text-gray-600 text-lg leading-relaxed">
-              At <span class="font-semibold text-indigo-600">Sitefully</span>,
-              we craft modern, high-performing websites that merge
-              <span class="text-indigo-500 font-medium">creativity</span> with
-              <span class="text-pink-500 font-medium">technology</span>. Our
-              passion lies in transforming your ideas into digital experiences
-              that captivate, inspire, and deliver measurable impact.
-            </p>
-            <a
-              href="About.html"
-              class="inline-block px-8 py-3 bg-gradient-to-r from-indigo-600 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:opacity-90 transition duration-300"
-            >
-              Learn More →
-            </a>
-          </div>
+        <div class="pt-4 flex flex-wrap gap-4">
+          <a href="About.html" 
+             class="btn-primary px-8 py-4 rounded-full inline-flex items-center gap-3 text-lg shadow-lg hover:scale-[1.03] transition-all">
+            Learn More
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
 
-          <!-- Right: Image / Illustration -->
-          <div class="relative" data-aos="fade-left">
-            <div
-              class="absolute inset-0 bg-indigo-500/10 blur-3xl rounded-3xl -rotate-3"
-            ></div>
-            <img
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
-              alt="Creative workspace - Sitefully"
-              class="relative rounded-3xl shadow-xl w-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES PREVIEW SECTION (Django — Frontend & Backend) -->
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-white to-indigo-50 pointer-events-none"
-      ></div>
-
-      <div
-        class="container relative mx-auto px-6 md:px-12 lg:px-20 text-center"
-      >
-        <!-- Heading -->
-        <div class="mb-12 space-y-4" data-aos="fade-up">
-          <h2 class="text-3xl md:text-5xl font-bold">
-            <span
-              class="bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent"
-            >
-              Website Creation — Frontend & Backend (Django)
-            </span>
-          </h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">
-            End-to-end website development: beautiful responsive frontends,
-            robust Django backends, and reliable deployments — built to perform.
-          </p>
-        </div>
-
-        <!-- Service Cards -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Service 1 -->
-          <article
-            class="p-8 bg-white rounded-3xl shadow-lg hover:-translate-y-2 transition duration-300 text-left"
-            data-aos="fade-up"
-          >
-            <div class="text-indigo-600 text-4xl mb-4" aria-hidden="true">
-              <i class="fa-solid fa-brackets-curly"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">
-              Full-Stack Django Development
-            </h3>
-            <p class="text-gray-600">
-              From models to templates: architecting scalable Django apps, clean
-              code structure, user auth, admin customization and business logic.
-            </p>
-          </article>
-
-          <!-- Service 2 -->
-          <article
-            class="p-8 bg-white rounded-3xl shadow-lg hover:-translate-y-2 transition duration-300 text-left"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div class="text-pink-500 text-4xl mb-4" aria-hidden="true">
-              <i class="fa-solid fa-display"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">
-              Frontend: HTML, CSS & JavaScript
-            </h3>
-            <p class="text-gray-600">
-              Responsive, accessible UIs using TailwindCSS, modern JS,
-              interactive components, performance optimizations and progressive
-              enhancement.
-            </p>
-          </article>
-
-          <!-- Service 3 -->
-          <article
-            class="p-8 bg-white rounded-3xl shadow-lg hover:-translate-y-2 transition duration-300 text-left"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div class="text-indigo-600 text-4xl mb-4" aria-hidden="true">
-              <i class="fa-solid fa-code-branch"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">
-              APIs & Integrations (DRF)
-            </h3>
-            <p class="text-gray-600">
-              RESTful APIs with Django REST Framework, third-party integrations
-              (payments, email, analytics) and JSON endpoints for SPAs or mobile
-              apps.
-            </p>
-          </article>
-
-          <!-- Service 4 -->
-          <article
-            class="p-8 bg-white rounded-3xl shadow-lg hover:-translate-y-2 transition duration-300 text-left"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <div class="text-pink-500 text-4xl mb-4" aria-hidden="true">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-gray-900">
-              Deployment & Maintenance
-            </h3>
-            <p class="text-gray-600">
-              Dockerized deployments, CI/CD, HTTPS, backups, monitoring and
-              ongoing maintenance so your Django site stays fast and secure.
-            </p>
-          </article>
-        </div>
-
-        <!-- CTA Button -->
-        <div class="mt-12" data-aos="fade-up">
-          <a
-            href="Services.html"
-            class="inline-block px-8 py-3 bg-gradient-to-r from-indigo-600 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:opacity-90 transition duration-300"
-            role="button"
-            aria-label="View all Django services"
-          >
-            View All Services →
+          <a href="portfolio.html" 
+             class="px-8 py-4 rounded-full border border-[var(--light-mint)]/30 text-[var(--light-mint)] text-lg hover:bg-white/10 transition-all">
+            See Portfolio
           </a>
         </div>
+
       </div>
-    </section>
 
-  <!-- 🌟 Testimonial Section -->
-    <section class="py-20 px-4 relative overflow-hidden">
-      <div class="max-w-5xl mx-auto text-center">
-        <!-- Heading -->
-        <h2 class="text-4xl font-bold mb-12 text-indigo-500">
-          Our
-          <span
-            class="bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent"
-            > Clients Say</span
-          >
-        </h2>
+      <!-- Image Block -->
+      <div class="relative" data-aos="fade-left">
 
-        <!-- Slider Wrapper -->
-        <div class="relative">
-          <div id="testimonial-slider" class="transition-all duration-700 ease-in-out">
-            
-            <!-- 1 -->
-            <div
-              class="testimonial-card flex flex-col md:flex-row items-center bg-gradient-to-r from-indigo-600 to-pink-500 rounded-3xl shadow-lg p-8 md:p-12 overflow-hidden relative fade-active"
-            >
-              <div class="flex-1 text-left md:pr-8 z-10">
-                <p class="text-lg md:text-xl text-white leading-relaxed mb-6">
-                  “Working with Sitefully was a game changer for our brand.
-                  Their design team truly understood our vision and brought it
-                  to life with precision and creativity.”
-                </p>
-                <div>
-                  <h3 class="text-pink-500 font-semibold text-lg">
-                    Alicia Bennett
-                  </h3>
-                  <p class="text-gray-400 text-sm">
-                    Founder, BrightPath Studios
-                  </p>
-                </div>
-              </div>
-              <div class="mt-8 md:mt-0 md:ml-8 relative">
-                <img
-                  src="https://images.unsplash.com/photo-1619946794135-5bc917a27793?auto=format&fit=crop&w=250&q=80"
-                  alt="Client portrait"
-                  class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
-                />
-              </div>
-              <div
-                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-cover"
-              ></div>
-            </div>
+        <!-- Glow Behind Image -->
+        <div class="absolute inset-0 bg-[rgba(17,100,102,0.09)] blur-3xl rounded-3xl -rotate-3"></div>
 
-            <!-- 2 -->
-            <div
-              class="testimonial-card hidden flex flex-col md:flex-row items-center bg-gradient-to-r from-indigo-600 to-pink-500 rounded-3xl shadow-lg p-8 md:p-12 overflow-hidden relative fade-enter"
-            >
-              <div class="flex-1 text-left md:pr-8 z-10">
-                <p class="text-lg md:text-xl text-white leading-relaxed mb-6">
-                  “The Sitefully team went above and beyond. Their branding
-                  approach elevated our identity and digital presence.”
-                </p>
-                <div>
-                  <h3 class="text-pink-500 font-semibold text-lg">
-                    Michael Chen
-                  </h3>
-                  <p class="text-gray-400 text-sm">
-                    Marketing Director, NovaTech
-                  </p>
-                </div>
-              </div>
-              <div class="mt-8 md:mt-0 md:ml-8 relative">
-                <img
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=250&q=80"
-                  alt="Client portrait"
-                  class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
-                />
-              </div>
-              <div
-                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-cover"
-              ></div>
-            </div>
-
-            <!-- 3 -->
-            <div
-              class="testimonial-card hidden flex flex-col md:flex-row items-center bg-gradient-to-r from-indigo-600 to-pink-500 rounded-3xl shadow-lg p-8 md:p-12 overflow-hidden relative fade-enter"
-            >
-              <div class="flex-1 text-left md:pr-8 z-10">
-                <p class="text-lg md:text-xl text-white leading-relaxed mb-6">
-                  “Sitefully’s creativity and professionalism exceeded all
-                  expectations. They captured our brand voice perfectly.”
-                </p>
-                <div>
-                  <h3 class="text-pink-500 font-semibold text-lg">
-                    Sarah Lopez
-                  </h3>
-                  <p class="text-gray-400 text-sm">
-                    Creative Director, VisionFlow
-                  </p>
-                </div>
-              </div>
-              <div class="mt-8 md:mt-0 md:ml-8 relative">
-                <img
-src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=250&q=80"
-                  alt="Client portrait"
-                  class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
-                />
-              </div>
-              <div
-                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-cover"
-              ></div>
-            </div>
-
-            <!-- 4 -->
-            <div
-              class="testimonial-card hidden flex flex-col md:flex-row items-center bg-gradient-to-r from-indigo-600 to-pink-500 rounded-3xl shadow-lg p-8 md:p-12 overflow-hidden relative fade-enter"
-            >
-              <div class="flex-1 text-left md:pr-8 z-10">
-                <p class="text-lg md:text-xl text-white leading-relaxed mb-6">
-                  “Absolutely love the professionalism and design sense of
-                  Sitefully. They gave our startup a world-class brand image.”
-                </p>
-                <div>
-                  <h3 class="text-pink-500 font-semibold text-lg">
-                    David Romero
-                  </h3>
-                  <p class="text-gray-400 text-sm">
-                    Co-Founder, Skyward Labs
-                  </p>
-                </div>
-              </div>
-              <div class="mt-8 md:mt-0 md:ml-8 relative">
-                <img
-src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=250&q=80"
-                  alt="Client portrait"
-                  class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
-                />
-              </div>
-              <div
-                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-cover"
-              ></div>
-            </div>
-
-            <!-- 5 -->
-            <div
-              class="testimonial-card hidden flex flex-col md:flex-row items-center bg-gradient-to-r from-indigo-600 to-pink-500 rounded-3xl shadow-lg p-8 md:p-12 overflow-hidden relative fade-enter"
-            >
-              <div class="flex-1 text-left md:pr-8 z-10">
-                <p class="text-lg md:text-xl text-white leading-relaxed mb-6">
-                  “From concept to delivery, Sitefully was flawless. Their
-                  attention to detail and brand understanding is unmatched.”
-                </p>
-                <div>
-                  <h3 class="text-pink-500 font-semibold text-lg">
-                    Elena Vasquez
-                  </h3>
-                  <p class="text-gray-400 text-sm">
-                    CEO, Dreamline Agency
-                  </p>
-                </div>
-              </div>
-              <div class="mt-8 md:mt-0 md:ml-8 relative">
-                <img
-                  src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=250&q=80"
-                  alt="Client portrait"
-                  class="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
-                />
-              </div>
-              <div
-                class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/world-map.png')] bg-center bg-cover"
-              ></div>
-            </div>
-          </div>
-
-          <!-- Navigation Arrows -->
-          <button
-            id="prevBtn"
-            class="absolute -left-10 md:-left-20 top-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-md hover:shadow-lg hover:bg-gray-50 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            id="nextBtn"
-            class="absolute -right-10 md:-right-20 top-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-md hover:shadow-lg hover:bg-gray-50 transition"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+        <!-- Hero Image -->
+  <div class="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+  <img
+    src="Assets/photo.avif"
+    alt="Modern workspace"
+    class="w-full h-auto object-cover"
+  />
+</div>
+      </div>
+</section>
+    <!-- SERVICES PREVIEW -->
+    <section class="py-20">
+      <div class="container mx-auto px-6 md:px-12 lg:px-20 text-center">
+        <div class="mb-12" data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold gradient-text">Website Creation — Frontend & Backend (Django)</h2>
+          <p class="text-[var(--light-mint)]/80 max-w-2xl mx-auto mt-4">End-to-end development: responsive frontends, robust Django backends and reliable deployments.</p>
         </div>
 
-        <!-- Dot Indicators -->
-        <div id="dots" class="flex justify-center mt-8 space-x-3"></div>
-    
+              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <article class="p-8 rounded-3xl card-glass border border-white/6">
+            <div class="text-[var(--cyan-teal)] text-4xl mb-4"><i class="fa-solid fa-laptop-code"></i></div>
+            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">Full-Stack Django Development</h3>
+            <p class="text-[var(--light-mint)]/80">Architecture, models, templates, auth, admin customization and business logic.</p>
+          </article>
+
+          <article class="p-8 rounded-3xl card-glass border border-white/6">
+            <div class="text-[var(--soft-peach)] text-4xl mb-4"><i class="fa-solid fa-display"></i></div>
+            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">Frontend: HTML, CSS & JavaScript</h3>
+            <p class="text-[var(--light-mint)]/80">Responsive, accessible UIs using Tailwind, modern JS and progressive enhancement.</p>
+          </article>
+
+          <article class="p-8 rounded-3xl card-glass border border-white/6">
+            <div class="text-[var(--cyan-teal)] text-4xl mb-4"><i class="fa-solid fa-code-branch"></i></div>
+            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">APIs & Integrations (DRF)</h3>
+            <p class="text-[var(--light-mint)]/80">Django REST Framework, payments, email, analytics and JSON endpoints for SPAs.</p>
+          </article>
+
+          <article class="p-8 rounded-3xl card-glass border border-white/6">
+            <div class="text-[var(--bronze)] text-4xl mb-4"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">Deployment & Maintenance</h3>
+            <p class="text-[var(--light-mint)]/80">Docker, CI/CD, HTTPS, backups, monitoring and ongoing maintenance.</p>
+          </article>
+        </div>
+
+        <div class="mt-12">
+          <a href="Services.html" class="btn-primary px-8 py-3 rounded-full">View All Services →</a>
+        </div>
       </div>
     </section>
 
-    <!-- 🌙 SITEFULLY FOOTER (Indigo→Pink Theme) -->
-    <footer
-      class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-indigo-800 to-pink-700 text-white"
-    >
-      <!-- Decorative gradient glow orbs -->
-      <div
-        class="absolute top-0 left-0 w-80 h-80 bg-pink-500/20 blur-3xl rounded-full"
-      ></div>
-      <div
-        class="absolute bottom-0 right-0 w-96 h-96 bg-indigo-500/20 blur-3xl rounded-full"
-      ></div>
+  <!-- TESTIMONIALS -->
+<section class="py-16">
+  <div class="max-w-5xl mx-auto text-center px-4">
+    <h2 class="text-3xl md:text-4xl font-bold text-[var(--light-mint)] mb-10">
+      Our <span class="gradient-text">Clients Say</span>
+    </h2>
+
+    <div class="relative">
+      <div id="testimonial-slider" class="transition-all duration-700 ease-in-out">
+
+        <!-- CARD TEMPLATE STYLE (all consistent) -->
+        <!-- 1 -->
+        <div class="testimonial-card flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
+                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
+                    shadow-soft fade-active">
+          <div class="flex-1 text-left md:pr-8 z-10">
+            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
+              “Working with Sitefully was a game changer for our brand.
+              Their design team truly understood our vision and brought it to life.”
+            </p>
+            <div>
+              <h3 class="text-[var(--soft-peach)] font-semibold">Alicia Bennett</h3>
+              <p class="text-[var(--light-mint)]/70 text-sm">Founder, BrightPath Studios</p>
+            </div>
+          </div>
+          <div class="mt-6 md:mt-0 md:ml-8">
+            <img src="https://images.unsplash.com/photo-1619946794135-5bc917a27793?auto=format&fit=crop&w=250&q=80"
+                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
+                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
+                    shadow-soft fade-enter">
+          <div class="flex-1 text-left md:pr-8 z-10">
+            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
+              “The Sitefully team went above and beyond. Their branding approach elevated our identity.”
+            </p>
+            <div>
+              <h3 class="text-[var(--soft-peach)] font-semibold">Michael Chen</h3>
+              <p class="text-[var(--light-mint)]/70 text-sm">Marketing Director, NovaTech</p>
+            </div>
+          </div>
+          <div class="mt-6 md:mt-0 md:ml-8">
+            <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=250&q=80"
+                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
+                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
+                    shadow-soft fade-enter">
+          <div class="flex-1 text-left md:pr-8 z-10">
+            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
+              “Sitefully’s creativity and professionalism exceeded expectations.”
+            </p>
+            <div>
+              <h3 class="text-[var(--soft-peach)] font-semibold">Sarah Lopez</h3>
+              <p class="text-[var(--light-mint)]/70 text-sm">Creative Director, VisionFlow</p>
+            </div>
+          </div>
+          <div class="mt-6 md:mt-0 md:ml-8">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=250&q=80"
+                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
+                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
+                    shadow-soft fade-enter">
+          <div class="flex-1 text-left md:pr-8 z-10">
+            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
+              “Absolutely love the professionalism and design sense of Sitefully.
+              They gave our startup a world-class brand image.”
+            </p>
+            <div>
+              <h3 class="text-[var(--soft-peach)] font-semibold">David Romero</h3>
+              <p class="text-[var(--light-mint)]/70 text-sm">Co-Founder, Skyward Labs</p>
+            </div>
+          </div>
+          <div class="mt-6 md:mt-0 md:ml-8">
+            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=250&q=80"
+                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
+                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
+                    shadow-soft fade-enter">
+          <div class="flex-1 text-left md:pr-8 z-10">
+            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
+              “From concept to delivery, Sitefully was flawless. Their attention to detail is unmatched.”
+            </p>
+            <div>
+              <h3 class="text-[var(--soft-peach)] font-semibold">Elena Vasquez</h3>
+              <p class="text-[var(--light-mint)]/70 text-sm">CEO, Dreamline Agency</p>
+            </div>
+          </div>
+          <div class="mt-6 md:mt-0 md:ml-8">
+            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=250&q=80"
+                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- arrows -->
+      <button id="prevBtn"
+              class="absolute -left-8 md:-left-14 top-1/2 -translate-y-1/2 
+                     bg-[rgba(255,255,255,0.03)] p-3 rounded-full shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--cyan-teal)]" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button id="nextBtn"
+              class="absolute -right-8 md:-right-14 top-1/2 -translate-y-1/2 
+                     bg-[rgba(255,255,255,0.03)] p-3 rounded-full shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--cyan-teal)]" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- dots -->
+    <div id="dots" class="flex justify-center mt-8 space-x-3"></div>
+  </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="relative overflow-hidden bg-gradient-to-tr from-[rgba(17,100,102,0.95)] to-[rgba(217,176,140,0.06)] text-[var(--light-mint)] mt-12">
+      <div class="absolute top-0 left-0 w-72 h-72 bg-[rgba(217,176,140,0.06)] rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
+      <div class="absolute bottom-0 right-0 w-80 h-80 bg-[rgba(17,100,102,0.06)] rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
 
       <div class="relative container mx-auto px-6 lg:px-12 py-16">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          <!-- Brand Column -->
           <div>
             <div class="flex items-center gap-3">
-              <img
-                src="Assets/sitefully logo.png"
-                alt="Sitefully"
-                class="w-12 h-12 object-contain rounded-xl shadow-md"
-                loading="lazy"
-              />
-              <h2 class="text-2xl font-extrabold tracking-tight">Sitefully</h2>
+              <div class="flex flex-col items-center space-y-2">
+  <div class="flex items-center space-x-4">
+  <!-- Logo -->
+  <img src="Assets/logo.png" alt="Sitefully" class="w-16 h-16 object-contain rounded-md"/>
+
+  <!-- Name + Motto -->
+  <div class="flex flex-col">
+    <h2 class="text-2xl font-extrabold text-gray-800">Sitefully</h2>
+    <p class="text-xs text-gray-500 ">The brain of great websites</p>
+  </div>
+</div>
+
+</div>
+
             </div>
-            <p class="mt-4 text-gray-200/90 leading-relaxed text-sm max-w-sm">
-              <span class="font-semibold text-pink-300"
-                >The Brain of Great Websites</span
-              >
-              — delivering intelligent, high-performing web solutions that
-              define brands and drive digital growth.
-            </p>
-            <a
-              href="Contact.html"
-              class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-semibold bg-gradient-to-r from-indigo-600 to-pink-500 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
-            >
-              Let’s Talk <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
+            <p class="mt-4 text-[var(--light-mint)]/85 text-sm max-w-sm"> <span class="accent-bronze font-semibold">The Brain of Great Websites</span> — delivering intelligent, high-performing web solutions that define brands and drive growth.</p>
+            <a href="Contact.html" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-semibold btn-primary rounded-full">Let’s Talk <i class="fa-solid fa-arrow-right text-xs"></i></a>
           </div>
 
-          <!-- Quick Links -->
           <nav aria-label="Footer Navigation">
-            <h3
-              class="text-lg font-semibold mb-5 text-pink-300 uppercase tracking-wide"
-            >
-              Quick Links
-            </h3>
-            <ul class="space-y-3">
-              <li>
-                <a
-                  href="#"
-                  class="group flex items-center gap-2 text-gray-200/90 hover:text-white transition-all duration-200"
-                >
-                  <i
-                    class="fa-solid fa-angle-right text-pink-400 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="About.html"
-                  class="group flex items-center gap-2 text-gray-200/90 hover:text-white transition-all duration-200"
-                >
-                  <i
-                    class="fa-solid fa-angle-right text-pink-400 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href="Services.html"
-                  class="group flex items-center gap-2 text-gray-200/90 hover:text-white transition-all duration-200"
-                >
-                  <i
-                    class="fa-solid fa-angle-right text-pink-400 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Products & Services
-                </a>
-              </li>
-              <li>
-                <a
-                  href="Contact.html"
-                  class="group flex items-center gap-2 text-gray-200/90 hover:text-white transition-all duration-200"
-                >
-                  <i
-                    class="fa-solid fa-angle-right text-pink-400 group-hover:translate-x-1 transition-transform"
-                  ></i>
-                  Contact
-                </a>
-              </li>
+            <h3 class="text-lg font-semibold mb-5 accent-bronze uppercase tracking-wide">Quick Links</h3>
+            <ul class="space-y-3 text-[var(--light-mint)]/90">
+              <li><a href="#" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Home</a></li>
+              <li><a href="About.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> About</a></li>
+              <li><a href="Services.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Products & Services</a></li>
+              <li><a href="Contact.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Contact</a></li>
             </ul>
           </nav>
 
-          <!-- Social Media -->
           <div>
-            <h3
-              class="text-lg font-semibold mb-5 text-pink-300 uppercase tracking-wide"
-            >
-              Stay Connected
-            </h3>
-            <p class="text-gray-200/90 text-sm mb-4">
-              Follow us and stay updated with insights, trends, and innovations.
-            </p>
+            <h3 class="text-lg font-semibold mb-5 accent-bronze uppercase tracking-wide">Stay Connected</h3>
+            <p class="text-[var(--light-mint)]/80 text-sm mb-4">Follow us for trends and updates.</p>
             <div class="flex space-x-4">
-              <a href="#" class="social-icon-footer group">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-icon-footer group">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="social-icon-footer group">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#" class="social-icon-footer group">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
+              <a href="#" class="social-icon-footer"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-icon-footer"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon-footer"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-icon-footer"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
         </div>
 
-        <!-- Footer Bottom -->
-        <div class="border-t border-white/10 pt-6 text-center">
-          <p class="text-sm text-gray-300">
-            © <span id="year"></span>
-            <span class="text-pink-300 font-semibold">Sitefully</span>. All
-            rights reserved.
-          </p>
+        <div class="border-t border-white/6 pt-6 text-center">
+          <p class="text-sm text-[var(--light-mint)]/75">© <span id="year"></span> <span class="accent-bronze font-semibold">Sitefully</span>. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
     <!-- SCRIPTS -->
     <script>
-      // NAVBAR BEHAVIOR
-
+      // NAVBAR scroll behavior (glass effect)
       window.addEventListener("scroll", () => {
         const nav = document.getElementById("navbar");
-        if (window.scrollY > 80) {
-          nav.classList.add(
-            "bg-indigo-950/70",
-            "shadow-lg",
-            "backdrop-blur-lg"
-          );
+        if (!nav) return;
+        if (window.scrollY > 60) {
+          nav.classList.add("backdrop-blur-xl", "shadow-2xl");
         } else {
-          nav.classList.remove(
-            "bg-indigo-950/70",
-            "shadow-lg",
-            "backdrop-blur-lg"
-          );
+          nav.classList.remove("backdrop-blur-xl", "shadow-2xl");
         }
       });
 
-      // Menu elements
+      // Mobile menu controls
       const menuBtn = document.getElementById("menuBtn");
       const closeMenu = document.getElementById("closeMenu");
       const mobileMenu = document.getElementById("mobileMenu");
       const drawer = document.getElementById("drawer");
       const overlay = document.getElementById("overlay");
+      let menuOpen = false;
 
-      // Menu state
-      let isMenuOpen = false;
-
-      // Toggle menu function
-      function toggleMenu(open) {
-        isMenuOpen = open;
-
-        // Update button icon and aria-expanded
-        menuBtn.innerHTML = open
-          ? '<i class="fa-solid fa-xmark text-xl"></i>'
-          : '<i class="fa-solid fa-bars text-xl"></i>';
-        menuBtn.setAttribute("aria-expanded", open);
-
-        // Toggle menu visibility
-        mobileMenu.classList.toggle("opacity-100", open);
-        mobileMenu.classList.toggle("opacity-0", !open);
-        mobileMenu.classList.toggle("pointer-events-auto", open);
-        mobileMenu.classList.toggle("pointer-events-none", !open);
-
-        // Toggle drawer position
-        drawer.classList.toggle("translate-x-0", open);
-        drawer.classList.toggle("translate-x-full", !open);
-
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = open ? "hidden" : "";
+      function openMenu() {
+        mobileMenu.classList.remove("opacity-0","pointer-events-none");
+        mobileMenu.classList.add("opacity-100","pointer-events-auto");
+        drawer.classList.remove("translate-x-full");
+        drawer.classList.add("translate-x-0");
+        document.body.style.overflow = "hidden";
+        menuBtn.setAttribute("aria-expanded","true");
+        menuOpen = true;
+      }
+      function closeMenuFunc(){
+        drawer.classList.add("translate-x-full");
+        mobileMenu.classList.remove("opacity-100","pointer-events-auto");
+        setTimeout(()=> {
+          mobileMenu.classList.add("opacity-0","pointer-events-none");
+          document.body.style.overflow = "";
+        }, 300);
+        menuBtn.setAttribute("aria-expanded","false");
+        menuOpen = false;
       }
 
-      // Event listeners
-      menuBtn.addEventListener("click", () => toggleMenu(!isMenuOpen));
-      closeMenu.addEventListener("click", () => toggleMenu(false));
-      overlay.addEventListener("click", () => toggleMenu(false));
+      if (menuBtn) menuBtn.addEventListener("click", () => (menuOpen ? closeMenuFunc() : openMenu()));
+      if (closeMenu) closeMenu.addEventListener("click", closeMenuFunc);
+      if (overlay) overlay.addEventListener("click", closeMenuFunc);
 
-      // Close menu on escape key
+      // Close on escape
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && isMenuOpen) {
-          toggleMenu(false);
-        }
+        if (e.key === "Escape" && menuOpen) closeMenuFunc();
       });
 
-      // Close menu on resize if screen becomes larger than mobile breakpoint
+      // Auto-close on resize above mobile
+      let resizeTimer;
       window.addEventListener("resize", () => {
-        if (window.innerWidth >= 768 && isMenuOpen) {
-          toggleMenu(false);
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth >= 768 && menuOpen) closeMenuFunc();
+        }, 120);
       });
+    
+      // Scroll arrow functionality
+      const arrow = document.getElementById('scroll-arrow');
+  const hero = document.getElementById('hero-section');
 
-      const currentPath = window.location.pathname;
-      document.querySelectorAll(".nav-link, .mobile-link").forEach((link) => {
-        try {
-          if (link.getAttribute("href") === currentPath) {
-            link.classList.add("active");
-            link.classList.add("text-[var(--color-accent)]");
-          }
-        } catch (e) {}
-      });
+  arrow.addEventListener('click', () => {
+    const headerOffset = 80; // adjust for fixed header
+    const elementPosition = hero.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      // Footer auto-year
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  });
+      // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
-      // Testimonial Slider
-        const testimonials = document.querySelectorAll(".testimonial-card");
+
+      // Testimonials slider
+      const testimonials = document.querySelectorAll(".testimonial-card");
       const dotsContainer = document.getElementById("dots");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
       let current = 0;
+      let autoSlide;
 
-      // Create dot indicators
+      // create dots
       testimonials.forEach((_, i) => {
-        const dot = document.createElement("button");
-        dot.className =
-          "w-3 h-3 rounded-full bg-gray-400 transition-all duration-300";
-        dot.addEventListener("click", () => {
-          current = i;
-          showTestimonial(current);
-        });
-        dotsContainer.appendChild(dot);
+        const btn = document.createElement("button");
+        btn.className = "w-3 h-3 rounded-full dot-glow bg-[rgba(255,255,255,0.18)]";
+        btn.addEventListener("click", () => { current = i; showTestimonial(current); resetAuto(); });
+        dotsContainer.appendChild(btn);
       });
+      const dots = dotsContainer.children;
 
-      const dots = dotsContainer.querySelectorAll("button");
-
-      const showTestimonial = (index) => {
+      function showTestimonial(index){
         testimonials.forEach((t, i) => {
           t.classList.add("hidden");
           t.classList.remove("fade-active");
+          t.classList.add("fade-enter");
           if (i === index) {
-            t.classList.remove("hidden");
-            setTimeout(() => t.classList.add("fade-active"), 10);
+            t.classList.remove("hidden","fade-enter");
+            setTimeout(()=> t.classList.add("fade-active"), 20);
           }
         });
+        for (let i=0;i<dots.length;i++){
+          dots[i].classList.remove("dot-active");
+          dots[i].classList.add("bg-[rgba(255,255,255,0.18)]");
+        }
+        if (dots[index]) { dots[index].classList.add("dot-active"); dots[index].classList.remove("bg-[rgba(255,255,255,0.18)]"); }
+      }
 
-        dots.forEach((d, i) => {
-          d.className =
-            "w-3 h-3 rounded-full transition-all duration-300 " +
-            (i === index ? "bg-pink-500 scale-110" : "bg-gray-400");
-        });
-      };
+      if (nextBtn) nextBtn.addEventListener("click", ()=> { current = (current+1) % testimonials.length; showTestimonial(current); resetAuto(); });
+      if (prevBtn) prevBtn.addEventListener("click", ()=> { current = (current-1 + testimonials.length) % testimonials.length; showTestimonial(current); resetAuto(); });
 
-      document.getElementById("nextBtn").addEventListener("click", () => {
-        current = (current + 1) % testimonials.length;
-        showTestimonial(current);
-      });
+      function startAuto(){
+        autoSlide = setInterval(()=> {
+          current = (current + 1) % testimonials.length;
+          showTestimonial(current);
+        }, 6000);
+      }
+      function resetAuto(){
+        clearInterval(autoSlide);
+        startAuto();
+      }
 
-      document.getElementById("prevBtn").addEventListener("click", () => {
-        current = (current - 1 + testimonials.length) % testimonials.length;
-        showTestimonial(current);
-      });
+      if (testimonials.length) { showTestimonial(0); startAuto(); }
 
-      // Auto-slide
-      setInterval(() => {
-        current = (current + 1) % testimonials.length;
-        showTestimonial(current);
-      }, 6000);
+      // Pause auto when hovering
+      const sliderWrap = document.getElementById("testimonial-slider");
+      if (sliderWrap){
+        sliderWrap.addEventListener("mouseenter", () => clearInterval(autoSlide));
+        sliderWrap.addEventListener("mouseleave", () => startAuto());
+      }
 
-      showTestimonial(0);
+      // Initialize AOS
+      if (AOS) AOS.init({ duration:900, once:true });
 
-      // AOS Initialization for About Preview
-      AOS.init({
-        duration: 1000,
-        once: true,
-      });
-
-      // Typing effect for hero subtitle
-      (function () {
+      // typing effect (hero)
+      (function(){
         const phrases = [
           "We build fast, accessible websites.",
           "Design-led development for growth.",
-          "Products that scale with your business.",
+          "Products that scale with your business."
         ];
         const el = document.getElementById("heroTyping");
         if (!el) return;
-        let p = 0,
-          i = 0,
-          timer = null;
+        let p=0, i=0, timer;
         const cursor = document.createElement("span");
         cursor.className = "cursor";
         el.appendChild(cursor);
 
-        function type() {
+        function type(){
           const full = phrases[p];
-          if (i <= full.length) {
-            el.textContent = full.slice(0, i);
+          if (i <= full.length){
+            el.textContent = full.slice(0,i);
             el.appendChild(cursor);
             i++;
-            timer = setTimeout(type, 70);
+            timer = setTimeout(type, 60);
           } else {
             timer = setTimeout(erase, 2000);
           }
         }
-        function erase() {
+        function erase(){
           const full = phrases[p];
-          if (i >= 0) {
-            el.textContent = full.slice(0, i);
+          if (i >= 0){
+            el.textContent = full.slice(0,i);
             el.appendChild(cursor);
             i--;
             timer = setTimeout(erase, 30);
           } else {
-            p = (p + 1) % phrases.length;
+            p = (p+1) % phrases.length;
             timer = setTimeout(type, 500);
           }
         }
-        // start after DOM ready
-        window.addEventListener("load", () => {
-          setTimeout(type, 400);
-        });
+        window.addEventListener("load", ()=> setTimeout(type, 400));
       })();
-
-      // Auto year
-      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>

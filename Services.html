@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,39 +15,47 @@
     />
 
     <style>
-  
-
-      /* Base colors (Indigo → Pink gradient theme) */
+      /* Brand palette */
       :root {
-        --indigo: #4f46e5;
-        --pink: #ec4899;
-        --light-bg: #f9fafb;
-        --text-dark: #1f2937;
-        --text-muted: #6b7280;
-        --card-border: rgba(255, 255, 255, 0.1);
+        --dark-teal: #2C3531;
+        --cyan-teal: #116466;
+        --bronze: #D9B08C;
+        --soft-peach: #FFCB9A;
+        --light-mint: #D1E8E2;
+
+        /* Derived tokens */
+        --bg-main: #0f1412;
+        --text-dark: #121212;
+        --text-muted: #4b5563;
+        --card-border: rgba(209, 232, 226, 0.6);
       }
 
       /* Smooth UI enhancements */
       body {
-        background: linear-gradient(to bottom right, var(--indigo), var(--pink));
+        background: radial-gradient(circle at top left, var(--cyan-teal) 0%, var(--dark-teal) 45%, #0b0f0e 100%);
         color: var(--text-dark);
-        font-family: 'Inter', sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
       }
 
       .glass-card {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(12px);
+        background: linear-gradient(
+          135deg,
+          rgba(209, 232, 226, 0.96),
+          rgba(255, 203, 154, 0.92)
+        );
+        backdrop-filter: blur(14px);
         border: 1px solid var(--card-border);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       }
 
       .glass-card:hover {
         transform: translateY(-6px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+        border-color: rgba(217, 176, 140, 0.9);
       }
 
       .gradient-text {
-        background: linear-gradient(90deg, var(--indigo), var(--pink));
+        background: linear-gradient(90deg, var(--cyan-teal), var(--soft-peach));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -56,7 +64,7 @@
         display: inline-block;
         width: 3px;
         height: 1em;
-        background: var(--indigo);
+        background: var(--soft-peach);
         animation: blink 1s steps(2, start) infinite;
         vertical-align: middle;
       }
@@ -74,63 +82,49 @@
         transform: translateY(-50%);
         width: 10px;
         height: 10px;
-        background: linear-gradient(90deg, var(--indigo), var(--pink));
+        background: linear-gradient(90deg, var(--cyan-teal), var(--soft-peach));
         border-radius: 50%;
       }
 
       .phase-badge {
-        background: linear-gradient(90deg, var(--indigo), var(--pink));
-        color: white;
+        background: linear-gradient(120deg, var(--cyan-teal), var(--bronze));
+        color: #ffffff;
         border-radius: 9999px;
-        padding: 0.35rem 0.8rem;
+        padding: 0.35rem 0.85rem;
         font-size: 0.75rem;
         font-weight: 600;
+        letter-spacing: 0.03em;
       }
     </style>
   </head>
-  <body>
+  <body class="text-[var(--dark-teal)]">
     <!-- HERO SECTION WITH VIDEO BACKGROUND -->
-<section class="relative w-full h-[40vh] flex flex-col justify-center items-center overflow-hidden text-white opacity-50 md:opacity-40">
-  <!-- Background Video -->
-  <video 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    class="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="Assets/Service hero.mp4" type="video/mp4" />
-  </video>
+    <section class="relative w-full h-[40vh] flex flex-col justify-center items-center overflow-hidden text-white opacity-60 md:opacity-50">
+    
+      <!-- Overlay for readability -->
+      <div class="absolute inset-0 bg-[rgba(17,100,102,0.7)] mix-blend-multiply"></div>
 
-  <!-- Overlay for readability -->
-  <div class="absolute inset-0 bg-black/50"></div>
+      <!-- Hero Content -->
+      <div class="relative z-10 text-center px-6 space-y-6 max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-extrabold drop-shadow-lg">
+          <span id="heroHeading" class="gradient-text">Smart Web Solutions for Every Brand</span>
+          <span class="hero-cursor"></span>
+        </h1>
+        
+      </div>
 
-  <!-- Hero Content -->
-  <div class="relative z-10 text-center px-6 space-y-6 max-w-4xl mx-auto">
-    <h1 class="text-4xl md:text-6xl font-extrabold gradient-text">
-      <span id="heroHeading">Smart Web Solutions for Every Brand</span>
-      <span class="hero-cursor"></span>
-    </h1>
-    <p class="text-lg md:text-xl text-gray-100/90">
-      Comprehensive web services designed to elevate your online presence
-      and drive business growth.
-    </p>
-  </div>
-
-  <!-- Dancing Arrow Section -->
-  <div class="relative z-10 mt-12 flex flex-col items-center">
-    <p class="text-sm md:text-base text-gray-200 mb-3 tracking-wide">
-      Scroll down to explore our <span class="text-pink-400 font-semibold">project checklist</span>
-    </p>
-    <a href="#checklist" class="animate-bounce">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-      </svg>
-    </a>
-  </div>
-</section>
-
-
+      <!-- Dancing Arrow Section -->
+      <div class="relative z-10 mt-12 flex flex-col items-center" id="checklist">
+        <p class="text-sm md:text-base text-[var(--light-mint)]/90 mb-3 tracking-wide">
+          Scroll down to explore our <span class="text-[var(--soft-peach)] font-semibold">project checklist</span>
+        </p>
+        <a href="#servicesContainer" class="animate-bounce">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-[var(--soft-peach)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+      </div>
+    </section>
 
     <!-- SERVICES SECTION -->
     <section class="flex-grow py-20 md:py-32">
@@ -139,33 +133,33 @@
         <!-- Service Cards -->
         <div
           id="servicesContainer"
-          class="max-w-5xl mx-auto space-y-6 text-gray-700"
+          class="max-w-5xl mx-auto space-y-6 text-[var(--dark-teal)]"
         >
-          <!-- Example card -->
+          <!-- Intro card -->
           <div class="glass-card rounded-2xl p-6 shadow-lg">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-4">
               <div>
-                <h2 class="text-2xl font-bold gradient-text mb-2">
-                  <i class="fas fa-clipboard-check mr-2"></i> Web Development
-                  Process
+                <h2 class="text-2xl font-bold gradient-text mb-2 flex items-center">
+                  <i class="fas fa-clipboard-check mr-2 text-[var(--cyan-teal)]/90"></i> 
+                  Web Development Process
                 </h2>
-                <p class="text-sm text-gray-500">
-                  Click each phase to see detailed steps and deliverables
+                <p class="text-sm text-[var(--text-muted)]">
+                  Click each phase to see detailed steps and deliverables.
                 </p>
               </div>
-              <span class="phase-badge">
-                <i class="fas fa-calendar-alt mr-1"></i> 8+ weeks
+              <span class="phase-badge flex items-center gap-1">
+                <i class="fas fa-calendar-alt text-xs"></i> 8+ weeks
               </span>
             </div>
           </div>
 
-          <!-- Example detail -->
+          <!-- 1. Discovery -->
           <details
-            class="glass-card rounded-2xl overflow-hidden"
+            class="glass-card rounded-2xl overflow-hidden checklist-item"
             open
           >
             <summary
-              class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
+              class="px-6 py-6 hover:bg-[var(--light-mint)]/40 cursor-pointer flex justify-between items-center transition-colors"
             >
               <div class="flex items-center space-x-4">
                 <img
@@ -177,37 +171,37 @@
                   <h3 class="font-bold text-lg gradient-text">
                     1. Project Discovery & Planning
                   </h3>
-                  <p class="text-sm text-gray-500">
+                  <p class="text-sm text-[var(--text-muted)]">
                     Understand client goals, audience, and design preferences.
                   </p>
                 </div>
               </div>
-              <i class="fas fa-plus text-pink-500"></i>
+              <i class="fas fa-plus expand-icon text-[var(--cyan-teal)]"></i>
             </summary>
             <div class="px-8 pb-6 pl-14 relative">
               <div class="space-y-4">
                 <div class="relative pl-6">
                   <div class="timeline-dot"></div>
-                  <h4 class="font-medium text-indigo-600">Initial consultation</h4>
-                  <p class="text-sm text-gray-600">
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Initial consultation</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
                     Virtual or in-person meeting to align goals.
                   </p>
                 </div>
                 <div class="relative pl-6">
                   <div class="timeline-dot"></div>
-                  <h4 class="font-medium text-indigo-600">
+                  <h4 class="font-medium text-[var(--cyan-teal)]">
                     Requirements & site map
                   </h4>
-                  <p class="text-sm text-gray-600">
+                  <p class="text-sm text-[var(--text-muted)]">
                     Define pages, features, integrations, and success metrics.
                   </p>
                 </div>
                  <div class="relative pl-6">
                   <div class="timeline-dot"></div>
-                  <h4 class="font-medium text-indigo-600">
+                  <h4 class="font-medium text-[var(--cyan-teal)]">
                     Proposal & milestones
                   </h4>
-                  <p class="text-sm text-gray-600">
+                  <p class="text-sm text-[var(--text-muted)]">
                     Deliverable: proposal & quotation.
                   </p>
                 </div>
@@ -215,451 +209,289 @@
             </div>
           </details>
 
-         <!-- Design & Mockup Phase -->
-<details class="glass-card rounded-2xl overflow-hidden">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-      <img
-  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
-  class="w-28 h-16 object-cover rounded-lg shadow-md"
-  alt="Design and Mockup"
->
-      <div>
-        <h3 class="font-bold text-lg gradient-text">
-          2. Design & Mockup Phase
-        </h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Visualize brand identity and UI concepts.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="space-y-4">
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Wireframes</h4>
-        <p class="text-sm text-gray-600">
-          Create layout drafts for all main pages and sections.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">High-fidelity Mockups</h4>
-        <p class="text-sm text-gray-600">
-          Build detailed visuals in Figma or Adobe XD for client feedback.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Final UI Approval</h4>
-        <p class="text-sm text-gray-600">
-          Finalize and approve design for the development handoff.
-        </p>
-      </div>
-    </div>
-
-    <!-- Duration Badge -->
-    <span
-      class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-xs font-semibold shadow-sm"
-    >
-      2–3 weeks
-    </span>
-  </div>
-</details>
-
-<!-- Development -->
-<details class="glass-card rounded-2xl overflow-hidden">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-      <img
-        src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=60"
-        class="w-28 h-16 object-cover rounded-lg shadow-md"
-        alt="Development"
-      />
-      <div>
-        <h3 class="font-bold text-lg gradient-text">
-          3. Development (Django + Tailwind/Bootstrap + JS)
-        </h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Convert design into a robust site.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="space-y-4">
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Backend setup</h4>
-        <p class="text-sm text-gray-600">
-          Models, views, authentication, and APIs.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Frontend build</h4>
-        <p class="text-sm text-gray-600">
-          Responsive UI components and interactions.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Feature integration</h4>
-        <p class="text-sm text-gray-600">
-          Forms, blog, gallery, email & WhatsApp links.
-        </p>
-      </div>
-    </div>
-
-    <!-- Duration Badge -->
-    <span
-      class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-xs font-semibold shadow-sm"
-    >
-      4–6 weeks
-    </span>
-  </div>
-</details>
-
-<!-- Testing -->
-<details class="glass-card rounded-2xl overflow-hidden">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-      <img
-        src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=60"
-        class="w-28 h-16 object-cover rounded-lg shadow-md"
-        alt="Testing"
-      />
-      <div>
-        <h3 class="font-bold text-lg gradient-text">
-          4. Testing & Review
-        </h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Ensure quality, security, and performance.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="space-y-4">
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Cross-browser checks</h4>
-        <p class="text-sm text-gray-600">
-          Chrome, Safari, Firefox, and mobile tests.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Performance tuning</h4>
-        <p class="text-sm text-gray-600">
-          Speed, image optimization, and caching.
-        </p>
-      </div>
-    </div>
-
-    <!-- Duration Badge -->
-    <span
-      class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-xs font-semibold shadow-sm"
-    >
-      1–2 weeks
-    </span>
-  </div>
-</details>
-
-<!-- Deployment -->
-<details class="glass-card rounded-2xl overflow-hidden">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-      <img
-        src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=60"
-        class="w-28 h-16 object-cover rounded-lg shadow-md"
-        alt="Deployment"
-      />
-      <div>
-        <h3 class="font-bold text-lg gradient-text">
-          5. Deployment & Hosting
-        </h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Make the site live & secure.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="space-y-4">
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Domain & SSL</h4>
-        <p class="text-sm text-gray-600">
-          Domain connect, HTTPS & DNS setup.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Deploy to host</h4>
-        <p class="text-sm text-gray-600">
-          Render, PythonAnywhere, or VPS deployment.
-        </p>
-      </div>
-    </div>
-
-    <!-- Duration Badge -->
-    <span
-      class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-xs font-semibold shadow-sm"
-    >
-      Included
-    </span>
-  </div>
-</details>
-
-<!-- Maintenance -->
-<details class="glass-card rounded-2xl overflow-hidden">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-      <img
-  src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=800&q=80"
-  class="w-28 h-16 object-cover rounded-lg shadow-md"
-  alt="Maintenance and Support"
->
-
-      <div>
-        <h3 class="font-bold text-lg gradient-text">
-          6. Maintenance & Support
-        </h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Keep the site secure and fresh.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="space-y-4">
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Regular updates</h4>
-        <p class="text-sm text-gray-600">
-          Security patches and content tweaks.
-        </p>
-      </div>
-
-      <div class="relative pl-6">
-        <div class="timeline-dot"></div>
-        <h4 class="font-medium text-indigo-600">Backups & support</h4>
-        <p class="text-sm text-gray-600">
-          Automatic backups and helpdesk access.
-        </p>
-      </div>
-    </div>
-
-    <!-- Duration Badge -->
-    <span
-      class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-xs font-semibold shadow-sm"
-    >
-      Ongoing
-    </span>
-  </div>
-</details>
-
-<!-- Deployment & Hosting -->
-<details class="glass-card rounded-2xl overflow-hidden">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-      <img
-  src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&q=80"
-  class="w-28 h-16 object-cover rounded-lg shadow-md"
-  alt="Deployment and Hosting"
->
-
-      <div>
-        <h3 class="font-bold text-lg gradient-text">
-          Deployment & Hosting — Optional Plans
-        </h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Make the site live, fast, and secure with flexible hosting tiers.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="overflow-x-auto rounded-xl border border-gray-100 shadow-sm bg-white/70 backdrop-blur-md">
-      <table class="w-full text-left text-sm">
-        <thead class="bg-gradient-to-r from-indigo-50 to-pink-50">
-          <tr>
-            <th class="py-3 px-4 text-indigo-900 font-semibold">Plan</th>
-            <th class="py-3 px-4 text-indigo-900 font-semibold">Hosting Type</th>
-            <th class="py-3 px-4 text-indigo-900 font-semibold">Features</th>
-            <th class="py-3 px-4 text-pink-600 font-semibold">Price (USD / Month)</th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-600">
-          <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-pink-50 transition">
-            <td class="py-2 px-4"> <strong>Basic</strong></td>
-            <td>Shared Hosting</td>
-            <td>1 domain, SSL, 2GB storage</td>
-            <td class="text-pink-600 font-semibold">$40</td>
-          </tr>
-          <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-pink-50 transition">
-            <td class="py-2 px-4"> <strong>Standard</strong></td>
-            <td>Cloud Hosting</td>
-            <td>Faster load, 5GB storage, email setup</td>
-            <td class="text-pink-600 font-semibold">$70</td>
-          </tr>
-          <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-pink-50 transition">
-            <td class="py-2 px-4"> <strong>Premium</strong></td>
-            <td>VPS Hosting</td>
-            <td>High speed, full control</td>
-            <td class="text-pink-600 font-semibold">$120</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Duration Badge 
-    <span
-      class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white text-xs font-semibold shadow-sm"
-    >
-      Annual Hosting
-    </span> -->
-  </div>
-</details> 
-
-<!-- Maintenance Plans -->
-<details class="glass-card rounded-2xl overflow-hidden mt-6">
-  <summary
-    class="px-6 py-6 hover:bg-white/40 cursor-pointer flex justify-between items-center"
-  >
-    <div class="flex items-center space-x-4">
-     <img
-  src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&q=80"
-  class="w-28 h-16 object-cover rounded-lg shadow-md"
-  alt="Maintenance Plans"
->
-
-      <div>
-        <h3 class="font-bold text-lg gradient-text">Maintenance Plans (Optional)</h3>
-        <p class="text-sm text-gray-500">
-          Purpose: Keep your website updated, secure, and running smoothly.
-        </p>
-      </div>
-    </div>
-    <i class="fas fa-plus text-pink-500"></i>
-  </summary>
-
-  <div class="px-8 pb-6 pl-14 relative">
-    <div class="overflow-x-auto rounded-xl border border-gray-100 shadow-sm bg-white/70 backdrop-blur-md">
-      <table class="w-full text-left text-sm">
-        <thead class="bg-gradient-to-r from-indigo-50 to-pink-50">
-          <tr>
-            <th class="py-3 px-4 text-indigo-900 font-semibold">Plan</th>
-            <th class="py-3 px-4 text-indigo-900 font-semibold">Duration</th>
-            <th class="py-3 px-4 text-pink-600 font-semibold">Price (USD)</th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-600">
-          <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-pink-50 transition">
-            <td class="py-2 px-4"><strong>Basic</strong></td>
-            <td>1 Month</td>
-            <td class="text-pink-600 font-semibold">$15</td>
-          </tr>
-          <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-pink-50 transition">
-            <td class="py-2 px-4"><strong>Standard</strong></td>
-            <td>3 Months</td>
-            <td class="text-pink-600 font-semibold">$35</td>
-          </tr>
-          <tr class="hover:bg-gradient-to-r hover:from-indigo-50 hover:to-pink-50 transition">
-            <td class="py-2 px-4"><strong>Premium</strong></td>
-            <td>6 Months</td>
-            <td class="text-pink-600 font-semibold">$60</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</details>
-
-
-          <!-- Pricing Overview -->
-          <div class="glass-card rounded-2xl p-6 shadow-lg">
-            <h3 class="text-xl font-bold gradient-text mb-3">
-              Pricing Overview (Excluding Hosting)
-            </h3>
-            <div class="grid md:grid-cols-3 gap-6">
-              <div
-                class="bg-white/50 p-4 rounded-lg border border-white/30 hover:shadow-md"
-              >
-                <h4 class="font-semibold text-indigo-600">
-                  Single Page Website
-                </h4>
-                <p class="text-sm text-gray-600">
-                  Landing page / Portfolio / Personal Brand
-                </p>
-                <p class="mt-2 text-pink-600 font-bold">$80 – $120</p>
+          <!-- 2. Design & Mockup Phase -->
+          <details class="glass-card rounded-2xl overflow-hidden checklist-item">
+            <summary
+              class="px-6 py-6 hover:bg-[var(--light-mint)]/40 cursor-pointer flex justify-between items-center transition-colors"
+            >
+              <div class="flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
+                  class="w-28 h-16 object-cover rounded-lg shadow-md"
+                  alt="Design and Mockup"
+                />
+                <div>
+                  <h3 class="font-bold text-lg gradient-text">
+                    2. Design & Mockup Phase
+                  </h3>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Visualize your brand identity and UI concepts.
+                  </p>
+                </div>
               </div>
-              <div
-                class="bg-white/50 p-4 rounded-lg border border-white/30 hover:shadow-md"
-              >
-                <h4 class="font-semibold text-indigo-600">
-                  Multi Page Website
-                </h4>
-                <p class="text-sm text-gray-600">
-                  Business / Company / School / Agency
-                </p>
-                <p class="mt-2 text-pink-600 font-bold">$150 – $250</p>
+              <i class="fas fa-plus expand-icon text-[var(--cyan-teal)]"></i>
+            </summary>
+
+            <div class="px-8 pb-6 pl-14 relative">
+              <div class="space-y-4">
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Wireframes</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Create layout drafts for all main pages and sections.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">High-fidelity Mockups</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Build detailed visuals in Figma or Adobe XD for client feedback.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Final UI Approval</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Finalize and approve design for the development handoff.
+                  </p>
+                </div>
               </div>
-              <div
-                class="bg-white/50 p-4 rounded-lg border border-white/30 hover:shadow-md"
+
+              <!-- Duration Badge -->
+              <span
+                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
               >
-                <h4 class="font-semibold text-indigo-600">
-                  Advanced Website
-                </h4>
-                <p class="text-sm text-gray-600">
-                  E-commerce / Blog system / Dynamic site
-                </p>
-                <p class="mt-2 text-pink-600 font-bold">$300 – $500</p>
-              </div>
+                2–3 weeks
+              </span>
             </div>
+          </details>
+
+          <!-- 3. Development -->
+          <details class="glass-card rounded-2xl overflow-hidden checklist-item">
+            <summary
+              class="px-6 py-6 hover:bg-[var(--light-mint)]/40 cursor-pointer flex justify-between items-center transition-colors"
+            >
+              <div class="flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=60"
+                  class="w-28 h-16 object-cover rounded-lg shadow-md"
+                  alt="Development"
+                />
+                <div>
+                  <h3 class="font-bold text-lg gradient-text">
+                    3. Development (Django + Tailwind/Bootstrap + JS)
+                  </h3>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Convert design into a robust, scalable site.
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-plus expand-icon text-[var(--cyan-teal)]"></i>
+            </summary>
+
+            <div class="px-8 pb-6 pl-14 relative">
+              <div class="space-y-4">
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Backend setup</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Models, views, authentication, and APIs.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Frontend build</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Responsive UI components and interactions.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Feature integration</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Forms, blog, gallery, email & WhatsApp links.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Duration Badge -->
+              <span
+                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
+              >
+                4–6 weeks
+              </span>
+            </div>
+          </details>
+
+          <!-- 4. Testing -->
+          <details class="glass-card rounded-2xl overflow-hidden checklist-item">
+            <summary
+              class="px-6 py-6 hover:bg-[var(--light-mint)]/40 cursor-pointer flex justify-between items-center transition-colors"
+            >
+              <div class="flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=60"
+                  class="w-28 h-16 object-cover rounded-lg shadow-md"
+                  alt="Testing"
+                />
+                <div>
+                  <h3 class="font-bold text-lg gradient-text">
+                    4. Testing & Review
+                  </h3>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Ensure quality, security, and performance.
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-plus expand-icon text-[var(--cyan-teal)]"></i>
+            </summary>
+
+            <div class="px-8 pb-6 pl-14 relative">
+              <div class="space-y-4">
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Cross-browser checks</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Chrome, Safari, Firefox, and mobile tests.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Performance tuning</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Speed, image optimization, and caching.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Duration Badge -->
+              <span
+                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
+              >
+                1–2 weeks
+              </span>
+            </div>
+          </details>
+
+          <!-- 5. Deployment -->
+          <details class="glass-card rounded-2xl overflow-hidden checklist-item">
+            <summary
+              class="px-6 py-6 hover:bg-[var(--light-mint)]/40 cursor-pointer flex justify-between items-center transition-colors"
+            >
+              <div class="flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=60"
+                  class="w-28 h-16 object-cover rounded-lg shadow-md"
+                  alt="Deployment"
+                />
+                <div>
+                  <h3 class="font-bold text-lg gradient-text">
+                    5. Deployment & Hosting
+                  </h3>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Make the site live & secure.
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-plus expand-icon text-[var(--cyan-teal)]"></i>
+            </summary>
+
+            <div class="px-8 pb-6 pl-14 relative">
+              <div class="space-y-4">
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Domain & SSL</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Domain connect, HTTPS & DNS setup.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Deploy to host</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Render, PythonAnywhere, or VPS deployment.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Duration Badge -->
+              <span
+                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
+              >
+                Included
+              </span>
+            </div>
+          </details>
+
+          <!-- 6. Maintenance -->
+          <details class="glass-card rounded-2xl overflow-hidden checklist-item">
+            <summary
+              class="px-6 py-6 hover:bg-[var(--light-mint)]/40 cursor-pointer flex justify-between items-center transition-colors"
+            >
+              <div class="flex items-center space-x-4">
+                <img
+                  src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=800&q=80"
+                  class="w-28 h-16 object-cover rounded-lg shadow-md"
+                  alt="Maintenance and Support"
+                />
+                <div>
+                  <h3 class="font-bold text-lg gradient-text">
+                    6. Maintenance & Support
+                  </h3>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Keep the site secure and fresh.
+                  </p>
+                </div>
+              </div>
+              <i class="fas fa-plus expand-icon text-[var(--cyan-teal)]"></i>
+            </summary>
+
+            <div class="px-8 pb-6 pl-14 relative">
+              <div class="space-y-4">
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Regular updates</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Security patches and content tweaks.
+                  </p>
+                </div>
+
+                <div class="relative pl-6">
+                  <div class="timeline-dot"></div>
+                  <h4 class="font-medium text-[var(--cyan-teal)]">Backups & support</h4>
+                  <p class="text-sm text-[var(--text-muted)]">
+                    Automatic backups and helpdesk access.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Duration Badge -->
+              <span
+                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
+              >
+                Ongoing
+              </span>
+            </div>
+          </details>
           </div>
-        </div>
 
         <!-- CTA -->
         <div class="mt-16 text-center">
-          <p class="text-white/90 mb-4">
+          <p class="text-[var(--light-mint)]/95 mb-4">
             Need a custom solution? Let's discuss your project requirements.
           </p>
           <a
-            href="/contact.html"
-            class="inline-block px-8 py-4 rounded-full font-semibold bg-gradient-to-r from-indigo-600 to-pink-500 text-white hover:shadow-xl hover:scale-105 transition-all duration-300"
+            href="Contact.html"
+            class="inline-block px-8 py-4 rounded-full font-semibold 
+                   bg-gradient-to-r from-[var(--cyan-teal)] via-[var(--bronze)] to-[var(--soft-peach)]
+                   text-[var(--dark-teal)] shadow-lg hover:shadow-2xl hover:scale-105
+                   transition-all duration-300 border border-[var(--bronze)]/70"
           >
             Get in Touch
           </a>
@@ -668,24 +500,12 @@
     </section>
 
     <script>
-      const accordions = document.querySelectorAll(".accordion-btn");
-      accordions.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const content = btn.nextElementSibling;
-          const isOpen = !content.classList.contains("hidden");
-          document
-            .querySelectorAll(".accordion-content")
-            .forEach((c) => c.classList.add("hidden"));
-          if (!isOpen) content.classList.remove("hidden");
-        });
-      });
-
-      // Add smooth animations for checklist items
+      // Smooth animations for checklist items
       document.querySelectorAll('.checklist-item').forEach(item => {
         item.addEventListener('toggle', () => {
           if (item.open) {
             item.classList.add('shadow-lg');
-            item.style.backgroundColor = 'rgba(244, 163, 0, 0.02)';
+            item.style.backgroundColor = 'rgba(209, 232, 226, 0.35)'; // light mint tint
           } else {
             item.classList.remove('shadow-lg');
             item.style.backgroundColor = '';
@@ -693,7 +513,6 @@
         });
       });
 
-      // Smooth reveal animation for checklist items
       const observerOptions = {
           threshold: 0.1,
           rootMargin: '0px 0px -50px 0px'
@@ -719,17 +538,14 @@
       // Toggle plus/minus icons for <details>
       document.querySelectorAll('.checklist-item').forEach(d => {
         const icon = d.querySelector('.expand-icon');
+        if (!icon) return;
         d.addEventListener('toggle', () => {
           if (d.open) {
             icon.classList.remove('fa-plus');
             icon.classList.add('fa-minus');
-            d.classList.add('shadow-lg');
-            d.style.backgroundColor = 'rgba(244,163,0,0.02)';
           } else {
             icon.classList.remove('fa-minus');
             icon.classList.add('fa-plus');
-            d.classList.remove('shadow-lg');
-            d.style.backgroundColor = '';
           }
         });
       });
@@ -771,22 +587,12 @@
         setTimeout(tick, 300);
       })();
 
-      // Replace simple .timeline-dot placeholders with Font Awesome icons (visible on all viewports)
+      // Replace simple .timeline-dot placeholders with Font Awesome icons (using bronze accent)
       (function () {
         document.querySelectorAll('.timeline-dot').forEach(dot => {
-          // keep a consistent small icon with the brand color
-          dot.innerHTML = '<i class="fas fa-circle" style="color:var(--gold);font-size:0.65rem;display:inline-block"></i>';
+          dot.innerHTML = '<i class="fas fa-circle" style="color:var(--bronze);font-size:0.65rem;display:inline-block"></i>';
         });
       })();
-
-      // Ensure all expand-icons are Font Awesome plus by default (already in markup, keep consistency)
-      document.querySelectorAll('.expand-icon').forEach(icon => {
-        if (!icon.classList.contains('fa-plus') && !icon.classList.contains('fa-minus')) {
-          icon.classList.add('fa-plus');
-        }
-      });
-
-      // existing toggle for details already present further down; keep it (it will switch fa-plus/fa-minus)
     </script>
   </body>
 </html>

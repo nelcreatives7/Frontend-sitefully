@@ -1,119 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Affordable web development and hosting plans by Smart Solution Support." />
-    <title>Pricing | Smart Solution Support</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing | Smart Solution Support</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --dark-teal: #2C3531;      /* Background, text contrast */
+      --cyan-teal: #116466;       /* Highlights, buttons */
+      --bronze: #D9B08C;          /* Accent details */
+      --peach: #FFCB9A;           /* Secondary highlights */
+      --light-mint: #D1E8E2;      /* Background contrast, subtle areas */
+    }
 
-  <body class="bg-gray-50 text-gray-800">
-    <!-- Header -->
-    <header class="bg-indigo-950 text-white py-16">
-      <div class="max-w-6xl mx-auto text-center px-6">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Flexible Web Development Plans</h1>
-        <p class="text-lg text-indigo-200 max-w-2xl mx-auto">
-          Whether you need a simple single-page site or a fully dynamic web app,
-          Smart Solution Support has a plan to match your goals and budget.
-        </p>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .gradient-title {
+      background: linear-gradient(to right, var(--cyan-teal), var(--bronze));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass {
+      background: rgba(209, 232, 226, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    table th, table td {
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    /* Responsive table scroll */
+    .table-container {
+      overflow-x: auto;
+    }
+
+  </style>
+</head>
+<body class="bg-[var(--dark-teal)] text-[var(--light-mint)]">
+
+  <!-- Header -->
+  <header class="py-20 text-center bg-[var(--cyan-teal)]/15 border-b border-[var(--cyan-teal)]/40">
+    <h1 class="text-4xl md:text-5xl font-extrabold gradient-title mb-4">Web Development Pricing</h1>
+    <p class="max-w-3xl mx-auto text-[var(--light-mint)]/80 text-lg">
+      Transparent, flexible, and value‑driven pricing tailored for startups, creators, and businesses.
+    </p>
+  </header>
+
+  <!-- Pricing Grid -->
+  <section class="py-20 max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+
+      <!-- Single Page -->
+      <div class="glass rounded-2xl p-8 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
+        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-3">Single Page Website</h3>
+        <p class="text-[var(--light-mint)]/70 mb-6">Perfect for portfolios and personal brands.</p>
+        <div class="text-3xl md:text-4xl font-extrabold text-[var(--cyan-teal)] mb-4">$99</div>
+        <ul class="space-y-2 mb-6 text-[var(--light-mint)]/90">
+          <li>✔ Fully responsive</li>
+          <li>✔ Custom UI design</li>
+          <li>✔ SEO & speed optimized</li>
+          <li>✔ Contact form</li>
+          <li>✘ No backend</li>
+        </ul>
       </div>
-    </header>
 
-    <!-- Pricing Section -->
-    <section class="py-20">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
+      <!-- Multi Page -->
+      <div class="glass rounded-2xl p-8 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
+        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-3">Multi‑Page Website</h3>
+        <p class="text-[var(--light-mint)]/70 mb-6">Great for businesses & organizations.</p>
+        <div class="text-3xl md:text-4xl font-extrabold text-[var(--cyan-teal)] mb-4">$249</div>
+        <ul class="space-y-2 mb-6 text-[var(--light-mint)]/90">
+          <li>✔ Up to 6 pages</li>
+          <li>✔ Modern responsive UI</li>
+          <li>✔ Contact & quote forms</li>
+          <li>✔ Basic SEO</li>
+          <li>✘ No backend system</li>
+        </ul>
+      </div>
 
-          <!-- Single Page -->
-          <div class="bg-white shadow-lg rounded-2xl p-8 border border-gray-100 hover:shadow-2xl transition">
-            <h3 class="text-2xl font-bold text-indigo-900 mb-3">Single Page Website</h3>
-            <p class="text-gray-500 mb-6">
-              Perfect for portfolios, personal brands, or small landing pages.
-            </p>
-            <div class="text-4xl font-extrabold text-indigo-900 mb-4">$99</div>
-            <ul class="space-y-3 mb-6 text-gray-700">
-              <li>✅ 1 responsive web page</li>
-              <li>✅ Fast loading & SEO setup</li>
-              <li>✅ Custom design & layout</li>
-              <li>✅ Contact form integration</li>
-              <li>❌ No backend or database</li>
-            </ul>
-            <a href="contact.html" class="block text-center bg-indigo-900 hover:bg-indigo-800 text-white py-3 rounded-xl font-semibold transition">
-              Get Started
-            </a>
-          </div>
+      <!-- Full‑Stack -->
+      <div class="rounded-2xl p-8 bg-[var(--cyan-teal)] text-white shadow-lg hover:shadow-xl transition">
+        <h3 class="text-2xl font-bold mb-3">Full‑Stack (Django)</h3>
+        <p class="text-white/85 mb-6">Complete dynamic website with backend.</p>
+        <div class="text-3xl md:text-4xl font-extrabold mb-4">$499</div>
+        <ul class="space-y-2 mb-6">
+          <li>✔ Django backend</li>
+          <li>✔ Database + dashboard</li>
+          <li>✔ Authentication system</li>
+          <li>✔ Dynamic content</li>
+          <li>✔ Advanced SEO</li>
+        </ul>
+      </div>
 
-          <!-- Multi-Page -->
-          <div class="bg-white shadow-lg rounded-2xl p-8 border border-gray-100 hover:shadow-2xl transition">
-            <h3 class="text-2xl font-bold text-indigo-900 mb-3">Multi-Page Website</h3>
-            <p class="text-gray-500 mb-6">
-              Ideal for businesses and organizations needing multiple sections.
-            </p>
-            <div class="text-4xl font-extrabold text-indigo-900 mb-4">$249</div>
-            <ul class="space-y-3 mb-6 text-gray-700">
-              <li>✅ Up to 6 pages (Home, About, Services, etc.)</li>
-              <li>✅ Fully responsive design</li>
-              <li>✅ Basic SEO optimization</li>
-              <li>✅ Contact & quote forms</li>
-              <li>❌ Backend functionality</li>
-            </ul>
-            <a href="contact.html" class="block text-center bg-indigo-900 hover:bg-indigo-800 text-white py-3 rounded-xl font-semibold transition">
-              Choose Plan
-            </a>
-          </div>
-
-          <!-- Full-Stack -->
-          <div class="bg-indigo-900 text-white shadow-xl rounded-2xl p-8 hover:shadow-2xl transition transform hover:-translate-y-1">
-            <h3 class="text-2xl font-bold mb-3">Full-Stack Website</h3>
-            <p class="text-indigo-200 mb-6">
-              A complete Django-based website with backend integration.
-            </p>
-            <div class="text-4xl font-extrabold mb-4">$499</div>
-            <ul class="space-y-3 mb-6 text-indigo-100">
-              <li>✅ Django backend integration</li>
-              <li>✅ Database & admin dashboard</li>
-              <li>✅ User login and forms</li>
-              <li>✅ Dynamic content management</li>
-              <li>✅ SEO & performance optimization</li>
-            </ul>
-            <a href="contact.html" class="block text-center bg-white text-indigo-900 py-3 rounded-xl font-semibold hover:bg-indigo-100 transition">
-              Request Quote
-            </a>
-          </div>
-
-          <!-- Hosting & Maintenance -->
-          <div class="bg-white shadow-lg rounded-2xl p-8 border border-gray-100 hover:shadow-2xl transition">
-            <h3 class="text-2xl font-bold text-indigo-900 mb-3">Hosting & Maintenance</h3>
-            <p class="text-gray-500 mb-6">
-              Keep your site live, secure, and up to date with our managed plans.
-            </p>
-            <div class="text-4xl font-extrabold text-indigo-900 mb-4">$25<span class="text-lg text-gray-500">/month</span></div>
-            <ul class="space-y-3 mb-6 text-gray-700">
-              <li>✅ Reliable web hosting</li>
-              <li>✅ Free SSL certificate</li>
-              <li>✅ Regular backups</li>
-              <li>✅ Bug fixes & content updates</li>
-              <li>✅ Priority support</li>
-            </ul>
-            <a href="contact.html" class="block text-center bg-indigo-900 hover:bg-indigo-800 text-white py-3 rounded-xl font-semibold transition">
-              Subscribe
-            </a>
-          </div>
+      <!-- Hosting Plans Table -->
+      <div class="glass rounded-2xl p-6 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
+        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-4 text-center">Hosting Plans</h3>
+        <div class="table-container">
+          <table class="w-full text-[var(--light-mint)] mb-6">
+            <thead>
+              <tr class="text-[var(--cyan-teal)]/90">
+                <th class="py-2 text-left">Plan</th>
+                <th class="py-2 text-left">Features</th>
+                <th class="py-2 text-right">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 font-semibold">Basic</td>
+                <td class="py-2">Shared Hosting — 1 domain, SSL, 2GB</td>
+                <td class="py-2 text-right">$40/mo</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-semibold">Standard</td>
+                <td class="py-2">Cloud Hosting — 5GB, Email setup</td>
+                <td class="py-2 text-right">$70/mo</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-semibold">Premium</td>
+                <td class="py-2">VPS Hosting — High speed, advanced control</td>
+                <td class="py-2 text-right">$120/mo</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-indigo-950 text-white py-6">
-      <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between">
-        <p class="text-sm">&copy; 2025 Smart Solution Support — All rights reserved.</p>
-        <div class="space-x-4 text-sm mt-3 sm:mt-0">
-          <a href="#!" class="hover:underline">Privacy</a>
-          <a href="#!" class="hover:underline">Terms</a>
-          <a href="contact.html" class="hover:underline">Contact</a>
+      <!-- Maintenance Plans Table -->
+      <div class="glass rounded-2xl p-6 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
+        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-4 text-center">Maintenance Plans</h3>
+        <div class="table-container">
+          <table class="w-full text-[var(--light-mint)] mb-6">
+            <thead>
+              <tr class="text-[var(--cyan-teal)]/90">
+                <th class="py-2 text-left">Plan</th>
+                <th class="py-2 text-left">Features</th>
+                <th class="py-2 text-right">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="py-2 font-semibold">Basic</td>
+                <td class="py-2">1 Month — Regular updates & backups</td>
+                <td class="py-2 text-right">$15/mo</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-semibold">Standard</td>
+                <td class="py-2">3 Months — Bug fixes & security patches</td>
+                <td class="py-2 text-right">$35/mo</td>
+              </tr>
+              <tr>
+                <td class="py-2 font-semibold">Premium</td>
+                <td class="py-2">6 Months — Performance & content updates</td>
+                <td class="py-2 text-right">$60/mo</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </footer>
-  </body>
+
+    </div>
+  </section>
+</body>
 </html>
