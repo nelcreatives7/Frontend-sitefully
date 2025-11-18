@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Contact Sitefully — get in touch about projects, partnerships or support." />
+  <meta name="robots" content="index,follow" />
   <title>Contact - Sitefully</title>
 
   <!-- TailwindCSS CDN -->
@@ -75,8 +76,12 @@
 
     input:focus, textarea:focus {
       border-color: var(--cyan-teal);
-      box-shadow: 0 0 0 3px rgba(17, 100, 102, 0.2);
+      box-shadow: 0 0 0 3px rgba(17, 100, 102, 0.12);
       outline: none;
+    }
+
+    #formStatus {
+      display: none;
     }
 
     #formStatus.visible {
@@ -87,43 +92,44 @@
       border-radius: 0.5rem;
       font-weight: 500;
     }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   </style>
 </head>
 
 <body class="flex flex-col min-h-screen">
 
   <!-- Hero Section -->
-  <section class="relative bg-cover bg-center bg-no-repeat py-20 px-6"
-           style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80');">
-    <div class="absolute inset-0 bg-gradient-to-b from-[rgba(44,53,49,0.7)] to-[rgba(17,100,102,0.6)]"></div>
+  <header class="relative bg-cover bg-center bg-no-repeat py-20 px-6"
+           style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80');">
+    <div class="absolute inset-0 bg-gradient-to-b from-[rgba(44,53,49,0.75)] to-[rgba(17,100,102,0.65)]" aria-hidden="true"></div>
     <div class="relative text-center max-w-4xl mx-auto text-white space-y-6">
       <h1 class="text-4xl md:text-6xl font-extrabold gradient-text">Get in Touch</h1>
-      <p class="text-lg md:text-xl">Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+      <p class="text-lg md:text-xl">Have a project in mind? Send us a message and we'll respond as soon as possible.</p>
     </div>
-  </section>
+  </header>
 
   <!-- Contact Section -->
-  <section class="flex-grow py-20 md:py-32">
+  <main class="flex-grow py-16 md:py-24">
     <div class="container mx-auto px-4 lg:px-8">
 
-      <!-- Grid Layout: Form first on mobile, info below -->
       <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
 
         <!-- Contact Form -->
-        <div class="order-1 md:order-1 bg-white rounded-2xl p-8 shadow-sm contact-card">
-          <h2 class="text-2xl font-bold text-[var(--dark-teal)] mb-6">Send us a Message</h2>
+        <section aria-labelledby="contactHeading" class="order-1 md:order-1 bg-white rounded-2xl p-8 shadow-sm contact-card">
+          <h2 id="contactHeading" class="text-2xl font-bold text-[var(--dark-teal)] mb-4">Send us a Message</h2>
 
           <form id="contactForm" class="space-y-6" novalidate>
-            <div id="formStatus" role="status" aria-live="polite" class="text-sm"></div>
+            <p id="formStatus" role="status" aria-live="polite" class="text-sm"></p>
 
             <div>
-              <label for="name" class="block text-sm font-semibold mb-2">Name</label>
-              <input id="name" type="text" name="name" placeholder="Your name" class="w-full px-4 py-2" required />
+              <label for="name" class="block text-sm font-semibold mb-2">Name <span class="text-red-500" aria-hidden="true">*</span></label>
+              <input id="name" type="text" name="name" placeholder="Your name" class="w-full px-4 py-2" required aria-required="true" />
             </div>
 
             <div>
-              <label for="email" class="block text-sm font-semibold mb-2">Email</label>
-              <input id="email" type="email" name="email" placeholder="your.email@example.com" class="w-full px-4 py-2" required />
+              <label for="email" class="block text-sm font-semibold mb-2">Email <span class="text-red-500" aria-hidden="true">*</span></label>
+              <input id="email" type="email" name="email" placeholder="your.email@example.com" class="w-full px-4 py-2" required aria-required="true" />
             </div>
 
             <div>
@@ -132,32 +138,41 @@
             </div>
 
             <div>
-              <label for="message" class="block text-sm font-semibold mb-2">Message</label>
-              <textarea id="message" name="message" placeholder="Tell us about your project..." class="w-full px-4 py-2 min-h-[150px] resize-none" required></textarea>
+              <label for="message" class="block text-sm font-semibold mb-2">Message <span class="text-red-500" aria-hidden="true">*</span></label>
+              <textarea id="message" name="message" placeholder="Tell us about your project..." class="w-full px-4 py-2 min-h-[150px] resize-none" required aria-required="true"></textarea>
             </div>
 
+            <!-- Honeypot -->
             <div class="sr-only" aria-hidden="true">
               <label for="website">Website</label>
               <input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
             </div>
 
-            <button type="submit" id="sendBtn" aria-label="Send message" class="w-full btn-gradient py-3 rounded-lg shadow-md">
-              Send Message
-              <i class="fa-solid fa-paper-plane ml-2" aria-hidden="true"></i>
-            </button>
+            <div class="flex gap-3 items-center">
+              <button type="submit" id="sendBtn" aria-label="Send message" class="flex-1 btn-gradient py-3 rounded-lg shadow-md inline-flex items-center justify-center">
+                <span id="btnText">Send Message</span>
+                <svg id="btnSpinner" class="hidden animate-spin ml-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+              </button>
+
+              <a href="mailto:hello@sitefully.com" class="inline-flex items-center justify-center px-4 py-3 rounded-lg border border-[var(--cyan-teal)] text-[var(--cyan-teal)] hover:bg-[var(--cyan-teal)] hover:text-white transition">Email</a>
+            </div>
           </form>
-        </div>
+
+          <noscript class="mt-3 text-sm text-center text-red-600">JavaScript is required for best experience. You can still email hello@sitefully.com.</noscript>
+        </section>
 
         <!-- Contact Info & Map -->
-        <div class="order-2 md:order-2 space-y-8">
+        <aside class="order-2 md:order-2 space-y-8" aria-labelledby="infoHeading">
+          <h2 id="infoHeading" class="sr-only">Contact information and location</h2>
 
-          <!-- Contact Info -->
-          <div class="bg-white rounded-2xl p-8 space-y-6 shadow-sm contact-card">
-            <h2 class="text-2xl font-bold text-[var(--dark-teal)] mb-6">Contact Information</h2>
+          <div class="bg-white rounded-2xl p-8 space-y-6 shadow-sm contact-card" aria-label="Contact information">
+            <h3 class="text-xl font-semibold text-[var(--dark-teal)] mb-2">Contact Information</h3>
             <div class="space-y-6">
-              <!-- Email -->
               <div class="flex items-start space-x-4">
-                <div class="h-12 w-12 rounded-xl bg-[var(--light-mint)] flex items-center justify-center flex-shrink-0">
+                <div class="h-12 w-12 rounded-xl bg-[var(--light-mint)] flex items-center justify-center flex-shrink-0" aria-hidden="true">
                   <i class="fa-solid fa-envelope text-[var(--cyan-teal)] text-xl"></i>
                 </div>
                 <div>
@@ -165,9 +180,9 @@
                   <a href="mailto:hello@sitefully.com" class="text-[var(--dark-teal)] hover:text-[var(--soft-peach)] transition-colors">hello@sitefully.com</a>
                 </div>
               </div>
-              <!-- Phone -->
+
               <div class="flex items-start space-x-4">
-                <div class="h-12 w-12 rounded-xl bg-[var(--soft-peach)] flex items-center justify-center flex-shrink-0">
+                <div class="h-12 w-12 rounded-xl bg-[var(--soft-peach)] flex items-center justify-center flex-shrink-0" aria-hidden="true">
                   <i class="fa-solid fa-phone text-[var(--cyan-teal)] text-xl"></i>
                 </div>
                 <div>
@@ -175,82 +190,177 @@
                   <a href="tel:+1234567890" class="text-[var(--dark-teal)] hover:text-[var(--soft-peach)] transition-colors">+1 (234) 567-890</a>
                 </div>
               </div>
-              <!-- Address -->
+
               <div class="flex items-start space-x-4">
-                <div class="h-12 w-12 rounded-xl bg-[var(--light-mint)] flex items-center justify-center flex-shrink-0">
+                <div class="h-12 w-12 rounded-xl bg-[var(--light-mint)] flex items-center justify-center flex-shrink-0" aria-hidden="true">
                   <i class="fa-solid fa-location-dot text-[var(--cyan-teal)] text-xl"></i>
                 </div>
                 <div>
                   <div class="text-sm font-semibold uppercase tracking-wider mb-1 text-[var(--cyan-teal)]">Address</div>
-                  <p class="text-[var(--dark-teal)] leading-relaxed">
+                  <address class="not-italic text-[var(--dark-teal)] leading-relaxed">
                     123 Digital Avenue<br />
                     Tech City, TC 12345<br />
                     United States
-                  </p>
+                  </address>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Embedded Map -->
-          <div class="bg-white rounded-2xl overflow-hidden shadow-sm contact-card">
+          <div class="bg-white rounded-2xl overflow-hidden shadow-sm contact-card" aria-hidden="false" title="Sitefully location map">
             <iframe
+              title="Sitefully location map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.293967985971!2d-122.41941558468154!3d37.77492977975911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808f0b3e9a8b%3A0x7bdfd3b82e1b6400!2sTech%20City!5e0!3m2!1sen!2sus!4v1636065136721!5m2!1sen!2sus"
-              width="100%" height="300" style="border:0" allowfullscreen="" loading="lazy">
+              width="100%" height="300" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
 
-        </div>
+        </aside>
       </div>
     </div>
-  </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[var(--dark-teal)] text-[var(--soft-peach)] py-6">
+    <div class="container mx-auto px-5 text-center text-sm">
+      <p>&copy; <span id="year" aria-hidden="false"></span> Sitefully Web Solutions — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Sitefully Web Solutions",
+    "url": "https://sitefully.example",
+    "logo": "https://sitefully.example/assets/logo.png",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+1-234-567-890",
+      "contactType": "customer service",
+      "email": "hello@sitefully.com"
+    }]
+  }
+  </script>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // small, defensive scripts: no global exceptions if element missing
+    try {
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+    } catch (e) { /* ignore */ }
 
-    const form = document.getElementById("contactForm");
-    const sendBtn = document.getElementById("sendBtn");
-    const formStatus = document.getElementById("formStatus");
+    (function () {
+      const form = document.getElementById("contactForm");
+      if (!form) return;
+      const sendBtn = document.getElementById("sendBtn");
+      const btnText = document.getElementById("btnText");
+      const btnSpinner = document.getElementById("btnSpinner");
+      const formStatus = document.getElementById("formStatus");
 
-    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const honeypot = form.querySelector('input[name="website"]');
-      if (honeypot && honeypot.value.trim() !== "") return;
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      if (!name || !email || !message) {
-        formStatus.textContent = "⚠️ Please fill in all required fields.";
+      const showStatus = (message, opts = {}) => {
+        formStatus.textContent = message;
         formStatus.classList.add("visible");
-        formStatus.style.color = "var(--soft-peach)";
-        return;
+        formStatus.style.color = opts.color || "var(--soft-peach)";
+        if (opts.hideAfter) setTimeout(() => { formStatus.classList.remove("visible"); }, opts.hideAfter);
+      };
+
+      const clearStatus = () => {
+        formStatus.classList.remove("visible");
+        formStatus.textContent = "";
+      };
+
+      const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        clearStatus();
+
+        const honeypot = form.querySelector('input[name="website"]');
+        if (honeypot && honeypot.value.trim() !== "") {
+          // silent spam drop
+          return;
+        }
+
+        const name = form.querySelector('#name')?.value.trim() || "";
+        const email = form.querySelector('#email')?.value.trim() || "";
+        const subject = form.querySelector('#subject')?.value.trim() || "";
+        const message = form.querySelector('#message')?.value.trim() || "";
+
+        if (!name || !email || !message) {
+          showStatus("⚠️ Please fill in all required fields.", { color: "crimson", hideAfter: 6000 });
+          return;
+        }
+
+        if (!isValidEmail(email)) {
+          showStatus("⚠️ Please enter a valid email address.", { color: "crimson", hideAfter: 6000 });
+          return;
+        }
+
+        // UI: show spinner
+        sendBtn.disabled = true;
+        btnSpinner.classList.remove('hidden');
+        btnText.textContent = 'Sending...';
+
+        // Example: attempt to POST to /api/contact (replace URL with your server endpoint).
+        // If you don't have a server, this block simulates a send and keeps UX consistent.
+        try {
+          // Uncomment and update the fetch block below to integrate with a real endpoint:
+          /*
+          const resp = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, subject, message })
+          });
+          if (!resp.ok) throw new Error('Network response was not ok');
+          */
+
+          // Simulated network latency
+          await new Promise(r => setTimeout(r, 900));
+
+          showStatus('✅ Message sent successfully! Thank you.', { color: 'var(--cyan-teal)', hideAfter: 5000 });
+          form.reset();
+        } catch (err) {
+          showStatus('⚠️ Unable to send message. Please try again or email hello@sitefully.com.', { color: 'crimson' });
+        } finally {
+          sendBtn.disabled = false;
+          btnSpinner.classList.add('hidden');
+          btnText.textContent = 'Send Message';
+        }
+      });
+
+      // Basic client-side accessibility: mark invalid fields on blur
+      ['name','email','message'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('blur', () => {
+          if (el.required && !el.value.trim()) {
+            el.setAttribute('aria-invalid', 'true');
+          } else if (el.type === 'email' && el.value && !isValidEmail(el.value)) {
+            el.setAttribute('aria-invalid', 'true');
+          } else {
+            el.removeAttribute('aria-invalid');
+          }
+        });
+      });
+    })();
+
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const subjectParam = urlParams.get('subject');
+      const messageParam = urlParams.get('message');
+
+      const subjectField = document.getElementById('subject');
+      const messageField = document.getElementById('message');
+
+      if (subjectParam && subjectField) subjectField.value = decodeURIComponent(subjectParam);
+      if (messageParam && messageField) messageField.value = decodeURIComponent(messageParam);
+
+      if ((subjectParam && subjectField) || (messageParam && messageField)) {
+        (subjectField || messageField).scrollIntoView({ behavior: 'smooth' });
       }
-
-      if (!isValidEmail(email)) {
-        formStatus.textContent = "⚠️ Please enter a valid email address.";
-        formStatus.classList.add("visible");
-        formStatus.style.color = "var(--soft-peach)";
-        return;
-      }
-
-      sendBtn.disabled = true;
-      sendBtn.innerHTML = "Sending...";
-      formStatus.textContent = "Sending your message…";
-      formStatus.classList.add("visible");
-      formStatus.style.color = "var(--cyan-teal)";
-
-      setTimeout(() => {
-        formStatus.textContent = "✅ Message sent successfully! Thank you.";
-        sendBtn.disabled = false;
-        sendBtn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane ml-2"></i>';
-        form.reset();
-        setTimeout(() => { formStatus.classList.remove("visible"); formStatus.textContent = ""; }, 5000);
-      }, 2000);
-    });
+    })();
   </script>
 
 </body>

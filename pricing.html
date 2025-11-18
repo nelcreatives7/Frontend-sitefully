@@ -1,168 +1,320 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing | Smart Solution Support</title>
+  <title>Pricing Page</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --dark-teal: #2C3531;      /* Background, text contrast */
-      --cyan-teal: #116466;       /* Highlights, buttons */
-      --bronze: #D9B08C;          /* Accent details */
-      --peach: #FFCB9A;           /* Secondary highlights */
-      --light-mint: #D1E8E2;      /* Background contrast, subtle areas */
+      --dark-teal: #0f3b37;
+      --cyan-teal: #0fb3a7;
+      --bronze: #F4C08D;
+      --soft-peach: #FFDBB2;
+      --light-mint: #BEEDE6;
+      --glass-border: rgba(255,255,255,0.12);
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: "Inter", sans-serif;
+      /* Brighter, inviting gradient */
+      background: radial-gradient(1200px 600px at 10% 10%, #e8fbf8 0%, rgba(14,68,63,0.04) 20%), linear-gradient(180deg, #dff7f5 0%, #e6fbf8 30%, #d6f0ec 60%);
+      color: #073a37;
+      min-height: 100vh;
+      padding-bottom: 4rem;
     }
 
-    .gradient-title {
-      background: linear-gradient(to right, var(--cyan-teal), var(--bronze));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .container {
+      max-width: 1000px;
+      margin: 2.5rem auto;
+      padding: 1.25rem;
     }
 
     .glass {
-      background: rgba(209, 232, 226, 0.15);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.85);
+      /* lighter glass for brighter look */
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      color: #063632;
     }
 
-    table th, table td {
-      border-bottom: 1px solid rgba(255,255,255,0.15);
+    .card-hover {
+      transition: all 0.28s cubic-bezier(.2,.9,.3,1);
     }
 
-    /* Responsive table scroll */
-    .table-container {
-      overflow-x: auto;
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(6,56,50,0.12);
     }
 
+    .highlight-card {
+      background: linear-gradient(135deg, rgba(15,179,167,0.08), rgba(190,237,230,0.5));
+      border: 1px solid rgba(15,179,167,0.18);
+      box-shadow: 0 8px 30px rgba(15,179,167,0.08);
+      color: #063632;
+    }
+
+    .subtle { color: rgba(6,54,50,0.7); }
+    .price { color: var(--dark-teal); font-feature-settings: "tnum"; }
+
+    .btn-primary {
+      background: linear-gradient(90deg,var(--cyan-teal),#06a89e);
+      color: #fff;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(90deg,var(--soft-peach),#ffd7aa);
+      color: #12362f;
+      border: none;
+    }
+
+    .pill {
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.35rem .75rem;
+      border-radius:999px;
+      font-weight:600;
+      box-shadow: 0 6px 18px rgba(6,56,50,0.06);
+    }
+
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    }
   </style>
 </head>
-<body class="bg-[var(--dark-teal)] text-[var(--light-mint)]">
 
-  <!-- Header -->
-  <header class="py-20 text-center bg-[var(--cyan-teal)]/15 border-b border-[var(--cyan-teal)]/40">
-    <h1 class="text-4xl md:text-5xl font-extrabold gradient-title mb-4">Web Development Pricing</h1>
-    <p class="max-w-3xl mx-auto text-[var(--light-mint)]/80 text-lg">
-      Transparent, flexible, and value‑driven pricing tailored for startups, creators, and businesses.
-    </p>
-  </header>
+<body>
 
-  <!-- Pricing Grid -->
-  <section class="py-20 max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+  <div class="container">
 
-      <!-- Single Page -->
-      <div class="glass rounded-2xl p-8 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
-        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-3">Single Page Website</h3>
-        <p class="text-[var(--light-mint)]/70 mb-6">Perfect for portfolios and personal brands.</p>
-        <div class="text-3xl md:text-4xl font-extrabold text-[var(--cyan-teal)] mb-4">$99</div>
-        <ul class="space-y-2 mb-6 text-[var(--light-mint)]/90">
-          <li>✔ Fully responsive</li>
-          <li>✔ Custom UI design</li>
-          <li>✔ SEO & speed optimized</li>
-          <li>✔ Contact form</li>
-          <li>✘ No backend</li>
-        </ul>
+    <header class="text-center mb-6">
+      <div class="inline-flex items-center gap-3">
+        
       </div>
 
-      <!-- Multi Page -->
-      <div class="glass rounded-2xl p-8 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
-        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-3">Multi‑Page Website</h3>
-        <p class="text-[var(--light-mint)]/70 mb-6">Great for businesses & organizations.</p>
-        <div class="text-3xl md:text-4xl font-extrabold text-[var(--cyan-teal)] mb-4">$249</div>
-        <ul class="space-y-2 mb-6 text-[var(--light-mint)]/90">
-          <li>✔ Up to 6 pages</li>
-          <li>✔ Modern responsive UI</li>
-          <li>✔ Contact & quote forms</li>
-          <li>✔ Basic SEO</li>
-          <li>✘ No backend system</li>
-        </ul>
-      </div>
+      <h1 class="text-4xl font-extrabold mt-4" style="color: var(--dark-teal);">Pricing Plans</h1>
+      <p class="subtle max-w-2xl mx-auto mt-2">
+        Choose a plan — beautiful design, reliable hosting and optional maintenance to keep things running smoothly.
+      </p>
+    </header>
 
-      <!-- Full‑Stack -->
-      <div class="rounded-2xl p-8 bg-[var(--cyan-teal)] text-white shadow-lg hover:shadow-xl transition">
-        <h3 class="text-2xl font-bold mb-3">Full‑Stack (Django)</h3>
-        <p class="text-white/85 mb-6">Complete dynamic website with backend.</p>
-        <div class="text-3xl md:text-4xl font-extrabold mb-4">$499</div>
-        <ul class="space-y-2 mb-6">
-          <li>✔ Django backend</li>
-          <li>✔ Database + dashboard</li>
-          <li>✔ Authentication system</li>
-          <li>✔ Dynamic content</li>
-          <li>✔ Advanced SEO</li>
-        </ul>
-      </div>
+    <section>
+      <h2 class="text-2xl font-bold mb-4" style="color: var(--dark-teal);">Website Packages</h2>
 
-      <!-- Hosting Plans Table -->
-      <div class="glass rounded-2xl p-6 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
-        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-4 text-center">Hosting Plans</h3>
-        <div class="table-container">
-          <table class="w-full text-[var(--light-mint)] mb-6">
-            <thead>
-              <tr class="text-[var(--cyan-teal)]/90">
-                <th class="py-2 text-left">Plan</th>
-                <th class="py-2 text-left">Features</th>
-                <th class="py-2 text-right">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="py-2 font-semibold">Basic</td>
-                <td class="py-2">Shared Hosting — 1 domain, SSL, 2GB</td>
-                <td class="py-2 text-right">$40/mo</td>
-              </tr>
-              <tr>
-                <td class="py-2 font-semibold">Standard</td>
-                <td class="py-2">Cloud Hosting — 5GB, Email setup</td>
-                <td class="py-2 text-right">$70/mo</td>
-              </tr>
-              <tr>
-                <td class="py-2 font-semibold">Premium</td>
-                <td class="py-2">VPS Hosting — High speed, advanced control</td>
-                <td class="py-2 text-right">$120/mo</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="grid-3 mt-4">
+
+        <!-- SINGLE PAGE -->
+        <div class="glass p-6 rounded-2xl card-hover">
+          <h3 class="text-lg font-bold" style="color: var(--dark-teal);">Frontend — Single Page</h3>
+          <p class="subtle mt-1 mb-4">A modern, powerful landing page.</p>
+
+          <ul class="subtle space-y-1">
+            <li>• Fully responsive</li>
+            <li>• Micro-interactions</li>
+            <li>• Contact form & analytics</li>
+            <li>• Basic SEO & SSL</li>
+          </ul>
+
+          <p class="text-2xl font-bold mt-6 price">$79 <span class="subtle text-sm">one‑time</span></p>
+
+          <button class="package-btn btn-primary px-4 py-2 rounded-lg mt-6" data-title="Frontend — Single Page Website"
+            onclick="window.location.href='contact.html?subject=Frontend%20—%20Single%20Page%20Website&message=Hello,%20I%20am%20interested%20in%20the%20Frontend%20—%20Single%20Page%20Website.%20Please%20share%20more%20details.'">
+            Select Single Page
+          </button>
         </div>
-      </div>
 
-      <!-- Maintenance Plans Table -->
-      <div class="glass rounded-2xl p-6 border border-[var(--light-mint)]/30 hover:shadow-xl transition">
-        <h3 class="text-2xl font-bold text-[var(--bronze)] mb-4 text-center">Maintenance Plans</h3>
-        <div class="table-container">
-          <table class="w-full text-[var(--light-mint)] mb-6">
-            <thead>
-              <tr class="text-[var(--cyan-teal)]/90">
-                <th class="py-2 text-left">Plan</th>
-                <th class="py-2 text-left">Features</th>
-                <th class="py-2 text-right">Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="py-2 font-semibold">Basic</td>
-                <td class="py-2">1 Month — Regular updates & backups</td>
-                <td class="py-2 text-right">$15/mo</td>
-              </tr>
-              <tr>
-                <td class="py-2 font-semibold">Standard</td>
-                <td class="py-2">3 Months — Bug fixes & security patches</td>
-                <td class="py-2 text-right">$35/mo</td>
-              </tr>
-              <tr>
-                <td class="py-2 font-semibold">Premium</td>
-                <td class="py-2">6 Months — Performance & content updates</td>
-                <td class="py-2 text-right">$60/mo</td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- MULTI PAGE -->
+        <div class="glass p-6 rounded-2xl card-hover">
+          <h3 class="text-lg font-bold" style="color: var(--dark-teal);">Frontend — Multiple Pages</h3>
+          <p class="subtle mt-1 mb-4">Best for businesses and agencies.</p>
+
+          <ul class="subtle space-y-1">
+            <li>• Up to 15 pages</li>
+            <li>• SEO-ready</li>
+            <li>• CMS-ready</li>
+            <li>• 1 month updates</li>
+          </ul>
+
+          <p class="text-2xl font-bold mt-6 price">$199 <span class="subtle text-sm">one‑time</span></p>
+
+          <button class="package-btn btn-secondary px-4 py-2 rounded-lg mt-6" data-title="Frontend — Multiple Pages Website"
+            onclick="window.location.href='contact.html?subject=Frontend%20—%20Multiple%20Pages%20Website&message=Hello,%20I%20am%20interested%20in%20the%20Frontend%20—%20Multiple%20Pages%20Website.%20Please%20share%20more%20details.'">
+            Get Multi Page
+          </button>
         </div>
+
+        <!-- DJANGO FULLSTACK -->
+        <div class="highlight-card p-6 rounded-2xl card-hover border">
+          <h3 class="text-lg font-bold" style="color: var(--dark-teal);">Fullstack — Django Website</h3>
+          <p class="subtle mt-1 mb-4">Perfect for dynamic, secure web apps.</p>
+
+          <ul class="subtle space-y-1">
+            <li>• Django backend + PostgreSQL</li>
+            <li>• Authentication & API</li>
+            <li>• Admin panel</li>
+            <li>• Deployment + monitoring</li>
+          </ul>
+
+          <p class="text-2xl font-bold mt-6 price">$449 <span class="subtle text-sm">one‑time</span></p>
+
+          <button class="package-btn px-4 py-2 rounded-lg mt-6"
+            style="border: 1px solid var(--light-mint); color: var(--dark-teal); background: transparent;" data-title="Fullstack — Django Website"
+            onclick="window.location.href='contact.html?subject=Fullstack%20—%20Django%20Website%20Development&message=Hello,%20I%20am%20interested%20in%20the%20Fullstack%20—%20Django%20Website%20Development.%20Please%20share%20more%20details.'">
+            Contact for Django
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+     <!-- BILLING TOGGLE -->
+      <div class="flex justify-center gap-4 mt-10">
+        <button id="monthlyBtn" class="px-5 py-2 rounded-xl font-semibold" aria-pressed="true">
+          Monthly
+        </button>
+
+        <button id="annualBtn" class="px-5 py-2 rounded-xl font-semibold" aria-pressed="false">
+          Annual (Save 15%)
+        </button>
       </div>
 
-    </div>
-  </section>
+      <!-- HOSTING -->
+      <div class="glass p-6 rounded-2xl mt-8">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--dark-teal);">Hosting Plans (USD)</h2>
+
+        <table class="w-full subtle text-left">
+          <tr>
+            <th class="py-2">Plan</th>
+            <th class="py-2">Details</th>
+            <th class="py-2 text-right">Price</th>
+          </tr>
+
+          <tr>
+            <td class="py-2 font-semibold">Basic</td>
+            <td class="py-2">Shared Hosting, SSL, 2GB</td>
+            <td class="py-2 text-right price-host" data-monthly="10" data-annual="8.5">$10 / mo</td>
+          </tr>
+
+          <tr>
+            <td class="py-2 font-semibold">Standard</td>
+            <td class="py-2">Cloud Hosting, 5GB, Email</td>
+            <td class="py-2 text-right price-host" data-monthly="20" data-annual="17">$20 / mo</td>
+          </tr>
+
+          <tr>
+            <td class="py-2 font-semibold">Premium</td>
+            <td class="py-2">VPS Hosting, High Speed</td>
+            <td class="py-2 text-right price-host" data-monthly="35" data-annual="29.75">$35 / mo</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- MAINTENANCE -->
+      <div class="glass p-6 rounded-2xl mt-6">
+        <h2 class="text-xl font-bold mb-4" style="color: var(--dark-teal);">Maintenance Plans (USD)</h2>
+
+        <ul class="subtle space-y-3">
+          <li>
+            <strong>Basic</strong> — Updates & Backups
+            <span class="float-right price-maint" data-monthly="5" data-annual="4.25">$5 / mo</span>
+          </li>
+
+          <li>
+            <strong>Standard</strong> — Security & Fixes
+            <span class="float-right price-maint" data-monthly="15" data-annual="12.75">$15 / mo</span>
+          </li>
+
+          <li>
+            <strong>Premium</strong> — Priority + Content
+            <span class="float-right price-maint" data-monthly="30" data-annual="25.5">$30 / mo</span>
+          </li>
+        </ul>
+      </div>
+
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const monthlyBtn = document.getElementById("monthlyBtn");
+    const annualBtn = document.getElementById("annualBtn");
+
+    function fmt(v) {
+      const n = Number(v);
+      return Number.isInteger(n) ? n : n.toFixed(2);
+    }
+
+    function setToggleStyles(isAnnual) {
+      // Visual styles for toggle buttons
+      if (isAnnual) {
+        annualBtn.style.background = "linear-gradient(90deg,#fff,#f3f8f7)";
+        annualBtn.style.color = "var(--dark-teal)";
+        annualBtn.style.border = "1px solid rgba(6,56,50,0.06)";
+        monthlyBtn.style.background = "transparent";
+        monthlyBtn.style.color = "rgba(6,54,50,0.7)";
+        monthlyBtn.style.border = "1px solid transparent";
+      } else {
+        monthlyBtn.style.background = "linear-gradient(90deg,var(--cyan-teal),#06a89e)";
+        monthlyBtn.style.color = "#fff";
+        monthlyBtn.style.border = "1px solid rgba(6,56,50,0.06)";
+        annualBtn.style.background = "transparent";
+        annualBtn.style.color = "rgba(6,54,50,0.7)";
+        annualBtn.style.border = "1px solid transparent";
+      }
+      monthlyBtn.setAttribute("aria-pressed", String(!isAnnual));
+      annualBtn.setAttribute("aria-pressed", String(isAnnual));
+    }
+
+    function updateBilling(isAnnual) {
+      setToggleStyles(isAnnual);
+
+      document.querySelectorAll(".price-host").forEach(el => {
+        const val = isAnnual ? el.dataset.annual : el.dataset.monthly;
+        const label = isAnnual ? "/yr" : "/mo";
+        el.textContent = `$${fmt(val)} ${label}`;
+      });
+
+      document.querySelectorAll(".price-maint").forEach(el => {
+        const val = isAnnual ? el.dataset.annual : el.dataset.monthly;
+        const label = isAnnual ? "/yr" : "/mo";
+        el.textContent = `$${fmt(val)} ${label}`;
+      });
+    }
+
+    monthlyBtn.addEventListener("click", () => updateBilling(false));
+    annualBtn.addEventListener("click", () => updateBilling(true));
+    updateBilling(false);
+
+    /* -------------------------
+       SAFE AUTO-FILL CONTACT FORM
+    -------------------------- */
+
+    // Only attempt to auto-fill if contact form exists on the page.
+    const subjectInput = document.getElementById("subjectField");
+    const messageField = document.getElementById("messageField");
+
+    document.querySelectorAll(".package-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const title = btn.dataset.title || btn.textContent.trim();
+
+        // If a contact form field exists on this page, populate it.
+        if (subjectInput) subjectInput.value = title;
+        if (messageField) messageField.value = `Hello, I am interested in the ${title}. Please share more details.`;
+
+        // If contact fields are present, smoothly scroll to them
+        if (subjectInput) subjectInput.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        // If no contact form exists here, the button still navigates to contact.html via inline onclick.
+      });
+    });
+  </script>
+
 </body>
 </html>

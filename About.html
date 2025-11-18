@@ -1,373 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Sitefully</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Sitefully</title>
+
+  <!-- Tailwind (dev CDN) + Fonts + Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome CDN -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
-    :root {
-      --dark-teal: #2C3531;
-      --cyan-teal: #116466;
-      --bronze: #D9B08C;
-      --soft-peach: #FFCB9A;
-      --light-mint: #D1E8E2;
+    :root{
+      --bg: #0f1720;
+      --card: rgba(220,238,233,0.85);
+      --accent: #0ea5a4; /* teal */
+      --warm: #d9b08c;
+      --muted: #3b524a;
+      --glass-border: rgba(14,165,164,0.12);
+    }
+    html,body{height:100%}
+    body{
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,var(--bg) 0%, #122226 100%);
+      color: var(--warm);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      scroll-behavior:smooth;
     }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      background-color: var(--dark-teal);
-      color: var(--bronze);
-      scroll-behavior: smooth;
-    }
-
-    .gradient-text {
-      background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 6px rgba(17,100,102,0.5);
-    }
-
+    /* Reusable utilities for this page */
     .glass {
-      background: rgba(209,232,226,0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(17,100,102,0.2);
-      box-shadow: 0 8px 32px rgba(17,100,102,0.2);
-      transition: all 0.4s ease;
+      background: var(--card);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.45);
     }
-    .glass:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 12px 48px rgba(17,100,102,0.3), 0 0 30px rgba(217,176,140,0.2);
-    }
-
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
-    }
-    .fade-up.show { opacity: 1; transform: translateY(0); }
-
-    .highlight-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .highlight-icon:hover {
-      transform: scale(1.2);
-      box-shadow: 0 0 12px rgba(17,100,102,0.6);
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--warm));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
 
-    .cta-btn {
-      transition: all 0.3s ease;
-      background: linear-gradient(to right, var(--cyan-teal), var(--bronze));
-      color: var(--dark-teal);
-    }
-    .cta-btn:hover {
-      box-shadow: 0 0 20px rgba(17,100,102,0.6), 0 0 30px rgba(217,176,140,0.5);
-      transform: scale(1.05);
-    }
+    /* Modal helpers */
+    #profileModal[aria-hidden="true"]{display:none}
+    #profileModal[aria-hidden="false"]{display:flex}
+
+    /* small niceties */
+    .fade-up{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+    .fade-up.show{opacity:1;transform:none}
+    .focus-outline:focus{outline:3px solid rgba(14,165,164,.25);outline-offset:3px}
   </style>
 </head>
 <body>
 
-<!-- OUR STORY -->
-<section class="relative py-28 fade-up">
-  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-14 px-6 md:px-10 lg:px-16">
-    <!-- Text -->
-    <div class="md:w-1/2 glass p-8 md:p-10 rounded-3xl shadow-md bg-[rgba(209,232,226,0.5)]">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-6 gradient-text">
-        Our Story
-      </h2>
-      <p class="text-lg leading-relaxed mb-4 text-[rgba(44,53,49,0.85)]">
-        Founded in <strong>2023</strong>, <strong>Sitefully</strong> began with a vision to help businesses and individuals build a powerful, lasting digital presence through sleek, high-performing, and thoughtfully designed websites.
-      </p>
-      <p class="text-lg leading-relaxed text-[rgba(44,53,49,0.85)]">
-        Today, we create tailor-made digital experiences — from elegant single-page portfolios to dynamic, multi-page sites — each one built to reflect your brand’s personality, passion, and purpose.
-      </p>
-      <div class="mt-8">
-        <a href="#portfolio" class="cta-btn inline-block font-semibold px-6 py-3 rounded-full shadow-md">
-          Explore Our Work
-        </a>
-      </div>
-    </div>
+  <main class="max-w-7xl mx-auto px-6 py-16">
 
-    <!-- Image -->
-    <div class="md:w-1/2 relative fade-up">
-      <div class="overflow-hidden rounded-3xl border-t-4 border-gradient-to-r from-[#116466] to-[#FFCB9A] shadow-md transition-transform duration-700 ease-in-out hover:scale-105">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80" alt="Creative team at work" class="w-full h-[460px] object-cover" loading="lazy"/>
-      </div>
-      <div class="absolute -bottom-6 -right-6 w-28 h-28 bg-gradient-to-r from-[#116466] to-[#FFCB9A] rounded-full blur-2xl opacity-30 animate-pulse"></div>
-    </div>
-  </div>
-</section>
-
-<!-- VISION & MISSION -->
-<section class="py-24 fade-up">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-12 mb-20">
-      <div class="glass p-8 rounded-3xl shadow-lg">
-        <h2 class="text-3xl font-bold mb-3" style="color:var(--cyan-teal);">Our Vision</h2>
-        <h3 class="font-semibold text-lg text-[var(--dark-teal)] mb-4">A digital world where every idea stands out beautifully</h3>
-        <p class="text-[var(--dark-teal)] leading-relaxed">We envision a future where every brand and creator has a beautiful, functional online presence that truly represents them.</p>
-      </div>
-      <div class="glass p-8 rounded-3xl shadow-lg">
-        <h2 class="text-3xl font-bold mb-3" style="color:var(--cyan-teal);">Our Mission</h2>
-        <h3 class="font-semibold text-lg text-[var(--dark-teal)] mb-4">Transform creativity into impactful digital experiences</h3>
-        <p class="text-[var(--dark-teal)] leading-relaxed">We turn ideas into interactive realities — building responsive websites and identities that empower growth.</p>
-      </div>
-    </div>
-
-    <!-- Core Values -->
-    <h2 class="text-4xl font-bold text-center gradient-text mb-12">Our Core Values</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-      <div class="glass p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-        <div class="highlight-icon mb-3 bg-[var(--cyan-teal)] text-white text-5xl w-16 h-16 mx-auto rounded-full">
-          <i class="fa-solid fa-handshake"></i>
+    <!-- Hero / Our Story -->
+    <section class="grid md:grid-cols-2 gap-10 items-center mb-16 fade-up">
+      <div class="glass p-10 rounded-2xl">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">Our Story</h1>
+        <p class="text-base text-[var(--muted)] mb-4">
+          Founded in <strong>2023</strong>, Sitefully helps businesses and creators build memorable, performant websites.
+          We blend pixel-perfect design with robust engineering to deliver sites that scale and convert.
+        </p>
+        <p class="text-base text-[var(--muted)]">
+          From single-page portfolios to complex multi-page platforms, every project centers on clarity, accessibility,
+          and measurable results.
+        </p>
+        <div class="mt-6 flex gap-3">
+          <a href="#team" class="inline-block px-5 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-[var(--accent)] to-[var(--warm)] text-[rgba(3,15,13,0.95)] shadow hover:scale-105 transition transform">Meet the team</a>
+          <a href="#" class="inline-block px-5 py-2 rounded-full text-sm font-medium border border-[var(--glass-border)] text-[var(--warm)] hover:bg-white/5 transition">Our work</a>
         </div>
-        <h3 class="font-semibold text-lg mb-2 text-[var(--cyan-teal)]">Collaboration</h3>
-        <p class="text-[var(--dark-teal)] text-sm">Teamwork and open communication in every project.</p>
       </div>
-      <div class="glass p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-        <div class="highlight-icon mb-3 bg-[var(--soft-peach)] text-white text-5xl w-16 h-16 mx-auto rounded-full">
-          <i class="fa-solid fa-check-circle"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-2 text-[var(--cyan-teal)]">Accountability</h3>
-        <p class="text-[var(--dark-teal)] text-sm">We take ownership and deliver on every promise made.</p>
-      </div>
-      <div class="glass p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-        <div class="highlight-icon mb-3 bg-[var(--soft-peach)] text-white text-5xl w-16 h-16 mx-auto rounded-full">
-          <i class="fa-solid fa-bullseye"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-2 text-[var(--cyan-teal)]">Customer Focus</h3>
-        <p class="text-[var(--dark-teal)] text-sm">Our clients are the heartbeat of our work and innovation.</p>
-      </div>
-      <div class="glass p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
-        <div class="highlight-icon mb-3 bg-[var(--cyan-teal)] text-white text-5xl w-16 h-16 mx-auto rounded-full">
-          <i class="fa-solid fa-star"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-2 text-[var(--cyan-teal)]">Excellence</h3>
-        <p class="text-[var(--dark-teal)] text-sm">We uphold top-tier quality in every design we create.</p>
-      </div>
-    </div>
 
-    <!-- Highlights Section -->
-    <section class="py-20 px-6 max-w-6xl mx-auto fade-up">
-      <h2 class="text-3xl md:text-4xl font-bold text-center gradient-text mb-12">
-        Why Choose Sitefully?
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-
-        <!-- Card 1 -->
-        <div class="glass p-6 rounded-3xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300">
-          <div class="highlight-icon mb-4 bg-[var(--cyan-teal)] text-white text-4xl w-14 h-14 mx-auto rounded-full">
-            <i class="fa-solid fa-rocket"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2 text-[var(--dark-teal)]">Creative & Innovative</h3>
-          <p class="text-[rgba(44,53,49,0.85)] text-sm leading-relaxed">
-            We craft unique digital experiences that blend stunning design with cutting-edge technology to help brands stand out online.
-          </p>
+      <div class="relative">
+        <div class="overflow-hidden rounded-2xl border-t-4 border-t-[var(--accent)] glass shadow-md">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80" alt="Creative team at work" class="w-full h-80 object-cover"/>
         </div>
-
-        <!-- Card 2 -->
-        <div class="glass p-6 rounded-3xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300">
-          <div class="highlight-icon mb-4 bg-[var(--soft-peach)] text-white text-4xl w-14 h-14 mx-auto rounded-full">
-            <i class="fa-solid fa-laptop-code"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2 text-[var(--dark-teal)]">Full-Stack Expertise</h3>
-          <p class="text-[rgba(44,53,49,0.85)] text-sm leading-relaxed">
-            From concept to launch, our skilled developers build fast, secure, and scalable websites tailored to your business goals.
-          </p>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="glass p-6 rounded-3xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300">
-          <div class="highlight-icon mb-4 bg-[var(--bronze)] text-white text-4xl w-14 h-14 mx-auto rounded-full">
-            <i class="fa-solid fa-users"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2 text-[var(--dark-teal)]">Client-Centered Approach</h3>
-          <p class="text-[rgba(44,53,49,0.85)] text-sm leading-relaxed">
-            We value transparency, communication, and collaboration to ensure every project reflects your vision and exceeds expectations.
-          </p>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="glass p-6 rounded-3xl shadow-md hover:shadow-xl transition-all transform hover:-translate-y-2 duration-300">
-          <div class="highlight-icon mb-4 bg-[var(--cyan-teal)] text-white text-4xl w-14 h-14 mx-auto rounded-full">
-            <i class="fa-solid fa-tools"></i>
-          </div>
-          <h3 class="font-bold text-lg mb-2 text-[var(--dark-teal)]">Reliable Support</h3>
-          <p class="text-[rgba(44,53,49,0.85)] text-sm leading-relaxed">
-            Beyond launch, we offer ongoing maintenance, updates, and optimization to keep your website performing at its best.
-          </p>
-        </div>
-
+        <div class="absolute -right-6 bottom-2 w-28 h-28 rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--warm)] blur-xl opacity-30 animate-pulse"></div>
       </div>
     </section>
-  </div>
-</section>
 
-<!-- Team Section -->
-<section class="team-section py-20 px-6 max-w-7xl mx-auto">
-  <h1 class="text-4xl md:text-5xl font-extrabold text-center gradient-text mb-6 fade-up">
-    Meet the Team
-  </h1>
-  <p class="text-center max-w-3xl mx-auto text-lg mb-12 text-[rgba(217,176,140,0.85)] fade-up" style="transition-delay:0.1s;">
-    We're a passionate team transforming tech education in Africa. With diverse backgrounds in technology, education, and business, we provide world-class training and career support to empower students across the continent.
-  </p>
-
-  <!-- Filter Buttons -->
-  <div class="flex justify-center gap-4 mb-10 fade-up" style="transition-delay:0.2s;">
-    <button class="filter-btn active px-5 py-2 rounded-full shadow-md transition transform hover:scale-105"
-            style="background:var(--cyan-teal);color:var(--light-mint);" data-filter="board">
-      Board Members
-    </button>
-    <button class="filter-btn px-5 py-2 rounded-full shadow-md transition transform hover:scale-105"
-            style="background:var(--soft-peach);color:var(--dark-teal);" data-filter="executive">
-      Executive Team
-    </button>
-  </div>
-
-  <!-- Team Grid -->
-  <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    
-    <!-- Member Example -->
-    <div class="member-card p-6 text-center glass shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 fade-up" data-role="board" style="transition-delay:0.3s;">
-      <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-[var(--light-mint)] flex items-center justify-center shadow-md overflow-hidden transition-transform duration-300 hover:scale-110 hover:shadow-xl">
-        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Alice M" class="w-24 h-24 object-cover rounded-full"/>
+    <!-- Vision & Mission -->
+    <section class="grid md:grid-cols-2 gap-8 mb-12 fade-up">
+      <div class="glass p-8 rounded-2xl">
+        <h2 class="text-2xl font-bold" style="color:var(--accent)">Our Vision</h2>
+        <p class="mt-2 text-[var(--muted)]">A digital world where ideas are presented beautifully, accessibly, and sustainably.</p>
       </div>
-      <h3 class="font-bold text-lg mb-1 text-[var(--dark-teal)]">Alice M</h3>
-      <p class="text-sm mb-3 text-[var(--dark-teal)]">Chairperson</p>
-      <a href="#" class="cta-btn inline-block font-medium px-4 py-1 rounded-full shadow">View Profile →</a>
-    </div>
-
-    <!-- Repeat for other members with clean images -->
-    <div class="member-card p-6 text-center glass shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 fade-up" data-role="board" style="transition-delay:0.4s;">
-      <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-[var(--light-mint)] flex items-center justify-center shadow-md overflow-hidden transition-transform duration-300 hover:scale-110 hover:shadow-xl">
-        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David K" class="w-24 h-24 object-cover rounded-full"/>
+      <div class="glass p-8 rounded-2xl">
+        <h2 class="text-2xl font-bold" style="color:var(--accent)">Our Mission</h2>
+        <p class="mt-2 text-[var(--muted)]">We turn creativity into measurable online experiences, focusing on speed, UX, and real impact.</p>
       </div>
-      <h3 class="font-bold text-lg mb-1 text-[var(--dark-teal)]">David K</h3>
-      <p class="text-sm mb-3 text-[var(--dark-teal)]">Board Member</p>
-      <a href="#" class="cta-btn inline-block font-medium px-4 py-1 rounded-full shadow">View Profile →</a>
-    </div>
+    </section>
 
-    <div class="member-card p-6 text-center glass shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 fade-up" data-role="executive" style="transition-delay:0.5s;">
-      <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-[var(--light-mint)] flex items-center justify-center shadow-md overflow-hidden transition-transform duration-300 hover:scale-110 hover:shadow-xl">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Kelvin J" class="w-24 h-24 object-cover rounded-full"/>
+    <!-- Core Values -->
+    <section class="mb-12 fade-up">
+      <h3 class="text-center text-3xl font-bold gradient-text mb-8">Core Values</h3>
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="glass p-6 rounded-xl text-center">
+          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--accent)] mx-auto"><i class="fa-solid fa-handshake"></i></div>
+          <strong class="block text-[var(--muted)]">Collaboration</strong>
+          <p class="text-sm text-[var(--muted)] mt-2">Open communication and shared outcomes.</p>
+        </div>
+        <div class="glass p-6 rounded-xl text-center">
+          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--warm)] mx-auto"><i class="fa-solid fa-bolt"></i></div>
+          <strong class="block text-[var(--muted)]">Innovation</strong>
+          <p class="text-sm text-[var(--muted)] mt-2">Creative solutions driven by research.</p>
+        </div>
+        <div class="glass p-6 rounded-xl text-center">
+          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--accent)] mx-auto"><i class="fa-solid fa-user-check"></i></div>
+          <strong class="block text-[var(--muted)]">Customer Focus</strong>
+          <p class="text-sm text-[var(--muted)] mt-2">Designing with empathy and clarity.</p>
+        </div>
+        <div class="glass p-6 rounded-xl text-center">
+          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--warm)] mx-auto"><i class="fa-solid fa-star"></i></div>
+          <strong class="block text-[var(--muted)]">Excellence</strong>
+          <p class="text-sm text-[var(--muted)] mt-2">Quality and craftsmanship in every detail.</p>
+        </div>
       </div>
-      <h3 class="font-bold text-lg mb-1 text-[var(--dark-teal)]">Kelvin J</h3>
-      <p class="text-sm mb-3 text-[var(--dark-teal)]">Founder & Creative Director</p>
-      <a href="#" class="cta-btn inline-block font-medium px-4 py-1 rounded-full shadow">View Profile →</a>
-    </div>
+    </section>
 
-    <div class="member-card p-6 text-center glass shadow-lg transition-transform transform hover:-translate-y-2 hover:scale-105 fade-up" data-role="executive" style="transition-delay:0.6s;">
-      <div class="w-28 h-28 mx-auto mb-4 rounded-full bg-[var(--light-mint)] flex items-center justify-center shadow-md overflow-hidden transition-transform duration-300 hover:scale-110 hover:shadow-xl">
-        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sophie L" class="w-24 h-24 object-cover rounded-full"/>
+    <!-- Team -->
+    <section id="team" class="mb-20">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Meet the Team</h2>
+        <div class="flex gap-2">
+          <button class="filter-btn px-4 py-2 rounded-full text-sm bg-[var(--accent)] text-black font-medium focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" data-filter="all">All</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm bg-white/10 text-[var(--warm)] border border-[var(--glass-border)] focus:outline-none" data-filter="board">Board</button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm bg-white/10 text-[var(--warm)] border border-[var(--glass-border)] focus:outline-none" data-filter="executive">Executive</button>
+        </div>
       </div>
-      <h3 class="font-bold text-lg mb-1 text-[var(--dark-teal)]">Sophie L</h3>
-      <p class="text-sm mb-3 text-[var(--dark-teal)]">Lead Developer</p>
-      <a href="#" class="cta-btn inline-block font-medium px-4 py-1 rounded-full shadow">View Profile →</a>
-    </div>
 
-    <!-- Add more members using randomuser.me for clean, professional images -->
+      <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Cards: keep data attributes for modal -->
+        <!-- Alice -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="board"
+                 data-name="Alice M" data-role-full="Chairperson"
+                 data-bio="Alice brings 15+ years of leadership in product and design. She guides strategy, partnerships, and user-first design at Sitefully."
+                 data-email="alice@example.com" data-img="https://randomuser.me/api/portraits/women/68.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Alice M" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Alice M</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Chairperson</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- David -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="board"
+                 data-name="David K" data-role-full="Board Member"
+                 data-bio="David is a strategic advisor with a background in finance and scaling startups across Africa."
+                 data-email="david@example.com" data-img="https://randomuser.me/api/portraits/men/75.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David K" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">David K</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Board Member</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Kelvin -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="executive"
+                 data-name="Kelvin J" data-role-full="Founder & Creative Director"
+                 data-bio="Kelvin is the creative lead behind Sitefully — a full-stack designer & builder focused on meaningful UX and performant code."
+                 data-email="kelvin@example.com" data-img="https://randomuser.me/api/portraits/men/32.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Kelvin J" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Kelvin J</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Founder & Creative Director</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Sophie -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="executive"
+                 data-name="Sophie L" data-role-full="Lead Developer"
+                 data-bio="Sophie leads engineering — specializing in performant front-end apps and accessible design systems."
+                 data-email="sophie@example.com" data-img="https://randomuser.me/api/portraits/women/65.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sophie L" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Sophie L</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Lead Developer</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Amina -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="board"
+                 data-name="Amina S" data-role-full="Non-Executive Director"
+                 data-bio="Amina is an operations leader with deep experience in scaling education programs and strategic partnerships across the continent."
+                 data-email="amina@example.com" data-img="https://randomuser.me/api/portraits/women/21.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/women/21.jpg" alt="Amina S" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Amina S</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Non-Executive Director</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- James -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="board"
+                 data-name="James O" data-role-full="Finance Advisor"
+                 data-bio="James is a finance specialist who advises on growth-stage funding, budgeting, and fiscal governance for tech ventures."
+                 data-email="james@example.com" data-img="https://randomuser.me/api/portraits/men/44.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="James O" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">James O</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Finance Advisor</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Tunde -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="executive"
+                 data-name="Tunde B" data-role-full="Head of Product"
+                 data-bio="Tunde leads product strategy and roadmaps, aligning user research with engineering to ship delightful experiences."
+                 data-email="tunde@example.com" data-img="https://randomuser.me/api/portraits/men/36.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Tunde B" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Tunde B</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Head of Product</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Amara -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="executive"
+                 data-name="Amara N" data-role-full="Head of Growth"
+                 data-bio="Amara drives growth and acquisition, blending data-driven marketing with community engagement to expand our reach."
+                 data-email="amara@example.com" data-img="https://randomuser.me/api/portraits/women/44.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Amara N" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Amara N</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Head of Growth</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Lillian -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="board"
+                 data-name="Lillian R" data-role-full="Governance Lead"
+                 data-bio="Lillian focuses on governance, compliance, and ethical frameworks to ensure sustainable growth and impact."
+                 data-email="lillian@example.com" data-img="https://randomuser.me/api/portraits/women/12.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Lillian R" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Lillian R</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Governance Lead</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+
+        <!-- Olu -->
+        <article class="member-card glass p-6 rounded-xl text-center transition transform hover:-translate-y-2" data-role="executive"
+                 data-name="Olu T" data-role-full="Engineering Manager"
+                 data-bio="Olu manages engineering delivery and CI/CD workflows, ensuring high-quality, scalable systems for client projects."
+                 data-email="olu@example.com" data-img="https://randomuser.me/api/portraits/men/29.jpg">
+          <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
+            <img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Olu T" class="w-full h-full object-cover"/>
+          </div>
+          <h4 class="text-lg font-semibold text-[var(--muted)]">Olu T</h4>
+          <p class="text-sm text-[var(--muted)] mb-3">Engineering Manager</p>
+          <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Reusable Profile Modal -->
+  <div id="profileModal" aria-hidden="true" aria-labelledby="profileModalTitle" role="dialog" class="fixed inset-0 z-50 items-center justify-center px-4">
+    <div id="modalOverlay" class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 max-w-3xl w-full glass rounded-2xl overflow-hidden">
+      <button id="modalClose" aria-label="Close profile" class="absolute top-4 right-4 bg-white/90 rounded-full w-9 h-9 flex items-center justify-center focus-outline">✕</button>
+      <div class="flex flex-col md:flex-row gap-6 p-6 md:p-8">
+        <img id="profileImg" src="" alt="" class="w-32 h-32 rounded-full object-cover shadow-md"/>
+        <div class="flex-1">
+          <h3 id="profileModalTitle" class="text-2xl font-bold text-[var(--muted)]"></h3>
+          <p id="profileModalRole" class="text-sm text-[var(--accent)] mb-3"></p>
+          <p id="profileModalBio" class="text-[var(--muted)] mb-4"></p>
+          <div class="flex gap-3">
+            <a id="profileEmail" href="#" class="px-4 py-2 rounded-full bg-[var(--accent)] text-black">Email</a>
+            <button id="profileMessage" class="px-4 py-2 rounded-full bg-[var(--warm)] text-[var(--muted)]">Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</section
 
-<!-- CTA Section -->
- <section class="relative overflow-hidden py-24 px-6 text-center fade-up">
-  <!-- Background Gradient -->
-  <div class="absolute inset-0 bg-gradient-to-r from-[#116466]/20 to-[#FFCB9A]/20 blur-3xl"></div>
+  <script>
+    (function(){
+      // Utilities
+      const qs = (s, ctx=document) => ctx.querySelector(s);
+      const qsa = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
 
-  <div class="relative z-10 max-w-3xl mx-auto">
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 gradient-text" style="text-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-      Join the Sitefully Journey
-    </h2>
-    <p class="text-lg md:text-xl mb-10 leading-relaxed font-medium text-black" style="text-shadow: 0 1px 4px rgba(0,0,0,0.2);">
-      At <span style="font-weight:600;">Sitefully</span>, we’re transforming how brands thrive online — from digital strategy to stunning design and seamless technology. Collaborate with our team to bring your ideas to life with creativity and purpose.
-    </p>
-    <a href="/contact" class="cta-btn relative inline-flex items-center justify-center font-semibold py-3 px-10 rounded-full shadow-lg text-[#2C3531] hover:scale-105 transition-transform">
-      <span class="mr-2">🚀</span> Contact Us
-    </a>
-  </div>
-</section>
+      // Fade-up intersection observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+      }, {threshold: 0.18});
+      qsa('.fade-up').forEach(el => observer.observe(el));
 
+      // Filter buttons
+      const filterBtns = qsa('.filter-btn');
+      const cards = qsa('.member-card');
+      function applyFilter(filter){
+        cards.forEach(c => {
+          c.style.display = (filter === 'all' || c.dataset.role === filter) ? '' : 'none';
+        });
+        filterBtns.forEach(b => b.classList.remove('bg-[var(--accent)]','text-black','bg-white/10'));
+        // style active
+        filterBtns.forEach(b=>{
+          if(b.dataset.filter===filter){
+            b.classList.add('bg-[var(--accent)]','text-black');
+            b.classList.remove('bg-white/10');
+          } else {
+            b.classList.add('bg-white/10');
+            b.classList.remove('bg-[var(--accent)]','text-black');
+          }
+        });
+      }
+      filterBtns.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
+      // show board first as before
+      applyFilter('board');
 
+      // Modal (reusable) with simple focus trap
+      const modal = qs('#profileModal'); const overlay = qs('#modalOverlay'); const closeBtn = qs('#modalClose');
+      const profileImg = qs('#profileImg'); const title = qs('#profileModalTitle'); const role = qs('#profileModalRole');
+      const bio = qs('#profileModalBio'); const emailLink = qs('#profileEmail');
+      let lastFocused = null;
 
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const fadeElements = document.querySelectorAll(".fade-up");
-    fadeElements.forEach((el,i) => setTimeout(() => el.classList.add("show"), i*200));
-  });
-
-  function contactKelvin() {
-    alert("Thanks for your interest! Kelvin will connect with you shortly 🚀");
-  }
-
-// Team filter functionality
-  const buttons = document.querySelectorAll(".filter-btn");
-  const cards = document.querySelectorAll(".member-card");
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const filter = btn.dataset.filter;
-      cards.forEach(card => card.style.display = (filter==='all'||card.dataset.role===filter) ? "block" : "none");
-    });
-  });
-   document.addEventListener("DOMContentLoaded", () => {
-    // Fade-up animation
-    const fadeElements = document.querySelectorAll(".fade-up");
-    fadeElements.forEach((el,i) => setTimeout(() => el.classList.add("show"), i*200));
-
-    // Team filter functionality
-    const buttons = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll(".member-card");
-
-    function filterMembers(filter) {
-      cards.forEach(card => {
-        if(card.dataset.role === filter) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
+      function trapFocus(container){
+        const focusable = qsa('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])', container);
+        if(!focusable.length) return null;
+        const first = focusable[0], last = focusable[focusable.length-1];
+        function handler(e){
+          if(e.key !== 'Tab') return;
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
         }
+        document.addEventListener('keydown', handler);
+        return () => document.removeEventListener('keydown', handler);
+      }
+
+      function openModal(data){
+        lastFocused = document.activeElement;
+        profileImg.src = data.img || '';
+        profileImg.alt = data.name || 'Profile photo';
+        title.textContent = data.name || '';
+        role.textContent = data.roleFull || '';
+        bio.textContent = data.bio || '';
+        emailLink.href = data.email ? `mailto:${data.email}` : '#';
+        modal.setAttribute('aria-hidden','false');
+        document.documentElement.style.overflow='hidden';
+        document.body.style.overflow='hidden';
+        // set focus and trap
+        closeBtn.focus();
+        removeTrap = trapFocus(modal);
+      }
+
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        document.documentElement.style.overflow='';
+        document.body.style.overflow='';
+        if(lastFocused && lastFocused.focus) lastFocused.focus();
+        if(typeof removeTrap === 'function') removeTrap();
+      }
+
+      let removeTrap = null;
+      // wire buttons on cards
+      qsa('.view-profile-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const card = btn.closest('.member-card');
+          const data = {
+            name: card.dataset.name,
+            roleFull: card.dataset.roleFull || card.dataset.role,
+            bio: card.dataset.bio,
+            email: card.dataset.email,
+            img: card.dataset.img
+          };
+          openModal(data);
+        });
       });
-    }
 
-    // Show only board members on page load
-    filterMembers('board');
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', closeModal);
+      document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
 
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        buttons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        filterMembers(btn.dataset.filter);
+      // small sample message action
+      qs('#profileMessage').addEventListener('click', () => {
+        alert('Message action — open chat or contact flow here.');
       });
-    });
-  });
-  //Animation JS for fade-up effect
 
-  const fadeEls = document.querySelectorAll('.fade-up');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('show');
-    });
-  }, { threshold: 0.2 });
-
-  fadeEls.forEach(el => observer.observe(el));
-
-
-</script>
+    })();
+  </script>
 
 </body>
 </html>
