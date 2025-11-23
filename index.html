@@ -215,7 +215,7 @@
             <!-- Desktop Links -->
             <div class="hidden md:flex items-center gap-8 font-medium text-[var(--light-mint)]">
               <a href="#" class="relative nav-underline">Home</a>
-              <a href="About.html" class="relative nav-underline">About</a>
+              <a href="About.html" class="relative nav-underline">About Us</a>
               <a href="Portfolio.html" class="relative nav-underline">Portfolio</a>
               <a href="Services.html" class="relative nav-underline">Services</a>
               <a href="Contact.html" class="relative nav-underline">Contact</a>
@@ -264,7 +264,7 @@
       </a>
 
       <a href="About.html" class="flex items-center gap-3 text-lg font-medium">
-        <i class="fa-solid fa-info-circle w-6 text-[var(--cyan-teal)]"></i> About
+        <i class="fa-solid fa-info-circle w-6 text-[var(--cyan-teal)]"></i> About Us
       </a>
 
       <a href="Portfolio.html" class="flex items-center gap-3 text-lg font-medium">
@@ -339,8 +339,8 @@
   </div>
 
  <!-- HEADER arrow -->
-<button id="scroll-arrow" 
-  class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--light-mint)] animate-bounce text-4xl">
+<button id="scroll-arrow" type="button"
+  class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--light-mint)] animate-bounce text-4xl z-50">
   <i class="fa-solid fa-chevron-down"></i>
 </button>
 
@@ -584,6 +584,15 @@
     <div id="dots" class="flex justify-center mt-8 space-x-3"></div>
   </div>
 </section>
+    
+    <!-- Floating WhatsApp Button (replaced: removed alert + overlap fix) -->
+<a id="whatsappBtn"
+   href="https://wa.me/2451163968863?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20Sitefully."
+   target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <i class="fab fa-whatsapp fa-lg" aria-hidden="true"></i>
+</a>
+
+
 
     <!-- FOOTER -->
     <footer class="relative overflow-hidden bg-gradient-to-tr from-[rgba(17,100,102,0.95)] to-[rgba(217,176,140,0.06)] text-[var(--light-mint)] mt-12">
@@ -598,12 +607,6 @@
   <div class="flex items-center space-x-4">
   <!-- Logo -->
   <img src="Assets/sitefully logo.png" alt="Sitefully" class="w-20 h-20 object-contain rounded-md"/>
-
-  <!-- Name + Motto 
-  <div class="flex flex-col">
-    <h2 class="text-2xl font-extrabold text-bronze">Sitefully</h2>
-    <p class="text-xs text-cyan-600">The brain of great websites</p>
-  </div>-->
 </div>
 
 </div>
@@ -618,8 +621,12 @@
             <ul class="space-y-3 text-[var(--light-mint)]/90">
               <li><a href="#" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Home</a></li>
               <li><a href="About.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> About</a></li>
+              <li><a href="Portfolio.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Portfolio</a></li>
               <li><a href="Services.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Products & Services</a></li>
               <li><a href="Contact.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Contact</a></li>
+              <li><a href="pricing.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Pricing</a></li>  
+              <li><a href="faq.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> FAQ</a></li>
+
             </ul>
           </nav>
 
@@ -700,20 +707,38 @@
         }, 120);
       });
     
-      // Scroll arrow functionality
-      const arrow = document.getElementById('scroll-arrow');
-  const hero = document.getElementById('hero-section');
+      // Scroll arrow functionality (robust)
+  (function(){
+    const arrow = document.getElementById('scroll-arrow');
+    if (!arrow) return;
 
-  arrow.addEventListener('click', () => {
-    const headerOffset = 80; // adjust for fixed header
-    const elementPosition = hero.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    // Target the next section explicitly (id present in your markup).
+    const explicitTarget = document.getElementById('hero-section');
+    const headerEl = document.querySelector('header[aria-label="Header"]') || document.querySelector('header');
+    const fallbackSection = explicitTarget || (headerEl && headerEl.nextElementSibling);
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth"
+    function scrollToTarget(el) {
+      if (!el) return;
+      const nav = document.getElementById('navbar');
+      const navHeight = nav ? Math.ceil(nav.getBoundingClientRect().height) : 0;
+      const gap = 12; // small spacing so content doesn't hide under navbar
+      const top = Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - navHeight - gap);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    arrow.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Prefer explicit #hero-section, otherwise compute next visible sibling
+      if (explicitTarget) return scrollToTarget(explicitTarget);
+
+      let target = fallbackSection;
+      // skip invisible/spacer nodes
+      while (target && target.offsetHeight === 0 && target.nextElementSibling) {
+        target = target.nextElementSibling;
+      }
+      scrollToTarget(target);
     });
-  });
+  })();
       // Footer year
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -816,16 +841,7 @@
         }
         window.addEventListener("load", ()=> setTimeout(type, 400));
       })();
-    </script>
-
-    <!-- Floating WhatsApp Button (replaced: removed alert + overlap fix) -->
-<a id="whatsappBtn"
-   href="https://wa.me/2451163968863?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20Sitefully."
-   target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-  <i class="fab fa-whatsapp fa-lg" aria-hidden="true"></i>
-</a>
-
-<script>
+   
   // keep WhatsApp button from overlapping footer: push it up when footer enters viewport
   (function(){
     const btn = document.getElementById('whatsappBtn');

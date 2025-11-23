@@ -22,12 +22,38 @@
         --bronze: #D9B08C;
         --soft-peach: #FFCB9A;
         --light-mint: #D1E8E2;
-
         /* Derived tokens */
         --bg-main: #0f1412;
         --text-dark: #121212;
         --text-muted: #4b5563;
         --card-border: rgba(209, 232, 226, 0.6);
+      }
+
+      /* Duration badge: absolute on desktop, flow on small screens to avoid overlap */
+      .duration-badge {
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+        display: inline-block;
+        padding: .25rem .75rem;
+        border-radius: .75rem;
+        background: linear-gradient(120deg, var(--cyan-teal), var(--bronze));
+        color: #ffffff;
+        font-size: .75rem;
+        font-weight: 600;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      }
+
+      @media (max-width: 768px) {
+        .duration-badge {
+          position: static; /* Change to static for mobile */
+          margin-top: 1rem; /* Add margin for spacing */
+          margin-left: 0; /* Reset left margin */
+          display: inline-block; /* Ensure it displays inline */
+        }
+        .checklist-item > div {
+          padding-right: 0; /* Remove right padding for mobile */
+        }
       }
 
       /* Smooth UI enhancements */
@@ -260,11 +286,7 @@
               </div>
 
               <!-- Duration Badge -->
-              <span
-                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
-              >
-                2–3 weeks
-              </span>
+              <span class="duration-badge">2–3 weeks</span>
             </div>
           </details>
 
@@ -319,11 +341,7 @@
               </div>
 
               <!-- Duration Badge -->
-              <span
-                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
-              >
-                4–6 weeks
-              </span>
+              <span class="duration-badge">4–6 weeks</span>
             </div>
           </details>
 
@@ -370,11 +388,7 @@
               </div>
 
               <!-- Duration Badge -->
-              <span
-                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
-              >
-                1–2 weeks
-              </span>
+              <span class="duration-badge">1–2 weeks</span>
             </div>
           </details>
 
@@ -421,11 +435,7 @@
               </div>
 
               <!-- Duration Badge -->
-              <span
-                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
-              >
-                Included
-              </span>
+              <span class="duration-badge">Included</span>
             </div>
           </details>
 
@@ -472,11 +482,7 @@
               </div>
 
               <!-- Duration Badge -->
-              <span
-                class="absolute top-4 right-8 inline-block px-3 py-1 rounded-full bg-[var(--cyan-teal)] text-white text-xs font-semibold shadow-sm"
-              >
-                Ongoing
-              </span>
+              <span class="duration-badge">Ongoing</span>
             </div>
           </details>
           </div>
