@@ -187,6 +187,75 @@
         opacity: 0;
         transform: translateY(20px);
       }
+
+
+      /* Tabs */
+.tab-btn {
+  user-select: none;
+}
+
+/* Cards */
+.card {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(44, 53, 49, 0.06);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  background: white;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(17, 100, 102, 0.08);
+}
+
+/* Carousel container */
+#cardsContainer {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 16px;
+}
+
+/* Carousel arrows */
+.arrow-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid var(--cyan-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.arrow-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--cyan-teal);
+  stroke-width: 2;
+}
+
+.arrow-btn:hover {
+  border-color: var(--bronze);
+  stroke: var(--bronze);
+  box-shadow: 0 6px 14px rgba(217, 176, 140, 0.2);
+}
+
+.arrow-left { left: -20px; }
+.arrow-right { right: -20px; }
+.arrow-btn.disabled { opacity: 0.4; pointer-events: none; }
+
+/* Tag pills */
+.tag-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
     </style>
   </head>
 
@@ -338,19 +407,101 @@
     </div>
   </div>
 
- <!-- HEADER arrow -->
-<button id="scroll-arrow" type="button"
-  class="absolute bottom-10 left-1/2 -translate-x-1/2 text-[var(--light-mint)] animate-bounce text-4xl z-50">
-  <i class="fa-solid fa-chevron-down"></i>
-</button>
 
  <!-- bottom fade -->
       <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[var(--dark-teal)] to-transparent pointer-events-none"></div>
 
 </header>
+   
+    <!-- SERVICES CAROUSEL -->
+<section class="max-w-7xl mx-auto px-4 py-20">
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">Our Services</h2>
+    <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+      Comprehensive web development solutions from concept to deployment — crafted with Sitefully precision.
+    </p>
+  </div>
 
+  <!-- Tabs -->
+  <div class="flex flex-wrap gap-4 mb-8 justify-center">
+    <button class="tab-btn active px-6 py-3 rounded-full font-semibold border-2 border-[var(--cyan-teal)] text-[var(--cyan-teal)] bg-[rgba(17,100,102,0.06)]" data-category="all">All Services</button>
+    <button class="tab-btn px-6 py-3 rounded-full font-semibold border-2 border-gray-300 text-gray-800 bg-white" data-category="development">Development</button>
+    <button class="tab-btn px-6 py-3 rounded-full font-semibold border-2 border-gray-300 text-gray-800 bg-white" data-category="frontend">Frontend</button>
+    <button class="tab-btn px-6 py-3 rounded-full font-semibold border-2 border-gray-300 text-gray-800 bg-white" data-category="backend">Backend</button>
+    <button class="tab-btn px-6 py-3 rounded-full font-semibold border-2 border-gray-300 text-gray-800 bg-white" data-category="deployment">Deployment</button>
+  </div>
 
-     
+  <!-- Carousel -->
+  <div class="relative">
+    <button id="prevBtn" class="arrow-btn arrow-left"> 
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button id="nextBtn" class="arrow-btn arrow-right"> 
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <div class="overflow-hidden">
+      <div id="cardsContainer" class="flex gap-4">
+        <!-- Card 1 -->
+        <div class="card min-w-full md:min-w-[calc(50%-8px)] lg:min-w-[calc(33%-10px)]" data-category="development">
+          <div class="h-64 relative overflow-hidden"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&q=80"><div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div></div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-3">Website Creation — Frontend & Django</h3>
+            <p class="text-gray-600 mb-4">End-to-end development: responsive frontends, robust Django backends.</p>
+            <div class="flex gap-2 mb-4"><span class="tag-pill text-[var(--cyan-teal)]">Django</span><span class="tag-pill text-[var(--dark-teal)]">Full-Stack</span></div>
+            <button class="w-full py-3 rounded-full text-white font-bold" style="background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card min-w-full md:min-w-[calc(50%-8px)] lg:min-w-[calc(33%-10px)]" data-category="backend">
+          <div class="h-64 relative overflow-hidden"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80"><div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div></div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-3">Full-Stack Django Development</h3>
+            <p class="text-gray-600 mb-4">Architecture, models, templates, auth, admin customization.</p>
+            <div class="flex gap-2 mb-4"><span class="tag-pill text-[var(--dark-teal)]">Architecture</span><span class="tag-pill text-[var(--cyan-teal)]">Models</span></div>
+            <button class="w-full py-3 rounded-full text-white font-bold" style="background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card min-w-full md:min-w-[calc(50%-8px)] lg:min-w-[calc(33%-10px)]" data-category="frontend">
+          <div class="h-64 relative overflow-hidden"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"><div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div></div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-3">Frontend: HTML, CSS & JS</h3>
+            <p class="text-gray-600 mb-4">Pixel-perfect UIs using Tailwind, modern JS and progressive enhancement.</p>
+            <div class="flex gap-2 mb-4"><span class="tag-pill text-[var(--cyan-teal)]">Tailwind</span><span class="tag-pill text-[var(--peach)]">JS</span></div>
+            <button class="w-full py-3 rounded-full text-white font-bold" style="background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card min-w-full md:min-w-[calc(50%-8px)] lg:min-w-[calc(33%-10px)]" data-category="backend">
+          <div class="h-64 relative overflow-hidden"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"><div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div></div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-3">APIs & Integrations (DRF)</h3>
+            <p class="text-gray-600 mb-4">Django REST Framework, payments, analytics, JSON endpoints.</p>
+            <div class="flex gap-2 mb-4"><span class="tag-pill text-[var(--mint)]">REST API</span></div>
+            <button class="w-full py-3 rounded-full text-white font-bold" style="background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));">Get Started</button>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card min-w-full md:min-w-[calc(50%-8px)] lg:min-w-[calc(33%-10px)]" data-category="deployment">
+          <div class="h-64 relative overflow-hidden"><img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80"><div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div></div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-3">Deployment & Maintenance</h3>
+            <p class="text-gray-600 mb-4">Docker, CI/CD, HTTPS, monitoring, backups.</p>
+            <div class="flex gap-2 mb-4"><span class="tag-pill text-[var(--cyan-teal)]">Docker</span></div>
+            <button class="w-full py-3 rounded-full text-white font-bold" style="background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
    <!-- HERO (Upgraded About → Hero) -->
 <section id="hero-section" class="relative min-h-[720px] py-24 md:py-32 overflow-hidden">
@@ -412,45 +563,6 @@
 </div>
       </div>
 </section>
-    <!-- SERVICES PREVIEW -->
-    <section class="py-20">
-      <div class="container mx-auto px-6 md:px-12 lg:px-20 text-center">
-        <div class="mb-12" data-aos="fade-up">
-          <h2 class="text-3xl md:text-4xl font-bold gradient-text">Website Creation — Frontend & Backend (Django)</h2>
-          <p class="text-[var(--light-mint)]/80 max-w-2xl mx-auto mt-4">End-to-end development: responsive frontends, robust Django backends and reliable deployments.</p>
-        </div>
-
-              <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <article class="p-8 rounded-3xl card-glass border border-white/6">
-            <div class="text-[var(--cyan-teal)] text-4xl mb-4"><i class="fa-solid fa-laptop-code"></i></div>
-            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">Full-Stack Django Development</h3>
-            <p class="text-[var(--light-mint)]/80">Architecture, models, templates, auth, admin customization and business logic.</p>
-          </article>
-
-          <article class="p-8 rounded-3xl card-glass border border-white/6">
-            <div class="text-[var(--soft-peach)] text-4xl mb-4"><i class="fa-solid fa-display"></i></div>
-            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">Frontend: HTML, CSS & JavaScript</h3>
-            <p class="text-[var(--light-mint)]/80">Responsive, accessible UIs using Tailwind, modern JS and progressive enhancement.</p>
-          </article>
-
-          <article class="p-8 rounded-3xl card-glass border border-white/6">
-            <div class="text-[var(--cyan-teal)] text-4xl mb-4"><i class="fa-solid fa-code-branch"></i></div>
-            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">APIs & Integrations (DRF)</h3>
-            <p class="text-[var(--light-mint)]/80">Django REST Framework, payments, email, analytics and JSON endpoints for SPAs.</p>
-          </article>
-
-          <article class="p-8 rounded-3xl card-glass border border-white/6">
-            <div class="text-[var(--bronze)] text-4xl mb-4"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-            <h3 class="text-lg font-semibold text-[var(--light-mint)] mb-2">Deployment & Maintenance</h3>
-            <p class="text-[var(--light-mint)]/80">Docker, CI/CD, HTTPS, backups, monitoring and ongoing maintenance.</p>
-          </article>
-        </div>
-
-        <div class="mt-12">
-          <a href="Services.html" class="btn-primary px-8 py-3 rounded-full">View All Services →</a>
-        </div>
-      </div>
-    </section>
 
   <!-- TESTIMONIALS -->
 <section class="py-16">
@@ -561,29 +673,61 @@
         </div>
 
       </div>
-
-      <!-- arrows -->
-      <button id="prevBtn"
-              class="absolute -left-8 md:-left-14 top-1/2 -translate-y-1/2 
-                     bg-[rgba(255,255,255,0.03)] p-3 rounded-full shadow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--cyan-teal)]" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-
-      <button id="nextBtn"
-              class="absolute -right-8 md:-right-14 top-1/2 -translate-y-1/2 
-                     bg-[rgba(255,255,255,0.03)] p-3 rounded-full shadow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[var(--cyan-teal)]" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
     </div>
 
     <!-- dots -->
     <div id="dots" class="flex justify-center mt-8 space-x-3"></div>
   </div>
 </section>
+
+ <section id="stats" class="py-24 relative overflow-hidden">
+  <!-- soft background glow -->
+  <div class="absolute inset-0 opacity-[0.06] pointer-events-none">
+    <div class="w-80 h-80 bg-[var(--cyan-teal)] blur-[140px] absolute top-10 left-10"></div>
+    <div class="w-96 h-96 bg-[var(--soft-peach)] blur-[160px] absolute bottom-10 right-10"></div>
+  </div>
+
+  <div class="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
+    <div class="text-center mb-14">
+      <h2 class="text-3xl md:text-5xl font-extrabold gradient-text">Our Impact</h2>
+      <p class="text-[var(--light-mint)]/80 mt-3 max-w-xl mx-auto">
+        Trusted by brands, businesses and organizations to deliver cutting-edge digital solutions.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <!-- Completed Projects -->
+      <div class="p-8 rounded-3xl card-glass text-center border border-white/5 shadow-soft">
+        <i class="fa-solid fa-briefcase text-4xl text-[var(--soft-peach)] mb-4"></i>
+        <h3 class="text-5xl font-extrabold gradient-text count-number" data-start="15" data-end="21">15</h3>
+        <p class="mt-3 text-[var(--light-mint)]/80 text-lg">Completed Projects</p>
+      </div>
+
+
+      <!-- Client Satisfaction (Static) -->
+      <div class="p-8 rounded-3xl card-glass text-center border border-white/5 shadow-soft">
+        <i class="fa-solid fa-star text-4xl text-[var(--bronze)] mb-4"></i>
+        <h3 class="text-5xl font-extrabold gradient-text">98%</h3>
+        <p class="mt-3 text-[var(--light-mint)]/80 text-lg">Client Satisfaction</p>
+      </div>
+
+      <!-- Happy Clients -->
+      <div class="p-8 rounded-3xl card-glass text-center border border-white/5 shadow-soft">
+        <i class="fa-solid fa-users text-4xl text-[var(--cyan-teal)] mb-4"></i>
+        <h3 class="text-5xl font-extrabold gradient-text count-number" data-start="12" data-end="21">12</h3>
+        <p class="mt-3 text-[var(--light-mint)]/80 text-lg">Happy Clients</p>
+      </div>
+
+      <!-- Awards Earned (Static) -->
+      <div class="p-8 rounded-3xl card-glass text-center border border-white/5 shadow-soft">
+        <i class="fa-solid fa-award text-4xl text-[var(--soft-peach)] mb-4"></i>
+        <h3 class="text-5xl font-extrabold gradient-text">12</h3>
+        <p class="mt-3 text-[var(--light-mint)]/80 text-lg">Awards Earned</p>
+      </div>
+    </div>
+  </div>
+</section>
+
     
     <!-- Floating WhatsApp Button (replaced: removed alert + overlap fix) -->
 <a id="whatsappBtn"
@@ -863,6 +1007,96 @@
     window.addEventListener('resize', adjust);
     // initial check
     adjust();
+  })();
+  // Stats counter animation
+  const counters = document.querySelectorAll('.count-number');
+  let statsPlayed = false;
+
+  function runSlowCounter(counter) {
+    const start = parseInt(counter.getAttribute('data-start'), 10);
+    const end = parseInt(counter.getAttribute('data-end'), 10);
+
+    let current = start;
+    counter.innerText = current;
+
+    const interval = setInterval(() => {
+      if (current < end) {
+        current++;
+        counter.innerText = current;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000); // +1 every second
+  }
+
+  function handleScroll() {
+    const statsSection = document.querySelector('#stats');
+    const rect = statsSection.getBoundingClientRect();
+
+    if (!statsPlayed && rect.top < window.innerHeight - 150) {
+      statsPlayed = true;
+      // Start slow count after 2 seconds
+      setTimeout(() => {
+        counters.forEach(counter => {
+          if(counter.hasAttribute('data-end')) runSlowCounter(counter);
+        });
+      }, 10000);
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll);
+
+  // Carousel functionality for services
+  (function(){
+  let currentIndex=0;
+  const container=document.getElementById('cardsContainer');
+  const cards=Array.from(document.querySelectorAll('.card'));
+  const prevBtn=document.getElementById('prevBtn');
+  const nextBtn=document.getElementById('nextBtn');
+  const tabBtns=Array.from(document.querySelectorAll('.tab-btn'));
+
+  function getCardsPerView(){ const w=window.innerWidth; if(w>=1024)return 3; if(w>=768)return 2; return 1; }
+  function getVisibleCards(){ return cards.filter(c=>c.style.display!=='none'); }
+
+  function updateCarousel(){
+    const visible=getVisibleCards(); if(!visible.length)return;
+    const cpv=getCardsPerView();
+    const maxIndex=Math.max(0,visible.length-cpv);
+    currentIndex=Math.min(currentIndex,maxIndex);
+    const cardWidth=visible[0].offsetWidth;
+    const gap=parseInt(getComputedStyle(container).gap)||16;
+    container.style.transform=`translateX(${-currentIndex*(cardWidth+gap)}px)`;
+    prevBtn.classList.toggle('disabled',currentIndex===0);
+    nextBtn.classList.toggle('disabled',currentIndex>=maxIndex);
+  }
+
+  function updateArrowVisibility(category){
+    if(category==='all'||category==='backend'){ prevBtn.style.display='flex'; nextBtn.style.display='flex'; }
+    else { prevBtn.style.display='none'; nextBtn.style.display='none'; }
+  }
+
+  prevBtn.addEventListener('click',()=>{ if(currentIndex>0){ currentIndex--; updateCarousel(); } });
+  nextBtn.addEventListener('click',()=>{ const cpv=getCardsPerView(); const maxIndex=Math.max(0,getVisibleCards().length-cpv); if(currentIndex<maxIndex){ currentIndex++; updateCarousel(); } });
+
+  tabBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const category=btn.dataset.category;
+      tabBtns.forEach(b=>b.classList.remove('active','text-[var(--cyan-teal)]','border-[var(--cyan-teal)]','bg-[rgba(17,100,102,0.06)]'));
+      tabBtns.forEach(b=>b.classList.add('text-gray-800','border-gray-300','bg-white'));
+      btn.classList.add('active','text-[var(--cyan-teal)]','border-[var(--cyan-teal)]','bg-[rgba(17,100,102,0.06)]');
+      btn.classList.remove('text-gray-800','border-gray-300','bg-white');
+
+      cards.forEach(c=>c.style.display=(category==='all'||c.dataset.category===category)?'block':'none');
+      updateArrowVisibility(category);
+      currentIndex=0;
+      updateCarousel();
+    });
+  });
+
+  window.addEventListener('resize',updateCarousel);
+  cards.forEach(c=>c.style.display='block');
+  updateArrowVisibility('all');
+  updateCarousel();
   })();
 </script>
   </body>
