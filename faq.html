@@ -20,129 +20,181 @@
             'bronze': '#D9B08C',
             'soft-peach': '#FFCB9A',
             'light-mint': '#D1E8E2',
+          },
+          boxShadow: {
+            'glass-lg': '0 10px 30px rgba(17,36,34,0.08)',
+            'glass-xl': '0 18px 60px rgba(17,36,34,0.12)',
+          },
+          borderRadius: {
+            'xl': '18px',
+            'full': '9999px',
           }
         }
       }
     }
   </script>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, #D1E8E2, #ffffff);
+      color: #2C3531;
+    }
+
+    /* FAQ summary arrows */
+    details[open] summary::after { content: "▲"; float: right; font-weight: bold; }
+    summary::after { content: "▼"; float: right; font-weight: bold; }
+    details summary { list-style: none; }
+    details[open] { background: #f0fdf4; border-color: #116466; }
+
+    details { transition: all 0.3s ease; }
+    details:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(17,36,34,0.12); }
+
+    /* Sidebar hover */
+    aside a:hover { color: #D9B08C; }
+
+    /* Gradient headers */
+    h1, h2 { background: linear-gradient(90deg, #116466, #D9B08C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Scrollbar fix */
+    main::-webkit-scrollbar { width: 6px; }
+    main::-webkit-scrollbar-thumb { background-color: rgba(17,36,34,0.2); border-radius: 10px; }
+
+    /* Contact button */
+    .contact-btn {
+      background: linear-gradient(90deg, #116466, #D9B08C);
+      color: #03100d;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(17,36,34,0.25); }
+  </style>
 </head>
 
-<body class="bg-light-mint text-dark-teal flex flex-col min-h-screen font-sans">
+<body class="flex flex-col min-h-screen">
 
   <!-- Header -->
-  <header class="bg-dark-teal text-soft-peach py-20 text-center">
+  <header class="py-20 text-center">
     <div class="container mx-auto px-5">
-      <h1 class="text-4xl md:text-5xl font-bold mb-3">Frequently Asked Questions</h1>
-      <p class="text-lg text-soft-peach/80 max-w-2xl mx-auto">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3">Frequently Asked Questions</h1>
+      <p class="text-lg text-dark-teal/80 max-w-2xl mx-auto">
         Everything you need to know before starting your website project with Sitefully.
       </p>
     </div>
   </header>
 
   <!-- FAQ Section -->
-  <main class="flex-grow py-16">
-    <div class="container mx-auto px-5 grid lg:grid-cols-3 gap-10">
+  <main class="flex-grow py-16 container mx-auto px-5 grid lg:grid-cols-3 gap-10">
+    
+    <!-- FAQ List -->
+    <div class="lg:col-span-2 space-y-10">
       
-      <!-- FAQ List -->
-      <div class="lg:col-span-2 space-y-10">
-
-        <!-- FAQ Category Template -->
-        <div>
-          <h2 class="text-2xl font-semibold mb-4 text-cyan-teal">General Questions</h2>
-          <div class="space-y-4">
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">What services does Sitefully offer?</summary>
-              <p class="mt-3 text-dark-teal/80">We specialize in building modern, secure, and scalable websites using Django. Our services include website design and development, e-commerce platforms, web applications, branding, SEO optimization, and ongoing maintenance.</p>
-            </details>
-
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Do you only work with Django?</summary>
-              <p class="mt-3 text-dark-teal/80">Django is our main backend framework due to its reliability and security. However, we also integrate modern frontend tools such as Tailwind CSS, React, and Alpine.js for responsive user interfaces.</p>
-            </details>
-
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Can you redesign or upgrade an existing website?</summary>
-              <p class="mt-3 text-dark-teal/80">Yes, we can revamp your current website to make it modern, mobile-friendly, and optimized for performance and conversions while migrating your data safely.</p>
-            </details>
-          </div>
-        </div>
-
-        <!-- Project Process -->
-        <div>
-          <h2 class="text-2xl font-semibold mb-4 text-cyan-teal">Project Process</h2>
-          <div class="space-y-4">
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">How does your web development process work?</summary>
-              <p class="mt-3 text-dark-teal/80">Our process includes discovery, design, development, testing, and deployment. We keep you involved at every step to ensure your vision is realized.</p>
-            </details>
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">How long does it take to build a website?</summary>
-              <p class="mt-3 text-dark-teal/80">Standard websites take 3–5 weeks; complex sites like e-commerce or web apps may take 6–10 weeks. We provide a timeline after consultation.</p>
-            </details>
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Do I need to provide content for the website?</summary>
-              <p class="mt-3 text-dark-teal/80">Yes, but we also offer professional content writing and design services if needed.</p>
-            </details>
-          </div>
-        </div>
-
-        <!-- Pricing & Support -->
-        <div>
-          <h2 class="text-2xl font-semibold mb-4 text-cyan-teal">Pricing & Support</h2>
-          <div class="space-y-4">
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">How much does a website cost?</summary>
-              <p class="mt-3 text-dark-teal/80">Pricing depends on size and functionality. Small business sites start at KSh 25,000, while custom sites are quoted individually.</p>
-            </details>
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Do you offer website maintenance?</summary>
-              <p class="mt-3 text-dark-teal/80">Yes. We offer maintenance plans covering updates, backups, security, and support after launch.</p>
-            </details>
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Can I request updates or new features later?</summary>
-              <p class="mt-3 text-dark-teal/80">Absolutely. Your website is scalable and can be updated as your business grows.</p>
-            </details>
-          </div>
-        </div>
-
-        <!-- Technical Questions -->
-        <div>
-          <h2 class="text-2xl font-semibold mb-4 text-cyan-teal">Technical Questions</h2>
-          <div class="space-y-4">
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Will my website be mobile-friendly?</summary>
-              <p class="mt-3 text-dark-teal/80">Yes, all our websites are 100% responsive for desktops, tablets, and smartphones.</p>
-            </details>
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Do you handle domain registration and hosting?</summary>
-              <p class="mt-3 text-dark-teal/80">Yes, we can manage domain and hosting setup or help configure your existing hosting.</p>
-            </details>
-            <details class="bg-white border border-light-mint rounded-lg p-5 shadow hover:shadow-md transition">
-              <summary class="cursor-pointer font-medium text-lg text-dark-teal hover:text-cyan-teal">Is SEO included?</summary>
-              <p class="mt-3 text-dark-teal/80">Yes, we follow best SEO practices including metadata, load speed, and mobile optimization.</p>
-            </details>
-          </div>
+      <!-- General Questions -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">General Questions</h2>
+        <div class="space-y-4">
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">What services does Sitefully offer?</summary>
+            <p class="mt-3 text-dark-teal/80">We specialize in modern, secure, and scalable websites using Django. Services: web design, e-commerce, web apps, branding, SEO, and maintenance.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Do you only work with Django?</summary>
+            <p class="mt-3 text-dark-teal/80">Django is our main backend framework. Frontend tools include Tailwind CSS, React, and Alpine.js for responsive interfaces.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Can you redesign or upgrade an existing website?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, we modernize websites, make them mobile-friendly, optimized, and safely migrate your data.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Do you provide content creation?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, professional content writing and graphics can be provided if needed.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Can I request a custom feature?</summary>
+            <p class="mt-3 text-dark-teal/80">Absolutely! Custom features and functionality can be discussed and implemented.</p>
+          </details>
         </div>
       </div>
 
-      <!-- Sidebar -->
-      <aside>
-        <div class="bg-cyan-teal text-soft-peach shadow-lg rounded-lg p-8 text-center space-y-4">
-          <h3 class="text-lg font-semibold mb-2">Still have questions?</h3>
-          <p class="text-soft-peach/90">
-            Contact our support team at <br>
-            <a href="mailto:support@sitefully.com" class="underline font-medium hover:text-bronze">support@sitefully.com</a>
-          </p>
-          <h4 class="font-semibold mb-2">Follow us</h4>
-          <div class="flex justify-center space-x-4 text-xl">
-            <a href="#" class="hover:text-bronze"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="hover:text-bronze"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="hover:text-bronze"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="hover:text-bronze"><i class="bi bi-youtube"></i></a>
-          </div>
+      <!-- Project Process -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Project Process</h2>
+        <div class="space-y-4">
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">How does your web development process work?</summary>
+            <p class="mt-3 text-dark-teal/80">Discovery, design, development, testing, deployment. Clients are involved at every stage.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">How long does it take to build a website?</summary>
+            <p class="mt-3 text-dark-teal/80">Standard sites: 3–5 weeks; complex apps: 6–10 weeks. Timeline shared after consultation.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Do I need to provide content?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, but we also provide content writing and design services if needed.</p>
+          </details>
         </div>
-      </aside>
+      </div>
+
+      <!-- Pricing & Support -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Pricing & Support</h2>
+        <div class="space-y-4">
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">How much does a website cost?</summary>
+            <p class="mt-3 text-dark-teal/80">Small business sites start at KSh 25,000; custom sites quoted individually.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Do you offer website maintenance?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, covering updates, backups, security, and ongoing support.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Can I request updates later?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, your site is scalable and can be updated as your business grows.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Technical Questions -->
+      <div>
+        <h2 class="text-2xl font-bold mb-4">Technical Questions</h2>
+        <div class="space-y-4">
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Will my website be mobile-friendly?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, fully responsive on desktop, tablet, and mobile.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Do you handle domain registration and hosting?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, we can set up or configure your hosting and domain.</p>
+          </details>
+          <details class="bg-white border border-light-mint rounded-xl p-5 shadow-lg hover:shadow-xl transition">
+            <summary class="cursor-pointer font-semibold text-lg">Is SEO included?</summary>
+            <p class="mt-3 text-dark-teal/80">Yes, including metadata, load speed optimization, and mobile optimization.</p>
+          </details>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Sidebar -->
+    <aside class="flex flex-col items-center space-y-6">
+      <div class="bg-cyan-teal text-soft-peach shadow-xl rounded-xl p-8 text-center space-y-4 w-full">
+        <h3 class="text-lg font-semibold mb-2">Still have questions?</h3>
+        <p class="text-soft-peach/90">
+          Contact our support team at <br>
+          <a href="mailto:support@sitefully.com" class="underline font-medium hover:text-bronze">support@sitefully.com</a>
+        </p>
+        <a href="Contact.html" class="contact-btn inline-block mt-3">Contact Support</a>
+        <h4 class="font-semibold mt-4">Follow us</h4>
+        <div class="flex justify-center space-x-4 text-xl mt-1">
+          <a href="#" class="hover:text-bronze"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="hover:text-bronze"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="hover:text-bronze"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="hover:text-bronze"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+    </aside>
   </main>
 
   <!-- Icons -->

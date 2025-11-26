@@ -5,223 +5,366 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sitefully | About Us</title>
 
-  <!-- Tailwind (dev CDN) + Fonts + Icons -->
+  <!-- Tailwind + Fonts + Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+  /* NEW THEME (FULLY APPLIED) */
+  :root { 
+    --dark-teal: #2C3531;   
+    --cyan-teal: #116466;   
+    --bronze: #D9B08C;      
+    --soft-peach: #FFCB9A;  
+    --light-mint: #D1E8E2;  
+    --glass-border: rgba(44,53,49,0.08);
+    --muted: rgba(44,53,49,0.75);
+    --surface: #ffffff;
+    --glass-elev: rgba(17,36,34,0.04);
+    --accent: #116466; /* used for dots and active filter button */
+  }
 
-  <style>
-    :root{
-      --bg: #0f1720;
-      --card: rgba(255,255,255,0.96);
-      --accent: #0ea5a4; /* teal */
-      --warm: #d9b08c;
-      --muted: #3b524a;
-      --glass-border: rgba(14,165,164,0.12);
-      --text-light: #e6efe9;
+  html,body{height:100%}
+  body{
+    font-family:"Poppins",system-ui;
+    background: linear-gradient(180deg, var(--light-mint), var(--surface));
+    color: var(--dark-teal);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .container { max-width:1120px; margin:0 auto; padding:0 1.25rem; }
+
+  /* Glass Cards */
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px var(--glass-elev);
+    color: var(--muted);
+  }
+
+  /* Gradient text using your colors */
+  .gradient-text {
+    background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .fade-up{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+  .fade-up.show{opacity:1;transform:none}
+
+  /* ===== Slider viewport & track ===== */
+  .slider-viewport {
+    overflow: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+  }
+
+  .slider-track {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 0.65s cubic-bezier(.2,.9,.2,1);
+    will-change: transform;
+  }
+
+  /* Slide cards */
+  .slide {
+    flex: 0 0 auto;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 40px rgba(17,36,34,0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    scroll-snap-align: center; /* centers each slide on mobile */
+  }
+
+  .slide:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 60px rgba(17,36,34,0.12);
+  }
+
+  /* Slide images */
+  .slide-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  /* Titles & text */
+  .slide-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark-teal);
+    margin-bottom: 6px;
+  }
+  .slide-text {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Slider arrows */
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));
+    color: #03100d;
+    border: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(17,36,34,0.15);
+    transition: 0.3s ease;
+  }
+
+  .slider-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 28px rgba(17,36,34,0.22);
+  }
+  .slider-arrow.left-0 { left: -15px; }
+  .slider-arrow.right-0 { right: -15px; }
+
+  /* Center slides & responsive widths */
+  @media (min-width:768px){
+    .slide { flex: 0 0 calc(50% - 0.75rem); }
+  }
+  @media (min-width:1024px){
+    .slide { flex: 0 0 calc(33.333% - 1rem); }
+  }
+
+  /* Snap scrolling for mobile */
+  @media (max-width: 767px) {
+    .slider-viewport {
+      scroll-snap-type: x mandatory;
     }
-    html,body{height:100%}
-    body{
-      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      background: linear-gradient(180deg,var(--bg) 0%, #122226 100%);
-      color: var(--text-light);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      scroll-behavior:smooth;
+    .slide {
+      scroll-snap-align: center;
     }
+  }
 
-    /* Container */
-    .container { max-width:1120px; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
+  /* Team */
+  .member-card img{border-radius:9999px;}
+  .member-card .cta-btn{
+    background:linear-gradient(90deg,var(--cyan-teal),var(--bronze));
+    color:#0d1a18;
+  }
 
-    /* Glass cards */
-    .glass {
-      background: var(--card);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(2,6,23,0.45);
-      color: var(--muted);
-    }
+  /* Modal */
+  #profileModal[aria-hidden="true"]{display:none}
+  #profileModal[aria-hidden="false"]{display:flex}
 
-    .gradient-text {
-      background: linear-gradient(90deg, var(--accent), var(--warm));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
+  /* Dots */
+  .dot{width:10px;height:10px;border-radius:9999px;cursor:pointer;opacity:.7;}
 
-    /* Animations */
-    .fade-up{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
-    .fade-up.show{opacity:1;transform:none}
-    .focus-outline:focus{outline:3px solid rgba(14,165,164,.25);outline-offset:3px}
+  /* Base button transitions */
+  .filter-btn {
+    transition: 
+      background 0.3s ease,
+      color 0.3s ease,
+      border-color 0.3s ease,
+      transform 0.2s ease,
+      box-shadow 0.3s ease;
+  }
 
-    /* Slider layout */
-    .slider-viewport { overflow:hidden; position:relative; }
-    .slider-track { display:flex; gap:1.25rem; will-change:transform; }
-    .slide { min-width:280px; flex:0 0 100%; border-radius:14px; overflow:hidden; }
-    @media (min-width:768px){ .slide{flex:0 0 calc(50% - 0.625rem);} }
-    @media (min-width:1024px){ .slide{flex:0 0 calc(33.333% - 0.83rem);} }
+  /* Hover effect (only when not active) */
+  .filter-btn:hover:not(.active) {
+    background: var(--light-mint) !important;
+    color: var(--dark-teal) !important;
+    border-color: var(--cyan-teal) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(17,100,102,0.3);
+  }
 
-    /* Team avatars */
-    .member-card img{border-radius:9999px;}
-    .member-card .cta-btn{background:linear-gradient(90deg,var(--accent),var(--warm)); color:#03100d;}
+  /* Active (selected) state */
+  .filter-btn.active {
+    background: linear-gradient(90deg, var(--cyan-teal), var(--bronze)) !important;
+    color: #03100d !important;
+    border-color: transparent !important;
+    box-shadow: 0 5px 20px rgba(17,36,34,0.25);
+    transform: translateY(-2px);
+  }
 
-    /* Modal */
-    #profileModal[aria-hidden="true"]{display:none}
-    #profileModal[aria-hidden="false"]{display:flex}
+  /* Click feedback */
+  .filter-btn:active {
+    transform: scale(0.95);
+  }
+</style>
 
-    /* Dots */
-    .dot{width:10px;height:10px;border-radius:9999px;opacity:.9;cursor:pointer;box-shadow:0 2px 6px rgba(2,6,23,.15)}
+
   </style>
 </head>
+
 <body>
 
   <!-- MAIN -->
   <main class="container py-8">
 
-    <!-- HERO / OUR STORY -->
-    <section class="grid md:grid-cols-2 gap-8 items-center mb-12 fade-up" aria-labelledby="our-story">
+    <!-- HERO -->
+    <section class="grid md:grid-cols-2 gap-8 items-center mb-12 fade-up">
       <div>
-        <h1 id="our-story" class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">Our Story</h1>
-        <p class="text-base text-[var(--muted)]  mb-4">
-  Founded in <strong>2023</strong>, Sitefully was created to bridge the gap between beautiful design and dependable web development. 
-  We help businesses, creators, and organizations build memorable online experiences by combining clean aesthetics, thoughtful strategy, 
-  and high-performance engineering. Every line of code and every design decision is made with purpose—to elevate your brand and strengthen 
-  your digital presence.
-</p>
-<p class="text-base text-[var(--muted)] mb-4">
-  From single-page portfolios to full multi-page platforms, our work is driven by clarity, accessibility, and measurable results. 
-  We build websites that load fast, look stunning, and guide your visitors effortlessly. Whether you're launching a new brand or 
-  upgrading your existing identity, Sitefully delivers solutions that scale with your growth and stand out in today’s competitive 
-  digital landscape.
-</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">Our Story</h1>
 
+        <p class="mb-4 text-[var(--muted)]">
+          Founded in 2023, Sitefully was born from a simple yet powerful idea: that design and web development shouldn’t exist in isolation. We believed that beautiful, thoughtful design deserved a foundation of reliable, high-performance development — and that users deserved experiences that feel intuitive, seamless, and human. What started as a small team with a shared passion has grown into a collective of designers, developers, and strategists who care deeply about every pixel and every line of code. At Sitefully, we don’t just build websites; we craft digital experiences that connect, inspire, and leave a lasting impression. Every project is an opportunity to solve real problems, tell unique stories, and bring ideas to life in ways that feel effortless yet impactful.
+        </p>
 
-        <div class="mt-6 flex gap-3">
-          <a href="#team" class="inline-block px-5 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-[var(--accent)] to-[var(--warm)] text-[rgba(3,15,13,0.95)] shadow hover:scale-105 transition transform">Meet the team</a>
-          <a href="Portfolio.html" class="inline-block px-5 py-2 rounded-full text-sm font-medium border border-[var(--glass-border)] text-[var(--warm)] hover:bg-white/5 transition">Our work</a>
+        <div class="flex gap-3 mt-6">
+          <a href="#team" class="px-5 py-2 rounded-full bg-gradient-to-r from-[var(--cyan-teal)] to-[var(--bronze)] text-black shadow hover:scale-105 transition">Meet the team</a>
+
+          <a href="Portfolio.html" class="px-5 py-2 rounded-full border border-[var(--glass-border)] text-[var(--bronze)] hover:bg-white/20 transition">
+            Our work
+          </a>
         </div>
       </div>
 
       <div class="relative">
-        <div class="overflow-hidden rounded-2xl border-t-4 border-t-[var(--accent)] glass shadow-md">
-          <!-- curated Unsplash hero image -->
-          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80" alt="Creative team at work" class="w-full h-80 object-cover"/>
+        <div class="overflow-hidden rounded-2xl glass">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80"
+               class="w-full h-80 object-cover"/>
         </div>
-        <div class="absolute -right-6 bottom-2 w-28 h-28 rounded-full bg-gradient-to-r from-[var(--accent)] to-[var(--warm)] blur-xl opacity-30 animate-pulse"></div>
+        <div class="absolute -right-6 bottom-2 w-28 h-28 rounded-full bg-gradient-to-r from-[var(--cyan-teal)] to-[var(--bronze)] blur-xl opacity-30 animate-pulse"></div>
       </div>
     </section>
 
   <!-- WHY WE ARE DIFFERENT - Slider (auto + swipe + accessible) -->
-    <section class="mb-16 fade-up" aria-labelledby="why-we-different">
-      <h2 id="why-we-different" class="text-center text-3xl md:text-4xl font-extrabold gradient-text mb-8">Why we are different</h2>
+<section class="mb-16 fade-up" aria-labelledby="why-we-different">
+  <h2 id="why-we-different" class="text-center text-3xl md:text-4xl font-extrabold gradient-text mb-8">
+    Why we are different
+  </h2>
 
-      <div id="slider" class="slider-viewport relative">
-        <div id="slides" class="slider-track" aria-live="polite">
-          <!-- Slide 1: clean workspace image -->
-          <article class="slide glass">
-            <img
-              src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80"
-              alt="Clean workspace with laptop and notebook"
-              loading="lazy"
-            />
-            <div class="p-5">
-              <h3 class="text-xl font-bold text-[var(--muted)] mb-2">Industry‑Aligned Web Development</h3>
-              <p class="text-sm text-[var(--muted)]">We build fast, secure, and scalable websites using modern technologies that match real business needs.</p>
-            </div>
-          </article>
+  <div id="slider" class="slider-viewport relative overflow-hidden">
 
-          <!-- Slide 2 -->
-          <article class="slide glass">
-            <img
-              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
-              alt="Developers collaborating"
-              loading="lazy"
-            />
-            <div class="p-5">
-              <h3 class="text-xl font-bold text-[var(--muted)] mb-2">Custom Business Websites</h3>
-              <p class="text-sm text-[var(--muted)]">We craft responsive and modern websites that help brands grow and create a strong digital presence.</p>
-            </div>
-          </article>
-
-          <!-- Slide 3 -->
-          <article class="slide glass">
-            <img
-              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80"
-              alt="Designer working on UI"
-              loading="lazy"
-            />
-            <div class="p-5">
-              <h3 class="text-xl font-bold text-[var(--muted)] mb-2">UI/UX Focused Design</h3>
-              <p class="text-sm text-[var(--muted)]">Our designs prioritize user experience with clean, smooth, and visually appealing interfaces that engage visitors.</p>
-            </div>
-          </article>
-
-          <!-- Slide 4 -->
-          <article class="slide glass">
-            <img
-              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80"
-              alt="Support team and analytics"
-              loading="lazy"
-            />
-            <div class="p-5">
-              <h3 class="text-xl font-bold text-[var(--muted)] mb-2">Ongoing Support & Growth</h3>
-              <p class="text-sm text-[var(--muted)]">We stay with our clients after launch — analytics, optimization and feature growth to keep your site performing.</p>
-            </div>
-          </article>
+    <div id="slides" class="slider-track flex gap-6 transition-transform duration-300" aria-live="polite">
+      <!-- Slide 1 -->
+      <article class="slide glass themed-slide flex-shrink-0">
+        <img
+          src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80"
+          alt="Clean workspace with laptop and notebook"
+          loading="lazy"
+          class="slide-img"
+        />
+        <div class="p-5">
+          <h3 class="slide-title">Industry-Aligned Web Development</h3>
+          <p class="slide-text">We build fast, secure, and scalable websites using modern technologies that match real business needs.</p>
         </div>
+      </article>
 
-        <!-- Arrows -->
-        <button id="prevSlide" aria-label="Previous slide" class="focus-outline">‹</button>
-        <button id="nextSlide" aria-label="Next slide" class="focus-outline">›</button>
-      </div>
+      <!-- Slide 2 -->
+      <article class="slide glass themed-slide flex-shrink-0">
+        <img
+          src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
+          alt="Developers collaborating"
+          loading="lazy"
+          class="slide-img"
+        />
+        <div class="p-5">
+          <h3 class="slide-title">Custom Business Websites</h3>
+          <p class="slide-text">We craft responsive and modern websites that help brands grow and create a strong digital presence.</p>
+        </div>
+      </article>
 
-      <!-- Indicators -->
-      <div id="dots" class="flex justify-center mt-5 space-x-2" role="tablist" aria-label="Slider indicators">
-        <!-- JS generates dots and handles aria-current -->
-      </div>
-    </section>
+      <!-- Slide 3 -->
+      <article class="slide glass themed-slide flex-shrink-0">
+        <img
+          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80"
+          alt="Designer working on UI"
+          loading="lazy"
+          class="slide-img"
+        />
+        <div class="p-5">
+          <h3 class="slide-title">UI/UX Focused Design</h3>
+          <p class="slide-text">Our designs prioritize user experience with clean, smooth, and visually appealing interfaces that engage visitors.</p>
+        </div>
+      </article>
+
+      <!-- Slide 4 -->
+      <article class="slide glass themed-slide flex-shrink-0">
+        <img
+          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80"
+          alt="Support team and analytics"
+          loading="lazy"
+          class="slide-img"
+        />
+        <div class="p-5">
+          <h3 class="slide-title">Ongoing Support & Growth</h3>
+          <p class="slide-text">We stay with our clients after launch — analytics, optimization and feature growth to keep your site performing.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- Arrows -->
+    <button id="prevSlide" aria-label="Previous slide" class="focus-outline slider-arrow left-0">‹</button>
+    <button id="nextSlide" aria-label="Next slide" class="focus-outline slider-arrow right-0">›</button>
+  </div>
+
+  <!-- Indicators -->
+  <div id="dots" class="flex justify-center mt-5 space-x-2" role="tablist" aria-label="Slider indicators">
+    <!-- JS generates dots -->
+  </div>
+</section>
+
 
     <!-- VISION & MISSION -->
-    <section class="grid md:grid-cols-2 gap-6 mb-12 fade-up" aria-labelledby="vision-mission">
+    <section class="grid md:grid-cols-2 gap-6 mb-12 fade-up">
       <div class="glass p-6 rounded-2xl">
-        <h2 id="vision" class="text-2xl font-bold" style="color:var(--accent)">Our Vision</h2>
-        <p class="mt-2 text-[var(--muted)]">A digital world where ideas are presented beautifully, accessibly, and sustainably.</p>
+        <h2 class="text-2xl font-bold" style="color:var(--cyan-teal)">Our Vision</h2>
+        <p class="mt-2 text-[var(--muted)]">A digital world where ideas are accessible and beautiful.</p>
       </div>
+
       <div class="glass p-6 rounded-2xl">
-        <h2 id="mission" class="text-2xl font-bold" style="color:var(--accent)">Our Mission</h2>
-        <p class="mt-2 text-[var(--muted)]">We turn creativity into measurable online experiences, focusing on speed, UX, and real impact.</p>
+        <h2 class="text-2xl font-bold" style="color:var(--cyan-teal)">Our Mission</h2>
+        <p class="mt-2 text-[var(--muted)]">We turn creativity into performance-driven digital experiences.</p>
       </div>
     </section>
 
     <!-- CORE VALUES -->
     <section class="mb-12 fade-up">
       <h3 class="text-center text-3xl font-bold gradient-text mb-6">Core Values</h3>
+
       <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
         <div class="glass p-6 rounded-xl text-center">
-          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--accent)] mx-auto"><i class="fa-solid fa-handshake"></i></div>
-          <strong class="block text-[var(--muted)]">Collaboration</strong>
-          <p class="text-sm text-[var(--muted)] mt-2">Open communication and shared outcomes.</p>
+          <div class="w-12 h-12 bg-[var(--cyan-teal)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <strong class="text-[var(--dark-teal)]">Collaboration</strong>
+          <p class="text-sm text-[var(--muted)]">Open communication & teamwork.</p>
         </div>
+
         <div class="glass p-6 rounded-xl text-center">
-          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--warm)] mx-auto"><i class="fa-solid fa-bolt"></i></div>
-          <strong class="block text-[var(--muted)]">Innovation</strong>
-          <p class="text-sm text-[var(--muted)] mt-2">Creative solutions driven by research.</p>
+          <div class="w-12 h-12 bg-[var(--bronze)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <strong class="text-[var(--dark-teal)]">Innovation</strong>
+          <p class="text-sm text-[var(--muted)]">Creative solutions built with research.</p>
         </div>
+
         <div class="glass p-6 rounded-xl text-center">
-          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--accent)] mx-auto"><i class="fa-solid fa-user-check"></i></div>
-          <strong class="block text-[var(--muted)]">Customer Focus</strong>
-          <p class="text-sm text-[var(--muted)] mt-2">Designing with empathy and clarity.</p>
+          <div class="w-12 h-12 bg-[var(--cyan-teal)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <strong class="text-[var(--dark-teal)]">Customer Focus</strong>
+          <p class="text-sm text-[var(--muted)]">Designing with empathy & clarity.</p>
         </div>
+
         <div class="glass p-6 rounded-xl text-center">
-          <div class="text-2xl mb-3 text-white inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--warm)] mx-auto"><i class="fa-solid fa-star"></i></div>
-          <strong class="block text-[var(--muted)]">Excellence</strong>
-          <p class="text-sm text-[var(--muted)] mt-2">Quality and craftsmanship in every detail.</p>
+          <div class="w-12 h-12 bg-[var(--bronze)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <strong class="text-[var(--dark-teal)]">Excellence</strong>
+          <p class="text-sm text-[var(--muted)]">Quality in every detail.</p>
         </div>
       </div>
     </section>
 
-
-    <!-- TEAM -->
+     <!-- TEAM -->
     <section id="team" class="mb-20 fade-up">
      
       <div class="mb-6 text-center">
@@ -330,219 +473,232 @@
 
   </main>
 
+
   <!-- SCRIPTS -->
-  <script>
-    /* ====== Helpers ====== */
-    const qs = (s, ctx=document) => ctx.querySelector(s);
-    const qsa = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
+ <script>
+/* ====== Helpers ====== */
+const qs = (s, ctx=document) => ctx.querySelector(s);
+const qsa = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
 
-    /* ====== Fade-up observer ====== */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
-    }, {threshold: 0.18});
-    qsa('.fade-up').forEach(el => observer.observe(el));
+/* ====== Fade-up observer ====== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+}, {threshold: 0.18});
+qsa('.fade-up').forEach(el => observer.observe(el));
 
-    /* ====== Team filter ====== */
-    const filterBtns = qsa('.filter-btn');
-    const cards = qsa('.member-card');
-    function applyFilter(filter){
-      cards.forEach(c => {
-        c.style.display = (filter === 'all' || c.dataset.role === filter) ? '' : 'none';
-      });
-      filterBtns.forEach(b => b.classList.remove('bg-[var(--accent)]','text-black'));
-      filterBtns.forEach(b=>{
-        if(b.dataset.filter===filter){
-          b.classList.add('bg-[var(--accent)]','text-black');
-        } else {
-          b.classList.remove('bg-[var(--accent)]','text-black');
-        }
-      });
+/* ====== Team filter ====== */
+const filterBtns = qsa('.filter-btn');
+const cards = qsa('.member-card');
+function applyFilter(filter){
+  cards.forEach(c => {
+    c.style.display = (filter === 'all' || c.dataset.role === filter) ? '' : 'none';
+  });
+  filterBtns.forEach(b => b.classList.remove('bg-[var(--accent)]','text-black','active'));
+  filterBtns.forEach(b=>{
+    if(b.dataset.filter===filter){
+      b.classList.add('bg-[var(--accent)]','text-black','active');
     }
-    filterBtns.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
-    applyFilter('all');
+  });
+}
+filterBtns.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
+applyFilter('all');
 
-    /* ====== Profile modal (accessible) ====== */
-    const modal = qs('#profileModal'); const overlay = qs('#modalOverlay'); const closeBtn = qs('#modalClose');
-    const profileImg = qs('#profileImg'); const title = qs('#profileModalTitle'); const role = qs('#profileModalRole');
-    const bio = qs('#profileModalBio'); const emailLink = qs('#profileEmail');
-    let lastFocused = null;
-    function trapFocus(container){
-      const focusable = Array.from(container.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'));
-      if(!focusable.length) return null;
-      const first = focusable[0], last = focusable[focusable.length-1];
-      function handler(e){
-        if(e.key !== 'Tab') return;
-        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-      }
-      document.addEventListener('keydown', handler);
-      return () => document.removeEventListener('keydown', handler);
-    }
-    function openModal(data){
-      lastFocused = document.activeElement;
-      profileImg.src = data.img || '';
-      profileImg.alt = data.name || 'Profile photo';
-      title.textContent = data.name || '';
-      role.textContent = data.roleFull || data.role || '';
-      bio.textContent = data.bio || '';
-      emailLink.href = data.email ? `mailto:${data.email}` : '#';
-      modal.setAttribute('aria-hidden','false');
-      document.documentElement.style.overflow='hidden';
-      document.body.style.overflow='hidden';
-      closeBtn.focus();
-      removeTrap = trapFocus(modal);
-    }
-    function closeModal(){
-      modal.setAttribute('aria-hidden','true');
-      document.documentElement.style.overflow='';
-      document.body.style.overflow='';
-      if(lastFocused && lastFocused.focus) lastFocused.focus();
-      if(typeof removeTrap === 'function') removeTrap();
-    }
-    let removeTrap = null;
-    qsa('.view-profile-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const card = btn.closest('.member-card');
-        const data = {
-          name: card.dataset.name,
-          roleFull: card.dataset.roleFull || card.dataset.role,
-          bio: card.dataset.bio,
-          email: card.dataset.email,
-          img: card.dataset.img
-        };
-        openModal(data);
-      });
+/* ====== Profile modal (accessible) ====== */
+const modal = qs('#profileModal'); 
+const overlay = qs('#modalOverlay'); 
+const closeBtn = qs('#modalClose');
+const profileImg = qs('#profileImg'); 
+const title = qs('#profileModalTitle'); 
+const role = qs('#profileModalRole');
+const bio = qs('#profileModalBio'); 
+const emailLink = qs('#profileEmail');
+let lastFocused = null;
+
+function trapFocus(container){
+  const focusable = Array.from(container.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'));
+  if(!focusable.length) return null;
+  const first = focusable[0], last = focusable[focusable.length-1];
+  function handler(e){
+    if(e.key !== 'Tab') return;
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+  document.addEventListener('keydown', handler);
+  return () => document.removeEventListener('keydown', handler);
+}
+
+function openModal(data){
+  lastFocused = document.activeElement;
+  profileImg.src = data.img || '';
+  profileImg.alt = data.name || 'Profile photo';
+  title.textContent = data.name || '';
+  role.textContent = data.roleFull || data.role || '';
+  bio.textContent = data.bio || '';
+  emailLink.href = data.email ? `mailto:${data.email}` : '#';
+  modal.setAttribute('aria-hidden','false');
+  document.documentElement.style.overflow='hidden';
+  document.body.style.overflow='hidden';
+  closeBtn.focus();
+  removeTrap = trapFocus(modal);
+}
+
+function closeModal(){
+  modal.setAttribute('aria-hidden','true');
+  document.documentElement.style.overflow='';
+  document.body.style.overflow='';
+  if(lastFocused && lastFocused.focus) lastFocused.focus();
+  if(typeof removeTrap === 'function') removeTrap();
+}
+
+let removeTrap = null;
+qsa('.view-profile-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const card = btn.closest('.member-card');
+    const data = {
+      name: card.dataset.name,
+      roleFull: card.dataset.roleFull || card.dataset.role,
+      bio: card.dataset.bio,
+      email: card.dataset.email,
+      img: card.dataset.img
+    };
+    openModal(data);
+  });
+});
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+qs('#profileMessage').addEventListener('click', () => { alert('Message action — open chat or contact flow here.'); });
+
+/* ====== Slider (auto + swipe + arrows + dots + centered) ====== */
+(function () {
+  const slidesWrap = qs('#slides');
+  const slides = Array.from(slidesWrap.children);
+  const dotsContainer = qs('#dots');
+  const prevBtn = qs('#prevSlide');
+  const nextBtn = qs('#nextSlide');
+  if (!slidesWrap || slides.length === 0) return;
+
+  // create dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot';
+    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    d.addEventListener('click', () => { goTo(i); restart(); });
+    dotsContainer.appendChild(d);
+  });
+  const dots = Array.from(dotsContainer.children);
+
+  let index = 0, intervalId = null, slidesPerView = 1;
+
+  function calcSlidesPerView() {
+    const w = window.innerWidth;
+    if (w >= 1024) return 3;
+    if (w >= 768) return 2;
+    return 1;
+  }
+
+  function updateLayout() {
+    slidesPerView = calcSlidesPerView();
+    index = Math.min(index, Math.max(0, slides.length - slidesPerView));
+    slides.forEach(sl => sl.style.flex = `0 0 ${100 / slidesPerView}%`);
+    move();
+  }
+
+  function move() {
+    const viewportWidth = slidesWrap.parentElement.offsetWidth;
+    const slideWidth = slides[0].offsetWidth + parseFloat(getComputedStyle(slidesWrap).gap || 24);
+
+    // calculate offset for proper centering
+    let offset = index * slideWidth;
+    const maxOffset = slidesWrap.scrollWidth - viewportWidth;
+    if (offset > maxOffset) offset = maxOffset;
+    slidesWrap.style.transform = `translateX(-${offset}px)`;
+
+    // update dots
+    dots.forEach((d, i) => {
+      d.style.background = (i === index) ? getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() : '#CBD5E1';
+      d.setAttribute('aria-current', i === index ? 'true' : 'false');
     });
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
-    qs('#profileMessage').addEventListener('click', () => { alert('Message action — open chat or contact flow here.'); });
+  }
 
-    /* ====== Slider (auto + responsive + swipe + dots + arrows) ====== */
-    (function () {
-      const slidesWrap = qs('#slides');
-      const slides = Array.from(slidesWrap.children);
-      const dotsContainer = qs('#dots');
-      const prevBtn = qs('#prevSlide');
-      const nextBtn = qs('#nextSlide');
-      if(!slidesWrap || slides.length === 0) return;
+  function goTo(i) {
+    index = Math.max(0, Math.min(i, slides.length - slidesPerView));
+    move();
+  }
 
-      // create dots
-      slides.forEach((_,i) => {
-        const d = document.createElement('button');
-        d.className = 'dot';
-        d.setAttribute('aria-label', `Go to slide ${i+1}`);
-        d.addEventListener('click', () => { goTo(i); restart(); });
-        dotsContainer.appendChild(d);
-      });
-      const dots = Array.from(dotsContainer.children);
+  function next() {
+    if (index < slides.length - slidesPerView) index++;
+    else index = 0;
+    move();
+  }
 
-      let index = 0, intervalId = null, slidesPerView = 1;
-      function calcSlidesPerView(){
-        const w = window.innerWidth;
-        if(w >= 1024) return 3;
-        if(w >= 768) return 2;
-        return 1;
-      }
-      function updateLayout(){
-        slidesPerView = calcSlidesPerView();
-        // ensure index valid
-        index = Math.min(index, Math.max(0, slides.length - slidesPerView));
-        move();
-      }
+  function prev() {
+    if (index > 0) index--;
+    else index = Math.max(0, slides.length - slidesPerView);
+    move();
+  }
 
-      function move(){
-        // percent shift = (index * (100 / slidesPerView))
-        const percent = (index * (100 / slidesPerView));
-        slidesWrap.style.transform = `translateX(-${percent}%)`;
-        updateDots();
-      }
+  function auto() {
+    clearInterval(intervalId);
+    intervalId = setInterval(next, 4000);
+  }
 
-      function updateDots(){
-        dots.forEach((d,i)=> {
-          d.style.background = (i === index) ? getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() : '#CBD5E1';
-          d.setAttribute('aria-current', i === index ? 'true' : 'false');
-        });
-      }
+  function stop() { clearInterval(intervalId); intervalId = null; }
 
-      function goTo(i){
-        index = Math.max(0, Math.min(i, slides.length - slidesPerView));
-        move();
-      }
-      function next(){
-        if(index < slides.length - slidesPerView) index++;
-        else index = 0;
-        move();
-      }
-      function prev(){
-        if(index > 0) index--;
-        else index = Math.max(0, slides.length - slidesPerView);
-        move();
-      }
+  // swipe support
+  let startX = 0, dx = 0, isTouch = false;
+  slidesWrap.addEventListener('touchstart', (e) => {
+    stop();
+    isTouch = true;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  slidesWrap.addEventListener('touchmove', (e) => {
+    if (!isTouch) return;
+    dx = e.touches[0].clientX - startX;
+  }, { passive: true });
+  slidesWrap.addEventListener('touchend', () => {
+    if (Math.abs(dx) > 40) {
+      if (dx < 0) next(); else prev();
+    }
+    dx = 0; isTouch = false; restart();
+  });
 
-      function auto(){
-        clearInterval(intervalId);
-        intervalId = setInterval(next, 4000);
-      }
-      function stop(){ clearInterval(intervalId); intervalId = null; }
+  // arrows
+  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restart(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { next(); restart(); });
 
-      // swipe support
-      let startX = 0, dx = 0, isTouch = false;
-      slidesWrap.addEventListener('touchstart', (e) => {
-        stop();
-        isTouch = true;
-        startX = e.touches[0].clientX;
-      }, {passive:true});
-      slidesWrap.addEventListener('touchmove', (e) => {
-        if(!isTouch) return;
-        dx = e.touches[0].clientX - startX;
-      }, {passive:true});
-      slidesWrap.addEventListener('touchend', () => {
-        if(Math.abs(dx) > 40){
-          if(dx < 0) next(); else prev();
-        }
-        dx = 0; isTouch = false; restart();
-      });
+  // pause on hover
+  const sliderViewport = qs('#slider');
+  sliderViewport.addEventListener('mouseenter', stop);
+  sliderViewport.addEventListener('mouseleave', restart);
 
-      // arrows
-      if(prevBtn) prevBtn.addEventListener('click', () => { prev(); restart(); });
-      if(nextBtn) nextBtn.addEventListener('click', () => { next(); restart(); });
+  // responsive
+  window.addEventListener('resize', updateLayout);
 
-      // pause on hover
-      const sliderViewport = qs('#slider');
-      sliderViewport.addEventListener('mouseenter', stop);
-      sliderViewport.addEventListener('mouseleave', restart);
+  function restart() { stop(); auto(); }
 
-      // responsive
-      window.addEventListener('resize', () => {
-        updateLayout();
-      });
+  // initial setup
+  slidesWrap.style.transition = 'transform .65s cubic-bezier(.2,.9,.2,1)';
+  updateLayout();
+  auto();
+  move();
+})();
 
-      function restart(){ stop(); auto(); }
+/* ====== Year update ====== */
+document.getElementById('yr').textContent = new Date().getFullYear();
 
-      // initial setup
-      // set track width and each slide's width via % so translate arithmetic works
-      const per = (100 / slidesPerView);
-      function setSlidesStyle(){
-        slidesPerView = calcSlidesPerView();
-        slidesWrap.style.transition = 'transform .65s cubic-bezier(.2,.9,.2,1)';
-        // set flex-basis for each slide to match calc in CSS breakpoints
-        slides.forEach(sl => sl.style.flex = `0 0 ${100/slidesPerView}%`);
-        updateLayout();
-      }
-      setSlidesStyle();
-      window.addEventListener('load', setSlidesStyle);
-      // start
-      auto();
-      updateDots();
-      move();
-    })();
+/* ====== Active state for filter buttons ====== */
+const filterButtons = document.querySelectorAll('.filter-btn');
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
 
-    /* ====== small helpers ====== */
-    document.getElementById('yr').textContent = new Date().getFullYear();
 
-  </script>
   <style>
     /* ...existing code... */
 
