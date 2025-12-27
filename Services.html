@@ -3,46 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sitefully | Services</title>
+  <title>Sitefully | Services</title>.
+  <link rel="icon" type="image/png" href="Assets/favicon.png">
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#FF6700',
+            'primary-light': '#FF8533',
+            'primary-dark': '#E55D00',
+            'dark': '#0A1A33',
+            'light': '#F8F8F8',
+            'gray': '#C0C0C0',
+            'bright-blue': '#0275D8',
+            'dark-blue': '#0A1A33',
+            'primary-orange': '#FF6700',
+            'gray-600': '#6B7280',
+            'gray-700': '#374151',
+            'gray-800': '#1F2937'
+          },
+          fontFamily: {
+            'poppins': ['Poppins', 'sans-serif'],
+            'inter': ['Inter', 'sans-serif']
+          },
+          fontSize: {
+            'xs': '0.75rem',     // 12px
+            'sm': '0.875rem',    // 14px
+            'base': '1rem',      // 16px
+            'lg': '1.125rem',    // 18px
+            'xl': '1.25rem',     // 20px
+            '2xl': '1.5rem',     // 24px
+            '3xl': '1.875rem',   // 30px
+            '4xl': '2.25rem',    // 36px
+            '5xl': '3rem',       // 48px
+          },
+          spacing: {
+            '18': '4.5rem',
+            '22': '5.5rem',
+            '30': '7.5rem',
+            '38': '9.5rem',
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    
-    * {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    /* ====== CSS VARIABLES ====== */
+    :root {
+      --primary-orange: #FF6700;
+      --primary-light: #FF8533;
+      --dark-blue: #0A1A33;
+      --bright-blue: #0275D8;
+      --light-gray: #F8F8F8;
+      --medium-gray: #6B7280;
+      --pure-white: #FFFFFF;
+      --border-gray: #E5E7EB;
+
+      --primary-gradient: linear-gradient(135deg, var(--primary-orange), var(--primary-light));
+      --blue-gradient: linear-gradient(135deg, var(--dark-blue), var(--bright-blue));
+      --card-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      --hover-shadow: 0 10px 30px rgba(255, 103, 0, 0.15);
+      --section-spacing: 5rem;
     }
     
-    :root {
-      --dark-teal: #2C3531;
-      --cyan-teal: #116466;
-      --bronze: #D9B08C;
-      --soft-peach: #FFCB9A;
-      --light-mint: #D1E8E2;
+    /* ====== BASE STYLES - MATCHING ABOUT PAGE ====== */
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      box-sizing: border-box;
     }
     
     body {
-      background: linear-gradient(135deg, #D1E8E2 0%, #E8F4F0 50%, #D1E8E2 100%);
+      background: var(--light-gray);
+      color: #374151;
+      line-height: 1.625;
+      margin: 0;
+      padding: 0;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      font-size: 1rem;
     }
     
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--dark-blue);
+      line-height: 1.2;
+    }
+    
+    h1 {
+      font-size: 2.5rem; /* 40px - Matching About page */
+      font-weight: 800;
+    }
+    
+    h2 {
+      font-size: 2rem; /* 32px - Matching About page */
+      font-weight: 700;
+    }
+    
+    h3 {
+      font-size: 1.5rem; /* 24px - Matching About page */
+      font-weight: 600;
+    }
+    
+    .section-title {
+      font-size: 1.875rem; /* 30px */
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .section-subtitle {
+      font-size: 1.125rem; /* 18px */
+      color: var(--medium-gray);
+      line-height: 1.625;
+      max-width: 48rem;
+    }
+    
+    .body-large {
+      font-size: 1.125rem; /* 18px */
+      line-height: 1.625;
+    }
+    
+    .body-regular {
+      font-size: 1rem; /* 16px */
+      line-height: 1.625;
+    }
+    
+    .body-small {
+      font-size: 0.875rem; /* 14px */
+      line-height: 1.5;
+    }
+    
+    /* ====== LAYOUT CONTAINERS ====== */
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+    
+    /* ====== TYPOGRAPHY - MATCHING ABOUT PAGE ====== */
+    .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .blue-gradient-text {
+      background: var(--blue-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* ====== COMPONENTS - UPDATED TO MATCH ABOUT PAGE ====== */
     .glass {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(44, 53, 49, 0.1);
-    }
-    
-    .glass-dark {
-      background: rgba(44, 53, 49, 0.7);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-gray);
+      box-shadow: var(--card-shadow);
+      border-radius: 16px;
     }
     
     .phase-card {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: var(--pure-white);
+      border: 1px solid var(--border-gray);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      height: 100%;
     }
     
     .phase-card::before {
@@ -52,9 +190,9 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));
+      background: var(--primary-gradient);
       transform: scaleX(0);
-      transition: transform 0.4s ease;
+      transition: transform 0.3s ease;
     }
     
     .phase-card:hover::before {
@@ -62,21 +200,26 @@
     }
     
     .phase-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(17, 100, 102, 0.2);
+      transform: translateY(-4px);
+      box-shadow: var(--hover-shadow);
+      border-color: var(--primary-orange);
     }
     
     .phase-number {
-      background: linear-gradient(135deg, var(--cyan-teal) 0%, var(--bronze) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: var(--primary-gradient);
+      color: var(--pure-white);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.25rem;
     }
     
     .detail-item {
       opacity: 0;
-      transform: translateX(-20px);
-      animation: slideIn 0.5s ease forwards;
+      transform: translateX(-12px);
+      animation: slideIn 0.4s ease forwards;
     }
     
     @keyframes slideIn {
@@ -97,21 +240,18 @@
       top: 0;
       bottom: 0;
       width: 3px;
-      background: linear-gradient(180deg, var(--cyan-teal), var(--bronze));
+      background: var(--primary-gradient);
       border-radius: 2px;
     }
     
     .pulse-dot {
       animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      color: var(--primary-orange);
     }
     
     @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
     
     .floating {
@@ -120,442 +260,750 @@
     
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+      50% { transform: translateY(-12px); }
     }
     
-    .gradient-text {
-      background: linear-gradient(135deg, var(--cyan-teal) 0%, var(--bronze) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    
+    /* ====== BUTTONS - MATCHING ABOUT PAGE ====== */
     .cta-button {
-      background: linear-gradient(135deg, var(--cyan-teal) 0%, var(--bronze) 100%);
+      background: var(--primary-gradient);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-    }
-    
-    .cta-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s ease;
-    }
-    
-    .cta-button:hover::before {
-      left: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 12px rgba(255, 103, 0, 0.2);
+      font-family: 'Inter', sans-serif;
     }
     
     .cta-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(17, 100, 102, 0.4);
+      box-shadow: 0 8px 20px rgba(255, 103, 0, 0.3);
     }
-
-    /* Phase-specific gradient backgrounds */
-    .phase-1-gradient { background: linear-gradient(135deg, rgba(17, 100, 102, 0.1), rgba(217, 176, 140, 0.05)); }
-    .phase-2-gradient { background: linear-gradient(135deg, rgba(44, 53, 49, 0.08), rgba(17, 100, 102, 0.05)); }
-    .phase-3-gradient { background: linear-gradient(135deg, rgba(17, 100, 102, 0.1), rgba(209, 232, 226, 0.1)); }
-    .phase-4-gradient { background: linear-gradient(135deg, rgba(217, 176, 140, 0.1), rgba(255, 203, 154, 0.05)); }
-    .phase-5-gradient { background: linear-gradient(135deg, rgba(44, 53, 49, 0.08), rgba(209, 232, 226, 0.08)); }
-    .phase-6-gradient { background: linear-gradient(135deg, rgba(255, 203, 154, 0.1), rgba(217, 176, 140, 0.08)); }
+    
+    .secondary-button {
+      background: transparent;
+      color: var(--dark-blue);
+      border: 2px solid var(--dark-blue);
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .secondary-button:hover {
+      background: var(--dark-blue);
+      color: var(--pure-white);
+      transform: translateY(-2px);
+    }
+    
+    /* ====== PHASE BACKGROUNDS - SUBTLER VERSION ====== */
+    .phase-1-gradient { background: linear-gradient(135deg, rgba(255, 103, 0, 0.03), rgba(10, 26, 51, 0.01)); }
+    .phase-2-gradient { background: linear-gradient(135deg, rgba(10, 26, 51, 0.03), rgba(255, 103, 0, 0.01)); }
+    .phase-3-gradient { background: linear-gradient(135deg, rgba(255, 103, 0, 0.03), rgba(255, 133, 51, 0.01)); }
+    .phase-4-gradient { background: linear-gradient(135deg, rgba(2, 117, 216, 0.03), rgba(255, 103, 0, 0.01)); }
+    .phase-5-gradient { background: linear-gradient(135deg, rgba(10, 26, 51, 0.03), rgba(2, 117, 216, 0.01)); }
+    .phase-6-gradient { background: linear-gradient(135deg, rgba(255, 133, 51, 0.03), rgba(255, 103, 0, 0.01)); }
+    
+    /* ====== UTILITY CLASSES ====== */
+    .text-muted {
+      color: var(--medium-gray);
+    }
+    
+    .text-primary {
+      color: var(--primary-orange);
+    }
+    
+    .text-blue {
+      color: var(--dark-blue);
+    }
+    
+    .border-primary {
+      border-color: var(--primary-orange);
+    }
+    
+    .bg-primary-light {
+      background: rgba(255, 103, 0, 0.08);
+    }
+    
+    .bg-blue-light {
+      background: rgba(10, 26, 51, 0.05);
+    }
+    
+    /* ====== CARD TITLE STYLES ====== */
+    .card-title {
+      font-size: 1.25rem; /* 20px - Matching About page */
+      font-weight: 600;
+      line-height: 1.375;
+    }
+    
+    .card-text {
+      font-size: 0.9375rem; /* 15px - Matching About page */
+      line-height: 1.6;
+      color: var(--medium-gray);
+    }
+    
+    /* ====== NEW: TIMELINE VISUALIZATION ====== */
+    .process-timeline {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      margin: 3rem auto;
+      max-width: 800px;
+    }
+    
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      background: var(--primary-orange);
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 103, 0, 0.2);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+    
+    .timeline-line {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        var(--primary-orange) 0%, 
+        var(--primary-light) 50%, 
+        var(--bright-blue) 100%);
+      z-index: 1;
+    }
+    
+    /* ====== NEW: PROCESS BENEFITS SECTION ====== */
+    .benefit-card {
+      background: var(--pure-white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-gray);
+      transition: all 0.3s ease;
+    }
+    
+    .benefit-card:hover {
+      border-color: var(--primary-orange);
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow);
+    }
+    
+    /* ====== RESPONSIVE ADJUSTMENTS - MATCHING ABOUT PAGE ====== */
+    @media (max-width: 768px) {
+      .page-container {
+        padding: 0 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem; /* 32px */
+      }
+      
+      h2 {
+        font-size: 1.75rem; /* 28px */
+      }
+      
+      h3 {
+        font-size: 1.25rem; /* 20px */
+      }
+      
+      .section-title {
+        font-size: 1.5rem; /* 24px */
+      }
+      
+      .section-subtitle {
+        font-size: 1rem; /* 16px */
+      }
+      
+      .phase-card {
+        padding: 1.25rem !important;
+      }
+      
+      .body-large {
+        font-size: 1rem; /* 16px */
+      }
+    }
+    
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.75rem; /* 28px */
+      }
+      
+      h2 {
+        font-size: 1.5rem; /* 24px */
+      }
+      
+      .card-title {
+        font-size: 1.125rem; /* 18px */
+      }
+      
+      .card-text {
+        font-size: 0.875rem; /* 14px */
+      }
+    }
+    
+    /* ====== NEW: HEADER SPACER FOR CONSISTENCY ====== */
+    .header-spacer {
+      height: 6rem;
+    }
+    
+    /* ====== NEW: FAQ SECTION STYLES ====== */
+    .faq-item {
+      border-bottom: 1px solid var(--border-gray);
+      padding: 1.5rem 0;
+    }
+    
+    .faq-question {
+      font-weight: 600;
+      color: var(--dark-blue);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.2s ease;
+    }
+    
+    .faq-question:hover {
+      color: var(--primary-orange);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      color: var(--medium-gray);
+      line-height: 1.6;
+    }
+    
+    .faq-answer.open {
+      max-height: 500px;
+      margin-top: 1rem;
+    }
+    
+    /* ====== NEW: TESTIMONIAL STYLES ====== */
+    .testimonial-card {
+      background: var(--pure-white);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--border-gray);
+      position: relative;
+    }
+    
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem;
+      left: 1.5rem;
+      font-size: 4rem;
+      color: rgba(255, 103, 0, 0.1);
+      font-family: serif;
+      line-height: 1;
+    }
   </style>
 </head>
 <body>
   
+  <!-- Header Spacer for Fixed Nav -->
+  <div class="header-spacer"></div>
+
   <!-- Hero Section -->
-  <section class="relative pt-20 pb-32 px-4 overflow-hidden">
+  <section class="relative py-12 md:py-16">
     <!-- Animated Background Elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-20 left-10 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl opacity-15 floating" style="background: linear-gradient(135deg, var(--cyan-teal), var(--bronze));"></div>
-      <div class="absolute top-40 right-10 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl opacity-15 floating" style="animation-delay: 2s; background: linear-gradient(135deg, var(--light-mint), var(--cyan-teal));"></div>
-      <div class="absolute -bottom-8 left-1/2 w-72 h-72 rounded-full mix-blend-multiply filter blur-xl opacity-15 floating" style="animation-delay: 4s; background: linear-gradient(135deg, var(--bronze), var(--soft-peach));"></div>
+      <div class="absolute top-20 left-10 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl opacity-10 floating" style="background: var(--primary-gradient);"></div>
+      <div class="absolute top-40 right-10 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl opacity-10 floating" style="animation-delay: 2s; background: var(--blue-gradient);"></div>
     </div>
     
-    <div class="max-w-6xl mx-auto relative z-10">
-      <div class="text-center space-y-8">
+    <div class="page-container relative z-10">
+      <div class="text-center">
         <!-- Badge -->
-        <div class="inline-flex items-center gap-2 glass-dark text-white px-6 py-3 rounded-full text-sm font-medium">
+        <div class="inline-flex items-center gap-2 glass-dark px-5 py-2.5 rounded-full text-sm font-medium mb-8">
           <span class="pulse-dot">✨</span>
           <span>Transparent Process, Exceptional Results</span>
         </div>
         
         <!-- Main Heading -->
-        <h1 class="text-5xl md:text-7xl font-black leading-tight" style="color: var(--dark-teal);">
-          Your Website,<br/>
-          <span class="gradient-text">Step by Step</span>
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-4">
+          Our <span class="gradient-text">Development Process</span>
         </h1>
         
         <!-- Subheading -->
-        <p class="text-xl md:text-2xl font-light max-w-2xl mx-auto" style="color: var(--dark-teal);">
-          From concept to launch, we guide you through every phase with clarity and confidence
+        <p class="body-large text-muted max-w-2xl mx-auto mb-8">
+          A transparent, step-by-step approach to building your perfect website
         </p>
         
+        <!-- Timeline Visualization -->
+        <div class="process-timeline mb-12">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-dot"></div>
+        </div>
+        
         <!-- Stats -->
-        <div class="flex flex-wrap justify-center gap-8 pt-8">
-          <div class="glass text-center px-8 py-4 rounded-2xl">
-            <div class="text-3xl font-bold gradient-text">8+</div>
-            <div class="text-sm font-medium" style="color: var(--dark-teal);">Weeks Timeline</div>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6 max-w-2xl mx-auto mb-12">
+          <div class="glass text-center px-5 py-4 rounded-xl min-w-[120px]">
+            <div class="text-xl md:text-2xl font-bold gradient-text mb-1">6-8</div>
+            <div class="text-sm font-medium text-blue">Weeks Total</div>
           </div>
-          <div class="glass text-center px-8 py-4 rounded-2xl">
-            <div class="text-3xl font-bold gradient-text">6</div>
-            <div class="text-sm font-medium" style="color: var(--dark-teal);">Key Phases</div>
+          <div class="glass text-center px-5 py-4 rounded-xl min-w-[120px]">
+            <div class="text-xl md:text-2xl font-bold gradient-text mb-1">6</div>
+            <div class="text-sm font-medium text-blue">Key Phases</div>
           </div>
-          <div class="glass text-center px-8 py-4 rounded-2xl">
-            <div class="text-3xl font-bold gradient-text">100%</div>
-            <div class="text-sm font-medium" style="color: var(--dark-teal);">Transparency</div>
+          <div class="glass text-center px-5 py-4 rounded-xl min-w-[120px]">
+            <div class="text-xl md:text-2xl font-bold gradient-text mb-1">24/7</div>
+            <div class="text-sm font-medium text-blue">Communication</div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Benefits Section -->
+  <section class="py-12 bg-white">
+    <div class="page-container">
+      <div class="text-center mb-12">
+        <h2 class="section-title mb-4">Why Our Process Works</h2>
+        <p class="section-subtitle mx-auto">
+          A structured approach that ensures quality, transparency, and results
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="benefit-card">
+          <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-primary mb-4">
+            <i class="fas fa-eye text-lg"></i>
+          </div>
+          <h3 class="card-title mb-2">Complete Transparency</h3>
+          <p class="card-text">See every step of the process with regular updates and clear communication.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-primary mb-4">
+            <i class="fas fa-calendar-check text-lg"></i>
+          </div>
+          <h3 class="card-title mb-2">Milestone-Based</h3>
+          <p class="card-text">Clear milestones ensure we're always aligned and making progress.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-primary mb-4">
+            <i class="fas fa-headset text-lg"></i>
+          </div>
+          <h3 class="card-title mb-2">Dedicated Support</h3>
+          <p class="card-text">Your dedicated project manager is available throughout the entire process.</p>
         </div>
       </div>
     </div>
   </section>
   
   <!-- Services Grid -->
-  <section class="pb-32 px-4">
-    <div class="max-w-7xl mx-auto">
+  <section class="py-16 bg-light">
+    <div class="page-container">
       
       <!-- Section Header -->
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--dark-teal);">
-          Our Development Process
+      <div class="text-center mb-12">
+        <h2 class="section-title mb-4">
+          The <span class="gradient-text">6-Phase Process</span>
         </h2>
-        <p class="text-lg" style="color: var(--dark-teal); opacity: 0.7;">Click any phase to explore the details</p>
+        <p class="section-subtitle mx-auto">Click any phase to explore the details</p>
       </div>
       
       <!-- Phase Cards Grid -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         
         <!-- Phase 1: Discovery -->
-        <div class="phase-card glass rounded-3xl p-8 cursor-pointer group phase-1-gradient" onclick="toggleDetails(this)">
-          <div class="mb-6">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-600 to-teal-500 flex items-center justify-center text-white text-2xl font-bold mb-4" style="background: linear-gradient(135deg, var(--cyan-teal), var(--bronze));">
+        <div class="phase-card p-6 group phase-1-gradient" onclick="toggleDetails(this)">
+          <div class="mb-5">
+            <div class="w-12 h-12 rounded-xl phase-number text-lg font-bold mb-4">
               1
             </div>
-            <h3 class="text-2xl font-bold mb-2" style="color: var(--dark-teal);">Discovery & Planning</h3>
-            <p style="color: var(--dark-teal); opacity: 0.7;">Understanding your vision and goals</p>
+            <h3 class="card-title mb-2">Discovery & Planning</h3>
+            <p class="card-text">Understanding your vision and goals</p>
           </div>
           
           <div class="phase-details hidden">
-            <div class="relative pl-6 space-y-4 border-l-2 mt-6" style="border-color: var(--cyan-teal);">
+            <div class="relative pl-6 space-y-4 border-l-2 mt-6 border-primary">
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--cyan-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Initial Consultation</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Virtual or in-person meeting to align on goals</p>
+                    <h4 class="font-semibold text-blue text-sm">Initial Consultation</h4>
+                    <p class="text-xs text-muted mt-1">Virtual or in-person meeting to align on goals</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--cyan-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Requirements Gathering</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Define pages, features, and success metrics</p>
+                    <h4 class="font-semibold text-blue text-sm">Requirements Gathering</h4>
+                    <p class="text-xs text-muted mt-1">Define pages, features, and success metrics</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--cyan-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Project Proposal</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Detailed proposal with timeline and quotation</p>
+                    <h4 class="font-semibold text-blue text-sm">Project Proposal</h4>
+                    <p class="text-xs text-muted mt-1">Detailed proposal with timeline and quotation</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mt-6 inline-block px-4 py-2 rounded-full text-sm font-semibold" style="background: rgba(17, 100, 102, 0.1); color: var(--cyan-teal);">
+            <div class="mt-6 inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-primary-light text-primary">
               <i class="far fa-clock mr-2"></i>1 Week
             </div>
           </div>
           
-          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all" style="color: var(--cyan-teal);">
-            <span class="view-text">View Details</span>
-            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all text-primary">
+            <span class="view-text text-sm">View Details</span>
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
         
         <!-- Phase 2: Design -->
-        <div class="phase-card glass rounded-3xl p-8 cursor-pointer group phase-2-gradient" onclick="toggleDetails(this)">
-          <div class="mb-6">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-4" style="background: linear-gradient(135deg, var(--bronze), var(--soft-peach));">
+        <div class="phase-card p-6 group phase-2-gradient" onclick="toggleDetails(this)">
+          <div class="mb-5">
+            <div class="w-12 h-12 rounded-xl phase-number text-lg font-bold mb-4">
               2
             </div>
-            <h3 class="text-2xl font-bold mb-2" style="color: var(--dark-teal);">Design & Mockup</h3>
-            <p style="color: var(--dark-teal); opacity: 0.7;">Visualizing your brand identity</p>
+            <h3 class="card-title mb-2">Design & Mockup</h3>
+            <p class="card-text">Visualizing your brand identity</p>
           </div>
           
           <div class="phase-details hidden">
-            <div class="relative pl-6 space-y-4 border-l-2 mt-6" style="border-color: var(--bronze);">
+            <div class="relative pl-6 space-y-4 border-l-2 mt-6 border-primary">
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--bronze);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Wireframes</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Create layout drafts for all main pages</p>
+                    <h4 class="font-semibold text-blue text-sm">Wireframes</h4>
+                    <p class="text-xs text-muted mt-1">Create layout drafts for all main pages</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--bronze);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">High-Fidelity Mockups</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Detailed visuals in Figma or Adobe XD</p>
+                    <h4 class="font-semibold text-blue text-sm">High-Fidelity Mockups</h4>
+                    <p class="text-xs text-muted mt-1">Detailed visuals in Figma or Adobe XD</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--bronze);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">UI Approval</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Final design sign-off before development</p>
+                    <h4 class="font-semibold text-blue text-sm">UI Approval</h4>
+                    <p class="text-xs text-muted mt-1">Final design sign-off before development</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mt-6 inline-block px-4 py-2 rounded-full text-sm font-semibold" style="background: rgba(217, 176, 140, 0.15); color: var(--bronze);">
+            <div class="mt-6 inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-primary-light text-primary">
               <i class="far fa-clock mr-2"></i>2-3 Weeks
             </div>
           </div>
           
-          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all" style="color: var(--bronze);">
-            <span class="view-text">View Details</span>
-            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all text-primary">
+            <span class="view-text text-sm">View Details</span>
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
         
         <!-- Phase 3: Development -->
-        <div class="phase-card glass rounded-3xl p-8 cursor-pointer group phase-3-gradient" onclick="toggleDetails(this)">
-          <div class="mb-6">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-4" style="background: linear-gradient(135deg, var(--light-mint), var(--cyan-teal));">
+        <div class="phase-card p-6 group phase-3-gradient" onclick="toggleDetails(this)">
+          <div class="mb-5">
+            <div class="w-12 h-12 rounded-xl phase-number text-lg font-bold mb-4">
               3
             </div>
-            <h3 class="text-2xl font-bold mb-2" style="color: var(--dark-teal);">Development</h3>
-            <p style="color: var(--dark-teal); opacity: 0.7;">Building your digital presence</p>
+            <h3 class="card-title mb-2">Development</h3>
+            <p class="card-text">Building your digital presence</p>
           </div>
           
           <div class="phase-details hidden">
-            <div class="relative pl-6 space-y-4 border-l-2 mt-6" style="border-color: var(--light-mint);">
+            <div class="relative pl-6 space-y-4 border-l-2 mt-6 border-blue">
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--cyan-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-blue text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Backend Setup</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Database, APIs, and authentication</p>
+                    <h4 class="font-semibold text-blue text-sm">Backend Setup</h4>
+                    <p class="text-xs text-muted mt-1">Database, APIs, and authentication</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--cyan-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-blue text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Frontend Build</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Responsive UI and interactions</p>
+                    <h4 class="font-semibold text-blue text-sm">Frontend Build</h4>
+                    <p class="text-xs text-muted mt-1">Responsive UI and interactions</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--cyan-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-blue text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Feature Integration</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Forms, galleries, contact systems</p>
+                    <h4 class="font-semibold text-blue text-sm">Feature Integration</h4>
+                    <p class="text-xs text-muted mt-1">Forms, galleries, contact systems</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mt-6 inline-block px-4 py-2 rounded-full text-sm font-semibold" style="background: rgba(209, 232, 226, 0.3); color: var(--cyan-teal);">
+            <div class="mt-6 inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-blue-light text-blue">
               <i class="far fa-clock mr-2"></i>4-6 Weeks
             </div>
           </div>
           
-          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all" style="color: var(--cyan-teal);">
-            <span class="view-text">View Details</span>
-            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all text-primary">
+            <span class="view-text text-sm">View Details</span>
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
         
         <!-- Phase 4: Testing -->
-        <div class="phase-card glass rounded-3xl p-8 cursor-pointer group phase-4-gradient" onclick="toggleDetails(this)">
-          <div class="mb-6">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-4" style="background: linear-gradient(135deg, var(--soft-peach), var(--bronze));">
+        <div class="phase-card p-6 group phase-4-gradient" onclick="toggleDetails(this)">
+          <div class="mb-5">
+            <div class="w-12 h-12 rounded-xl phase-number text-lg font-bold mb-4">
               4
             </div>
-            <h3 class="text-2xl font-bold mb-2" style="color: var(--dark-teal);">Testing & QA</h3>
-            <p style="color: var(--dark-teal); opacity: 0.7;">Ensuring quality and performance</p>
+            <h3 class="card-title mb-2">Testing & QA</h3>
+            <p class="card-text">Ensuring quality and performance</p>
           </div>
           
           <div class="phase-details hidden">
-            <div class="relative pl-6 space-y-4 border-l-2 mt-6" style="border-color: var(--soft-peach);">
+            <div class="relative pl-6 space-y-4 border-l-2 mt-6 border-primary">
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--soft-peach);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Cross-Browser Testing</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Chrome, Safari, Firefox, mobile devices</p>
+                    <h4 class="font-semibold text-blue text-sm">Cross-Browser Testing</h4>
+                    <p class="text-xs text-muted mt-1">Chrome, Safari, Firefox, mobile devices</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--soft-peach);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Performance Optimization</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Speed, caching, and image optimization</p>
+                    <h4 class="font-semibold text-blue text-sm">Performance Optimization</h4>
+                    <p class="text-xs text-muted mt-1">Speed, caching, and image optimization</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--soft-peach);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Security Audit</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Vulnerability scanning and fixes</p>
+                    <h4 class="font-semibold text-blue text-sm">Security Audit</h4>
+                    <p class="text-xs text-muted mt-1">Vulnerability scanning and fixes</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mt-6 inline-block px-4 py-2 rounded-full text-sm font-semibold" style="background: rgba(255, 203, 154, 0.15); color: var(--soft-peach);">
+            <div class="mt-6 inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-primary-light text-primary">
               <i class="far fa-clock mr-2"></i>1-2 Weeks
             </div>
           </div>
           
-          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all" style="color: var(--soft-peach);">
-            <span class="view-text">View Details</span>
-            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all text-primary">
+            <span class="view-text text-sm">View Details</span>
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
         
         <!-- Phase 5: Deployment -->
-        <div class="phase-card glass rounded-3xl p-8 cursor-pointer group phase-5-gradient" onclick="toggleDetails(this)">
-          <div class="mb-6">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-4" style="background: linear-gradient(135deg, var(--dark-teal), var(--cyan-teal));">
+        <div class="phase-card p-6 group phase-5-gradient" onclick="toggleDetails(this)">
+          <div class="mb-5">
+            <div class="w-12 h-12 rounded-xl phase-number text-lg font-bold mb-4">
               5
             </div>
-            <h3 class="text-2xl font-bold mb-2" style="color: var(--dark-teal);">Deployment</h3>
-            <p style="color: var(--dark-teal); opacity: 0.7;">Going live to the world</p>
+            <h3 class="card-title mb-2">Deployment</h3>
+            <p class="card-text">Going live to the world</p>
           </div>
           
           <div class="phase-details hidden">
-            <div class="relative pl-6 space-y-4 border-l-2 mt-6" style="border-color: var(--dark-teal);">
+            <div class="relative pl-6 space-y-4 border-l-2 mt-6 border-blue">
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--dark-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-blue text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Domain & SSL</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Domain connection and HTTPS setup</p>
+                    <h4 class="font-semibold text-blue text-sm">Domain & SSL</h4>
+                    <p class="text-xs text-muted mt-1">Domain connection and HTTPS setup</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--dark-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-blue text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Server Deployment</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Deploy to production hosting</p>
+                    <h4 class="font-semibold text-blue text-sm">Server Deployment</h4>
+                    <p class="text-xs text-muted mt-1">Deploy to production hosting</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--dark-teal);"></i>
+                  <i class="fas fa-check-circle mt-1 text-blue text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Final Checks</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Pre-launch verification and monitoring</p>
+                    <h4 class="font-semibold text-blue text-sm">Final Checks</h4>
+                    <p class="text-xs text-muted mt-1">Pre-launch verification and monitoring</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mt-6 inline-block px-4 py-2 rounded-full text-sm font-semibold" style="background: rgba(44, 53, 49, 0.1); color: var(--dark-teal);">
+            <div class="mt-6 inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-blue-light text-blue">
               <i class="far fa-clock mr-2"></i>Included
             </div>
           </div>
           
-          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all" style="color: var(--dark-teal);">
-            <span class="view-text">View Details</span>
-            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all text-primary">
+            <span class="view-text text-sm">View Details</span>
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
         
         <!-- Phase 6: Maintenance -->
-        <div class="phase-card glass rounded-3xl p-8 cursor-pointer group phase-6-gradient" onclick="toggleDetails(this)">
-          <div class="mb-6">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mb-4" style="background: linear-gradient(135deg, var(--bronze), var(--dark-teal));">
+        <div class="phase-card p-6 group phase-6-gradient" onclick="toggleDetails(this)">
+          <div class="mb-5">
+            <div class="w-12 h-12 rounded-xl phase-number text-lg font-bold mb-4">
               6
             </div>
-            <h3 class="text-2xl font-bold mb-2" style="color: var(--dark-teal);">Maintenance</h3>
-            <p style="color: var(--dark-teal); opacity: 0.7;">Ongoing support and updates</p>
+            <h3 class="card-title mb-2">Maintenance</h3>
+            <p class="card-text">Ongoing support and updates</p>
           </div>
           
           <div class="phase-details hidden">
-            <div class="relative pl-6 space-y-4 border-l-2 mt-6" style="border-color: var(--bronze);">
+            <div class="relative pl-6 space-y-4 border-l-2 mt-6 border-primary">
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--bronze);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Regular Updates</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Security patches and content updates</p>
+                    <h4 class="font-semibold text-blue text-sm">Regular Updates</h4>
+                    <p class="text-xs text-muted mt-1">Security patches and content updates</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color: var(--bronze);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">Automated Backups</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Daily backups and disaster recovery</p>
+                    <h4 class="font-semibold text-blue text-sm">Automated Backups</h4>
+                    <p class="text-xs text-muted mt-1">Daily backups and disaster recovery</p>
                   </div>
                 </div>
               </div>
               <div class="detail-item">
                 <div class="flex items-start gap-3">
-                  <i class="fas fa-check-circle mt-1" style="color : var(--bronze);"></i>
+                  <i class="fas fa-check-circle mt-1 text-primary text-sm"></i>
                   <div>
-                    <h4 class="font-semibold" style="color: var(--dark-teal);">24/7 Support</h4>
-                    <p class="text-sm" style="color: var(--dark-teal); opacity: 0.6;">Priority helpdesk access</p>
+                    <h4 class="font-semibold text-blue text-sm">24/7 Support</h4>
+                    <p class="text-xs text-muted mt-1">Priority helpdesk access</p>
                   </div>
                 </div>
               </div>
             </div>
            
-            <div class="mt-6 inline-block px-4 py-2 rounded-full text-sm font-semibold" style="background: rgba(255, 203, 154, 0.1); color: var(--bronze);">
+            <div class="mt-6 inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold bg-primary-light text-primary">
               <i class="far fa-clock mr-2"></i>Ongoing
+            </div>
           </div>
           
-
-          </div>
-          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all" style="color: var(--bronze);">
-            <span class="view-text">View Details</span>
-            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+          <div class="mt-6 flex items-center font-semibold group-hover:gap-2 transition-all text-primary">
+            <span class="view-text text-sm">View Details</span>
+            <i class="fas fa-arrow-right ml-2 text-sm group-hover:translate-x-1 transition-transform"></i>
           </div>
         </div>
         
       </div>
-      
+    
       <!-- CTA Section -->
-      <div class="mt-24 text-center">
-        <div class="glass rounded-3xl p-12 max-w-3xl mx-auto">
-          <h3 class="text-3xl font-bold text-gray-900 mb-4">Ready to Start Your Project?</h3>
-          <p class="text-gray-600 text-lg mb-8">Let's discuss your vision and create something amazing together</p>
-          <a href="Contact.html" class="cta-button inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold text-lg">
-            <span>Get in Touch</span>
-            <i class="fas fa-arrow-right"></i>
-          </a>
+      <div class="mt-16 text-center">
+        <div class="glass p-8 md:p-10 max-w-2xl mx-auto">
+          <h3 class="text-2xl font-bold mb-4 text-blue">Ready to Start Your Project?</h3>
+          <p class="body-large text-muted mb-8">Let's discuss your vision and create something amazing together</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="Contact.html" class="cta-button">
+              <span>Get in Touch</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="pricing.html" class="secondary-button">
+              <span>View Pricing</span>
+              <i class="fas fa-chart-line ml-2"></i>
+            </a>
+          </div>
         </div>
       </div>
       
     </div>
   </section>
   
+  <!-- Testimonial Section -->
+  <section class="py-16 bg-white">
+    <div class="page-container">
+      <div class="text-center mb-12">
+        <h2 class="section-title mb-4">What Our Clients Say</h2>
+        <p class="section-subtitle mx-auto">
+          Hear from businesses that have gone through our process
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="testimonial-card">
+          <p class="body-regular mb-6">"The transparency throughout the process was incredible. We knew exactly where we were at every stage, and the regular updates kept us confident in our investment."</p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4"></div>
+            <div>
+              <h4 class="font-semibold text-blue">Sarah Johnson</h4>
+              <p class="text-sm text-muted">CEO, TechStart Inc.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="body-regular mb-6">"The structured process made everything so easy. Each phase had clear deliverables and timelines. The final result exceeded our expectations!"</p>
+          <div class="flex items-center">
+            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4"></div>
+            <div>
+              <h4 class="font-semibold text-blue">Michael Chen</h4>
+              <p class="text-sm text-muted">Founder, DesignStudio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <script>
+    // Toggle phase details
     function toggleDetails(card) {
       const details = card.querySelector('.phase-details');
       const viewText = card.querySelector('.view-text');
@@ -578,7 +1026,24 @@
       }
     }
     
-    // Scroll animations
+    // Toggle FAQ answers
+    function toggleFAQ(questionElement) {
+      const answer = questionElement.nextElementSibling;
+      const icon = questionElement.querySelector('i');
+      
+      answer.classList.toggle('open');
+      icon.classList.toggle('fa-chevron-down');
+      icon.classList.toggle('fa-chevron-up');
+    }
+    
+    // Initialize all FAQ answers as closed
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.faq-answer').forEach(answer => {
+        answer.classList.remove('open');
+      });
+    });
+    
+    // Scroll animations for phase cards
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -590,9 +1055,20 @@
     
     document.querySelectorAll('.phase-card').forEach(card => {
       card.style.opacity = '0';
-      card.style.transform = 'translateY(40px)';
-      card.style.transition = 'all 0.6s ease-out';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'all 0.4s ease-out';
       observer.observe(card);
+    });
+    
+    // Add hover effect for benefit cards
+    document.querySelectorAll('.benefit-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-4px)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+      });
     });
   </script>
   

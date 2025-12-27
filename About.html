@@ -4,201 +4,266 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sitefully | About Us</title>
+  <link rel="icon" type="image/png" href="Assets/favicon.png">
+
 
   <!-- Tailwind + Fonts + Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<style>
-  /* NEW THEME (FULLY APPLIED) */
-  :root { 
-    --dark-teal: #2C3531;   
-    --cyan-teal: #116466;   
-    --bronze: #D9B08C;      
-    --soft-peach: #FFCB9A;  
-    --light-mint: #D1E8E2;  
-    --glass-border: rgba(44,53,49,0.08);
-    --muted: rgba(44,53,49,0.75);
-    --surface: #ffffff;
-    --glass-elev: rgba(17,36,34,0.04);
-    --accent: #116466; /* used for dots and active filter button */
-  }
-
-  html,body{height:100%}
-  body{
-    font-family:"Poppins",system-ui;
-    background: linear-gradient(180deg, var(--light-mint), var(--surface));
-    color: var(--dark-teal);
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  .container { max-width:1120px; margin:0 auto; padding:0 1.25rem; }
-
-  /* Glass Cards */
-  .glass {
-    background: var(--surface);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 10px 30px var(--glass-elev);
-    color: var(--muted);
-  }
-
-  /* Gradient text using your colors */
-  .gradient-text {
-    background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-  }
-
-  .fade-up{opacity:0;transform:translateY(18px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
-  .fade-up.show{opacity:1;transform:none}
-
-  /* ===== Slider viewport & track ===== */
-  .slider-viewport {
-    overflow: hidden;
-    scroll-behavior: smooth;
-    position: relative;
-  }
-
-  .slider-track {
-    display: flex;
-    gap: 1.5rem;
-    transition: transform 0.65s cubic-bezier(.2,.9,.2,1);
-    will-change: transform;
-  }
-
-  /* Slide cards */
-  .slide {
-    flex: 0 0 auto;
-    border-radius: 18px;
-    overflow: hidden;
-    background: var(--surface);
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 10px 40px rgba(17,36,34,0.08);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    scroll-snap-align: center; /* centers each slide on mobile */
-  }
-
-  .slide:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 60px rgba(17,36,34,0.12);
-  }
-
-  /* Slide images */
-  .slide-img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-bottom: 1px solid var(--glass-border);
-  }
-
-  /* Titles & text */
-  .slide-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--dark-teal);
-    margin-bottom: 6px;
-  }
-  .slide-text {
-    font-size: 0.9rem;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  /* Slider arrows */
-  .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: linear-gradient(90deg,var(--cyan-teal),var(--bronze));
-    color: #03100d;
-    border: none;
-    font-size: 1.6rem;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 8px 20px rgba(17,36,34,0.15);
-    transition: 0.3s ease;
-  }
-
-  .slider-arrow:hover {
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 12px 28px rgba(17,36,34,0.22);
-  }
-  .slider-arrow.left-0 { left: -15px; }
-  .slider-arrow.right-0 { right: -15px; }
-
-  /* Center slides & responsive widths */
-  @media (min-width:768px){
-    .slide { flex: 0 0 calc(50% - 0.75rem); }
-  }
-  @media (min-width:1024px){
-    .slide { flex: 0 0 calc(33.333% - 1rem); }
-  }
-
-  /* Snap scrolling for mobile */
-  @media (max-width: 767px) {
-    .slider-viewport {
-      scroll-snap-type: x mandatory;
+  
+  <style>
+    /* NEW ORANGE & BLUE THEME */
+    :root { 
+      --bright-orange: #FF6B35;     /* Vibrant orange for accents */
+      --light-orange: #FFE8D6;      /* Soft orange for background highlights */
+      --navy-blue: #0A2342;         /* Deep navy blue for strong contrast */
+      --light-gray: #E2E8F0;        /* Light gray for borders/dividers */
+      --medium-gray: #94A3B8;       /* Medium gray for subtle elements */
+      --surface: #FFFFFF;           /* Clean white for card backgrounds */
+      --text-dark: #1E293B;         /* Dark text for readability */
+      --text-muted: #475569;        /* Muted text color */
+      --accent: #FF6B35;            /* Primary accent color */
+      --glass-border: rgba(10, 35, 66, 0.08);
+      --glass-elev: rgba(10, 35, 66, 0.04);
     }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+      color: var(--text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+
+    .container { 
+      max-width: 1120px; 
+      margin: 0 auto; 
+      padding: 0 1.25rem; 
+    }
+
+    /* Glass Cards */
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px var(--glass-elev);
+      color: var(--text-muted);
+    }
+
+    /* Gradient text using new theme colors */
+    .gradient-text {
+      background: linear-gradient(90deg, var(--navy-blue), var(--bright-orange));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: all .6s cubic-bezier(.2,.9,.2,1);
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== Slider Styles ===== */
+    .slider-viewport {
+      overflow: hidden;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+
+    .slider-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.65s cubic-bezier(.2,.9,.2,1);
+      will-change: transform;
+    }
+
+    /* Slide cards */
     .slide {
+      flex: 0 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 40px rgba(10, 35, 66, 0.08);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
       scroll-snap-align: center;
     }
-  }
 
-  /* Team */
-  .member-card img{border-radius:9999px;}
-  .member-card .cta-btn{
-    background:linear-gradient(90deg,var(--cyan-teal),var(--bronze));
-    color:#0d1a18;
-  }
+    .slide:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 60px rgba(10, 35, 66, 0.12);
+      border-color: var(--bright-orange);
+    }
 
-  /* Modal */
-  #profileModal[aria-hidden="true"]{display:none}
-  #profileModal[aria-hidden="false"]{display:flex}
+    /* Slide images */
+    .slide-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--light-gray);
+    }
 
-  /* Dots */
-  .dot{width:10px;height:10px;border-radius:9999px;cursor:pointer;opacity:.7;}
+    /* Titles & text */
+    .slide-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-blue);
+      margin-bottom: 6px;
+    }
+    .slide-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
 
-  /* Base button transitions */
-  .filter-btn {
-    transition: 
-      background 0.3s ease,
-      color 0.3s ease,
-      border-color 0.3s ease,
-      transform 0.2s ease,
-      box-shadow 0.3s ease;
-  }
+    /* Slider arrows - Updated colors */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--bright-orange);
+      color: white;
+      border: none;
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+      transition: 0.3s ease;
+    }
 
-  /* Hover effect (only when not active) */
-  .filter-btn:hover:not(.active) {
-    background: var(--light-mint) !important;
-    color: var(--dark-teal) !important;
-    border-color: var(--cyan-teal) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 0 10px rgba(17,100,102,0.3);
-  }
+    .slider-arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+      background: var(--navy-blue);
+      box-shadow: 0 12px 28px rgba(10, 35, 66, 0.25);
+    }
+    .slider-arrow.left-0 { left: -15px; }
+    .slider-arrow.right-0 { right: -15px; }
 
-  /* Active (selected) state */
-  .filter-btn.active {
-    background: linear-gradient(90deg, var(--cyan-teal), var(--bronze)) !important;
-    color: #03100d !important;
-    border-color: transparent !important;
-    box-shadow: 0 5px 20px rgba(17,36,34,0.25);
-    transform: translateY(-2px);
-  }
+    /* Center slides & responsive widths */
+    @media (min-width:768px){
+      .slide { flex: 0 0 calc(50% - 0.75rem); }
+    }
+    @media (min-width:1024px){
+      .slide { flex: 0 0 calc(33.333% - 1rem); }
+    }
 
-  /* Click feedback */
-  .filter-btn:active {
-    transform: scale(0.95);
-  }
-</style>
+    /* Snap scrolling for mobile */
+    @media (max-width: 767px) {
+      .slider-viewport {
+        scroll-snap-type: x mandatory;
+      }
+      .slide {
+        scroll-snap-align: center;
+      }
+    }
 
+    /* Team Member Cards */
+    .member-card img {
+      border-radius: 9999px;
+      border: 3px solid var(--light-orange);
+    }
+    
+    .member-card .cta-btn {
+      background: var(--bright-orange);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .member-card .cta-btn:hover {
+      background: var(--navy-blue);
+      transform: translateY(-2px);
+    }
 
+    /* Modal */
+    #profileModal[aria-hidden="true"] { display: none; }
+    #profileModal[aria-hidden="false"] { display: flex; }
+
+    /* Dots - Updated colors */
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 9999px;
+      cursor: pointer;
+      opacity: .7;
+      background: var(--medium-gray);
+      border: none;
+    }
+    
+    .dot.active {
+      background: var(--bright-orange);
+      opacity: 1;
+    }
+
+    /* Filter buttons */
+    .filter-btn {
+      transition: all 0.3s ease;
+      background: var(--light-orange);
+      color: var(--navy-blue);
+      border: 1px solid transparent;
+    }
+
+    .filter-btn:hover:not(.active) {
+      background: var(--bright-orange);
+      color: white;
+      border-color: var(--bright-orange);
+      transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+      background: var(--navy-blue) !important;
+      color: white !important;
+      border-color: var(--navy-blue) !important;
+      box-shadow: 0 5px 20px rgba(10, 35, 66, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Button transitions */
+    .btn-primary {
+      background: var(--bright-orange);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      background: var(--navy-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--bright-orange);
+      color: var(--bright-orange);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bright-orange);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Value icons */
+    .value-icon {
+      background: linear-gradient(135deg, var(--navy-blue), var(--bright-orange));
+      color: white;
+    }
   </style>
 </head>
 
@@ -212,14 +277,13 @@
       <div>
         <h1 class="text-4xl md:text-5xl font-extrabold mb-4 gradient-text">Our Story</h1>
 
-        <p class="mb-4 text-[var(--muted)]">
-          Founded in 2023, Sitefully was born from a simple yet powerful idea: that design and web development shouldn’t exist in isolation. We believed that beautiful, thoughtful design deserved a foundation of reliable, high-performance development — and that users deserved experiences that feel intuitive, seamless, and human. What started as a small team with a shared passion has grown into a collective of designers, developers, and strategists who care deeply about every pixel and every line of code. At Sitefully, we don’t just build websites; we craft digital experiences that connect, inspire, and leave a lasting impression. Every project is an opportunity to solve real problems, tell unique stories, and bring ideas to life in ways that feel effortless yet impactful.
+        <p class="mb-4 text-[var(--text-muted)]">
+          Founded in 2023, Sitefully was born from a simple yet powerful idea: that design and web development shouldn't exist in isolation. We believed that beautiful, thoughtful design deserved a foundation of reliable, high-performance development — and that users deserved experiences that feel intuitive, seamless, and human. What started as a small team with a shared passion has grown into a collective of designers, developers, and strategists who care deeply about every pixel and every line of code. At Sitefully, we don't just build websites; we craft digital experiences that connect, inspire, and leave a lasting impression. Every project is an opportunity to solve real problems, tell unique stories, and bring ideas to life in ways that feel effortless yet impactful.
         </p>
 
         <div class="flex gap-3 mt-6">
-          <a href="#team" class="px-5 py-2 rounded-full bg-gradient-to-r from-[var(--cyan-teal)] to-[var(--bronze)] text-black shadow hover:scale-105 transition">Meet the team</a>
-
-          <a href="Portfolio.html" class="px-5 py-2 rounded-full border border-[var(--glass-border)] text-[var(--bronze)] hover:bg-white/20 transition">
+          <a href="#team" class="px-5 py-2 rounded-full btn-primary shadow">Meet the team</a>
+          <a href="Portfolio.html" class="px-5 py-2 rounded-full btn-secondary">
             Our work
           </a>
         </div>
@@ -230,98 +294,96 @@
           <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=80"
                class="w-full h-80 object-cover"/>
         </div>
-        <div class="absolute -right-6 bottom-2 w-28 h-28 rounded-full bg-gradient-to-r from-[var(--cyan-teal)] to-[var(--bronze)] blur-xl opacity-30 animate-pulse"></div>
+        <div class="absolute -right-6 bottom-2 w-28 h-28 rounded-full bg-gradient-to-r from-[var(--navy-blue)] to-[var(--bright-orange)] blur-xl opacity-30 animate-pulse"></div>
       </div>
     </section>
 
-  <!-- WHY WE ARE DIFFERENT - Slider (auto + swipe + accessible) -->
-<section class="mb-16 fade-up" aria-labelledby="why-we-different">
-  <h2 id="why-we-different" class="text-center text-3xl md:text-4xl font-extrabold gradient-text mb-8">
-    Why we are different
-  </h2>
+    <!-- WHY WE ARE DIFFERENT - Slider -->
+    <section class="mb-16 fade-up" aria-labelledby="why-we-different">
+      <h2 id="why-we-different" class="text-center text-3xl md:text-4xl font-extrabold gradient-text mb-8">
+        Why we are different
+      </h2>
 
-  <div id="slider" class="slider-viewport relative overflow-hidden">
+      <div id="slider" class="slider-viewport relative overflow-hidden">
+        <div id="slides" class="slider-track flex gap-6 transition-transform duration-300" aria-live="polite">
+          <!-- Slide 1 -->
+          <article class="slide glass themed-slide flex-shrink-0">
+            <img
+              src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80"
+              alt="Clean workspace with laptop and notebook"
+              loading="lazy"
+              class="slide-img"
+            />
+            <div class="p-5">
+              <h3 class="slide-title">Industry-Aligned Web Development</h3>
+              <p class="slide-text">We build fast, secure, and scalable websites using modern technologies that match real business needs.</p>
+            </div>
+          </article>
 
-    <div id="slides" class="slider-track flex gap-6 transition-transform duration-300" aria-live="polite">
-      <!-- Slide 1 -->
-      <article class="slide glass themed-slide flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80"
-          alt="Clean workspace with laptop and notebook"
-          loading="lazy"
-          class="slide-img"
-        />
-        <div class="p-5">
-          <h3 class="slide-title">Industry-Aligned Web Development</h3>
-          <p class="slide-text">We build fast, secure, and scalable websites using modern technologies that match real business needs.</p>
+          <!-- Slide 2 -->
+          <article class="slide glass themed-slide flex-shrink-0">
+            <img
+              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
+              alt="Developers collaborating"
+              loading="lazy"
+              class="slide-img"
+            />
+            <div class="p-5">
+              <h3 class="slide-title">Custom Business Websites</h3>
+              <p class="slide-text">We craft responsive and modern websites that help brands grow and create a strong digital presence.</p>
+            </div>
+          </article>
+
+          <!-- Slide 3 -->
+          <article class="slide glass themed-slide flex-shrink-0">
+            <img
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80"
+              alt="Designer working on UI"
+              loading="lazy"
+              class="slide-img"
+            />
+            <div class="p-5">
+              <h3 class="slide-title">UI/UX Focused Design</h3>
+              <p class="slide-text">Our designs prioritize user experience with clean, smooth, and visually appealing interfaces that engage visitors.</p>
+            </div>
+          </article>
+
+          <!-- Slide 4 -->
+          <article class="slide glass themed-slide flex-shrink-0">
+            <img
+              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80"
+              alt="Support team and analytics"
+              loading="lazy"
+              class="slide-img"
+            />
+            <div class="p-5">
+              <h3 class="slide-title">Ongoing Support & Growth</h3>
+              <p class="slide-text">We stay with our clients after launch — analytics, optimization and feature growth to keep your site performing.</p>
+            </div>
+          </article>
         </div>
-      </article>
 
-      <!-- Slide 2 -->
-      <article class="slide glass themed-slide flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
-          alt="Developers collaborating"
-          loading="lazy"
-          class="slide-img"
-        />
-        <div class="p-5">
-          <h3 class="slide-title">Custom Business Websites</h3>
-          <p class="slide-text">We craft responsive and modern websites that help brands grow and create a strong digital presence.</p>
-        </div>
-      </article>
+        <!-- Arrows -->
+        <button id="prevSlide" aria-label="Previous slide" class="focus-outline slider-arrow left-0">‹</button>
+        <button id="nextSlide" aria-label="Next slide" class="focus-outline slider-arrow right-0">›</button>
+      </div>
 
-      <!-- Slide 3 -->
-      <article class="slide glass themed-slide flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80"
-          alt="Designer working on UI"
-          loading="lazy"
-          class="slide-img"
-        />
-        <div class="p-5">
-          <h3 class="slide-title">UI/UX Focused Design</h3>
-          <p class="slide-text">Our designs prioritize user experience with clean, smooth, and visually appealing interfaces that engage visitors.</p>
-        </div>
-      </article>
-
-      <!-- Slide 4 -->
-      <article class="slide glass themed-slide flex-shrink-0">
-        <img
-          src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80"
-          alt="Support team and analytics"
-          loading="lazy"
-          class="slide-img"
-        />
-        <div class="p-5">
-          <h3 class="slide-title">Ongoing Support & Growth</h3>
-          <p class="slide-text">We stay with our clients after launch — analytics, optimization and feature growth to keep your site performing.</p>
-        </div>
-      </article>
-    </div>
-
-    <!-- Arrows -->
-    <button id="prevSlide" aria-label="Previous slide" class="focus-outline slider-arrow left-0">‹</button>
-    <button id="nextSlide" aria-label="Next slide" class="focus-outline slider-arrow right-0">›</button>
-  </div>
-
-  <!-- Indicators -->
-  <div id="dots" class="flex justify-center mt-5 space-x-2" role="tablist" aria-label="Slider indicators">
-    <!-- JS generates dots -->
-  </div>
-</section>
-
+      <!-- Indicators -->
+      <div id="dots" class="flex justify-center mt-5 space-x-2" role="tablist" aria-label="Slider indicators">
+        <!-- JS generates dots -->
+      </div>
+    </section>
 
     <!-- VISION & MISSION -->
     <section class="grid md:grid-cols-2 gap-6 mb-12 fade-up">
-      <div class="glass p-6 rounded-2xl">
-        <h2 class="text-2xl font-bold" style="color:var(--cyan-teal)">Our Vision</h2>
-        <p class="mt-2 text-[var(--muted)]">A digital world where ideas are accessible and beautiful.</p>
+      <div class="glass p-6 rounded-2xl border-l-4 border-[var(--bright-orange)]">
+        <h2 class="text-2xl font-bold" style="color:var(--navy-blue)">Our Vision</h2>
+        <p class="mt-2 text-[var(--text-muted)]">A digital world where ideas are accessible and beautiful.</p>
       </div>
 
-      <div class="glass p-6 rounded-2xl">
-        <h2 class="text-2xl font-bold" style="color:var(--cyan-teal)">Our Mission</h2>
-        <p class="mt-2 text-[var(--muted)]">We turn creativity into performance-driven digital experiences.</p>
+      <div class="glass p-6 rounded-2xl border-l-4 border-[var(--navy-blue)]">
+        <h2 class="text-2xl font-bold" style="color:var(--navy-blue)">Our Mission</h2>
+        <p class="mt-2 text-[var(--text-muted)]">We turn creativity into performance-driven digital experiences.</p>
       </div>
     </section>
 
@@ -330,69 +392,59 @@
       <h3 class="text-center text-3xl font-bold gradient-text mb-6">Core Values</h3>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="glass p-6 rounded-xl text-center">
-          <div class="w-12 h-12 bg-[var(--cyan-teal)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+        <div class="glass p-6 rounded-xl text-center hover:border-[var(--bright-orange)] transition-colors">
+          <div class="w-12 h-12 value-icon rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-handshake"></i>
           </div>
-          <strong class="text-[var(--dark-teal)]">Collaboration</strong>
-          <p class="text-sm text-[var(--muted)]">Open communication & teamwork.</p>
+          <strong class="text-[var(--navy-blue)]">Collaboration</strong>
+          <p class="text-sm text-[var(--text-muted)]">Open communication & teamwork.</p>
         </div>
 
-        <div class="glass p-6 rounded-xl text-center">
-          <div class="w-12 h-12 bg-[var(--bronze)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+        <div class="glass p-6 rounded-xl text-center hover:border-[var(--bright-orange)] transition-colors">
+          <div class="w-12 h-12 value-icon rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-bolt"></i>
           </div>
-          <strong class="text-[var(--dark-teal)]">Innovation</strong>
-          <p class="text-sm text-[var(--muted)]">Creative solutions built with research.</p>
+          <strong class="text-[var(--navy-blue)]">Innovation</strong>
+          <p class="text-sm text-[var(--text-muted)]">Creative solutions built with research.</p>
         </div>
 
-        <div class="glass p-6 rounded-xl text-center">
-          <div class="w-12 h-12 bg-[var(--cyan-teal)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+        <div class="glass p-6 rounded-xl text-center hover:border-[var(--bright-orange)] transition-colors">
+          <div class="w-12 h-12 value-icon rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-user-check"></i>
           </div>
-          <strong class="text-[var(--dark-teal)]">Customer Focus</strong>
-          <p class="text-sm text-[var(--muted)]">Designing with empathy & clarity.</p>
+          <strong class="text-[var(--navy-blue)]">Customer Focus</strong>
+          <p class="text-sm text-[var(--text-muted)]">Designing with empathy & clarity.</p>
         </div>
 
-        <div class="glass p-6 rounded-xl text-center">
-          <div class="w-12 h-12 bg-[var(--bronze)] text-white rounded-full flex items-center justify-center mx-auto mb-3">
+        <div class="glass p-6 rounded-xl text-center hover:border-[var(--bright-orange)] transition-colors">
+          <div class="w-12 h-12 value-icon rounded-full flex items-center justify-center mx-auto mb-3">
             <i class="fa-solid fa-star"></i>
           </div>
-          <strong class="text-[var(--dark-teal)]">Excellence</strong>
-          <p class="text-sm text-[var(--muted)]">Quality in every detail.</p>
+          <strong class="text-[var(--navy-blue)]">Excellence</strong>
+          <p class="text-sm text-[var(--text-muted)]">Quality in every detail.</p>
         </div>
       </div>
     </section>
 
-     <!-- TEAM -->
+    <!-- TEAM -->
     <section id="team" class="mb-20 fade-up">
-     
       <div class="mb-6 text-center">
-  <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mb-4">
-    The Minds Powering Our Digital Solutions
-  </h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold gradient-text mb-4">
+          The Minds Powering Our Digital Solutions
+        </h2>
 
-  <div class="flex justify-center gap-2">
-    <button 
-      class="filter-btn px-4 py-2 rounded-full text-sm bg-[var(--accent)] text-black font-medium focus:outline-none" 
-      data-filter="all">
-      All
-    </button>
-
-    <button 
-      class="filter-btn px-4 py-2 rounded-full text-sm bg-white/10 text-[var(--warm)] border border-[var(--glass-border)] focus:outline-none" 
-      data-filter="board">
-      Board
-    </button>
-
-    <button 
-      class="filter-btn px-4 py-2 rounded-full text-sm bg-white/10 text-[var(--warm)] border border-[var(--glass-border)] focus:outline-none" 
-      data-filter="executive">
-      Executive
-    </button>
-  </div>
-</div>
-
+        <div class="flex justify-center gap-2">
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium focus:outline-none active" data-filter="all">
+            All
+          </button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium focus:outline-none" data-filter="board">
+            Board
+          </button>
+          <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium focus:outline-none" data-filter="executive">
+            Executive
+          </button>
+        </div>
+      </div>
 
       <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Alice -->
@@ -403,8 +455,8 @@
           <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Alice M" class="w-full h-full object-cover"/>
           </div>
-          <h4 class="text-lg font-semibold text-[var(--muted)]">Alice M</h4>
-          <p class="text-sm text-[var(--muted)] mb-3">Chairperson</p>
+          <h4 class="text-lg font-semibold text-[var(--navy-blue)]">Alice M</h4>
+          <p class="text-sm text-[var(--text-muted)] mb-3">Chairperson</p>
           <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
         </article>
 
@@ -416,8 +468,8 @@
           <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
             <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Ben K" class="w-full h-full object-cover"/>
           </div>
-          <h4 class="text-lg font-semibold text-[var(--muted)]">Ben K</h4>
-          <p class="text-sm text-[var(--muted)] mb-3">Head of Engineering</p>
+          <h4 class="text-lg font-semibold text-[var(--navy-blue)]">Ben K</h4>
+          <p class="text-sm text-[var(--text-muted)] mb-3">Head of Engineering</p>
           <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
         </article>
 
@@ -429,8 +481,8 @@
           <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Clara O" class="w-full h-full object-cover"/>
           </div>
-          <h4 class="text-lg font-semibold text-[var(--muted)]">Clara O</h4>
-          <p class="text-sm text-[var(--muted)] mb-3">Lead Designer</p>
+          <h4 class="text-lg font-semibold text-[var(--navy-blue)]">Clara O</h4>
+          <p class="text-sm text-[var(--text-muted)] mb-3">Lead Designer</p>
           <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
         </article>
 
@@ -442,12 +494,10 @@
           <div class="mx-auto w-28 h-28 rounded-full overflow-hidden shadow-md mb-3">
             <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David R" class="w-full h-full object-cover"/>
           </div>
-          <h4 class="text-lg font-semibold text-[var(--muted)]">David R</h4>
-          <p class="text-sm text-[var(--muted)] mb-3">Operations</p>
+          <h4 class="text-lg font-semibold text-[var(--navy-blue)]">David R</h4>
+          <p class="text-sm text-[var(--text-muted)] mb-3">Operations</p>
           <button class="view-profile-btn cta-btn inline-block px-4 py-2 rounded-full focus-outline" aria-haspopup="dialog">View Profile →</button>
         </article>
-
-        <!-- (Add more member cards as needed) -->
       </div>
     </section>
 
@@ -455,16 +505,16 @@
     <div id="profileModal" aria-hidden="true" aria-labelledby="profileModalTitle" role="dialog" class="fixed inset-0 z-50 items-center justify-center px-4">
       <div id="modalOverlay" class="absolute inset-0 bg-black/50"></div>
       <div class="relative z-10 max-w-3xl w-full glass rounded-2xl overflow-hidden">
-        <button id="modalClose" aria-label="Close profile" class="absolute top-4 right-4 bg-white/90 rounded-full w-9 h-9 flex items-center justify-center focus-outline">✕</button>
+        <button id="modalClose" aria-label="Close profile" class="absolute top-4 right-4 bg-white/90 rounded-full w-9 h-9 flex items-center justify-center focus-outline hover:bg-[var(--bright-orange)] hover:text-white transition">✕</button>
         <div class="flex flex-col md:flex-row gap-6 p-6 md:p-8">
-          <img id="profileImg" src="" alt="" class="w-32 h-32 rounded-full object-cover shadow-md"/>
+          <img id="profileImg" src="" alt="" class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-[var(--light-orange)]"/>
           <div class="flex-1">
-            <h3 id="profileModalTitle" class="text-2xl font-bold text-[var(--muted)]"></h3>
-            <p id="profileModalRole" class="text-sm text-[var(--accent)] mb-3"></p>
-            <p id="profileModalBio" class="text-[var(--muted)] mb-4"></p>
+            <h3 id="profileModalTitle" class="text-2xl font-bold text-[var(--navy-blue)]"></h3>
+            <p id="profileModalRole" class="text-sm text-[var(--bright-orange)] font-medium mb-3"></p>
+            <p id="profileModalBio" class="text-[var(--text-muted)] mb-4"></p>
             <div class="flex gap-3">
-              <a id="profileEmail" href="#" class="px-4 py-2 rounded-full bg-[var(--accent)] text-black">Email</a>
-              <button id="profileMessage" class="px-4 py-2 rounded-full bg-[var(--warm)] text-[var(--muted)]">Message</button>
+              <a id="profileEmail" href="#" class="px-4 py-2 rounded-full bg-[var(--bright-orange)] text-white hover:bg-[var(--navy-blue)] transition">Email</a>
+              <button id="profileMessage" class="px-4 py-2 rounded-full border border-[var(--bright-orange)] text-[var(--bright-orange)] hover:bg-[var(--bright-orange)] hover:text-white transition">Message</button>
             </div>
           </div>
         </div>
@@ -473,277 +523,222 @@
 
   </main>
 
-
   <!-- SCRIPTS -->
- <script>
-/* ====== Helpers ====== */
-const qs = (s, ctx=document) => ctx.querySelector(s);
-const qsa = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
+  <script>
+    /* ====== Helpers ====== */
+    const qs = (s, ctx=document) => ctx.querySelector(s);
+    const qsa = (s, ctx=document) => Array.from(ctx.querySelectorAll(s));
 
-/* ====== Fade-up observer ====== */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
-}, {threshold: 0.18});
-qsa('.fade-up').forEach(el => observer.observe(el));
+    /* ====== Fade-up observer ====== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+    }, {threshold: 0.18});
+    qsa('.fade-up').forEach(el => observer.observe(el));
 
-/* ====== Team filter ====== */
-const filterBtns = qsa('.filter-btn');
-const cards = qsa('.member-card');
-function applyFilter(filter){
-  cards.forEach(c => {
-    c.style.display = (filter === 'all' || c.dataset.role === filter) ? '' : 'none';
-  });
-  filterBtns.forEach(b => b.classList.remove('bg-[var(--accent)]','text-black','active'));
-  filterBtns.forEach(b=>{
-    if(b.dataset.filter===filter){
-      b.classList.add('bg-[var(--accent)]','text-black','active');
+    /* ====== Team filter ====== */
+    const filterBtns = qsa('.filter-btn');
+    const cards = qsa('.member-card');
+    
+    function applyFilter(filter){
+      cards.forEach(c => {
+        c.style.display = (filter === 'all' || c.dataset.role === filter) ? '' : 'none';
+      });
+      filterBtns.forEach(b => b.classList.remove('active'));
+      qsa(`.filter-btn[data-filter="${filter}"]`).forEach(b => b.classList.add('active'));
     }
-  });
-}
-filterBtns.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
-applyFilter('all');
+    
+    filterBtns.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
+    applyFilter('all');
 
-/* ====== Profile modal (accessible) ====== */
-const modal = qs('#profileModal'); 
-const overlay = qs('#modalOverlay'); 
-const closeBtn = qs('#modalClose');
-const profileImg = qs('#profileImg'); 
-const title = qs('#profileModalTitle'); 
-const role = qs('#profileModalRole');
-const bio = qs('#profileModalBio'); 
-const emailLink = qs('#profileEmail');
-let lastFocused = null;
+    /* ====== Profile modal (accessible) ====== */
+    const modal = qs('#profileModal'); 
+    const overlay = qs('#modalOverlay'); 
+    const closeBtn = qs('#modalClose');
+    const profileImg = qs('#profileImg'); 
+    const title = qs('#profileModalTitle'); 
+    const role = qs('#profileModalRole');
+    const bio = qs('#profileModalBio'); 
+    const emailLink = qs('#profileEmail');
+    let lastFocused = null;
 
-function trapFocus(container){
-  const focusable = Array.from(container.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'));
-  if(!focusable.length) return null;
-  const first = focusable[0], last = focusable[focusable.length-1];
-  function handler(e){
-    if(e.key !== 'Tab') return;
-    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-  }
-  document.addEventListener('keydown', handler);
-  return () => document.removeEventListener('keydown', handler);
-}
+    function trapFocus(container){
+      const focusable = Array.from(container.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])'));
+      if(!focusable.length) return null;
+      const first = focusable[0], last = focusable[focusable.length-1];
+      function handler(e){
+        if(e.key !== 'Tab') return;
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      document.addEventListener('keydown', handler);
+      return () => document.removeEventListener('keydown', handler);
+    }
 
-function openModal(data){
-  lastFocused = document.activeElement;
-  profileImg.src = data.img || '';
-  profileImg.alt = data.name || 'Profile photo';
-  title.textContent = data.name || '';
-  role.textContent = data.roleFull || data.role || '';
-  bio.textContent = data.bio || '';
-  emailLink.href = data.email ? `mailto:${data.email}` : '#';
-  modal.setAttribute('aria-hidden','false');
-  document.documentElement.style.overflow='hidden';
-  document.body.style.overflow='hidden';
-  closeBtn.focus();
-  removeTrap = trapFocus(modal);
-}
+    function openModal(data){
+      lastFocused = document.activeElement;
+      profileImg.src = data.img || '';
+      profileImg.alt = data.name || 'Profile photo';
+      title.textContent = data.name || '';
+      role.textContent = data.roleFull || data.role || '';
+      bio.textContent = data.bio || '';
+      emailLink.href = data.email ? `mailto:${data.email}` : '#';
+      modal.setAttribute('aria-hidden','false');
+      document.documentElement.style.overflow='hidden';
+      document.body.style.overflow='hidden';
+      closeBtn.focus();
+      removeTrap = trapFocus(modal);
+    }
 
-function closeModal(){
-  modal.setAttribute('aria-hidden','true');
-  document.documentElement.style.overflow='';
-  document.body.style.overflow='';
-  if(lastFocused && lastFocused.focus) lastFocused.focus();
-  if(typeof removeTrap === 'function') removeTrap();
-}
+    function closeModal(){
+      modal.setAttribute('aria-hidden','true');
+      document.documentElement.style.overflow='';
+      document.body.style.overflow='';
+      if(lastFocused && lastFocused.focus) lastFocused.focus();
+      if(typeof removeTrap === 'function') removeTrap();
+    }
 
-let removeTrap = null;
-qsa('.view-profile-btn').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const card = btn.closest('.member-card');
-    const data = {
-      name: card.dataset.name,
-      roleFull: card.dataset.roleFull || card.dataset.role,
-      bio: card.dataset.bio,
-      email: card.dataset.email,
-      img: card.dataset.img
-    };
-    openModal(data);
-  });
-});
-closeBtn.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
-document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
-qs('#profileMessage').addEventListener('click', () => { alert('Message action — open chat or contact flow here.'); });
-
-/* ====== Slider (auto + swipe + arrows + dots + centered) ====== */
-(function () {
-  const slidesWrap = qs('#slides');
-  const slides = Array.from(slidesWrap.children);
-  const dotsContainer = qs('#dots');
-  const prevBtn = qs('#prevSlide');
-  const nextBtn = qs('#nextSlide');
-  if (!slidesWrap || slides.length === 0) return;
-
-  // create dots
-  slides.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'dot';
-    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    d.addEventListener('click', () => { goTo(i); restart(); });
-    dotsContainer.appendChild(d);
-  });
-  const dots = Array.from(dotsContainer.children);
-
-  let index = 0, intervalId = null, slidesPerView = 1;
-
-  function calcSlidesPerView() {
-    const w = window.innerWidth;
-    if (w >= 1024) return 3;
-    if (w >= 768) return 2;
-    return 1;
-  }
-
-  function updateLayout() {
-    slidesPerView = calcSlidesPerView();
-    index = Math.min(index, Math.max(0, slides.length - slidesPerView));
-    slides.forEach(sl => sl.style.flex = `0 0 ${100 / slidesPerView}%`);
-    move();
-  }
-
-  function move() {
-    const viewportWidth = slidesWrap.parentElement.offsetWidth;
-    const slideWidth = slides[0].offsetWidth + parseFloat(getComputedStyle(slidesWrap).gap || 24);
-
-    // calculate offset for proper centering
-    let offset = index * slideWidth;
-    const maxOffset = slidesWrap.scrollWidth - viewportWidth;
-    if (offset > maxOffset) offset = maxOffset;
-    slidesWrap.style.transform = `translateX(-${offset}px)`;
-
-    // update dots
-    dots.forEach((d, i) => {
-      d.style.background = (i === index) ? getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() : '#CBD5E1';
-      d.setAttribute('aria-current', i === index ? 'true' : 'false');
+    let removeTrap = null;
+    qsa('.view-profile-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = btn.closest('.member-card');
+        const data = {
+          name: card.dataset.name,
+          roleFull: card.dataset.roleFull || card.dataset.role,
+          bio: card.dataset.bio,
+          email: card.dataset.email,
+          img: card.dataset.img
+        };
+        openModal(data);
+      });
     });
-  }
+    
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+    qs('#profileMessage').addEventListener('click', () => { alert('Message action — open chat or contact flow here.'); });
 
-  function goTo(i) {
-    index = Math.max(0, Math.min(i, slides.length - slidesPerView));
-    move();
-  }
+    /* ====== Slider (auto + swipe + arrows + dots + centered) ====== */
+    (function () {
+      const slidesWrap = qs('#slides');
+      const slides = Array.from(slidesWrap.children);
+      const dotsContainer = qs('#dots');
+      const prevBtn = qs('#prevSlide');
+      const nextBtn = qs('#nextSlide');
+      if (!slidesWrap || slides.length === 0) return;
 
-  function next() {
-    if (index < slides.length - slidesPerView) index++;
-    else index = 0;
-    move();
-  }
+      // create dots
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot';
+        d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        d.addEventListener('click', () => { goTo(i); restart(); });
+        dotsContainer.appendChild(d);
+      });
+      const dots = Array.from(dotsContainer.children);
 
-  function prev() {
-    if (index > 0) index--;
-    else index = Math.max(0, slides.length - slidesPerView);
-    move();
-  }
+      let index = 0, intervalId = null, slidesPerView = 1;
 
-  function auto() {
-    clearInterval(intervalId);
-    intervalId = setInterval(next, 4000);
-  }
+      function calcSlidesPerView() {
+        const w = window.innerWidth;
+        if (w >= 1024) return 3;
+        if (w >= 768) return 2;
+        return 1;
+      }
 
-  function stop() { clearInterval(intervalId); intervalId = null; }
+      function updateLayout() {
+        slidesPerView = calcSlidesPerView();
+        index = Math.min(index, Math.max(0, slides.length - slidesPerView));
+        slides.forEach(sl => sl.style.flex = `0 0 ${100 / slidesPerView}%`);
+        move();
+      }
 
-  // swipe support
-  let startX = 0, dx = 0, isTouch = false;
-  slidesWrap.addEventListener('touchstart', (e) => {
-    stop();
-    isTouch = true;
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-  slidesWrap.addEventListener('touchmove', (e) => {
-    if (!isTouch) return;
-    dx = e.touches[0].clientX - startX;
-  }, { passive: true });
-  slidesWrap.addEventListener('touchend', () => {
-    if (Math.abs(dx) > 40) {
-      if (dx < 0) next(); else prev();
-    }
-    dx = 0; isTouch = false; restart();
-  });
+      function move() {
+        const viewportWidth = slidesWrap.parentElement.offsetWidth;
+        const slideWidth = slides[0].offsetWidth + parseFloat(getComputedStyle(slidesWrap).gap || 24);
 
-  // arrows
-  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restart(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { next(); restart(); });
+        // calculate offset for proper centering
+        let offset = index * slideWidth;
+        const maxOffset = slidesWrap.scrollWidth - viewportWidth;
+        if (offset > maxOffset) offset = maxOffset;
+        slidesWrap.style.transform = `translateX(-${offset}px)`;
 
-  // pause on hover
-  const sliderViewport = qs('#slider');
-  sliderViewport.addEventListener('mouseenter', stop);
-  sliderViewport.addEventListener('mouseleave', restart);
+        // update dots
+        dots.forEach((d, i) => {
+          if (i === index) {
+            d.style.background = 'var(--bright-orange)';
+            d.classList.add('active');
+          } else {
+            d.style.background = 'var(--medium-gray)';
+            d.classList.remove('active');
+          }
+        });
+      }
 
-  // responsive
-  window.addEventListener('resize', updateLayout);
+      function goTo(i) {
+        index = Math.max(0, Math.min(i, slides.length - slidesPerView));
+        move();
+      }
 
-  function restart() { stop(); auto(); }
+      function next() {
+        if (index < slides.length - slidesPerView) index++;
+        else index = 0;
+        move();
+      }
 
-  // initial setup
-  slidesWrap.style.transition = 'transform .65s cubic-bezier(.2,.9,.2,1)';
-  updateLayout();
-  auto();
-  move();
-})();
+      function prev() {
+        if (index > 0) index--;
+        else index = Math.max(0, slides.length - slidesPerView);
+        move();
+      }
 
-/* ====== Year update ====== */
-document.getElementById('yr').textContent = new Date().getFullYear();
+      function auto() {
+        clearInterval(intervalId);
+        intervalId = setInterval(next, 4000);
+      }
 
-/* ====== Active state for filter buttons ====== */
-const filterButtons = document.querySelectorAll('.filter-btn');
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-</script>
+      function stop() { clearInterval(intervalId); intervalId = null; }
 
+      // swipe support
+      let startX = 0, dx = 0, isTouch = false;
+      slidesWrap.addEventListener('touchstart', (e) => {
+        stop();
+        isTouch = true;
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+      
+      slidesWrap.addEventListener('touchmove', (e) => {
+        if (!isTouch) return;
+        dx = e.touches[0].clientX - startX;
+      }, { passive: true });
+      
+      slidesWrap.addEventListener('touchend', () => {
+        if (Math.abs(dx) > 40) {
+          if (dx < 0) next(); else prev();
+        }
+        dx = 0; isTouch = false; restart();
+      });
 
-  <style>
-    /* ...existing code... */
+      // arrows
+      if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restart(); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { next(); restart(); });
 
-    /* Replace previous slider CSS with robust sizing for desktop multi-column view */
-    #slider { position: relative; max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
-    #slides { display: flex; gap: 1.25rem; will-change: transform; transition: transform .65s cubic-bezier(.2,.9,.2,1); }
-    .slide { flex: 0 0 auto; min-width: 0; border-radius: 14px; overflow: hidden; background: white; }
-    .slide img { width: 100%; display: block; object-fit: cover; height: 260px; }
-    .slide .p-5 { padding: 1.25rem; }
+      // pause on hover
+      const sliderViewport = qs('#slider');
+      sliderViewport.addEventListener('mouseenter', stop);
+      sliderViewport.addEventListener('mouseleave', restart);
 
-    @media (min-width:768px) {
-      .slide img { height: 240px; }
-    }
-    @media (min-width:1024px) {
-      .slide img { height: 220px; }
-    }
+      // responsive
+      window.addEventListener('resize', updateLayout);
 
-    /* Arrows */
-    #prevSlide, #nextSlide {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 30;
-      width: 44px;
-      height: 44px;
-      border-radius: 9999px;
-      background: rgba(255,255,255,0.95);
-      color: #03100d;
-      align-items: center;
-      justify-content: center;
-      display: none;
-      box-shadow: 0 6px 18px rgba(2,6,23,0.12);
-      border: none;
-      cursor: pointer;
-    }
-    @media (min-width:768px){
-      #prevSlide, #nextSlide { display: flex; }
-      #prevSlide { left: 0.75rem; }
-      #nextSlide { right: 0.75rem; }
-    }
+      function restart() { stop(); auto(); }
 
-    /* Dots */
-    #dots { margin-top: 1rem; }
-    .dot { width: 10px; height: 10px; border-radius: 9999px; cursor: pointer; box-shadow: 0 2px 6px rgba(2,6,23,.15); background: #CBD5E1; border: none; padding:0; }
-    .dot[aria-current="true"] { background: var(--accent); }
-  </style>
+      // initial setup
+      slidesWrap.style.transition = 'transform .65s cubic-bezier(.2,.9,.2,1)';
+      updateLayout();
+      auto();
+      move();
+    })();
+  </script>
 </body>
 </html>

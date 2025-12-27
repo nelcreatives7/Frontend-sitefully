@@ -1,1208 +1,1761 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sitefully</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitefully </title>
+<link rel="icon" type="image/png" href="Assets/favicon.png">
 
-    <!-- Tailwind (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-<!-- Include Google Fonts in <head> -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#FF6700',
+                        'primary-light': '#FF8533',
+                        'primary-dark': '#E55D00',
+                        'dark': '#0A1A33',
+                        'light': '#F8F8F8',
+                        'gray': '#C0C0C0',
+                        'bright-blue': '#0275D8',
+                        'dark-blue': '#0A1A33',
+                        'primary-orange': '#FF6700',
+                        'gray-600': '#6B7280',
+                        'gray-700': '#374151',
+                        'gray-800': '#1F2937'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    fontSize: {
+                        'xs': '0.75rem',     // 12px
+                        'sm': '0.875rem',    // 14px
+                        'base': '1rem',      // 16px
+                        'lg': '1.125rem',    // 18px
+                        'xl': '1.25rem',     // 20px
+                        '2xl': '1.5rem',     // 24px
+                        '3xl': '1.875rem',   // 30px
+                        '4xl': '2.25rem',    // 36px
+                        '5xl': '3rem',       // 48px
+                        '6xl': '3.75rem',    // 60px
+                        '7xl': '4.5rem'      // 72px
+                    },
+                    lineHeight: {
+                        'tight': 1.2,
+                        'snug': 1.375,
+                        'normal': 1.5,
+                        'relaxed': 1.625,
+                        'loose': 2
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '22': '5.5rem',
+                        '30': '7.5rem',
+                        '38': '9.5rem',
+                        '46': '11.5rem'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      /* ===== Sitefully — Custom Palette (Dark Teal / Cyan-Teal / Bronze / Soft Peach / Light Mint) ===== */
-      :root{
-        --dark-teal: #2C3531;
-        --cyan-teal: #116466;
-        --bronze: #D9B08C;
-        --soft-peach: #FFCB9A;
-        --light-mint: #D1E8E2;
-
-        /* derived */
-        --primary-gradient: linear-gradient(90deg, var(--cyan-teal), var(--soft-peach));
-        --muted-bg: rgba(209,232,226,0.06); /* subtle light mint tint for cards */
-        --glass: rgba(255,255,255,0.03);
-      }
-
-      /* Base page */
-      html,body { height:100%; }
-      body {
-        margin:0;
-        background: var(--dark-teal);
-        color: var(--light-mint);
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-        -webkit-font-smoothing:antialiased;
-        -moz-osx-font-smoothing:grayscale;
-      }
-
-      /* gradient text helper */
-      .gradient-text {
-        background: var(--primary-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      /* buttons */
-      .btn-primary {
-        background: var(--primary-gradient);
-        color: var(--dark-teal);
-        font-weight:600;
-        box-shadow: 0 6px 20px rgba(17,100,102,0.14);
-        transition: transform .18s ease, box-shadow .18s ease;
-      }
-      .btn-primary:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(17,100,102,0.18);
-      } 
-
-      /* subtle glass cards */
-      .card-glass{
-        background: linear-gradient(180deg, rgba(209,232,226,0.03), rgba(255,255,255,0.01));
-        border: 1px solid rgba(209,232,226,0.06);
-        backdrop-filter: blur(6px);
-      }
-
-      /* nav link underline */
-      .nav-underline::after{
-        content: "";
-        position: absolute;
-        left:0;
-        right:auto;
-        bottom:-6px;
-        height:3px;
-        width:0;
-        background: var(--primary-gradient);
-        border-radius: 999px;
-        transition: width .28s cubic-bezier(.2,.9,.3,1);
-      }
-      .nav-underline:hover::after{ width:100%; }
-
-      /* hero typing */
-      #heroTyping { display:inline-block; white-space:nowrap; overflow:hidden; vertical-align:middle; min-height:1.25rem; color:var(--light-mint); }
-      #heroTyping .cursor {
-        display:inline-block;
-        width:2px;
-        height:1.15em;
-        background: var(--soft-peach);
-        margin-left:8px;
-        animation: blink 1s steps(2) infinite;
-        box-shadow: 0 0 8px rgba(255,203,154,0.25);
-      }
-      @keyframes blink { 50%{ opacity:0; } }
-
-      /* testimonials dot glow */
-      .dot-glow { box-shadow: 0 0 10px rgba(17,100,102,0.08); transition: all .25s ease; }
-      .dot-active { background: var(--soft-peach); transform: scale(1.15); box-shadow: 0 6px 18px rgba(255,203,154,0.14); }
-
-      /* small utilities */
-      .accent-bronze { color: var(--bronze); }
-      .bg-soft-mint { background: var(--light-mint); color: var(--dark-teal); }
-      .shadow-soft { box-shadow: 0 10px 30px rgba(12,14,13,0.35); }
-
-      /* responsive tweaks */
-      @media (max-width:768px){
-        .hero-title { font-size:2rem; }
-      }
-
-      /* small scoped styles for the floating button */
-      #whatsappBtn{
-        position: fixed;
-        right: 1rem;
-        bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
-        background: #25D366;
-        color: #fff;
-        padding: 0.75rem;
-        border-radius: 999px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-        z-index: 60;
-        transition: transform .22s ease, box-shadow .18s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        overflow: visible;
-      }
-      #whatsappBtn:hover{
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.32);
-      }
-
-      /* pulsing ring animation around the button */
-      #whatsappBtn::after{
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) scale(1);
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: rgba(37,211,102,0.12);
-        z-index: 0;
-        pointer-events: none;
-        animation: whatsapp-pulse 2200ms ease-out infinite;
-      }
-
-      @keyframes whatsapp-pulse {
-        0% {
-          transform: translate(-50%, -50%) scale(0.8);
-          opacity: 0.9;
+        /* Apply About page typography system */
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.625;
+            color: #374151;
+            background-color: #F8F8F8;
         }
-        60% {
-          transform: translate(-50%, -50%) scale(1.45);
-          opacity: 0.08;
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #0A1A33;
         }
-        100% {
-          transform: translate(-50%, -50%) scale(1.8);
-          opacity: 0;
+        
+        h1 {
+            font-size: 2.5rem; /* 40px - Reduced from 60px */
+            font-weight: 800;
         }
-      }
+        
+        h2 {
+            font-size: 2rem; /* 32px - Reduced from 48px */
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.5rem; /* 24px - Reduced from 30px */
+            font-weight: 600;
+        }
+        
+        h4 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+        }
+        
+        .section-title {
+            font-size: 1.875rem; /* 30px - Reduced from 36px */
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.125rem; /* 18px */
+            color: #6B7280;
+            line-height: 1.625;
+            max-width: 48rem;
+        }
+        
+        .body-large {
+            font-size: 1.125rem; /* 18px */
+            line-height: 1.625;
+        }
+        
+        .body-regular {
+            font-size: 1rem; /* 16px */
+            line-height: 1.625;
+        }
+        
+        .body-small {
+            font-size: 0.875rem; /* 14px */
+            line-height: 1.5;
+        }
+        
+        /* Card text styles - Reduced sizes */
+        .card-title {
+            font-size: 1.25rem; /* 20px - Reduced from 24px */
+            font-weight: 600;
+            line-height: 1.375;
+        }
+        
+        .card-text {
+            font-size: 0.9375rem; /* 15px - Reduced from 16px */
+            line-height: 1.6;
+            color: #6B7280;
+        }
+        
+        /* Button text */
+        .btn-text {
+            font-size: 1rem; /* 16px */
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-text-lg {
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+        }
+        
+        /* Notification bar */
+        .notification-bar {
+            background-color: #0A1A33;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Dropdown Styles */
+        .dropdown-container {
+            position: relative;
+        }
+        
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 12px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .dropdown-container:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: #4A5568;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255, 103, 0, 0.1);
+            color: #FF6700;
+        }
+        
+        /* Mobile Menu Styles */
+        #mobileMenu.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        #overlay.active {
+            opacity: 1;
+        }
+        
+        #drawer.active {
+            transform: translateX(0);
+        }
+        
+        /* Existing card styles (keep structure) */
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FF6700, #FF8533);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(255, 103, 0, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6700, #FF8533);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 103, 0, 0.3);
+        }
+        
+        .tag-pill {
+            background: rgba(255, 103, 0, 0.1);
+            color: #FF6700;
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem; /* Reduced from 0.875rem */
+            font-weight: 600;
+            border: 1px solid rgba(255, 103, 0, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #FF6700, #FF8533);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Services slider cards - Reduced sizes */
+        .service-card .card-title {
+            font-size: 1.125rem; /* 18px for service cards */
+            margin-bottom: 0.5rem;
+        }
+        
+        .service-card .card-text {
+            font-size: 0.875rem; /* 14px for service cards */
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonial text sizes */
+        .testimonial-quote {
+            font-size: 1.125rem; /* 18px */
+            line-height: 1.6;
+        }
+        
+        .testimonial-name {
+            font-size: 1rem; /* 16px */
+            font-weight: 600;
+        }
+        
+        .testimonial-role {
+            font-size: 0.875rem; /* 14px */
+        }
+        
+        /* Testimonial Dots - FIXED VISIBILITY */
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #E5E7EB;
+        }
+        
+        .testimonial-dot.active {
+            background-color: #FF6700;
+            transform: scale(1.2);
+        }
+        
+        .testimonial-dot:hover:not(.active) {
+            background-color: #FF8533;
+        }
+        
+        /* Navbar improvements */
+        .nav-link {
+            font-size: 1rem; /* Consistent 16px */
+            font-weight: 500;
+        }
+        
+        /* Footer text improvements */
+        footer h4 {
+            font-size: 1.125rem; /* 18px */
+            margin-bottom: 1rem;
+        }
+        
+        footer .body-regular {
+            font-size: 0.9375rem; /* 15px */
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem; /* 32px */
+            }
+            
+            h2 {
+                font-size: 1.75rem; /* 28px */
+            }
+            
+            h3 {
+                font-size: 1.25rem; /* 20px */
+            }
+            
+            .section-title {
+                font-size: 1.5rem; /* 24px */
+            }
+            
+            .section-subtitle {
+                font-size: 1rem; /* 16px */
+            }
+            
+            .body-large {
+                font-size: 1rem; /* 16px */
+            }
+            
+            /* Mobile menu text sizes */
+            #mobileMenu .text-lg {
+                font-size: 1rem;
+            }
+            
+            #mobileMenu .body-regular {
+                font-size: 0.9375rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.75rem; /* 28px */
+            }
+            
+            h2 {
+                font-size: 1.5rem; /* 24px */
+            }
+            
+            .body-large {
+                font-size: 0.9375rem; /* 15px */
+            }
+            
+            .card-title {
+                font-size: 1.125rem; /* 18px */
+            }
+            
+            .card-text {
+                font-size: 0.875rem; /* 14px */
+            }
+        }
+        
+        /* Hero section specific adjustments */
+        .hero-title {
+            font-size: 2.25rem; /* 36px for hero */
+        }
+        
+        .hero-subtitle {
+            font-size: 1.125rem; /* 18px */
+        }
+        
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3rem; /* 48px on desktop */
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem; /* 20px on desktop */
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem; /* 56px on large desktop */
+            }
+        }
+         /*ANIMATIONS */
+        
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
 
-      /* =========================
-         PAGE TRANSITIONS (GSAP)
-         ========================= */
-      /* 1. initial state */
-      .fade-page {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      /* 2. enter (animate in) */
-      .fade-active {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      /* 3. leave (animate out) */
-      .fade-leave {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
 
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+          }
 
-      /* Tabs */
-.tab-btn {
+          .animate-fadeInUp {
+            animation: fadeInUp 1s ease-out forwards;
+          }
+
+          .animate-fadeIn {
+            animation: fadeIn 1.2s ease-out forwards;
+          }
+
+          .animate-float {
+            animation: float 4s ease-in-out infinite;
+          }
+
+          .delay-200 {
+            animation-delay: 0.2s;
+          }
+         
+          /* ---------- Slider & Cards ---------- */
+          .slider-viewport {
+            position: relative;
+          }
+          .slider-track {
+            display: flex;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+          }
+          .slide {
+            background:#fff;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.08);
+            display:flex;
+            flex-direction:column;
+            flex-shrink:0;
+            overflow: hidden;
+          }
+          .slide-img {
+            width:100%;
+            height:160px;
+            object-fit:cover;
+          }
+          .slide .p-5 {
+            padding:1.25rem;
+            display:flex;
+            flex-direction:column;
+            flex-grow:1;
+          }
+          .slide-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0A1A33;
+          }
+          .slide-text {
+            font-size: 0.875rem;
+            color: #6B7280;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+          }
+          .service-btn{
+            background:linear-gradient(135deg,#ff6700,#ff8c3a);
+            color:#fff;
+            padding:0.625rem;
+            border-radius:8px;
+            font-weight:600;
+            text-align:center;
+            transition:.3s;
+            font-size:0.875rem;
+            margin-top: auto;
+          }
+          .service-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 4px 12px rgba(255,103,0,.3);
+          }
+
+          /* ---------- Arrows ---------- */
+          .slider-arrow{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            width:36px;
+            height:36px;
+            border-radius:50%;
+            background:#fff;
+            border:2px solid #ff6700;
+            color:#ff6700;
+            font-size:18px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            transition:.3s;
+            z-index:10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          }
+          .slider-arrow:hover{
+            background:#ff6700;
+            color:#fff;
+            transform:translateY(-50%) scale(1.1);
+          }
+          .slider-arrow.left{ left:-18px; }
+          .slider-arrow.right{ right:-18px; }
+
+          /* ---------- Dots ---------- */
+          .dot {
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:#e5e7eb;
+            cursor:pointer;
+            transition: all 0.3s ease;
+          }
+          .dot.active { 
+            background:#ff6700; 
+            width: 24px;
+            border-radius: 4px;
+          }
+
+          /* Responsive */
+          @media (max-width:1024px){
+            .slider-arrow.left{ left:-10px; }
+            .slider-arrow.right{ right:-10px; }
+            .slider-arrow {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+          }
+          
+          @media (max-width: 768px) {
+            .slider-arrow {
+                display: none;
+            }
+          }
+        
+          * {
+  --wa-primary: #25D366;
+  --wa-dark: #128C7E;
+  --wa-shadow: 0 2px 8px rgba(37, 211, 102, 0.25);
+}
+
+.whatsapp-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.whatsapp-float {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  
+  background: var(--wa-primary);
+  color: white;
+  border: none;
+  text-decoration: none;
+  font-size: 24px;
+  
+  box-shadow: var(--wa-shadow);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
+  will-change: transform, box-shadow;
 }
 
-/* Cards */
-.card {
-  border-radius: 1rem;
-  overflow: hidden;
-  border: 1px solid rgba(44, 53, 49, 0.06);
-  transition: transform 0.28s ease, box-shadow 0.28s ease;
-  background: white;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(17, 100, 102, 0.08);
-}
-
-/* Carousel container */
-#cardsContainer {
-  display: flex;
-  transition: transform 0.5s ease;
-  gap: 16px;
-}
-
-/* Carousel arrows */
-.arrow-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  border: 1px solid var(--cyan-teal);
+.whatsapp-float i {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.85);
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
+  transition: transform 0.3s ease;
 }
 
-.arrow-btn svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--cyan-teal);
-  stroke-width: 2;
+/* Pulse Animation */
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: var(--wa-shadow),
+                0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  50% {
+    box-shadow: var(--wa-shadow),
+                0 0 0 10px rgba(37, 211, 102, 0);
+  }
 }
 
-.arrow-btn:hover {
-  border-color: var(--bronze);
-  stroke: var(--bronze);
-  box-shadow: 0 6px 14px rgba(217, 176, 140, 0.2);
+.whatsapp-float.pulse {
+  animation: subtle-pulse 2.5s ease-in-out infinite;
 }
 
-.arrow-left { left: -20px; }
-.arrow-right { right: -20px; }
-.arrow-btn.disabled { opacity: 0.4; pointer-events: none; }
-
-/* Tag pills */
-.tag-pill {
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
+/* Hover Effects */
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+  transform: scale(1.12);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  animation: none;
 }
-@media (min-width: 1024px) {
-  #cardsContainer.centered {
-    justify-content: center !important;
+
+.whatsapp-float:hover i {
+  transform: scale(1.2) rotate(15deg);
+}
+
+.whatsapp-float:active {
+  transform: scale(1.06);
+}
+
+.whatsapp-float:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float.pulse {
+    animation: none;
+    box-shadow: var(--wa-shadow);
+  }
+  
+  .whatsapp-float,
+  .whatsapp-float i {
+    transition: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Initial Entry Animation */
+@keyframes float-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.whatsapp-float {
+  animation: float-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both,
+             subtle-pulse 2.5s ease-in-out 1s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    animation: float-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
   }
 }
 
     </style>
-  </head>
-
-  <body class="antialiased">
+</head>
+<body class="antialiased">
     <!-- Fixed top: notification + navbar -->
     <div class="fixed top-0 left-0 right-0 z-50">
       <!-- Notification Top Bar -->
-      <div class="w-full" style="background: linear-gradient(90deg, rgba(17,100,102,0.95), rgba(255,203,154,0.95));">
-        <div class="container mx-auto px-4 lg:px-8 py-2 flex items-center justify-center text-center">
-          <p class="flex items-center gap-2 text-sm font-medium text-[var(--dark-teal)]">
-            Get <strong class="accent-bronze">20% OFF</strong> on all web development services!
+      <div class="w-full notification-bar">
+        <div class="container px-6 py-2 flex items-center justify-center text-center">
+          <p class="flex items-center gap-2 text-xs md:text-sm text-white">
+            <i class="fa-solid fa-bolt text-xs"></i>
+            Get <strong class="font-bold">20% OFF</strong> on all web development services! 
+            <a href="pricing.html" class="ml-2 underline hover:no-underline text-xs md:text-sm">View Offers →</a>
           </p>
         </div>
       </div>
 
-      <!-- NAVBAR -->
-<nav id="navbar" class="bg-[var(--glass)] backdrop-blur-md border-b border-white/5">
-  <div class="container mx-auto px-4 lg:px-8">
-    <div class="flex items-center justify-between h-16 md:h-20">
-      
-      <!-- Logo Left Side -->
-      <div class="flex items-center gap-3">
-        <!-- Logo Image (no gradient box) -->
-        <img src="Assets/sitefully logo.png" alt="Sitefully" class="w-12 h-12 object-contain"/>
+      <!-- Fixed NAVBAR -->
+      <nav id="navbar" class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-sm">
+                <i class="fas fa-code text-white"></i>
+              </div>
+              <span class="text-2xl font-bold text-gray-900 font-poppins">Sitefully</span>
+            </a>
 
-        <!-- Logo Text 
-        <div class="flex flex-col">
-          <span class="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase" style="font-family: 'Montserrat', sans-serif; color: white;">
-            SITEFULLY
-          </span>
-          <span class="text-xs sm:text-sm md:text-base font-medium mt-1" style="font-family: 'Roboto', sans-serif; color: var(--soft-peach);">
-            Crafting Digital Excellence
-          </span>
-        </div> -->
-      </div>
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-10">
+              <a href="index.html" class="nav-link body-regular">Home</a>
 
-      <!-- Desktop Links Right Side -->
-      <div class="hidden md:flex items-center gap-8 font-medium text-[var(--light-mint)]">
-        <a href="#" class="relative nav-underline">Home</a>
-        <a href="About.html" class="relative nav-underline">About Us</a>
-        <a href="Portfolio.html" class="relative nav-underline">Portfolio</a>
-        <a href="Services.html" class="relative nav-underline">Services</a>
-        <a href="pricing.html" class="relative nav-underline">Pricing</a>
-        <a href="faq.html" class="relative nav-underline">FAQ</a>
-        <a href="Contact.html" class="relative nav-underline">Contact</a>
+              <!-- About Dropdown -->
+              <div class="dropdown-container">
+                <button class="nav-link flex items-center gap-2 body-regular">
+                  About <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <a href="About.html" class="dropdown-item">About Us</a>
+                  <a href="Portfolio.html" class="dropdown-item">Portfolio</a>
+                  <a href="faq.html" class="dropdown-item">FAQ</a>
+                </div>
+              </div>
+
+              <!-- Services Dropdown -->
+              <div class="dropdown-container">
+                <button class="nav-link flex items-center gap-2 body-regular">
+                  Services & Packages <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <a href="Services.html" class="dropdown-item">Our Services</a>
+                  <a href="pricing.html" class="dropdown-item">Pricing</a>
+                </div>
+              </div>
+
+              <a href="Contact.html" class="nav-link body-regular">Contact</a>
+            </div>
+
+            <!-- Mobile Button -->
+            <button id="menuBtn"
+              class="md:hidden p-3 rounded-xl bg-gray-100 hover:bg-primary/10 text-gray-800 transition"
+              aria-label="Open menu" aria-expanded="false">
+              <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Fixed Mobile Menu -->
+    <div id="mobileMenu"
+      class="fixed inset-0 z-[9999] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden">
+
+      <!-- Overlay -->
+      <div id="overlay"
+        class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+      <!-- Drawer -->
+      <nav id="drawer"
+        aria-label="Mobile Navigation"
+        class="absolute top-0 right-0 bottom-0 w-80 bg-white/95 backdrop-blur-lg
+               border-l border-gray-200 shadow-2xl rounded-l-3xl
+               transform translate-x-full transition-transform duration-300 ease-out">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-sm">
+              <i class="fas fa-code text-white"></i>
+            </div>
+            <span class="text-xl font-bold text-gray-900 font-poppins">Sitefully</span>
+          </div>
+
+          <button id="closeMenu"
+            class="p-2 rounded-xl bg-gray-100 text-gray-700
+                   hover:bg-primary/10 hover:text-primary transition">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+
+        <!-- Links -->
+        <div class="p-6 space-y-4 overflow-y-auto" style="max-height: calc(100vh - 100px);">
+
+          <!-- Home -->
+          <a href="index.html"
+            class="flex items-center gap-4 py-3 px-3 rounded-xl
+                   hover:bg-primary/10 hover:text-primary transition body-regular">
+            <i class="fa-solid fa-house w-6 text-primary"></i>
+            Home
+          </a>
+
+          <!-- About Accordion -->
+          <div class="accordion-item border-t pt-3">
+            <button
+              class="accordion-header w-full flex items-center justify-between py-3 px-3 rounded-xl
+                     hover:bg-primary/10 transition"
+              data-accordion="about">
+              <span class="flex items-center gap-4 body-regular">
+                <i class="fa-solid fa-circle-info w-6 text-primary"></i>
+                About
+              </span>
+              <i class="fa-solid fa-chevron-down accordion-icon transition-transform"></i>
+            </button>
+
+            <div class="accordion-content pl-12 mt-2 space-y-2 max-h-0 overflow-hidden transition-all duration-300">
+              <a href="About.html" class="block py-2 text-gray-600 hover:text-primary transition body-regular">
+                About Us
+              </a>
+              <a href="Portfolio.html" class="block py-2 text-gray-600 hover:text-primary transition body-regular">
+                Portfolio
+              </a>
+              <a href="faq.html" class="block py-2 text-gray-600 hover:text-primary transition body-regular">
+                FAQ
+              </a>
+            </div>
+          </div>
+
+          <!-- Services Accordion -->
+          <div class="accordion-item border-t pt-3">
+            <button
+              class="accordion-header w-full flex items-center justify-between py-3 px-3 rounded-xl
+                     hover:bg-primary/10 transition"
+              data-accordion="products">
+              <span class="flex items-center gap-4 body-regular">
+                <i class="fa-solid fa-briefcase w-6 text-primary"></i>
+                Services & Packages
+              </span>
+              <i class="fa-solid fa-chevron-down accordion-icon transition-transform"></i>
+            </button>
+
+            <div class="accordion-content pl-12 mt-2 space-y-2 max-h-0 overflow-hidden transition-all duration-300">
+              <a href="Services.html" class="block py-2 text-gray-600 hover:text-primary transition body-regular">
+                Our Services
+              </a>
+              <a href="pricing.html" class="block py-2 text-gray-600 hover:text-primary transition body-regular">
+                Pricing
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <a href="Contact.html"
+            class="flex items-center gap-4 py-3 px-3 rounded-xl
+                   hover:bg-primary/10 hover:text-primary transition body-regular">
+            <i class="fa-solid fa-envelope w-6 text-primary"></i>
+            Contact
+          </a>
+
+          <!-- CTA -->
+          <div class="mt-8 p-5 bg-gray-50 rounded-2xl border border-gray-200">
+            <h3 class="font-semibold text-gray-900 mb-1">
+              Ready to start your project?
+            </h3>
+            <p class="text-gray-600 mb-4 body-small">
+              Let's build something great together.
+            </p>
+            <a href="Contact.html"
+              class="block text-center py-3 rounded-xl bg-primary text-white font-semibold body-regular
+                     hover:opacity-90 transition">
+              Get in Touch
+            </a>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+
+    <!-- Header Spacer -->
+    <div class="h-40 md:h-32"></div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
         
-      </div>
+        <!-- HERO SECTION -->
+        <section class="min-h-screen flex items-center bg-gradient-to-br from-orange-50 via-white to-blue-50 relative overflow-hidden">
 
-      <!-- Mobile Menu Button -->
-      <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false"
-        class="md:hidden p-2 rounded-full border border-white/6 bg-[rgba(255,255,255,0.02)] text-[var(--light-mint)] hover:bg-[rgba(255,255,255,0.04)] transition">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-  </div>
-</nav>
+          <!-- Decorative Blur -->
+          <div class="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-orange-300 rounded-full blur-3xl opacity-20"></div>
+          <div class="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-blue-300 rounded-full blur-3xl opacity-20"></div>
 
-    </div>
+          <div class="container mx-auto px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
 
-   <!-- Mobile Menu Drawer - Brighter Version -->
-<div id="mobileMenu"
-  class="fixed inset-0 z-[9999] md:hidden opacity-0 pointer-events-none transition-opacity duration-300">
+            <!-- LEFT CONTENT -->
+            <div class="space-y-6 animate-fadeInUp">
+              <h1 class="hero-title font-extrabold leading-tight">
+                Crafting <span class="text-orange-500">Digital Experiences</span><br />
+                That Inspire & Perform
+              </h1>
 
-  <!-- Overlay -->
-  <div id="overlay"
-    class="absolute inset-0 bg-[rgba(12,14,13,0.45)] backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+              <p class="hero-subtitle text-gray-600 max-w-xl">
+                We blend creativity, technology, and purpose to build impactful websites,
+                brands, and digital solutions that truly connect.
+              </p>
 
-  <!-- Drawer -->
-  <nav id="drawer" aria-label="Mobile Navigation"
-    class="absolute top-0 right-0 bottom-0 w-80 bg-[rgba(44,53,49,0.95)]  <!-- slightly lighter dark-teal -->
-           border-l border-white/10 shadow-xl rounded-l-2xl
-           transform translate-x-full transition-transform duration-300">
+              <!-- CTA BUTTONS -->
+              <div class="flex flex-wrap gap-4 pt-4">
+                <a href="Contact.html"
+                   class="px-8 py-4 bg-orange-500 text-white rounded-xl font-semibold shadow-lg hover:bg-orange-600 transition btn-text">
+                  Get Started
+                </a>
 
-    <!-- Header -->
-    <div class="flex items-center justify-between p-6 border-b border-white/10">
-      <span class="text-lg font-semibold text-[var(--light-mint)]">Menu</span>
-      <button id="closeMenu" class="p-2 rounded-full bg-[rgba(255,255,255,0.08)] text-[var(--light-mint)] hover:bg-[rgba(255,255,255,0.15)] transition">
-        <i class="fa-solid fa-xmark text-xl"></i>
-      </button>
-    </div>
+                <a href="Portfolio.html"
+                   class="px-8 py-4 border border-gray-300 rounded-xl font-semibold hover:bg-gray-100 transition btn-text">
+                  View Work
+                </a>
+              </div>
 
-    <!-- Links -->
-    <div class="p-6 space-y-5 text-[var(--light-mint)]">
-      <a href="#" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-home w-6 text-[var(--cyan-teal)]"></i> Home
-      </a>
+              <!-- TRUST TEXT -->
+              <div class="pt-6 text-sm text-gray-500">
+                ✔ Modern Design &nbsp;&nbsp; ✔ Reliable Solutions &nbsp;&nbsp; ✔ Purpose-Driven
+              </div>
+            </div>
 
-      <a href="About.html" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-info-circle w-6 text-[var(--cyan-teal)]"></i> About Us
-      </a>
+           
+            <!-- RIGHT VISUAL -->
+            <div class="relative flex justify-center lg:justify-end animate-fadeIn">
+              
+              <!-- Card 1 -->
+              <div class="absolute top-10 left-10 bg-white p-6 rounded-2xl shadow-xl w-56 animate-float">
+                <h3 class="font-bold text-sm">Creative Design</h3>
+                <p class="text-sm text-gray-500 mt-2">
+                  Clean, modern & brand-focused layouts.
+                </p>
+              </div>
 
-      <a href="Portfolio.html" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-image w-6 text-[var(--cyan-teal)]"></i> Portfolio
-      </a>
-
-      <a href="Services.html" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-briefcase w-6 text-[var(--cyan-teal)]"></i> Services
-      </a>
-       <a href="pricing.html" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-tag w-6 text-[var(--cyan-teal)]"></i> Pricing
-      </a>
-
-      <a href="faq.html" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-question-circle w-6 text-[var(--cyan-teal)]"></i> FAQ
-      </a>
-
-      <a href="Contact.html" class="flex items-center gap-3 text-lg font-medium hover:text-[var(--cyan-teal)] transition-colors">
-        <i class="fa-solid fa-envelope w-6 text-[var(--cyan-teal)]"></i> Contact
-      </a>
-
-     
-
-      <!-- CTA Box -->
-      <div class="mt-6 bg-[rgba(209,232,226,0.12)] p-4 rounded-lg border border-white/5">
-        <h3 class="font-semibold text-[var(--light-mint)]">Join Our Journey</h3>
-        <p class="text-sm text-[var(--light-mint)]/80 mb-3">Have a project? Let's discuss it.</p>
-        <a href="Contact.html"
-           class="inline-block px-4 py-2 bg-[var(--cyan-teal)] text-[var(--light-mint)] rounded-md text-sm hover:bg-[var(--soft-peach)] hover:text-[var(--dark-teal)] transition">
-          Get in Touch
-        </a>
-      </div>
-    </div>
-  </nav>
+              <!-- Card 2 -->
+              <div class="absolute bottom-10 right-12 bg-white p-6 rounded-2xl shadow-xl w-56 animate-float delay-200">
+                <h3 class="font-bold text-sm">Smart Development</h3>
+                <p class="text-sm text-gray-500 mt-2">
+                  Fast, scalable & user-friendly builds.
+                </p>
+              </div>
+              
+    <div class="w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden shadow-2xl">
+  <img
+    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+    alt="Creative digital workspace"
+    class="w-full h-full object-cover"
+  />
 </div>
 
 
 
-    <!-- Spacer so content not hidden under fixed header -->
-    <div style="height:96px" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
 
-   <!-- HEADER (Former Hero) -->
-<header class="relative min-h-[480px] flex items-center justify-center overflow-hidden" aria-label="Header">
-  
-  <!-- Background -->
-  <div 
-    class="absolute inset-0 w-full h-full bg-cover bg-center opacity-20"
-    style="background-image: url('Assets/bg-masthead.jpg');"
-    aria-hidden="true"></div>
+       
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-gradient-to-t from-[rgba(12,14,13,0.85)] via-[rgba(17,100,102,0.25)] to-transparent"></div>
+        <!-- About Us Introduction -->
+        <section id="about" class="py-16 bg-gray-50">
+          <div class="max-w-7xl mx-auto px-4">
 
-  <div class="container mx-auto px-6 lg:px-10 relative z-10 text-center py-24 md:py-36">
-    <div class="max-w-4xl mx-auto space-y-6">
+            <!-- Intro Text (No Heading) -->
+            <div class="text-center mb-12">
+              <p class="body-large text-gray-600 max-w-3xl mx-auto mb-8">
+                We are a modern digital solutions team focused on delivering high-quality,
+                reliable, and user-centered web development services. Our mission is to
+                transform your digital presence with innovative solutions that drive
+                growth and long-term success.
+              </p>
 
-      <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-[var(--light-mint)] hero-title">
-        <span class="gradient-text">Discover Grow Transform</span>
-      </h1>
+              <!-- Button -->
+              <a href="About.html"
+                 class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-white font-semibold shadow-md hover:bg-primary/90 transition btn-text">
+                See More About Us
+                <i class="fas fa-arrow-right text-sm"></i>
+              </a>
+            </div>
 
-      <div id="heroTyping" class="mt-2 text-lg md:text-2xl font-medium tracking-wide text-[var(--light-mint)]"></div>
+            <!-- Content -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-      <p class="text-lg md:text-xl text-[var(--light-mint)]/90 max-w-2xl mx-auto leading-relaxed">
-        From concept to code, <span class="accent-bronze font-semibold">Sitefully</span> crafts intelligent web solutions that define brands and drive measurable growth.
-      </p>
+              <!-- Image -->
+              <div class="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+                  alt="Modern web development team"
+                  class="rounded-2xl shadow-lg object-cover w-full h-[380px]"
+                />
+                <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-primary/20 to-transparent"></div>
+              </div>
 
-      <div class="pt-6 flex items-center justify-center gap-4">
-        <a href="Contact.html " class="btn-primary px-8 py-3 rounded-full inline-flex items-center gap-3">
-          Start Your Project
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
+              <!-- Features -->
+              <div class="grid sm:grid-cols-2 gap-6">
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                  <div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Quality First</h3>
+                  <p class="text-gray-600 body-regular">
+                    Every project is crafted with attention to detail and high standards of excellence.
+                  </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                  <div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                    <i class="fas fa-shield-alt"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Reliable Service</h3>
+                  <p class="text-gray-600 body-regular">
+                    We deliver consistent, dependable solutions you can trust at every stage.
+                  </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition sm:col-span-2">
+                  <div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Client Focused</h3>
+                  <p class="text-gray-600 body-regular">
+                    We work closely with you to understand your goals and turn ideas into impactful digital experiences.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="py-16 bg-white rounded-2xl shadow-sm mb-16">
+            <div class="text-center mb-12">
+                <h2 class="section-title mb-4">Why Choose Us</h2>
+                <p class="section-subtitle mx-auto">
+                    We combine technical expertise with creative solutions to deliver exceptional results
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Quality Service -->
+                <div class="card-hover bg-light rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-circle mr-4">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="card-title">Premium Quality</h3>
+                    </div>
+                    <p class="card-text mb-4">
+                        We deliver exceptional quality in every project, ensuring your website stands out with superior performance and design.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Pixel-perfect design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Optimized performance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Clean code standards</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Reliability -->
+                <div class="card-hover bg-light rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-circle mr-4">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="card-title">Reliable Delivery</h3>
+                    </div>
+                    <p class="card-text mb-4">
+                        Count on us for timely delivery and consistent results. We meet deadlines without compromising on quality.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">On-time delivery</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Clear communication</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Progress updates</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Fast Support -->
+                <div class="card-hover bg-light rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-circle mr-4">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="card-title">Fast Support</h3>
+                    </div>
+                    <p class="card-text mb-4">
+                        Our team provides quick and effective support whenever you need it. We're here to help you succeed.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">24/7 availability</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Quick response time</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Technical expertise</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Professional Delivery -->
+                <div class="card-hover bg-light rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <div class="icon-circle mr-4">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="card-title">Professional Work</h3>
+                    </div>
+                    <p class="card-text mb-4">
+                        Experience professional service from start to finish. We handle every detail with care and expertise.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Expert team</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Modern technology</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-primary mr-2 text-sm"></i>
+                            <span class="body-small">Best practices</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button onclick="scrollToServices()" class="btn-primary inline-flex items-center py-3 px-8 btn-text">
+                    <span>Explore Our Services</span>
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SERVICES SLIDER -->
+        <section id="services" class="mb-12 fade-up" aria-labelledby="services-section">
+          <div class="text-center mb-8">
+            <h2 id="services-section" class="section-title mb-4">
+              Our <span class="gradient-text">Services</span>
+            </h2>
+            <p class="section-subtitle mx-auto mb-8">
+              Comprehensive digital solutions tailored to your business needs
+            </p>
+          </div>
+
+          <div class="slider-viewport relative overflow-hidden">
+            <div id="servicesSlides" class="slider-track" aria-live="polite">
+              <!-- Slides generated by JS -->
+            </div>
+
+            <!-- Arrows -->
+            <button id="prevService" aria-label="Previous slide" class="slider-arrow left">‹</button>
+            <button id="nextService" aria-label="Next slide" class="slider-arrow right">›</button>
+          </div>
+
+          <!-- Dots -->
+          <div id="serviceDots" class="flex justify-center mt-5 space-x-2" role="tablist" aria-label="Slider indicators">
+            <!-- JS generates dots -->
+          </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="py-16">
+          <div class="max-w-5xl mx-auto text-center px-4">
+            <h2 class="section-title mb-8">
+              Our <span class="gradient-text">Clients Say</span>
+            </h2>
+
+            <div class="relative">
+              <div id="testimonial-slider" class="transition-all duration-700 ease-in-out">
+                <!-- Testimonial cards will be shown/hidden by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Dots Navigation -->
+            <div id="testimonial-dots" class="flex justify-center mt-8 space-x-2">
+              <!-- Dots will be generated by JavaScript -->
+            </div>
+          </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section id="stats" class="py-16 relative overflow-hidden bg-light">
+            <!-- soft background glow -->
+            <div class="absolute inset-0 opacity-[0.06] pointer-events-none">
+                <div class="w-80 h-80 bg-primary blur-[140px] absolute top-10 left-10"></div>
+                <div class="w-96 h-96 bg-bright-blue blur-[160px] absolute bottom-10 right-10"></div>
+            </div>
+
+            <div class="container px-6 relative z-10 space-y-12">
+                <div class="text-center space-y-4">
+                    <h2 class="section-title">Our Impact</h2>
+                    <p class="section-subtitle mx-auto">
+                        Trusted by brands, businesses and organizations to deliver cutting-edge digital solutions.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Completed Projects -->
+                    <div class="stat-card text-center hover:transform hover:-translate-y-2 transition-all duration-300 p-6">
+                        <i class="fa-solid fa-briefcase text-3xl text-primary mb-4"></i>
+                        <h3 class="text-3xl font-extrabold gradient-text count-number" data-start="15" data-end="21">15</h3>
+                        <p class="mt-3 text-gray-600 body-regular">Completed Projects</p>
+                    </div>
+
+                    <!-- Client Satisfaction -->
+                    <div class="stat-card text-center hover:transform hover:-translate-y-2 transition-all duration-300 p-6">
+                        <i class="fa-solid fa-star text-3xl text-primary mb-4"></i>
+                        <h3 class="text-3xl font-extrabold gradient-text">98%</h3>
+                        <p class="mt-3 text-gray-600 body-regular">Client Satisfaction</p>
+                    </div>
+
+                    <!-- Happy Clients -->
+                    <div class="stat-card text-center hover:transform hover:-translate-y-2 transition-all duration-300 p-6">
+                        <i class="fa-solid fa-users text-3xl text-primary mb-4"></i>
+                        <h3 class="text-3xl font-extrabold gradient-text count-number" data-start="12" data-end="21">12</h3>
+                        <p class="mt-3 text-gray-600 body-regular">Happy Clients</p>
+                    </div>
+
+                    <!-- Awards Earned -->
+                    <div class="stat-card text-center hover:transform hover:-translate-y-2 transition-all duration-300 p-6">
+                        <i class="fa-solid fa-award text-3xl text-primary mb-4"></i>
+                        <h3 class="text-3xl font-extrabold gradient-text">12</h3>
+                        <p class="mt-3 text-gray-600 body-regular">Awards Earned</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
- <!-- bottom fade -->
-      <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[var(--dark-teal)] to-transparent pointer-events-none"></div>
-
-</header>
-
-
-
-<!-- WHY CHOOSE US SECTION -->
-<section class="py-20" style="background-color: var(--dark-teal); color: white;">
-  <div class="container mx-auto px-6 lg:px-20">
-    
-    <!-- Heading -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4" style="color: var(--soft-peach);">Why Hire Us for Your Next Project</h2>
-      <p class="max-w-2xl mx-auto" style="color: var(--light-mint);">
-        At Sitefully, we architect cutting-edge digital experiences where creativity meets innovation. We design and build immersive, future-ready solutions engineered for clarity, performance, and measurable impact.
-      </p>
-    </div>
-
-    <!-- Rhombus Images Row -->
-    <div class="flex justify-center items-end gap-6 mb-12 flex-wrap">
-      <!-- Rhombus Image 1 -->
-      <div class="transform rotate-45 w-32 h-32 overflow-hidden shadow-lg rounded-lg hover:scale-105 transition-transform duration-300">
-  <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80" 
-       alt="Modern Workspace" class="w-full h-full object-cover -rotate-45">
+<div class="whatsapp-widget">
+  <a href="https://wa.me/254116306863?text=Hello!%20I%20visited%20your%20website%20and%20I%27m%20interested%20in%20your%20web%20development%20services.%20Could%20you%20please%20share%20more%20details%3F"
+     class="whatsapp-float pulse"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Chat on WhatsApp"
+     title="Start WhatsApp conversation">
+    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+  </a>
 </div>
 
 
-      <!-- Rhombus Image 2 -->
-      <div class="transform rotate-45 w-40 h-40 overflow-hidden mt-6 shadow-lg">
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?crop=entropy&cs=tinysrgb&fit=crop&h=300&w=300" 
-             alt="Design" class="w-full h-full object-cover -rotate-45">
-      </div>
 
-      <!-- Rhombus Image 3 -->
-      <div class="transform rotate-45 w-48 h-48 overflow-hidden mt-12 shadow-lg">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?crop=entropy&cs=tinysrgb&fit=crop&h=300&w=300" 
-             alt="Creative" class="w-full h-full object-cover -rotate-45">
-      </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Brand Info -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold font-poppins">Sitefully</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 body-regular">
+                        Transforming digital presence with modern web solutions.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-twitter text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                    </div>
+                </div>
 
-      <!-- Rhombus Image 4 -->
-      <div class="transform rotate-45 w-40 h-40 overflow-hidden mt-6 shadow-lg">
-        <img src="Assets/photo.avif" 
-             alt="Innovation" class="w-full h-full object-cover -rotate-45">
-      </div>
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 font-poppins">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition-colors body-regular">Home</a></li>
+                        <li><a href="About.html" class="text-gray-300 hover:text-white transition-colors body-regular">About Us</a></li>
+                        <li><a href="Services.html" class="text-gray-300 hover:text-white transition-colors body-regular">Services</a></li>
+                        <li><a href="Portfolio.html" class="text-gray-300 hover:text-white transition-colors body-regular">Portfolio</a></li>
+                    </ul>
+                </div>
 
-      <!-- Rhombus Image 5 -->
-      <div class="transform rotate-45 w-32 h-32 overflow-hidden shadow-lg">
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=crop&h=300&w=300" 
-             alt="Strategy" class="w-full h-full object-cover -rotate-45">
-      </div>
-    </div>
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 font-poppins">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors body-regular">Web Development</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors body-regular">UI/UX Design</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors body-regular">E-commerce</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors body-regular">Maintenance</a></li>
+                    </ul>
+                </div>
 
-    <!-- CTA Button -->
-    <div class="text-center">
-      <a href="About.html" class="inline-block px-8 py-4 rounded-full font-bold text-white shadow-lg transition-transform hover:scale-105"
-         style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));">
-        Learn More
-      </a>
-    </div>
-
-  </div>
-</section>
-
-
-   
- <!-- SERVICES CAROUSEL - COMPACT FULL VERSION -->
-<section class="max-w-7xl mx-auto px-4 py-16" style="--dark-teal:#2C3531; --cyan-teal:#116466; --bronze:#D9B08C; --soft-peach:#FFCB9A; --light-mint:#D1E8E2;">
-  <!-- Header -->
-  <div class="text-center mb-10">
-    <h2 class="text-3xl md:text-4xl font-extrabold mb-3" style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-      Our Services
-    </h2>
-    <p class="text-base md:text-lg max-w-3xl mx-auto" style="color: var(--light-mint);">
-      Comprehensive web development solutions from concept to deployment — crafted with Sitefully precision.
-    </p>
-  </div>
-
-  <!-- Tabs -->
-  <div class="flex flex-wrap gap-3 mb-6 justify-center">
-    <button class="tab-btn active px-4 py-2 rounded-full font-semibold border-2 border-[var(--cyan-teal)] text-[var(--cyan-teal)] bg-[rgba(17,100,102,0.1)]" data-category="all">All Services</button>
-    <button class="tab-btn px-4 py-2 rounded-full font-semibold border-2 border-[var(--dark-teal)] text-[var(--dark-teal)] bg-[var(--light-mint)]" data-category="development">Development</button>
-    <button class="tab-btn px-4 py-2 rounded-full font-semibold border-2 border-[var(--dark-teal)] text-[var(--dark-teal)] bg-[var(--light-mint)]" data-category="frontend">Frontend</button>
-    <button class="tab-btn px-4 py-2 rounded-full font-semibold border-2 border-[var(--dark-teal)] text-[var(--dark-teal)] bg-[var(--light-mint)]" data-category="backend">Backend</button>
-    <button class="tab-btn px-4 py-2 rounded-full font-semibold border-2 border-[var(--dark-teal)] text-[var(--dark-teal)] bg-[var(--light-mint)]" data-category="deployment">Deployment</button>
-  </div>
-
-  <!-- Carousel -->
-  <div class="relative">
-    <button id="prevBtn" class="arrow-btn arrow-left text-[var(--cyan-teal)]"> 
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button id="nextBtn" class="arrow-btn arrow-right text-[var(--cyan-teal)]"> 
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-5 h-5"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-
-    <div class="overflow-hidden">
-      <div id="cardsContainer" class="flex gap-3">
-
-        <!-- Card 1: Development -->
-        <div class="card min-w-full md:min-w-[calc(50%-6px)] lg:min-w-[calc(33%-8px)]" data-category="development">
-          <div class="h-48 relative overflow-hidden rounded-lg shadow-lg">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&q=80">
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-teal)]/40 to-transparent"></div>
-          </div>
-          <div class="p-4">
-            <h3 class="text-xl font-bold mb-2" style="color: var(--soft-peach);">Website Creation — Frontend & Django</h3>
-            <p class="mb-3 text-sm" style="color: var(--light-mint);">End-to-end development: responsive frontends, robust Django backends.</p>
-            <div class="flex gap-2 mb-3">
-              <span class="tag-pill text-[var(--cyan-teal)] border-2 border-[var(--cyan-teal)] rounded-full px-2 py-1 text-xs">Django</span>
-              <span class="tag-pill text-[var(--dark-teal)] border-2 border-[var(--dark-teal)] rounded-full px-2 py-1 text-xs">Full-Stack</span>
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 font-poppins">Contact Info</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1 text-sm"></i>
+                            <span class="text-gray-300 body-regular">123 Tech Street, Digital City</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-3 text-sm"></i>
+                            <span class="text-gray-300 body-regular">+1 (234) 567-8900</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-primary mr-3 text-sm"></i>
+                            <span class="text-gray-300 body-regular">hello@sitefully.com</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <a href="Services.html">
-              <button class="w-full py-2 rounded-full font-bold text-white text-sm" style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));">Get Started</button>
-            </a>
-          </div>
-        </div>
 
-        <!-- Card 2: Backend -->
-        <div class="card min-w-full md:min-w-[calc(50%-6px)] lg:min-w-[calc(33%-8px)]" data-category="backend">
-          <div class="h-48 relative overflow-hidden rounded-lg shadow-lg">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80">
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-teal)]/40 to-transparent"></div>
-          </div>
-          <div class="p-4">
-            <h3 class="text-xl font-bold mb-2" style="color: var(--soft-peach);">Full-Stack Django Development</h3>
-            <p class="mb-3 text-sm" style="color: var(--light-mint);">Architecture, models, templates, auth, admin customization.</p>
-            <div class="flex gap-2 mb-3">
-              <span class="tag-pill text-[var(--dark-teal)] border-2 border-[var(--dark-teal)] rounded-full px-2 py-1 text-xs">Architecture</span>
-              <span class="tag-pill text-[var(--cyan-teal)] border-2 border-[var(--cyan-teal)] rounded-full px-2 py-1 text-xs">Models</span>
+            <div class="border-t border-gray-800 mt-12 pt-6 text-center">
+                <p class="text-gray-400 body-small">
+                    &copy; 2024 Sitefully. All rights reserved. | Designed with ❤️ for digital excellence
+                </p>
             </div>
-            <a href="Services.html">
-              <button class="w-full py-2 rounded-full font-bold text-white text-sm" style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));">Get Started</button>
-            </a>
-          </div>
         </div>
-
-        <!-- Card 3: Frontend -->
-        <div class="card min-w-full md:min-w-[calc(50%-6px)] lg:min-w-[calc(33%-8px)]" data-category="frontend">
-          <div class="h-48 relative overflow-hidden rounded-lg shadow-lg">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80">
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-teal)]/40 to-transparent"></div>
-          </div>
-          <div class="p-4">
-            <h3 class="text-xl font-bold mb-2" style="color: var(--soft-peach);">Frontend: HTML, CSS & JS</h3>
-            <p class="mb-3 text-sm" style="color: var(--light-mint);">Pixel-perfect UIs using Tailwind, modern JS and progressive enhancement.</p>
-            <div class="flex gap-2 mb-3">
-              <span class="tag-pill text-[var(--cyan-teal)] border-2 border-[var(--cyan-teal)] rounded-full px-2 py-1 text-xs">Tailwind</span>
-              <span class="tag-pill text-[var(--soft-peach)] border-2 border-[var(--soft-peach)] rounded-full px-2 py-1 text-xs">JS</span>
-            </div>
-            <a href="Services.html">
-              <button class="w-full py-2 rounded-full font-bold text-white text-sm" style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));">Get Started</button>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 4: Backend / APIs -->
-        <div class="card min-w-full md:min-w-[calc(50%-6px)] lg:min-w-[calc(33%-8px)]" data-category="backend">
-          <div class="h-48 relative overflow-hidden rounded-lg shadow-lg">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-teal)]/40 to-transparent"></div>
-          </div>
-          <div class="p-4">
-            <h3 class="text-xl font-bold mb-2" style="color: var(--soft-peach);">APIs & Integrations (DRF)</h3>
-            <p class="mb-3 text-sm" style="color: var(--light-mint);">Django REST Framework, payments, analytics, JSON endpoints.</p>
-            <div class="flex gap-2 mb-3">
-              <span class="tag-pill text-[var(--light-mint)] border-2 border-[var(--light-mint)] rounded-full px-2 py-1 text-xs">REST API</span>
-            </div>
-            <a href="Services.html">
-              <button class="w-full py-2 rounded-full font-bold text-white text-sm" style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));">Get Started</button>
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 5: Deployment -->
-        <div class="card min-w-full md:min-w-[calc(50%-6px)] lg:min-w-[calc(33%-8px)]" data-category="deployment">
-          <div class="h-48 relative overflow-hidden rounded-lg shadow-lg">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&q=80">
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--dark-teal)]/40 to-transparent"></div>
-          </div>
-          <div class="p-4">
-            <h3 class="text-xl font-bold mb-2" style="color: var(--soft-peach);">Deployment & Maintenance</h3>
-            <p class="mb-3 text-sm" style="color: var(--light-mint);">Docker, CI/CD, HTTPS, monitoring, backups.</p>
-            <div class="flex gap-2 mb-3">
-              <span class="tag-pill text-[var(--cyan-teal)] border-2 border-[var(--cyan-teal)] rounded-full px-2 py-1 text-xs">Docker</span>
-            </div>
-            <a href="Services.html">
-              <button class="w-full py-2 rounded-full font-bold text-white text-sm" style="background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));">Get Started</button>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-  <!-- TESTIMONIALS -->
-<section class="py-16">
-  <div class="max-w-5xl mx-auto text-center px-4">
-    <h2 class="text-3xl md:text-4xl font-bold text-[var(--light-mint)] mb-10">
-      Our <span class="gradient-text">Clients Say</span>
-    </h2>
-
-    <div class="relative">
-      <div id="testimonial-slider" class="transition-all duration-700 ease-in-out">
-
-        <!-- CARD TEMPLATE STYLE (all consistent) -->
-        <!-- 1 -->
-        <div class="testimonial-card flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
-                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
-                    shadow-soft fade-active">
-          <div class="flex-1 text-left md:pr-8 z-10">
-            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
-              “Working with Sitefully was a game changer for our brand.
-              Their design team truly understood our vision and brought it to life.”
-            </p>
-            <div>
-              <h3 class="text-[var(--soft-peach)] font-semibold">Alicia Bennett</h3>
-              <p class="text-[var(--light-mint)]/70 text-sm">Founder, BrightPath Studios</p>
-            </div>
-          </div>
-          <div class="mt-6 md:mt-0 md:ml-8">
-            <img src="https://images.unsplash.com/photo-1619946794135-5bc917a27793?auto=format&fit=crop&w=250&q=80"
-                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
-          </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
-                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
-                    shadow-soft fade-enter">
-          <div class="flex-1 text-left md:pr-8 z-10">
-            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
-              “The Sitefully team went above and beyond. Their branding approach elevated our identity.”
-            </p>
-            <div>
-              <h3 class="text-[var(--soft-peach)] font-semibold">Michael Chen</h3>
-              <p class="text-[var(--light-mint)]/70 text-sm">Marketing Director, NovaTech</p>
-            </div>
-          </div>
-          <div class="mt-6 md:mt-0 md:ml-8">
-            <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=250&q=80"
-                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
-          </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
-                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
-                    shadow-soft fade-enter">
-          <div class="flex-1 text-left md:pr-8 z-10">
-            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
-              “Sitefully’s creativity and professionalism exceeded expectations.”
-            </p>
-            <div>
-              <h3 class="text-[var(--soft-peach)] font-semibold">Sarah Lopez</h3>
-              <p class="text-[var(--light-mint)]/70 text-sm">Creative Director, VisionFlow</p>
-            </div>
-          </div>
-          <div class="mt-6 md:mt-0 md:ml-8">
-            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=250&q=80"
-                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
-          </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
-                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
-                    shadow-soft fade-enter">
-          <div class="flex-1 text-left md:pr-8 z-10">
-            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
-              “Absolutely love the professionalism and design sense of Sitefully.
-              They gave our startup a world-class brand image.”
-            </p>
-            <div>
-              <h3 class="text-[var(--soft-peach)] font-semibold">David Romero</h3>
-              <p class="text-[var(--light-mint)]/70 text-sm">Co-Founder, Skyward Labs</p>
-            </div>
-          </div>
-          <div class="mt-6 md:mt-0 md:ml-8">
-            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=250&q=80"
-                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
-          </div>
-        </div>
-
-        <!-- 5 -->
-        <div class="testimonial-card hidden flex flex-col md:flex-row items-center rounded-3xl p-8 md:p-12 
-                    bg-[linear-gradient(90deg,rgba(17,100,102,0.12),rgba(255,203,154,0.06))]
-                    shadow-soft fade-enter">
-          <div class="flex-1 text-left md:pr-8 z-10">
-            <p class="text-lg md:text-xl text-[var(--light-mint)] leading-relaxed mb-6">
-              “From concept to delivery, Sitefully was flawless. Their attention to detail is unmatched.”
-            </p>
-            <div>
-              <h3 class="text-[var(--soft-peach)] font-semibold">Elena Vasquez</h3>
-              <p class="text-[var(--light-mint)]/70 text-sm">CEO, Dreamline Agency</p>
-            </div>
-          </div>
-          <div class="mt-6 md:mt-0 md:ml-8">
-            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=250&q=80"
-                 class="w-28 h-28 rounded-full border-4 border-[rgba(255,255,255,0.04)] object-cover shadow-2xl"/>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- dots -->
-    <div id="dots" class="flex justify-center mt-8 space-x-3"></div>
-  </div>
-</section>
-
-  <!-- STATS SECTION - COMPACT VERSION -->
-<section id="stats" class="py-16 relative overflow-hidden">
-  <!-- soft background glow -->
-  <div class="absolute inset-0 opacity-[0.06] pointer-events-none">
-    <div class="w-60 h-60 bg-[var(--cyan-teal)] blur-[120px] absolute top-10 left-10"></div>
-    <div class="w-80 h-80 bg-[var(--soft-peach)] blur-[140px] absolute bottom-10 right-10"></div>
-  </div>
-
-  <div class="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-    <div class="text-center mb-10">
-      <h2 class="text-3xl md:text-4xl font-extrabold gradient-text">Our Impact</h2>
-      <p class="text-[var(--light-mint)]/80 mt-2 max-w-xl mx-auto text-base md:text-lg">
-        Trusted by brands, businesses and organizations to deliver cutting-edge digital solutions.
-      </p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Completed Projects -->
-      <div class="p-6 rounded-2xl card-glass text-center border border-white/5 shadow-soft">
-        <i class="fa-solid fa-briefcase text-3xl text-[var(--soft-peach)] mb-3"></i>
-        <h3 class="text-3xl md:text-4xl font-extrabold gradient-text count-number" data-start="15" data-end="21">15</h3>
-        <p class="mt-2 text-[var(--light-mint)]/80 text-sm md:text-base">Completed Projects</p>
-      </div>
-
-      <!-- Client Satisfaction -->
-      <div class="p-6 rounded-2xl card-glass text-center border border-white/5 shadow-soft">
-        <i class="fa-solid fa-star text-3xl text-[var(--bronze)] mb-3"></i>
-        <h3 class="text-3xl md:text-4xl font-extrabold gradient-text">98%</h3>
-        <p class="mt-2 text-[var(--light-mint)]/80 text-sm md:text-base">Client Satisfaction</p>
-      </div>
-
-      <!-- Happy Clients -->
-      <div class="p-6 rounded-2xl card-glass text-center border border-white/5 shadow-soft">
-        <i class="fa-solid fa-users text-3xl text-[var(--cyan-teal)] mb-3"></i>
-        <h3 class="text-3xl md:text-4xl font-extrabold gradient-text count-number" data-start="12" data-end="21">12</h3>
-        <p class="mt-2 text-[var(--light-mint)]/80 text-sm md:text-base">Happy Clients</p>
-      </div>
-
-      <!-- Awards Earned -->
-      <div class="p-6 rounded-2xl card-glass text-center border border-white/5 shadow-soft">
-        <i class="fa-solid fa-award text-3xl text-[var(--soft-peach)] mb-3"></i>
-        <h3 class="text-3xl md:text-4xl font-extrabold gradient-text">12</h3>
-        <p class="mt-2 text-[var(--light-mint)]/80 text-sm md:text-base">Awards Earned</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-    
-    <!-- Floating WhatsApp Button (replaced: removed alert + overlap fix) -->
-<a id="whatsappBtn"
-   href="https://wa.me/254116306863?text=Hello!%20I%20would%20like%20to%20know%20more%20about%20Sitefully."
-   target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
-  <i class="fab fa-whatsapp fa-lg" aria-hidden="true"></i>
-</a>
-
-
-
-    <!-- FOOTER -->
-    <footer class="relative overflow-hidden bg-gradient-to-tr from-[rgba(17,100,102,0.95)] to-[rgba(217,176,140,0.06)] text-[var(--light-mint)] mt-12">
-      <div class="absolute top-0 left-0 w-72 h-72 bg-[rgba(217,176,140,0.06)] rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
-      <div class="absolute bottom-0 right-0 w-80 h-80 bg-[rgba(17,100,102,0.06)] rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
-
-      <div class="relative container mx-auto px-6 lg:px-12 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          <div>
-            <div class="flex items-center gap-3">
-              <div class="flex flex-col items-center space-y-2">
-  <div class="flex items-center space-x-4">
-  <!-- Logo -->
-  <img src="Assets/sitefully logo.png" alt="Sitefully" class="w-20 h-20 object-contain rounded-md"/>
-</div>
-
-</div>
-
-            </div>
-            <p class="mt-4 text-[var(--light-mint)]/85 text-sm max-w-sm"> <span class="accent-bronze font-semibold">The Brain of Great Websites</span> — delivering intelligent, high-performing web solutions that define brands and drive growth.</p>
-            <a href="Contact.html" class="inline-flex items-center gap-2 mt-6 px-5 py-2.5 text-sm font-semibold btn-primary rounded-full">Let’s Talk <i class="fa-solid fa-arrow-right text-xs"></i></a>
-          </div>
-
-          <nav aria-label="Footer Navigation">
-            <h3 class="text-lg font-semibold mb-5 accent-bronze uppercase tracking-wide">Quick Links</h3>
-            <ul class="space-y-3 text-[var(--light-mint)]/90">
-              <li><a href="#" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Home</a></li>
-              <li><a href="About.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> About</a></li>
-              <li><a href="Portfolio.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Portfolio</a></li>
-              <li><a href="Services.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Products & Services</a></li>
-               <li><a href="pricing.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Pricing</a></li>  
-              <li><a href="faq.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> FAQ</a></li>
-              <li><a href="Contact.html" class="flex items-center gap-2"><i class="fa-solid fa-angle-right text-[var(--soft-peach)]"></i> Contact</a></li>
-             
-            </ul>
-          </nav>
-
-          <div>
-            <h3 class="text-lg font-semibold mb-5 accent-bronze uppercase tracking-wide">Stay Connected</h3>
-            <p class="text-[var(--light-mint)]/80 text-sm mb-4">Follow us for trends and updates.</p>
-            <div class="flex space-x-4">
-              <a href="#" class="social-icon-footer"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social-icon-footer"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="social-icon-footer"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="social-icon-footer"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="border-t border-white/6 pt-6 text-center">
-          <p class="text-sm text-[var(--light-mint)]/75">© <span id="year"></span> <span class="accent-bronze font-semibold">Sitefully</span>. All rights reserved.</p>
-        </div>
-      </div>
     </footer>
 
-    <!-- SCRIPTS -->
     <script>
-      // NAVBAR scroll behavior (glass effect)
-      window.addEventListener("scroll", () => {
-        const nav = document.getElementById("navbar");
-        if (!nav) return;
-        if (window.scrollY > 60) {
-          nav.classList.add("backdrop-blur-xl", "shadow-2xl");
-        } else {
-          nav.classList.remove("backdrop-blur-xl", "shadow-2xl");
+        // Fixed Mobile Menu Functionality
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const drawer = document.getElementById('drawer');
+
+        function openDrawer() {
+          mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+          overlay.classList.remove('opacity-0');
+          drawer.classList.remove('translate-x-full');
+          menuBtn.setAttribute('aria-expanded', 'true');
         }
-      });
 
-      // Mobile menu controls
-      const menuBtn = document.getElementById("menuBtn");
-      const closeMenu = document.getElementById("closeMenu");
-      const mobileMenu = document.getElementById("mobileMenu");
-      const drawer = document.getElementById("drawer");
-      const overlay = document.getElementById("overlay");
-      let menuOpen = false;
+        function closeDrawer() {
+          mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+          overlay.classList.add('opacity-0');
+          drawer.classList.add('translate-x-full');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
 
-      function openMenu() {
-        mobileMenu.classList.remove("opacity-0","pointer-events-none");
-        mobileMenu.classList.add("opacity-100","pointer-events-auto");
-        drawer.classList.remove("translate-x-full");
-        drawer.classList.add("translate-x-0");
-        document.body.style.overflow = "hidden";
-        menuBtn.setAttribute("aria-expanded","true");
-        menuOpen = true;
-      }
-      function closeMenuFunc(){
-        drawer.classList.add("translate-x-full");
-        mobileMenu.classList.remove("opacity-100","pointer-events-auto");
-        setTimeout(()=> {
-          mobileMenu.classList.add("opacity-0","pointer-events-none");
-          document.body.style.overflow = "";
-        }, 300);
-        menuBtn.setAttribute("aria-expanded","false");
-        menuOpen = false;
-      }
+        menuBtn.addEventListener('click', openDrawer);
+        closeMenu.addEventListener('click', closeDrawer);
+        overlay.addEventListener('click', closeDrawer);
 
-      if (menuBtn) menuBtn.addEventListener("click", () => (menuOpen ? closeMenuFunc() : openMenu()));
-      if (closeMenu) closeMenu.addEventListener("click", closeMenuFunc);
-      if (overlay) overlay.addEventListener("click", closeMenuFunc);
-
-      // Close on escape
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && menuOpen) closeMenuFunc();
-      });
-
-      // Auto-close on resize above mobile
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          if (window.innerWidth >= 768 && menuOpen) closeMenuFunc();
-        }, 120);
-      });
-    
-      // Scroll arrow functionality (robust)
-  (function(){
-    const arrow = document.getElementById('scroll-arrow');
-    if (!arrow) return;
-
-    // Target the next section explicitly (id present in your markup).
-    const explicitTarget = document.getElementById('hero-section');
-    const headerEl = document.querySelector('header[aria-label="Header"]') || document.querySelector('header');
-    const fallbackSection = explicitTarget || (headerEl && headerEl.nextElementSibling);
-
-    function scrollToTarget(el) {
-      if (!el) return;
-      const nav = document.getElementById('navbar');
-      const navHeight = nav ? Math.ceil(nav.getBoundingClientRect().height) : 0;
-      const gap = 12; // small spacing so content doesn't hide under navbar
-      const top = Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - navHeight - gap);
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-
-    arrow.addEventListener('click', (e) => {
-      e.preventDefault();
-      // Prefer explicit #hero-section, otherwise compute next visible sibling
-      if (explicitTarget) return scrollToTarget(explicitTarget);
-
-      let target = fallbackSection;
-      // skip invisible/spacer nodes
-      while (target && target.offsetHeight === 0 && target.nextElementSibling) {
-        target = target.nextElementSibling;
-      }
-      scrollToTarget(target);
-    });
-  })();
-      // Footer year
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // Testimonials slider
-      const testimonials = document.querySelectorAll(".testimonial-card");
-      const dotsContainer = document.getElementById("dots");
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
-      let current = 0;
-      let autoSlide;
-
-      // create dots
-      testimonials.forEach((_, i) => {
-        const btn = document.createElement("button");
-        btn.className = "w-3 h-3 rounded-full dot-glow bg-[rgba(255,255,255,0.18)]";
-        btn.addEventListener("click", () => { current = i; showTestimonial(current); resetAuto(); });
-        dotsContainer.appendChild(btn);
-      });
-      const dots = dotsContainer.children;
-
-      function showTestimonial(index){
-        testimonials.forEach((t, i) => {
-          t.classList.add("hidden");
-          t.classList.remove("fade-active");
-          t.classList.add("fade-enter");
-          if (i === index) {
-            t.classList.remove("hidden","fade-enter");
-            setTimeout(()=> t.classList.add("fade-active"), 20);
-          }
+        // Auto-close on link clicks
+        drawer.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', closeDrawer);
         });
-        for (let i=0;i<dots.length;i++){
-          dots[i].classList.remove("dot-active");
-          dots[i].classList.add("bg-[rgba(255,255,255,0.18)]");
-        }
-        if (dots[index]) { dots[index].classList.add("dot-active"); dots[index].classList.remove("bg-[rgba(255,255,255,0.18)]"); }
-      }
 
-      if (nextBtn) nextBtn.addEventListener("click", ()=> { current = (current+1) % testimonials.length; showTestimonial(current); resetAuto(); });
-      if (prevBtn) prevBtn.addEventListener("click", ()=> { current = (current-1 + testimonials.length) % testimonials.length; showTestimonial(current); resetAuto(); });
-
-      function startAuto(){
-        autoSlide = setInterval(()=> {
-          current = (current + 1) % testimonials.length;
-          showTestimonial(current);
-        }, 6000);
-      }
-      function resetAuto(){
-        clearInterval(autoSlide);
-        startAuto();
-      }
-
-      if (testimonials.length) { showTestimonial(0); startAuto(); }
-
-      // Pause auto when hovering
-      const sliderWrap = document.getElementById("testimonial-slider");
-      if (sliderWrap){
-        sliderWrap.addEventListener("mouseenter", () => clearInterval(autoSlide));
-        sliderWrap.addEventListener("mouseleave", () => startAuto());
-      }
-
-      // Initialize AOS
-      if (AOS) AOS.init({ duration:900, once:true });
-
-      // typing effect (hero)
-      (function(){
-        const phrases = [
-          "We build fast, accessible websites.",
-          "Design-led development for growth.",
-          "Products that scale with your business."
-        ];
-        const el = document.getElementById("heroTyping");
-        if (!el) return;
-        let p=0, i=0, timer;
-        const cursor = document.createElement("span");
-        cursor.className = "cursor";
-        el.appendChild(cursor);
-
-        function type(){
-          const full = phrases[p];
-          if (i <= full.length){
-            el.textContent = full.slice(0,i);
-            el.appendChild(cursor);
-            i++;
-            timer = setTimeout(type, 60);
-          } else {
-            timer = setTimeout(erase, 2000);
-          }
-        }
-        function erase(){
-          const full = phrases[p];
-          if (i >= 0){
-            el.textContent = full.slice(0,i);
-            el.appendChild(cursor);
-            i--;
-            timer = setTimeout(erase, 30);
-          } else {
-            p = (p+1) % phrases.length;
-            timer = setTimeout(type, 500);
-          }
-        }
-        window.addEventListener("load", ()=> setTimeout(type, 400));
-      })();
-   
-  // keep WhatsApp button from overlapping footer: push it up when footer enters viewport
-  (function(){
-    const btn = document.getElementById('whatsappBtn');
-    const footer = document.querySelector('footer');
-    if (!btn || !footer) return;
-
-    function adjust() {
-      const footerRect = footer.getBoundingClientRect();
-      const overlap = window.innerHeight - footerRect.top;
-      if (overlap > 0) {
-        // move the button up by the overlap amount + a small gap (16px)
-        btn.style.transform = `translateY(-${overlap + 16}px)`;
-      } else {
-        btn.style.transform = 'translateY(0)';
-      }
-    }
-
-    window.addEventListener('scroll', adjust, { passive: true });
-    window.addEventListener('resize', adjust);
-    // initial check
-    adjust();
-  })();
-  // Stats counter animation
-  const counters = document.querySelectorAll('.count-number');
-  let statsPlayed = false;
-
-  function runSlowCounter(counter) {
-    const start = parseInt(counter.getAttribute('data-start'), 10);
-    const end = parseInt(counter.getAttribute('data-end'), 10);
-
-    let current = start;
-    counter.innerText = current;
-
-    const interval = setInterval(() => {
-      if (current < end) {
-        current++;
-        counter.innerText = current;
-      } else {
-        clearInterval(interval);
-      }
-    }, 1000); // +1 every second
-  }
-
-  function handleScroll() {
-    const statsSection = document.querySelector('#stats');
-    const rect = statsSection.getBoundingClientRect();
-
-    if (!statsPlayed && rect.top < window.innerHeight - 150) {
-      statsPlayed = true;
-      // Start slow count after 2 seconds
-      setTimeout(() => {
-        counters.forEach(counter => {
-          if(counter.hasAttribute('data-end')) runSlowCounter(counter);
+        // Mobile Accordion Functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const accordion = header.getAttribute('data-accordion');
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.accordion-icon');
+                
+                // Close other accordions
+                accordionHeaders.forEach(h => {
+                  if (h !== header) {
+                    const c = h.nextElementSibling;
+                    c.classList.remove('max-h-96');
+                    c.classList.add('max-h-0');
+                    h.querySelector('.accordion-icon').classList.remove('rotate-180');
+                  }
+                });
+                
+                // Toggle current accordion
+                content.classList.toggle('max-h-0');
+                content.classList.toggle('max-h-96');
+                icon.classList.toggle('rotate-180');
+            });
         });
-      }, 10000);
-    }
-  }
 
-  window.addEventListener('scroll', handleScroll);
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Helper function to scroll to services
+            window.scrollToServices = function() {
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                    servicesSection.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            };
 
- // Carousel functionality for services
-(function(){
-  let currentIndex=0;
-  const container=document.getElementById('cardsContainer');
-  const cards=Array.from(document.querySelectorAll('.card'));
-  const prevBtn=document.getElementById('prevBtn');
-  const nextBtn=document.getElementById('nextBtn');
-  const tabBtns=Array.from(document.querySelectorAll('.tab-btn'));
+            // Stats counter animation
+            const countElements = document.querySelectorAll('.count-number');
+            const observerOptions = {
+                threshold: 0.5
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const start = parseInt(element.getAttribute('data-start'));
+                        const end = parseInt(element.getAttribute('data-end'));
+                        
+                        let current = start;
+                        const increment = Math.ceil((end - start) / 50);
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= end) {
+                                current = end;
+                                clearInterval(timer);
+                            }
+                            element.textContent = current;
+                        }, 30);
+                        
+                        observer.unobserve(element);
+                    }
+                });
+            }, observerOptions);
+            
+            countElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
 
-  function getCardsPerView(){ 
-    const w=window.innerWidth; 
-    if(w>=1024)return 3; 
-    if(w>=768)return 2; 
-    return 1; 
-  }
+        // TESTIMONIALS INITIALIZATION
+        function initializeTestimonials() {
+            const testimonialContainer = document.getElementById('testimonial-slider');
+            if (!testimonialContainer) return;
+            
+            // Testimonial data
+            const testimonials = [
+                {
+                    quote: "Working with Sitefully was a game changer for our brand. Their design team truly understood our vision and brought it to life.",
+                    name: "Alicia Bennett",
+                    role: "Founder, BrightPath Studios",
+                    image: "https://images.unsplash.com/photo-1619946794135-5bc917a27793?auto=format&fit=crop&w=250&q=80"
+                },
+                {
+                    quote: "The Sitefully team went above and beyond. Their branding approach elevated our identity.",
+                    name: "Michael Chen",
+                    role: "Marketing Director, NovaTech",
+                    image: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=250&q=80"
+                },
+                {
+                    quote: "Sitefully's creativity and professionalism exceeded expectations.",
+                    name: "Sarah Lopez",
+                    role: "Creative Director, VisionFlow",
+                    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=250&q=80"
+                },
+                {
+                    quote: "Absolutely love the professionalism and design sense of Sitefully. They gave our startup a world-class brand image.",
+                    name: "David Romero",
+                    role: "Co-Founder, Skyward Labs",
+                    image: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=250&q=80"
+                },
+                {
+                    quote: "From concept to delivery, Sitefully was flawless. Their attention to detail is unmatched.",
+                    name: "Elena Vasquez",
+                    role: "CEO, Dreamline Agency",
+                    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=250&q=80"
+                }
+            ];
+            
+            // Clear existing content and add testimonials
+            testimonialContainer.innerHTML = '';
+            testimonials.forEach((testimonial, index) => {
+                const testimonialHTML = `
+                    <div class="testimonial-card ${index === 0 ? 'active' : 'hidden'}" data-index="${index}">
+                        <div class="flex flex-col md:flex-row items-center rounded-xl p-6 md:p-8 
+                            bg-white shadow-sm border border-gray-100">
+                            <div class="flex-1 text-left md:pr-6 z-10">
+                                <p class="testimonial-quote text-gray-700 leading-relaxed mb-4">
+                                    "${testimonial.quote}"
+                                </p>
+                                <div>
+                                    <h3 class="testimonial-name text-primary">${testimonial.name}</h3>
+                                    <p class="testimonial-role">${testimonial.role}</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 md:mt-0 md:ml-6">
+                                <img src="${testimonial.image}"
+                                     class="w-20 h-20 rounded-full border-3 border-primary/20 object-cover"
+                                     alt="${testimonial.name}"/>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                testimonialContainer.innerHTML += testimonialHTML;
+            });
+            
+            // Initialize dots container
+            const dotsContainer = document.getElementById('testimonial-dots');
+            if (!dotsContainer) return;
+            
+            dotsContainer.innerHTML = '';
+            testimonials.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = `testimonial-dot ${index === 0 ? 'active' : ''}`;
+                dot.setAttribute('data-index', index);
+                dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
+                dot.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+                dot.addEventListener('click', () => showTestimonial(index));
+                dotsContainer.appendChild(dot);
+            });
+            
+            // State
+            let currentTestimonial = 0;
+            let autoSlideInterval;
+            
+            // Show specific testimonial
+            function showTestimonial(index) {
+                const testimonialCards = document.querySelectorAll('.testimonial-card');
+                const dots = document.querySelectorAll('.testimonial-dot');
+                
+                // Hide all testimonials
+                testimonialCards.forEach(card => {
+                    card.classList.remove('active');
+                    card.classList.add('hidden');
+                });
+                
+                // Show selected testimonial
+                testimonialCards[index].classList.remove('hidden');
+                testimonialCards[index].classList.add('active');
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                    dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+                });
+                
+                currentTestimonial = index;
+                
+                // Reset auto-slide timer
+                resetAutoSlide();
+            }
+            
+            // Auto-slide functionality
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    const nextIndex = (currentTestimonial + 1) % testimonials.length;
+                    showTestimonial(nextIndex);
+                }, 5000);
+            }
+            
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+            
+            // Pause auto-slide on hover
+            testimonialContainer.addEventListener('mouseenter', () => {
+                clearInterval(autoSlideInterval);
+            });
+            
+            testimonialContainer.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+            
+            // Start auto-slide
+            startAutoSlide();
+        }
 
-  function getVisibleCards(){ 
-    return cards.filter(c=>c.style.display!=='none'); 
-  }
+        // Initialize testimonials when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeTestimonials);
 
-  function updateCarousel(){
-    const visible=getVisibleCards(); 
-    if(!visible.length)return;
-    const cpv=getCardsPerView();
-    const maxIndex=Math.max(0,visible.length-cpv);
-    currentIndex=Math.min(currentIndex,maxIndex);
-    const cardWidth=visible[0].offsetWidth;
-    const gap=parseInt(getComputedStyle(container).gap)||16;
-    container.style.transform=`translateX(${-currentIndex*(cardWidth+gap)}px)`;
-    prevBtn.classList.toggle('disabled',currentIndex===0);
-    nextBtn.classList.toggle('disabled',currentIndex>=maxIndex);
-  }
+        // SERVICES SLIDER INITIALIZATION
+          document.addEventListener("DOMContentLoaded", () => {
+            const slidesContainer = document.getElementById("servicesSlides");
+            const prevBtn = document.getElementById("prevService");
+            const nextBtn = document.getElementById("nextService");
+            const dotsContainer = document.getElementById("serviceDots");
 
-  function updateArrowVisibility(category){
-    if(category==='all'||category==='backend'){ 
-      prevBtn.style.display='flex'; 
-      nextBtn.style.display='flex'; 
-    } else { 
-      prevBtn.style.display='none'; 
-      nextBtn.style.display='none'; 
-    }
-  }
+            const services = [
+              { title: "Website Development", desc: "End-to-end web solutions built with Django & modern frontends.", img: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5" },
+              { title: "Frontend Engineering", desc: "Responsive, pixel-perfect interfaces with HTML, CSS & JS.", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085" },
+              { title: "Backend Systems", desc: "Robust backend architecture, APIs & database management.", img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c" },
+              { title: "API Integrations", desc: "Seamless integrations using Django REST Framework.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
+              { title: "Deployment & DevOps", desc: "Docker, CI/CD pipelines, monitoring & maintenance.", img: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9" }
+            ];
 
-  prevBtn.addEventListener('click',()=>{
-    if(currentIndex>0){ 
-      currentIndex--; 
-      updateCarousel(); 
-    }
-  });
+            let index = 0;
+            let visible = 3;
+            let autoSlide;
 
-  nextBtn.addEventListener('click',()=>{
-    const cpv=getCardsPerView(); 
-    const maxIndex=Math.max(0,getVisibleCards().length-cpv); 
-    if(currentIndex<maxIndex){ 
-      currentIndex++; 
-      updateCarousel(); 
-    }
-  });
+            function createSlide(service) {
+              const slide = document.createElement("article");
+              slide.className = "slide";
+              slide.style.width = "calc((100% - 2rem) / 3)"; // 3 cards with gaps
+              slide.innerHTML = `
+                <img src="${service.img}" alt="${service.title}" class="slide-img">
+                <div class="p-5 flex flex-col h-full">
+                  <h3 class="slide-title">${service.title}</h3>
+                  <p class="slide-text">${service.desc}</p>
+                  <a href="Contact.html" class="service-btn mt-auto">Get Started</a>
+                </div>
+              `;
+              slidesContainer.appendChild(slide);
+            }
 
-  tabBtns.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const category=btn.dataset.category;
+            function renderSlides() {
+              slidesContainer.innerHTML = "";
+              services.forEach(s => createSlide(s));
+            }
 
-      // Tab styling
-      tabBtns.forEach(b=>b.classList.remove('active','text-[var(--cyan-teal)]','border-[var(--cyan-teal)]','bg-[rgba(17,100,102,0.06)]'));
-      tabBtns.forEach(b=>b.classList.add('text-gray-800','border-gray-300','bg-white'));
-      btn.classList.add('active','text-[var(--cyan-teal)]','border-[var(--cyan-teal)]','bg-[rgba(17,100,102,0.06)]');
-      btn.classList.remove('text-gray-800','border-gray-300','bg-white');
+            function updateSlides() {
+              const slides = [...slidesContainer.children];
+              const containerWidth = slidesContainer.parentElement.offsetWidth;
+              
+              // Update responsive card width
+              if (window.innerWidth < 768) {
+                visible = 1;
+                slides.forEach(slide => {
+                  slide.style.width = "calc(100% - 1rem)";
+                });
+              } else if (window.innerWidth < 1024) {
+                visible = 2;
+                slides.forEach(slide => {
+                  slide.style.width = "calc((100% - 1rem) / 2)";
+                });
+              } else {
+                visible = 3;
+                slides.forEach(slide => {
+                  slide.style.width = "calc((100% - 2rem) / 3)";
+                });
+              }
 
-      // Filter cards
-      cards.forEach(c=>c.style.display=(category==='all'||c.dataset.category===category)?'block':'none');
+              if(slides.length <= visible){
+                slidesContainer.style.transform = "translateX(0)";
+                prevBtn.classList.add("hidden");
+                nextBtn.classList.add("hidden");
+                index = 0;
+                return;
+              }
 
-      // ---- NEW CENTERING LOGIC ----
-      const visible = getVisibleCards();
+              if(index > slides.length - visible) index = slides.length - visible;
+              if(index < 0) index = 0;
 
-      if (window.innerWidth >= 1024 && visible.length < 3) {
-        container.classList.add("centered");
-      } else {
-        container.classList.remove("centered");
-      }
-      // ------------------------------
+              const slideWidth = slides[0].offsetWidth + 16;
+              slidesContainer.style.transform = `translateX(-${index * slideWidth}px)`;
 
-      updateArrowVisibility(category);
-      currentIndex=0;
-      updateCarousel();
-    });
-  });
+              prevBtn.classList.toggle("hidden", index === 0);
+              nextBtn.classList.toggle("hidden", index >= slides.length - visible);
 
-  window.addEventListener('resize',updateCarousel);
-  cards.forEach(c=>c.style.display='block');
-  updateArrowVisibility('all');
-  updateCarousel();
-})();
+              updateDots(slides.length);
+            }
 
-</script>
-  </body>
+            function updateDots(count){
+              dotsContainer.innerHTML = "";
+              for(let i=0;i<count;i++){
+                const dot = document.createElement("button");
+                dot.className = `dot ${i===index?'active':''}`;
+                dot.onclick = ()=>{ index=i; updateSlides(); resetAutoSlide(); };
+                dotsContainer.appendChild(dot);
+              }
+            }
+
+            function nextSlide(){
+              const slides = [...slidesContainer.children];
+              if(index < slides.length - visible){ index++; updateSlides(); } 
+            }
+
+            nextBtn.onclick = () => { nextSlide(); resetAutoSlide(); };
+            prevBtn.onclick = () => { if(index>0){ index--; updateSlides(); resetAutoSlide(); } };
+
+            // Swipe support
+            let startX = 0;
+            slidesContainer.addEventListener("touchstart", e => startX = e.touches[0].screenX);
+            slidesContainer.addEventListener("touchend", e => {
+              const endX = e.changedTouches[0].screenX;
+              const diff = startX - endX;
+              if(Math.abs(diff) > 50){
+                if(diff>0 && !nextBtn.classList.contains("hidden")) nextBtn.click();
+                if(diff<0 && !prevBtn.classList.contains("hidden")) prevBtn.click();
+              }
+              resetAutoSlide();
+            });
+
+            function autoSlideStart(){
+              autoSlide = setInterval(()=>{
+                const slides = [...slidesContainer.children];
+                if(index < slides.length - visible) index++;
+                else index = 0;
+                updateSlides();
+              }, 5000);
+            }
+
+            function resetAutoSlide(){
+              clearInterval(autoSlide);
+              autoSlideStart();
+            }
+
+            window.addEventListener("resize", updateSlides);
+
+            renderSlides();
+            updateSlides();
+            autoSlideStart();
+          });
+        
+
+    </script>
+</body>
 </html>

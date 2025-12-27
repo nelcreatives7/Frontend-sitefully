@@ -3,95 +3,271 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio | Sitefully</title>
+  <title>Sitefully | Portfolio</title>
+  <link rel="icon" type="image/png" href="Assets/favicon.png">
+
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  
+  <!-- Updated Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --dark-teal: #2C3531;
-      --cyan-teal: #116466;
-      --bronze: #D9B08C;
-      --soft-peach: #FFCB9A;
-      --light-mint: #D1E8E2;
+    /* NEW THEME VARIABLES */
+    :root {
+      --primary-orange: #FF6700;
+      --dark-blue: #0A1A33;
+      --bright-blue: #0275D8;
+      --light-gray: #EBEBEB;
+      --medium-gray: #C0C0C0;
+      --pure-white: #FFFFFF;
+
+      --primary-gradient: linear-gradient(90deg, var(--primary-orange), #FF8533);
+      --card-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      --nav-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    * { font-family: 'Inter', system-ui, sans-serif; }
-
+    /* TYPOGRAPHY */
     body {
-      background: linear-gradient(135deg, var(--light-mint) 0%, #ffffff 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
       min-height: 100vh;
-      color: var(--dark-teal);
+      color: var(--dark-blue);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--dark-blue);
+    }
+
+    /* LAYOUT CONTAINER */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* Glass effect */
     .glass {
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(18px);
-      border: 1px solid var(--soft-peach);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(10, 26, 51, 0.1);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Animated blobs */
     .blob {
       mix-blend-mode: multiply;
-      filter: blur(80px);
-      opacity: 0.25;
+      filter: blur(60px);
+      opacity: 0.15;
       border-radius: 50%;
       position: absolute;
-      animation: float 6s ease-in-out infinite;
+      animation: float 8s ease-in-out infinite;
+      z-index: 0;
     }
 
-    .blob-1 { background: var(--soft-peach); width: 350px; height: 350px; top: 10%; left: 15%; }
-    .blob-2 { background: var(--bronze); width: 350px; height: 350px; top: 30%; right: 10%; animation-delay:2s; }
-    .blob-3 { background: var(--cyan-teal); width: 350px; height: 350px; bottom: 15%; left: 45%; animation-delay:4s; }
+    .blob-1 { 
+      background: var(--primary-orange); 
+      width: 300px; 
+      height: 300px; 
+      top: 10%; 
+      left: 10%; 
+    }
+    .blob-2 { 
+      background: var(--bright-blue); 
+      width: 250px; 
+      height: 250px; 
+      top: 25%; 
+      right: 10%; 
+      animation-delay: 2s; 
+    }
+    .blob-3 { 
+      background: var(--dark-blue); 
+      width: 280px; 
+      height: 280px; 
+      bottom: 15%; 
+      left: 40%; 
+      animation-delay: 4s; 
+    }
 
     @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
     }
 
+    /* Filter buttons */
     .filter-btn {
-      background: rgba(255, 255, 255, 0.6);
-      color: var(--dark-teal);
-      border: 1px solid var(--soft-peach);
-      transition: 0.3s ease;
+      background: var(--pure-white);
+      color: var(--dark-blue);
+      border: 1px solid var(--light-gray);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 12px;
     }
-    .filter-btn:hover,
+    
+    .filter-btn:hover {
+      border-color: var(--primary-orange);
+      color: var(--primary-orange);
+      transform: translateY(-2px);
+    }
+    
     .filter-btn.active {
-      background: var(--cyan-teal);
+      background: var(--primary-gradient);
       color: white;
-      border-color: var(--cyan-teal);
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(255, 103, 0, 0.25);
+      transform: translateY(-2px);
     }
 
+    /* Project cards */
     .project-card {
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--bronze);
-      transition: 0.3s ease;
-      color: var(--dark-teal);
+      background: var(--pure-white);
+      border: 1px solid var(--light-gray);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: var(--dark-blue);
+      border-radius: 16px;
+      overflow: hidden;
     }
+    
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      border-color: var(--cyan-teal);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      border-color: var(--primary-orange);
     }
 
-    .modal-backdrop { backdrop-filter: blur(10px); background: rgba(0,0,0,0.5); }
-    .modal-content { animation: slideUp 0.4s ease; }
-    @keyframes slideUp { from {opacity:0; transform:translateY(50px);} to {opacity:1; transform:translateY(0);} }
+    /* Modal */
+    .modal-backdrop { 
+      backdrop-filter: blur(8px); 
+      background: rgba(0, 0, 0, 0.5); 
+    }
+    
+    .modal-content { 
+      animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    
+    @keyframes slideUp { 
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    /* Category badges */
     .category-badge {
-      background: var(--light-mint);
-      padding: 4px 10px;
+      background: rgba(255, 103, 0, 0.1);
+      padding: 0.25rem 0.75rem;
       border-radius: 8px;
-      font-size: 12px;
-      border: 1px solid var(--cyan-teal);
-      color: var(--dark-teal);
+      font-size: 0.75rem;
+      border: 1px solid rgba(255, 103, 0, 0.2);
+      color: var(--primary-orange);
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
     }
 
+    /* Mockup browser */
+    .mockup-browser {
+      background: var(--light-gray);
+      border-bottom: 1px solid rgba(10, 26, 51, 0.1);
+    }
+    
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Image loading placeholder */
+    .image-placeholder {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .blob {
+        display: none;
+      }
+      
+      .project-card {
+        margin-bottom: 1rem;
+      }
+      
+      .filter-btn {
+        padding: 0.375rem 0.875rem;
+        font-size: 0.8125rem;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    /* Smooth transitions */
+    * {
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Focus styles */
+    button:focus,
+    a:focus {
+      outline: 2px solid var(--primary-orange);
+      outline-offset: 2px;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--light-gray);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--medium-gray);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-orange);
+    }
   </style>
 </head>
 
-<body>
+<body class="relative">
 
   <!-- BLOBS -->
   <div class="blob blob-1"></div>
@@ -99,79 +275,85 @@
   <div class="blob blob-3"></div>
 
   <!-- HERO SECTION -->
-  <section class="relative pt-20 pb-32 px-4 text-center">
-    <div class="max-w-4xl mx-auto space-y-6 relative z-10">
-      <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium border bg-white/70 border-[var(--soft-peach)] text-[var(--dark-teal)]">
-        🎨 Selected Works 2024
+  <section class="relative py-16 md:py-24">
+    <div class="container">
+      <div class="text-center max-w-3xl mx-auto space-y-6 relative z-10">
+        <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border bg-white/80 border-[var(--light-gray)] text-[var(--dark-blue)] mb-4">
+          <i class="fas fa-star text-[var(--primary-orange)]"></i>
+          Selected Works 2024
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          Our Creative  
+          <span class="gradient-text">Portfolio</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-[var(--dark-blue)]/70 max-w-2xl mx-auto leading-relaxed">
+          Discover our latest projects spanning web design, e-commerce, branding, and digital experiences.
+        </p>
       </div>
-
-      <h1 class="text-5xl md:text-7xl font-black leading-tight text-[var(--dark-teal)]">
-        Our Creative  
-        <span class="text-[var(--cyan-teal)]">Portfolio</span>
-      </h1>
-
-      <p class="text-xl md:text-2xl text-[var(--dark-teal)]/70 max-w-2xl mx-auto">
-        Discover our latest projects spanning web design, e-commerce, branding, and digital experiences.
-      </p>
     </div>
   </section>
 
   <!-- FILTER BUTTONS -->
-  <section class="pb-12 px-4">
-    <div class="flex flex-wrap gap-3 justify-center my-8">
-      <button class="filter-btn active px-5 py-2 rounded-full" data-filter="all">All</button>
-      <button class="filter-btn px-5 py-2 rounded-full" data-filter="web">Web</button>
-      <button class="filter-btn px-5 py-2 rounded-full" data-filter="ecommerce">Ecommerce</button>
-      <button class="filter-btn px-5 py-2 rounded-full" data-filter="dashboard">Dashboard</button>
-      <button class="filter-btn px-5 py-2 rounded-full" data-filter="branding">Branding</button>
+  <section class="pb-8 md:pb-12">
+    <div class="container">
+      <div class="flex flex-wrap gap-2 md:gap-3 justify-center my-6 md:my-8">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="web">Web Design</button>
+        <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+        <button class="filter-btn" data-filter="dashboard">Dashboard</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+      </div>
     </div>
   </section>
 
   <!-- PROJECT GRID -->
-  <section class="pb-32 px-4">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-      <!-- Projects will render here -->
+  <section class="pb-16 md:pb-24">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="projects-grid">
+        <!-- Projects will render here -->
+      </div>
     </div>
   </section>
 
   <!-- MODAL -->
   <div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop">
-    <div class="modal-content glass rounded-3xl w-full max-w-5xl overflow-hidden shadow-2xl flex flex-col">
-
-      <div class="flex items-center justify-between p-6 border-b border-[var(--soft-peach)] bg-[var(--cyan-teal)]">
-        <h3 id="modalTitle" class="font-bold text-2xl text-white">Sample Project</h3>
-        <button id="modalClose" class="text-3xl font-bold text-white hover:text-gray-200">×</button>
+    <div class="modal-content glass w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between p-6 border-b border-[var(--light-gray)] bg-[var(--dark-blue)]">
+        <h3 id="modalTitle" class="font-bold text-xl md:text-2xl text-white">Sample Project</h3>
+        <button id="modalClose" class="text-2xl md:text-3xl font-bold text-white hover:text-[var(--primary-orange)] transition-colors">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
 
-      <div class="p-6 max-h-[80vh] overflow-y-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
+      <div class="p-4 md:p-6 overflow-y-auto flex-1">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           <!-- Image -->
           <div class="space-y-4">
-            <div class="mockup-screen bg-white rounded-lg shadow">
-              <div class="mockup-browser p-3 bg-[var(--light-mint)] border-b border-[var(--bronze)]">
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+              <div class="mockup-browser p-3">
                 <div class="browser-dots flex gap-2">
-                  <div class="browser-dot bg-red-500 w-3 h-3 rounded-full"></div>
-                  <div class="browser-dot bg-yellow-500 w-3 h-3 rounded-full"></div>
-                  <div class="browser-dot bg-green-500 w-3 h-3 rounded-full"></div>
+                  <div class="browser-dot bg-red-500"></div>
+                  <div class="browser-dot bg-yellow-500"></div>
+                  <div class="browser-dot bg-green-500"></div>
                 </div>
               </div>
               <div class="website-preview">
-                <img id="modalImage" src="https://via.placeholder.com/400x300" class="w-full rounded-md">
+                <img id="modalImage" src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop&q=80" class="w-full h-auto rounded-b-lg" alt="Project preview">
               </div>
             </div>
           </div>
 
           <!-- Details -->
           <div class="space-y-5">
-
             <div>
-              <h4 class="text-sm font-semibold text-[var(--dark-teal)]/70 uppercase">Project Overview</h4>
-              <p id="modalDesc" class="text-[var(--dark-teal)]/80">This is a sample project description.</p>
+              <h4 class="text-sm font-semibold text-[var(--dark-blue)]/70 uppercase mb-2">Project Overview</h4>
+              <p id="modalDesc" class="text-[var(--dark-blue)]/80 text-sm leading-relaxed">This is a sample project description.</p>
             </div>
 
             <div>
-              <h4 class="text-sm font-semibold text-[var(--dark-teal)]/70 uppercase">Technologies</h4>
+              <h4 class="text-sm font-semibold text-[var(--dark-blue)]/70 uppercase mb-2">Technologies</h4>
               <div id="modalTags" class="flex flex-wrap gap-2">
                 <span class="category-badge">HTML</span>
                 <span class="category-badge">CSS</span>
@@ -179,45 +361,48 @@
               </div>
             </div>
 
-            <div>
-              <h4 class="text-sm font-semibold text-[var(--dark-teal)]/70 uppercase">Client</h4>
-              <p id="modalClient" class="text-[var(--dark-teal)]/80">Sitefully</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <h4 class="text-sm font-semibold text-[var(--dark-blue)]/70 uppercase mb-1">Client</h4>
+                <p id="modalClient" class="text-[var(--dark-blue)]/80 text-sm">Sitefully</p>
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-[var(--dark-blue)]/70 uppercase mb-1">Duration</h4>
+                <p id="modalDuration" class="text-[var(--dark-blue)]/80 text-sm">3 Months</p>
+              </div>
             </div>
 
-            <div>
-              <h4 class="text-sm font-semibold text-[var(--dark-teal)]/70 uppercase">Duration</h4>
-              <p id="modalDuration" class="text-[var(--dark-teal)]/80">3 Months</p>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-4 pt-2">
+            <div class="flex flex-col sm:flex-row gap-3 pt-4">
               <a id="modalLive" href="#" target="_blank"
-                class="flex-1 text-center px-6 py-3 rounded-xl bg-[var(--cyan-teal)] text-white font-semibold hover:opacity-90">
+                class="flex-1 text-center px-4 md:px-6 py-2.5 md:py-3 rounded-xl bg-[var(--primary-gradient)] text-white font-semibold hover:opacity-90 transition-opacity shadow-md hover:shadow-lg">
                 <i class="fas fa-external-link-alt mr-2"></i>View Live
               </a>
               <button id="modalClose2"
-                class="px-6 py-3 rounded-xl border-2 border-[var(--dark-teal)] text-[var(--dark-teal)] font-semibold hover:bg-[var(--light-mint)]">
-                Close
+                class="px-4 md:px-6 py-2.5 md:py-3 rounded-xl border border-[var(--dark-blue)] text-[var(--dark-blue)] font-semibold hover:bg-[var(--dark-blue)] hover:text-white transition-colors">
+                Close Project
               </button>
             </div>
 
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 
+  
+
   <script>
-    // Project data
+    
+    // Project data with OPTIMIZED IMAGES
     const projects = [
-     {
+      {
         id: "p1",
         title: "Aurora Studio",
         desc: "A stunning portfolio website for a creative studio featuring smooth parallax animations, an immersive gallery, and a bold visual identity. Built with modern web technologies to ensure lightning-fast performance.",
         category: "web",
         tags: ["React", "Tailwind CSS", "Framer Motion", "Next.js"],
-        image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=70",
         client: "Aurora Creative Studio",
         duration: "6 weeks",
         live: "#",
@@ -228,7 +413,8 @@
         desc: "A comprehensive e-commerce platform specializing in organic products. Features include real-time inventory management, secure checkout, personalized recommendations, and an intuitive admin dashboard.",
         category: "ecommerce",
         tags: ["Shopify", "React", "Node.js", "Stripe API"],
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=70",
         client: "GreenCart Inc.",
         duration: "10 weeks",
         live: "#",
@@ -239,7 +425,8 @@
         desc: "Complete brand identity and website redesign for a cutting-edge tech startup. Includes logo design, brand guidelines, marketing materials, and a responsive website with interactive 3D elements.",
         category: "branding",
         tags: ["Figma", "Adobe XD", "Three.js", "Vue.js"],
-        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=70",
         client: "NovaTech Solutions",
         duration: "8 weeks",
         live: "#",
@@ -250,7 +437,8 @@
         desc: "Sophisticated fintech platform with data visualization dashboards, real-time analytics, and secure user authentication. Built to handle complex financial calculations and transactions.",
         category: "dashboard",
         tags: ["React", "D3.js", "Python", "PostgreSQL"],
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=70",
         client: "Bright Finance Ltd",
         duration: "12 weeks",
         live: "#",
@@ -261,7 +449,8 @@
         desc: "Elegant e-commerce website for a boutique furniture brand. Features a minimalist design, high-quality product photography, 360° product views, and seamless checkout experience.",
         category: "ecommerce",
         tags: ["WordPress", "WooCommerce", "Custom Theme"],
-        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=70",
         client: "Cedar Furniture Co.",
         duration: "7 weeks",
         live: "#",
@@ -272,7 +461,8 @@
         desc: "Comprehensive e-learning platform with video streaming, interactive quizzes, progress tracking, and certification management. Designed for scalability and user engagement.",
         category: "web",
         tags: ["Django", "React", "AWS", "WebRTC"],
-        image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=70",
         client: "EduSmart Academy",
         duration: "14 weeks",
         live: "#",
@@ -283,7 +473,8 @@
         desc: "Modern fitness tracking dashboard with real-time health metrics, workout planning, nutrition tracking, and social features. Integrated with wearable devices for seamless data sync.",
         category: "dashboard",
         tags: ["React Native", "Firebase", "Chart.js"],
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=70",
         client: "FitTrack Technologies",
         duration: "9 weeks",
         live: "#",
@@ -294,7 +485,8 @@
         desc: "Luxurious beauty brand website with product customization, virtual try-on features, and subscription management. Includes influencer partnership portal and rewards program.",
         category: "ecommerce",
         tags: ["Magento", "Vue.js", "AR.js"],
-        image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&q=70",
         client: "Bloom Beauty Co.",
         duration: "11 weeks",
         live: "#",
@@ -305,7 +497,8 @@
         desc: "Hip coffee shop chain website with online ordering, loyalty program, store locator, and event management. Features dynamic menu updates and seasonal campaigns.",
         category: "web",
         tags: ["React", "Express", "MongoDB", "Mapbox"],
-        image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400&h=300&fit=crop&q=80",
+        imageLarge: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&q=70",
         client: "Urban Brew Coffee",
         duration: "6 weeks",
         live: "#",
@@ -320,36 +513,54 @@
       const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
 
       grid.innerHTML = filtered.map(p => `
-        <div class="project-card glass rounded-2xl overflow-hidden shadow-xl cursor-pointer" onclick="openModal('${p.id}')">
+        <div class="project-card glass cursor-pointer" onclick="openModal('${p.id}')">
           <div class="relative overflow-hidden group">
-            <div class="mockup-browser p-3 bg-[var(--light-mint)] border-b border-[var(--bronze)]">
+            <div class="mockup-browser p-3">
               <div class="browser-dots flex gap-2">
-                <div class="browser-dot bg-red-500 w-3 h-3 rounded-full"></div>
-                <div class="browser-dot bg-yellow-500 w-3 h-3 rounded-full"></div>
-                <div class="browser-dot bg-green-500 w-3 h-3 rounded-full"></div>
+                <div class="browser-dot bg-red-500"></div>
+                <div class="browser-dot bg-yellow-500"></div>
+                <div class="browser-dot bg-green-500"></div>
               </div>
             </div>
             <div class="website-preview">
-              <img src="${p.image}" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700 rounded-md">
+              <img 
+                src="${p.image}" 
+                loading="lazy" 
+                width="400" 
+                height="300"
+                class="w-full h-48 md:h-56 object-cover group-hover:scale-105 transition-transform duration-500 image-placeholder"
+                alt="${p.title}"
+                onload="this.classList.remove('image-placeholder')"
+              >
             </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-              <span class="text-white font-semibold flex items-center gap-2">View Project <i class="fas fa-arrow-right"></i></span>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <span class="text-white font-semibold text-sm flex items-center gap-2">
+                View Details <i class="fas fa-arrow-right"></i>
+              </span>
             </div>
           </div>
 
-          <div class="p-6 space-y-4">
+          <div class="p-4 md:p-5 space-y-3">
             <div class="flex items-center justify-between">
-              <h3 class="text-xl font-bold">${p.title}</h3>
+              <h3 class="text-lg md:text-xl font-bold">${p.title}</h3>
               <span class="category-badge">${p.category}</span>
             </div>
-            <p class="text-[var(--dark-teal)]/70 text-sm line-clamp-2">${p.desc}</p>
-            <div class="flex flex-wrap gap-2">
+            <p class="text-[var(--dark-blue)]/70 text-xs md:text-sm line-clamp-2 leading-relaxed">${p.desc}</p>
+            <div class="flex flex-wrap gap-1.5">
               ${p.tags.slice(0,3).map(t => `<span class="category-badge">${t}</span>`).join('')}
               ${p.tags.length > 3 ? `<span class="category-badge">+${p.tags.length-3}</span>` : ''}
             </div>
           </div>
         </div>
       `).join('');
+    }
+
+    // Preload images for better user experience
+    function preloadImages() {
+      projects.forEach(p => {
+        const img = new Image();
+        img.src = p.image; // Preload thumbnail
+      });
     }
 
     // Filter buttons
@@ -376,26 +587,31 @@
     function openModal(id) {
       const p = projects.find(pr => pr.id === id);
       modalTitle.textContent = p.title;
-      modalImage.src = p.image;
+      modalImage.src = p.imageLarge || p.image; // Use larger image for modal
       modalDesc.textContent = p.desc;
       modalClient.textContent = p.client;
       modalDuration.textContent = p.duration;
       modalTags.innerHTML = p.tags.map(t => `<span class="category-badge">${t}</span>`).join('');
       modalLive.href = p.live;
-      modal.classList.remove('hidden'); modal.classList.add('flex');
+      modal.classList.remove('hidden'); 
+      modal.classList.add('flex');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      modal.classList.add('hidden'); modal.classList.remove('flex');
+      modal.classList.add('hidden'); 
+      modal.classList.remove('flex');
       document.body.style.overflow = 'auto';
     }
 
     closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
     modal.addEventListener('click', e => { if(e.target===modal) closeModal(); });
 
-    // Initial render
-    renderProjects();
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProjects();
+      preloadImages();
+    });
   </script>
 </body>
 </html>

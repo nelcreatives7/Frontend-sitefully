@@ -5,52 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Contact Sitefully — get in touch about projects, partnerships or support." />
   <meta name="robots" content="index,follow" />
-  <title>Contact - Sitefully</title>
+  <title>Sitefully | Contact</title>
+  <link rel="icon" type="image/png" href="Assets/favicon.png">
+
 
   <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  
+  <!-- Updated Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* NEW THEME VARIABLES */
     :root {
-      --dark-teal: #2C3531;
-      --cyan-teal: #116466;
-      --bronze: #D9B08C;
-      --soft-peach: #FFCB9A;
-      --light-mint: #D1E8E2;
+      --primary-orange: #FF6700;
+      --dark-blue: #0A1A33;
+      --bright-blue: #0275D8;
+      --light-gray: #EBEBEB;
+      --medium-gray: #C0C0C0;
+      --pure-white: #FFFFFF;
+
+      --primary-gradient: linear-gradient(90deg, var(--primary-orange), #FF8533);
+      --card-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      --nav-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
+    /* TYPOGRAPHY */
     body {
-      font-family: "Inter", system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, var(--light-mint) 0%, #f0fffe 100%);
-      color: var(--dark-teal);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      color: var(--dark-blue);
       min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--dark-blue);
     }
 
     .gradient-text {
-      background: linear-gradient(90deg, var(--cyan-teal), var(--bronze));
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* Enhanced header with parallax-like effect */
+    /* LAYOUT CONTAINER */
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    /* HERO SECTION */
     .hero-section {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, var(--cyan-teal) 0%, var(--dark-teal) 100%);
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #1a2b4d 100%);
       animation: gradientShift 8s ease infinite;
     }
 
     @keyframes gradientShift {
-      0%, 100% { background: linear-gradient(135deg, var(--cyan-teal) 0%, var(--dark-teal) 100%); }
-      50% { background: linear-gradient(135deg, var(--dark-teal) 0%, var(--cyan-teal) 100%); }
+      0%, 100% { background: linear-gradient(135deg, var(--dark-blue) 0%, #1a2b4d 100%); }
+      50% { background: linear-gradient(135deg, #1a2b4d 0%, var(--dark-blue) 100%); }
     }
 
     .hero-section::before {
@@ -60,8 +91,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,.1)"/><circle cx="50" cy="50" r="1.5" fill="rgba(255,255,255,.05)"/></svg>');
-      background-size: 200px 200px;
+      background: radial-gradient(circle at 20% 80%, rgba(255, 103, 0, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(2, 117, 216, 0.1) 0%, transparent 50%);
       animation: float 20s linear infinite;
     }
 
@@ -76,38 +107,41 @@
       z-index: 1;
     }
 
+    /* COMPACT CARDS */
     .contact-card {
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 32px rgba(44, 53, 49, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(10, 26, 51, 0.1);
+      background: var(--pure-white);
+      box-shadow: var(--card-shadow);
+      border-radius: 16px;
     }
 
     .contact-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 48px rgba(17, 100, 102, 0.15);
-      border-color: var(--bronze);
-      backdrop-filter: blur(15px);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+      border-color: var(--primary-orange);
     }
 
     .contact-card i {
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.3s ease;
     }
 
     .contact-card:hover i {
-      color: var(--soft-peach);
-      transform: scale(1.2) rotate(5deg);
+      color: var(--primary-orange);
+      transform: scale(1.1);
     }
 
+    /* BUTTONS */
     .btn-gradient {
-      background: linear-gradient(135deg, var(--cyan-teal) 0%, var(--bronze) 100%);
+      background: var(--primary-gradient);
       color: white !important;
       font-weight: 600;
-      box-shadow: 0 8px 24px rgba(17, 100, 102, 0.2);
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 12px rgba(255, 103, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      border: none;
+      border-radius: 12px;
     }
 
     .btn-gradient::before {
@@ -126,38 +160,112 @@
     }
 
     .btn-gradient:hover {
-      opacity: 0.98;
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 40px rgba(17, 100, 102, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 103, 0, 0.3);
     }
 
-    .btn-gradient:active {
-      transform: translateY(-1px) scale(0.98);
+    .email-btn {
+      border: 2px solid var(--dark-blue);
+      background: white;
+      color: var(--dark-blue);
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 12px;
     }
 
+    .email-btn:hover {
+      background: var(--dark-blue);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 26, 51, 0.15);
+    }
+
+    /* FORM ELEMENTS */
     input, textarea {
-      border: 2px solid #e5e7eb;
-      border-radius: 0.75rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 12px;
       transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      padding: 0.875rem 1rem;
     }
 
     input::placeholder, textarea::placeholder {
-      color: rgba(44, 53, 49, 0.4);
+      color: var(--medium-gray);
+    }
+
+    /* SELECT STYLING */
+    select {
+      width: 100%;
+      border: 2px solid var(--light-gray);
+      border-radius: 0.625rem;
+      padding: 0.875rem 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--dark-blue);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    select:hover {
+      border-color: var(--primary-orange);
+      background-color: white;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 3px rgba(255, 103, 0, 0.1);
+      background-color: white;
+    }
+
+    select option {
+      padding: 0.5rem;
+      background-color: white;
+      color: var(--dark-blue);
+    }
+
+    /* CHECKBOX STYLING */
+    input[type="checkbox"] {
+      width: 1.25rem;
+      height: 1.25rem;
+      cursor: pointer;
+      accent-color: var(--primary-orange);
+      border: 2px solid var(--light-gray);
+      border-radius: 0.375rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    input[type="checkbox"]:hover {
+      border-color: var(--primary-orange);
+    }
+
+    input[type="checkbox"]:focus {
+      outline: 2px solid var(--primary-orange);
+      outline-offset: 2px;
     }
 
     input:focus, textarea:focus {
-      border-color: var(--cyan-teal);
-      box-shadow: 0 0 0 4px rgba(17, 100, 102, 0.15);
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 3px rgba(255, 103, 0, 0.15);
       outline: none;
       background: white;
-      transform: scale(1.01);
     }
 
     input:invalid:not(:placeholder-shown) {
       border-color: #ef4444;
     }
 
+    /* FORM STATUS */
     #formStatus {
       display: none;
       animation: slideIn 0.3s ease-out;
@@ -176,26 +284,14 @@
 
     #formStatus.visible {
       display: block;
-      background: linear-gradient(135deg, rgba(255, 203, 154, 0.15), rgba(209, 232, 226, 0.15));
-      border-left: 4px solid var(--soft-peach);
+      background: linear-gradient(135deg, rgba(255, 103, 0, 0.08), rgba(2, 117, 216, 0.08));
+      border-left: 4px solid var(--primary-orange);
       padding: 1rem;
-      border-radius: 0.75rem;
+      border-radius: 12px;
       font-weight: 500;
-      backdrop-filter: blur(10px);
     }
 
-    .sr-only { 
-      position: absolute; 
-      width: 1px; 
-      height: 1px; 
-      padding: 0; 
-      margin: -1px; 
-      overflow: hidden; 
-      clip: rect(0,0,0,0); 
-      white-space: nowrap; 
-      border: 0; 
-    }
-
+    /* ICON WRAPPERS */
     .icon-wrapper {
       animation: iconFloat 3s ease-in-out infinite;
     }
@@ -213,32 +309,86 @@
       50% { transform: translateY(-4px); }
     }
 
-    .email-btn {
-      border: 2px solid var(--cyan-teal);
-      background: white;
-      color: var(--cyan-teal);
-      font-weight: 600;
-      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* CONTACT INFO CARDS */
+    .icon-wrapper .icon-bg {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
     }
 
-    .email-btn:hover {
-      background: var(--cyan-teal);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(17, 100, 102, 0.25);
+    .icon-wrapper:hover .icon-bg {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
+    /* SECTION DIVIDER */
     .section-divider {
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--soft-peach), transparent);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--light-gray), transparent);
       margin: 2rem 0;
     }
 
+    /* LABELS */
     label {
       display: block;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: var(--dark-teal);
+      color: var(--dark-blue);
+      font-size: 0.9375rem;
+    }
+
+    /* UTILITY CLASSES */
+    .sr-only { 
+      position: absolute; 
+      width: 1px; 
+      height: 1px; 
+      padding: 0; 
+      margin: -1px; 
+      overflow: hidden; 
+      clip: rect(0,0,0,0); 
+      white-space: nowrap; 
+      border: 0; 
+    }
+
+    /* MAP STYLING */
+    iframe {
+      border-radius: 16px;
+      border: 1px solid rgba(10, 26, 51, 0.1);
+    }
+
+    /* RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 4rem 1rem;
+      }
+      
+      .contact-card {
+        padding: 1.5rem;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* SMOOTH SCROLLING */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* FOCUS STYLES */
+    button:focus,
+    a:focus,
+    input:focus,
+    textarea:focus {
+      outline: 2px solid var(--primary-orange);
+      outline-offset: 2px;
     }
   </style>
 </head>
@@ -246,54 +396,106 @@
 <body class="flex flex-col min-h-screen">
 
   <!-- Hero Section -->
-  <header class="hero-section relative py-24 px-6 md:py-32">
-    <div class="hero-content">
-      <div class="relative text-center max-w-4xl mx-auto text-white space-y-6">
-        <div class="inline-block mb-4">
-          <span class="text-sm font-semibold tracking-widest uppercase opacity-80 backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full">Contact Us</span>
+  <header class="hero-section relative py-20 md:py-28">
+    <div class="container">
+      <div class="hero-content text-center max-w-4xl mx-auto text-white space-y-6">
+        <div class="inline-block mb-6">
+          <span class="text-sm font-semibold tracking-widest uppercase opacity-90 backdrop-blur-sm bg-white/10 px-5 py-2.5 rounded-full border border-white/20">
+            <i class="fas fa-comments mr-2"></i>Get In Touch
+          </span>
         </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
-          <span class="text-white">Let's Create</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+          <span class="block text-white mb-3">Let's Create</span>
           <span class="block gradient-text">Something Amazing</span>
         </h1>
-        <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">Have a project in mind? Get in touch with our team and let's bring your ideas to life.</p>
+        <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto leading-relaxed">
+          Have a project in mind? Get in touch with our team and let's bring your ideas to life.
+        </p>
+        <div class="pt-6">
+          <a href="#contactForm" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full btn-gradient text-base font-semibold hover:shadow-xl transition-all duration-300">
+            <i class="fas fa-paper-plane"></i>Send a Message
+          </a>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- Contact Section -->
-  <main class="flex-grow py-16 md:py-28 px-4">
-    <div class="container mx-auto">
-
-      <div class="grid md:grid-cols-2 gap-8 md:gap-16 max-w-6xl mx-auto">
-
+  <main class="flex-grow py-12 md:py-20">
+    <div class="container">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
+        
         <!-- Contact Form -->
-        <section aria-labelledby="contactHeading" class="order-1 md:order-1">
-          <div class="bg-white rounded-2xl p-8 md:p-10 shadow-lg contact-card">
-            <h2 id="contactHeading" class="text-3xl font-bold text-[var(--dark-teal)] mb-2">Send us a Message</h2>
-            <p class="text-gray-600 mb-8">We'll get back to you within 24 hours.</p>
+        <section aria-labelledby="contactHeading" class="md:order-1">
+          <div class="contact-card p-6 md:p-8">
+            <div class="mb-6">
+              <h2 id="contactHeading" class="text-2xl md:text-3xl font-bold mb-2">Send us a Message</h2>
+              <p class="text-gray-600">We'll get back to you within 24 hours.</p>
+            </div>
 
-            <form id="contactForm" class="space-y-6" novalidate>
+            <form id="contactForm" class="space-y-5" novalidate>
               <p id="formStatus" role="status" aria-live="polite" class="text-sm"></p>
 
+              <!-- Name Field -->
               <div>
-                <label for="name">Name <span class="text-red-500" aria-hidden="true">*</span></label>
-                <input id="name" type="text" name="name" placeholder="Your name" class="w-full px-4 py-3" required aria-required="true" />
+                <label for="name">Full Name <span class="text-red-500" aria-hidden="true">*</span></label>
+                <input id="name" type="text" name="name" placeholder="John Doe" class="w-full" required aria-required="true" minlength="2" />
               </div>
 
+              <!-- Email Field -->
               <div>
-                <label for="email">Email <span class="text-red-500" aria-hidden="true">*</span></label>
-                <input id="email" type="email" name="email" placeholder="your.email@example.com" class="w-full px-4 py-3" required aria-required="true" />
+                <label for="email">Email Address <span class="text-red-500" aria-hidden="true">*</span></label>
+                <input id="email" type="email" name="email" placeholder="john@company.com" class="w-full" required aria-required="true" />
               </div>
 
+              <!-- Phone Field -->
               <div>
-                <label for="subject">Subject</label>
-                <input id="subject" type="text" name="subject" placeholder="How can we help?" class="w-full px-4 py-3" />
+                <label for="phone">Phone Number</label>
+                <input id="phone" type="tel" name="phone" placeholder="+1 (555) 123-4567" class="w-full" />
               </div>
 
+              <!-- Service Category -->
               <div>
-                <label for="message">Message <span class="text-red-500" aria-hidden="true">*</span></label>
-                <textarea id="message" name="message" placeholder="Tell us about your project..." class="w-full px-4 py-3 min-h-[150px] resize-none" required aria-required="true"></textarea>
+                <label for="service">Service Type <span class="text-red-500" aria-hidden="true">*</span></label>
+                <select id="service" name="service" class="w-full" required aria-required="true">
+                  <option value="">-- Select a service --</option>
+                  <option value="web-design">Web Design</option>
+                  <option value="web-development">Web Development</option>
+                  <option value="consultation">Consultation</option>
+                  <option value="branding">Branding</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <!-- Subject Field -->
+              <div>
+                <label for="subject">Project Title <span class="text-red-500" aria-hidden="true">*</span></label>
+                <input id="subject" type="text" name="subject" placeholder="e.g., E-commerce Platform Redesign" class="w-full" required aria-required="true" />
+              </div>
+
+              <!-- Message Field -->
+              <div>
+                <label for="message">Project Details <span class="text-red-500" aria-hidden="true">*</span></label>
+                <textarea id="message" name="message" placeholder="Describe your project, goals, timeline, and any specific requirements..." class="w-full min-h-[140px]" required aria-required="true" minlength="10"></textarea>
+              </div>
+
+              <!-- Budget Range -->
+              <div>
+                <label for="budget">Budget Range</label>
+                <select id="budget" name="budget" class="w-full">
+                  <option value="">-- Select budget range --</option>
+                  <option value="under-5k">Under $5,000</option>
+                  <option value="5k-10k">$5,000 - $10,000</option>
+                  <option value="10k-25k">$10,000 - $25,000</option>
+                  <option value="25k-50k">$25,000 - $50,000</option>
+                  <option value="50k-plus">$50,000+</option>
+                </select>
+              </div>
+
+              <!-- Terms Agreement -->
+              <div class="flex items-start gap-3">
+                <input id="terms" type="checkbox" name="terms" class="mt-1" required aria-required="true" />
+                <label for="terms" class="text-sm font-normal">I agree to the privacy policy and terms of service <span class="text-red-500" aria-hidden="true">*</span></label>
               </div>
 
               <!-- Honeypot -->
@@ -302,8 +504,8 @@
                 <input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
               </div>
 
-              <div class="flex gap-3 items-center pt-4">
-                <button type="submit" id="sendBtn" aria-label="Send message" class="flex-1 btn-gradient py-3 rounded-lg inline-flex items-center justify-center relative">
+              <div class="flex flex-col sm:flex-row gap-3 items-center pt-4">
+                <button type="submit" id="sendBtn" aria-label="Submit contact form" class="flex-1 btn-gradient py-3.5 rounded-xl inline-flex items-center justify-center relative font-semibold">
                   <span id="btnText">Send Message</span>
                   <svg id="btnSpinner" class="hidden animate-spin ml-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -311,7 +513,9 @@
                   </svg>
                 </button>
 
-                <a href="mailto:hello@sitefully.com" class="inline-flex items-center justify-center px-4 py-3 rounded-lg email-btn" aria-label="Send email directly">Email</a>
+                <a href="mailto:hello@sitefully.com" class="inline-flex items-center justify-center px-6 py-3.5 rounded-xl email-btn w-full sm:w-auto font-semibold" aria-label="Send email directly to hello@sitefully.com">
+                  <i class="fas fa-envelope mr-2"></i>Email Directly
+                </a>
               </div>
             </form>
 
@@ -320,39 +524,39 @@
         </section>
 
         <!-- Contact Info & Map -->
-        <aside class="order-2 md:order-2 space-y-8" aria-labelledby="infoHeading">
+        <aside class="md:order-2 space-y-6" aria-labelledby="infoHeading">
           <h2 id="infoHeading" class="sr-only">Contact information and location</h2>
 
-          <div class="bg-white rounded-2xl p-8 md:p-10 space-y-6 shadow-lg contact-card" aria-label="Contact information">
-            <h3 class="text-2xl font-bold text-[var(--dark-teal)] mb-6">Get in Touch</h3>
-            <div class="space-y-6">
-              <div class="icon-wrapper flex items-start space-x-4 group">
-                <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-[var(--light-mint)] to-[var(--cyan-teal)] flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg transition-all" aria-hidden="true">
+          <div class="contact-card p-6 md:p-8 space-y-6" aria-label="Contact information">
+            <h3 class="text-xl md:text-2xl font-bold mb-4">Get in Touch</h3>
+            <div class="space-y-5">
+              <div class="icon-wrapper flex items-start gap-4 group">
+                <div class="icon-bg bg-gradient-to-br from-[var(--primary-orange)] to-[#FF8533]" aria-hidden="true">
                   <i class="fa-solid fa-envelope text-white text-lg"></i>
                 </div>
                 <div class="flex-1">
-                  <div class="text-xs font-bold uppercase tracking-wider mb-2 text-[var(--cyan-teal)]">Email</div>
-                  <a href="mailto:hello@sitefully.com" class="text-[var(--dark-teal)] hover:text-[var(--soft-peach)] transition-colors font-medium">hello@sitefully.com</a>
+                  <div class="text-xs font-bold uppercase tracking-wider mb-1.5 text-[var(--primary-orange)]">Email</div>
+                  <a href="mailto:hello@sitefully.com" class="text-[var(--dark-blue)] hover:text-[var(--primary-orange)] transition-colors font-medium text-sm">hello@sitefully.com</a>
                 </div>
               </div>
 
-              <div class="icon-wrapper flex items-start space-x-4 group">
-                <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-[var(--soft-peach)] to-[var(--bronze)] flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg transition-all" aria-hidden="true">
+              <div class="icon-wrapper flex items-start gap-4 group">
+                <div class="icon-bg bg-gradient-to-br from-[var(--bright-blue)] to-[#0294f5]" aria-hidden="true">
                   <i class="fa-solid fa-phone text-white text-lg"></i>
                 </div>
                 <div class="flex-1">
-                  <div class="text-xs font-bold uppercase tracking-wider mb-2 text-[var(--cyan-teal)]">Phone</div>
-                  <a href="tel:+1234567890" class="text-[var(--dark-teal)] hover:text-[var(--soft-peach)] transition-colors font-medium">+1 (234) 567-890</a>
+                  <div class="text-xs font-bold uppercase tracking-wider mb-1.5 text-[var(--bright-blue)]">Phone</div>
+                  <a href="tel:+1234567890" class="text-[var(--dark-blue)] hover:text-[var(--primary-orange)] transition-colors font-medium text-sm">+1 (234) 567-890</a>
                 </div>
               </div>
 
-              <div class="icon-wrapper flex items-start space-x-4 group">
-                <div class="h-14 w-14 rounded-xl bg-gradient-to-br from-[var(--light-mint)] to-[var(--soft-peach)] flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg transition-all" aria-hidden="true">
+              <div class="icon-wrapper flex items-start gap-4 group">
+                <div class="icon-bg bg-gradient-to-br from-[var(--dark-blue)] to-[#1a2b4d]" aria-hidden="true">
                   <i class="fa-solid fa-location-dot text-white text-lg"></i>
                 </div>
                 <div class="flex-1">
-                  <div class="text-xs font-bold uppercase tracking-wider mb-2 text-[var(--cyan-teal)]">Address</div>
-                  <address class="not-italic text-[var(--dark-teal)] leading-relaxed font-medium">
+                  <div class="text-xs font-bold uppercase tracking-wider mb-1.5 text-[var(--dark-blue)]">Address</div>
+                  <address class="not-italic text-[var(--dark-blue)] leading-relaxed font-medium text-sm">
                     123 Digital Avenue<br />
                     Tech City, TC 12345<br />
                     United States
@@ -362,18 +566,39 @@
             </div>
           </div>
 
-          <div class="bg-white rounded-2xl overflow-hidden shadow-lg contact-card" aria-hidden="false" title="Sitefully location map">
+          <div class="contact-card overflow-hidden" aria-hidden="false" title="Sitefully location map">
             <iframe
               title="Sitefully location map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.293967985971!2d-122.41941558468154!3d37.77492977975911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808f0b3e9a8b%3A0x7bdfd3b82e1b6400!2sTech%20City!5e0!3m2!1sen!2sus!4v1636065136721!5m2!1sen!2sus"
-              width="100%" height="320" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+              width="100%" height="280" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
+          </div>
+
+          <!-- Hours Section -->
+          <div class="contact-card p-6 md:p-8">
+            <h4 class="text-lg font-bold mb-4 text-[var(--dark-blue)]">Office Hours</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center py-2 border-b border-[var(--light-gray)]">
+                <span class="font-medium">Monday - Friday</span>
+                <span class="text-[var(--dark-blue)] font-semibold">9:00 AM - 6:00 PM</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-[var(--light-gray)]">
+                <span class="font-medium">Saturday</span>
+                <span class="text-[var(--dark-blue)] font-semibold">10:00 AM - 4:00 PM</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="font-medium">Sunday</span>
+                <span class="text-[var(--dark-blue)] font-semibold">Closed</span>
+              </div>
+            </div>
           </div>
 
         </aside>
       </div>
     </div>
   </main>
+
+  
 
   <!-- JSON-LD Organization -->
   <script type="application/ld+json">
@@ -392,6 +617,7 @@
   }
   </script>
 
+  <!-- Your existing JavaScript remains unchanged -->
   <script>
     // small, defensive scripts: no global exceptions if element missing
     try {
@@ -410,7 +636,7 @@
       const showStatus = (message, opts = {}) => {
         formStatus.textContent = message;
         formStatus.classList.add("visible");
-        formStatus.style.color = opts.color || "var(--soft-peach)";
+        formStatus.style.color = opts.color || "var(--primary-orange)";
         if (opts.hideAfter) setTimeout(() => { formStatus.classList.remove("visible"); }, opts.hideAfter);
       };
 
@@ -465,7 +691,7 @@
           // Simulated network latency
           await new Promise(r => setTimeout(r, 900));
 
-          showStatus('✅ Message sent successfully! Thank you.', { color: 'var(--cyan-teal)', hideAfter: 5000 });
+          showStatus('✅ Message sent successfully! Thank you.', { color: 'var(--bright-blue)', hideAfter: 5000 });
           form.reset();
         } catch (err) {
           showStatus('⚠️ Unable to send message. Please try again or email hello@sitefully.com.', { color: 'crimson' });
